@@ -6,4 +6,10 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OrderingSystemDAL\OrderingSystemDAL.csproj" />
+    <ProjectReference Include="..\OrderingSystemLogic\OrderingSystemLogic.csproj" />
+    <ProjectReference Include="..\OrderingSystemModel\OrderingSystemModel.csproj" />
+  </ItemGroup>
+
 </Project>

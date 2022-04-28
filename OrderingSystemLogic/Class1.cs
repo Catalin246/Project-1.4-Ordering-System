@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OrderingSystemDAL
+namespace OrderingSystemLogic
 {
     public class Class1
     {

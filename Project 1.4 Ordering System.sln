@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderingSystemUI", "Orderin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingSystemDAL", "OrderingSystemDAL\OrderingSystemDAL.csproj", "{4D77D18E-4B62-4311-9979-2DADFB80CEB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingSystemLogic", "OrderingSystemLogic\OrderingSystemLogic.csproj", "{4FF194D3-B91D-42B7-BDF5-EE611FCDBFB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingSystemModel", "OrderingSystemModel\OrderingSystemModel.csproj", "{E45EB8EE-5668-4D5E-9DFC-26AD2AEF2F0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{4D77D18E-4B62-4311-9979-2DADFB80CEB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D77D18E-4B62-4311-9979-2DADFB80CEB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D77D18E-4B62-4311-9979-2DADFB80CEB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FF194D3-B91D-42B7-BDF5-EE611FCDBFB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FF194D3-B91D-42B7-BDF5-EE611FCDBFB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FF194D3-B91D-42B7-BDF5-EE611FCDBFB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FF194D3-B91D-42B7-BDF5-EE611FCDBFB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E45EB8EE-5668-4D5E-9DFC-26AD2AEF2F0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E45EB8EE-5668-4D5E-9DFC-26AD2AEF2F0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E45EB8EE-5668-4D5E-9DFC-26AD2AEF2F0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E45EB8EE-5668-4D5E-9DFC-26AD2AEF2F0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
