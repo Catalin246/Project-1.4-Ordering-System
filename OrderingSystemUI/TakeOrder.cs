@@ -10,12 +10,11 @@ using System.Windows.Forms;
 
 namespace OrderingSystemUI
 {
-    public partial class Form1 : Form
+    public partial class TakeOrder : Form
     {
-        public Form1()
+        public TakeOrder()
         {
             InitializeComponent();
         }
-
     }
 }
