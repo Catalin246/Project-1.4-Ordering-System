@@ -26,13 +26,21 @@ namespace OrderingSystemUI
 
             if (panelName == "Dashboard")
             {
+                pnlTakeOrder.Hide();
                 pnlTableView.Hide();
                 pnlDashboard.Show();
             }
             else if(panelName == "Table view")
             {
+                pnlTakeOrder.Hide();
                 pnlDashboard.Hide();
                 pnlTableView.Show();
+            }
+            else if (panelName == "Take Order")
+            {
+                pnlDashboard.Hide();
+                pnlTableView.Hide();
+                pnlTakeOrder.Show();
             }
         }
 
@@ -58,8 +66,7 @@ namespace OrderingSystemUI
 
         private void btnTable1_Click(object sender, EventArgs e)
         {
-            TakeOrder takeOrder = new TakeOrder();
-            takeOrder.Show();
+            showPanel("Take Order");
         }
     }
 }
