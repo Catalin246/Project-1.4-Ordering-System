@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OrderingSystemDAL;
+using OrderingSystemLogic;
+using OrderingSystemModel;
 
 namespace OrderingSystemUI
 {
@@ -67,6 +70,34 @@ namespace OrderingSystemUI
         private void btnTable1_Click(object sender, EventArgs e)
         {
             showPanel("Take Order");
+        }
+
+        private void btnDrinks_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // fill the drinks listview within the drinks panel with a list of drinks
+                DrinkService drinkService = new DrinkService(); ;
+                List<Drink> drinks = drinkService.GetDrinks(); ;
+
+                // clear the listview before filling it again
+                listViewMenuItems.Items.Clear();
+
+                foreach (Drink drink in drinks)
+                {
+                    ListViewItem li = new ListViewItem(drink.Number.ToString());
+                    li.SubItems.Add(drink.Name);
+                    li.SubItems.Add(drink.Price.ToString());
+                   
+                    li.Tag = drink;
+
+                    listViewMenuItems.Items.Add(li);
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+            }
         }
     }
 }

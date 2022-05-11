@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 
-namespace SomerenDAL
+namespace OrderingSystemDAL
 {
     public abstract class BaseDao
     {
@@ -14,7 +14,7 @@ namespace SomerenDAL
         {
             // DO NOT FORGET TO INSERT YOUR CONNECTION STRING NAMED 'Database Name' IN YOUR APP.CONFIG!!
 
-            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseName"].ConnectionString);
+            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
             adapter = new SqlDataAdapter();
         }
 
