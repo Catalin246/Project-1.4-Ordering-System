@@ -80,7 +80,7 @@ namespace OrderingSystemUI
                 DrinkService drinkService = new DrinkService(); ;
                 List<Drink> drinks = drinkService.GetDrinks(); ;
 
-                // clear the listview before filling it again
+                
                 listViewMenuItems.Items.Clear();
 
                 foreach (Drink drink in drinks)
