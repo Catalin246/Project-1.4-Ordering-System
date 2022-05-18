@@ -32,8 +32,8 @@ namespace OrderingSystemDAL
             {
                 Drink drink = new Drink();
                 {
-                    drink.Number = (int)dr["drinkID"];
-                    drink.Name = (string)dr["drinkName"].ToString();
+                    drink.DrinkId = (int)dr["drinkID"];
+                    drink.DrinkName = (string)dr["drinkName"].ToString();
                 };
                 drinks.Add(drink);
             }
