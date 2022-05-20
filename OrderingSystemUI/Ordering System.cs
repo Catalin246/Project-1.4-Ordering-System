@@ -76,7 +76,6 @@ namespace OrderingSystemUI
         {
             try
             {
-                // fill the drinks listview within the drinks panel with a list of drinks
                 DrinkService drinkService = new DrinkService(); ;
                 List<Drink> drinks = drinkService.GetDrinks(); ;
 
