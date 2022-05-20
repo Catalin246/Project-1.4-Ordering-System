@@ -11,6 +11,10 @@ namespace OrderingSystemModel
         public int BillID { get; set; }
         public string PaymentType { get; set; }
         public string BillNote { get; set; }
+        public  Bill()
+        {
+
+        }
         public Bill(int billId, string paymentType, string billNotes)
         {
             this.BillID = billId;
