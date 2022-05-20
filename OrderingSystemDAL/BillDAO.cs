@@ -11,7 +11,11 @@ using System.Collections.ObjectModel;
 
 namespace OrderingSystemDAL
 {
+
     public class BillDAO : BaseDao
+=======
+    public class BillDao
+
     {
         public List<Bill> GetAllBills()
         {

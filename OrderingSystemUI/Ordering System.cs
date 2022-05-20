@@ -72,11 +72,11 @@ namespace OrderingSystemUI
             showPanel("Take Order");
         }
 
+        //comments
         private void btnDrinks_Click(object sender, EventArgs e)
         {
             try
             {
-                // fill the drinks listview within the drinks panel with a list of drinks
                 DrinkService drinkService = new DrinkService(); ;
                 List<Drink> drinks = drinkService.GetDrinks(); ;
 
