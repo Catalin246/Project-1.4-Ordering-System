@@ -8,12 +8,12 @@ namespace OrderingSystemModel
 {
     public class Bill
     {
-        public int BillID { get; set; }
+        public int BillId { get; set; }
         public string PaymentType { get; set; }
         public string BillNote { get; set; }
         public Bill(int billId, string paymentType, string billNotes)
         {
-            this.BillID = billId;
+            this.BillId = billId;
             this.BillNote = billNotes;
             this.PaymentType = paymentType;
         }

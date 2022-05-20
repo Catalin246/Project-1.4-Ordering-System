@@ -8,8 +8,8 @@ namespace OrderingSystemModel
 {
     public class Drink
     {
-        public int Number { get; set; }
-        public string Name { get; set; }
-        public float Price { get; set; }
+        public int DrinkId { get; set; }
+        public string DrinkName { get; set; }
+        public float DrinkPrice { get; set; }
     }
 }
