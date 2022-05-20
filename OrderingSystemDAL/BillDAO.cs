@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemDAL
 {
-    public class BillDAO
+    public class BillDao
     {
        
 
