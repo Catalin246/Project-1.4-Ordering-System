@@ -55,7 +55,6 @@ namespace OrderingSystemUI
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnTake = new System.Windows.Forms.Button();
             this.listViewOrderItems = new System.Windows.Forms.ListView();
-            this.paymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlPayment = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.pnlTableView.SuspendLayout();
@@ -69,8 +68,7 @@ namespace OrderingSystemUI
             this.dashboardToolStripMenuItem,
             this.barViewToolStripMenuItem,
             this.kitchenViewToolStripMenuItem,
-            this.tableViewToolStripMenuItem,
-            this.paymentToolStripMenuItem});
+            this.tableViewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
@@ -136,7 +134,6 @@ namespace OrderingSystemUI
             // 
             // pnlTakeOrder
             // 
-            this.pnlTakeOrder.Controls.Add(this.pnlPayment);
             this.pnlTakeOrder.Controls.Add(this.btnModifyOrder);
             this.pnlTakeOrder.Controls.Add(this.btnPayment);
             this.pnlTakeOrder.Controls.Add(this.btnDrinks);
@@ -152,6 +149,7 @@ namespace OrderingSystemUI
             this.pnlTakeOrder.Controls.Add(this.btnCancel);
             this.pnlTakeOrder.Controls.Add(this.btnTake);
             this.pnlTakeOrder.Controls.Add(this.listViewOrderItems);
+            this.pnlTakeOrder.Controls.Add(this.pnlPayment);
             this.pnlTakeOrder.Location = new System.Drawing.Point(15, 36);
             this.pnlTakeOrder.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlTakeOrder.Name = "pnlTakeOrder";
@@ -334,12 +332,6 @@ namespace OrderingSystemUI
             this.listViewOrderItems.TabIndex = 6;
             this.listViewOrderItems.UseCompatibleStateImageBehavior = false;
             // 
-            // paymentToolStripMenuItem
-            // 
-            this.paymentToolStripMenuItem.Name = "paymentToolStripMenuItem";
-            this.paymentToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
-            this.paymentToolStripMenuItem.Text = "Payment";
-            // 
             // pnlPayment
             // 
             this.pnlPayment.Location = new System.Drawing.Point(0, 0);
@@ -399,7 +391,6 @@ namespace OrderingSystemUI
         private System.Windows.Forms.Button btnModifyOrder;
         private System.Windows.Forms.ColumnHeader ItemID;
         private System.Windows.Forms.ColumnHeader ItemName;
-        private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem;
         private System.Windows.Forms.Panel pnlPayment;
     }
 }
