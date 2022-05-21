@@ -99,5 +99,13 @@ namespace OrderingSystemUI
                 MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
             }
         }
+
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            pnlDashboard.Hide();
+            pnlTableView.Hide();
+            pnlTakeOrder.Hide();
+            pnlPayment.Show();
+        }
     }
 }

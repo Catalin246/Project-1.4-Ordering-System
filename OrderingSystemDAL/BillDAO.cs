@@ -13,9 +13,6 @@ namespace OrderingSystemDAL
 {
 
     public class BillDAO : BaseDao
-=======
-    public class BillDao
-
     {
         public List<Bill> GetAllBills()
         {
@@ -31,7 +28,7 @@ namespace OrderingSystemDAL
             {
                 Bill bill = new Bill()
                 {
-                    BillID = (int)dr["billId"],
+                    BillId = (int)dr["billId"],
                     BillNote = (string)(dr["billNotes"]),
                     PaymentType = (string)(dr["paymentType"])
                 };
