@@ -85,9 +85,9 @@ namespace OrderingSystemUI
 
                 foreach (Drink drink in drinks)
                 {
-                    ListViewItem li = new ListViewItem(drink.Number.ToString());
-                    li.SubItems.Add(drink.Name);
-                    li.SubItems.Add(drink.Price.ToString());
+                    ListViewItem li = new ListViewItem(drink.DrinkId.ToString());
+                    li.SubItems.Add(drink.DrinkName);
+                    li.SubItems.Add(drink.DrinkPrice.ToString());
                    
                     li.Tag = drink;
 
@@ -106,6 +106,11 @@ namespace OrderingSystemUI
             pnlTableView.Hide();
             pnlTakeOrder.Hide();
             pnlPayment.Show();
+        }
+
+        private void pnlPayment_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
