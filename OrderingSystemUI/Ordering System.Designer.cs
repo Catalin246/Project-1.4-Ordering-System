@@ -38,6 +38,20 @@ namespace OrderingSystemUI
             this.pnlTableView = new System.Windows.Forms.Panel();
             this.btnTable1 = new System.Windows.Forms.Button();
             this.pnlTakeOrder = new System.Windows.Forms.Panel();
+            this.pnlPayment = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.listViewDisplayItems = new System.Windows.Forms.ListView();
+            this.ItemsName = new System.Windows.Forms.ColumnHeader();
+            this.Quantity = new System.Windows.Forms.ColumnHeader();
+            this.ItemsPrice = new System.Windows.Forms.ColumnHeader();
+            this.Vat = new System.Windows.Forms.ColumnHeader();
+            this.TotalWithVAT = new System.Windows.Forms.ColumnHeader();
             this.btnModifyOrder = new System.Windows.Forms.Button();
             this.btnPayment = new System.Windows.Forms.Button();
             this.btnDrinks = new System.Windows.Forms.Button();
@@ -55,10 +69,15 @@ namespace OrderingSystemUI
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnTake = new System.Windows.Forms.Button();
             this.listViewOrderItems = new System.Windows.Forms.ListView();
-            this.pnlPayment = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttCredit = new System.Windows.Forms.Button();
+            this.buttDebit = new System.Windows.Forms.Button();
+            this.buttCash = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.pnlTableView.SuspendLayout();
             this.pnlTakeOrder.SuspendLayout();
+            this.pnlPayment.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -144,17 +163,152 @@ namespace OrderingSystemUI
             this.pnlTakeOrder.Controls.Add(this.button2);
             this.pnlTakeOrder.Controls.Add(this.lblMenu);
             this.pnlTakeOrder.Controls.Add(this.lblOrderNumber);
-            this.pnlTakeOrder.Controls.Add(this.lblTableNumber);
             this.pnlTakeOrder.Controls.Add(this.listViewMenuItems);
             this.pnlTakeOrder.Controls.Add(this.btnCancel);
             this.pnlTakeOrder.Controls.Add(this.btnTake);
             this.pnlTakeOrder.Controls.Add(this.listViewOrderItems);
-            this.pnlTakeOrder.Controls.Add(this.pnlPayment);
+            this.pnlTakeOrder.Controls.Add(this.lblTableNumber);
             this.pnlTakeOrder.Location = new System.Drawing.Point(15, 36);
             this.pnlTakeOrder.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlTakeOrder.Name = "pnlTakeOrder";
             this.pnlTakeOrder.Size = new System.Drawing.Size(887, 548);
             this.pnlTakeOrder.TabIndex = 3;
+            // 
+            // pnlPayment
+            // 
+            this.pnlPayment.Controls.Add(this.label6);
+            this.pnlPayment.Controls.Add(this.buttCash);
+            this.pnlPayment.Controls.Add(this.buttDebit);
+            this.pnlPayment.Controls.Add(this.buttCredit);
+            this.pnlPayment.Controls.Add(this.textBox1);
+            this.pnlPayment.Controls.Add(this.label5);
+            this.pnlPayment.Controls.Add(this.label4);
+            this.pnlPayment.Controls.Add(this.label3);
+            this.pnlPayment.Controls.Add(this.button3);
+            this.pnlPayment.Controls.Add(this.button4);
+            this.pnlPayment.Controls.Add(this.label1);
+            this.pnlPayment.Controls.Add(this.label2);
+            this.pnlPayment.Controls.Add(this.listViewDisplayItems);
+            this.pnlPayment.Location = new System.Drawing.Point(12, 36);
+            this.pnlPayment.Name = "pnlPayment";
+            this.pnlPayment.Size = new System.Drawing.Size(887, 545);
+            this.pnlPayment.TabIndex = 29;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(614, 77);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(92, 25);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "ADD TIP:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(34, 372);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 28);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "TIP: ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(266, 372);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(148, 28);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Total with TIP:";
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button3.Location = new System.Drawing.Point(3, 107);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button3.Name = "button3";
+            this.button3.Padding = new System.Windows.Forms.Padding(2, 0, 0, 1);
+            this.button3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.button3.Size = new System.Drawing.Size(25, 29);
+            this.button3.TabIndex = 18;
+            this.button3.Text = "- ";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button4.Location = new System.Drawing.Point(522, 98);
+            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button4.Name = "button4";
+            this.button4.Padding = new System.Windows.Forms.Padding(2, 0, 0, 1);
+            this.button4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.button4.Size = new System.Drawing.Size(25, 29);
+            this.button4.TabIndex = 19;
+            this.button4.Text = "+ ";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(390, 53);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(126, 20);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Order No. 001347";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(34, 53);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(61, 20);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Table#1";
+            // 
+            // listViewDisplayItems
+            // 
+            this.listViewDisplayItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ItemsName,
+            this.Quantity,
+            this.ItemsPrice,
+            this.Vat,
+            this.TotalWithVAT});
+            this.listViewDisplayItems.HideSelection = false;
+            this.listViewDisplayItems.Location = new System.Drawing.Point(32, 78);
+            this.listViewDisplayItems.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listViewDisplayItems.Name = "listViewDisplayItems";
+            this.listViewDisplayItems.Size = new System.Drawing.Size(482, 291);
+            this.listViewDisplayItems.TabIndex = 7;
+            this.listViewDisplayItems.UseCompatibleStateImageBehavior = false;
+            this.listViewDisplayItems.View = System.Windows.Forms.View.Details;
+            // 
+            // ItemsName
+            // 
+            this.ItemsName.Text = "ItemsName";
+            this.ItemsName.Width = 200;
+            // 
+            // Quantity
+            // 
+            this.Quantity.Text = "Quantity";
+            this.Quantity.Width = 80;
+            // 
+            // ItemsPrice
+            // 
+            this.ItemsPrice.Text = "Unit Price";
+            this.ItemsPrice.Width = 80;
+            // 
+            // Vat
+            // 
+            this.Vat.Text = "VAT";
+            this.Vat.Width = 80;
+            // 
+            // TotalWithVAT
+            // 
+            this.TotalWithVAT.Text = "Total With VAT";
+            this.TotalWithVAT.Width = 150;
             // 
             // btnModifyOrder
             // 
@@ -332,18 +486,65 @@ namespace OrderingSystemUI
             this.listViewOrderItems.TabIndex = 6;
             this.listViewOrderItems.UseCompatibleStateImageBehavior = false;
             // 
-            // pnlPayment
+            // textBox1
             // 
-            this.pnlPayment.Location = new System.Drawing.Point(0, 0);
-            this.pnlPayment.Name = "pnlPayment";
-            this.pnlPayment.Size = new System.Drawing.Size(887, 464);
-            this.pnlPayment.TabIndex = 29;
+            this.textBox1.Location = new System.Drawing.Point(721, 78);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(140, 27);
+            this.textBox1.TabIndex = 23;
+            // 
+            // buttCredit
+            // 
+            this.buttCredit.BackColor = System.Drawing.Color.Teal;
+            this.buttCredit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttCredit.ForeColor = System.Drawing.Color.White;
+            this.buttCredit.Location = new System.Drawing.Point(541, 190);
+            this.buttCredit.Name = "buttCredit";
+            this.buttCredit.Size = new System.Drawing.Size(94, 29);
+            this.buttCredit.TabIndex = 24;
+            this.buttCredit.Text = "CREDIT";
+            this.buttCredit.UseVisualStyleBackColor = false;
+            // 
+            // buttDebit
+            // 
+            this.buttDebit.BackColor = System.Drawing.Color.Teal;
+            this.buttDebit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttDebit.ForeColor = System.Drawing.Color.White;
+            this.buttDebit.Location = new System.Drawing.Point(651, 190);
+            this.buttDebit.Name = "buttDebit";
+            this.buttDebit.Size = new System.Drawing.Size(94, 29);
+            this.buttDebit.TabIndex = 25;
+            this.buttDebit.Text = "DEBIT";
+            this.buttDebit.UseVisualStyleBackColor = false;
+            // 
+            // buttCash
+            // 
+            this.buttCash.BackColor = System.Drawing.Color.Teal;
+            this.buttCash.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttCash.ForeColor = System.Drawing.Color.White;
+            this.buttCash.Location = new System.Drawing.Point(767, 190);
+            this.buttCash.Name = "buttCash";
+            this.buttCash.Size = new System.Drawing.Size(94, 29);
+            this.buttCash.TabIndex = 26;
+            this.buttCash.Text = "CASH";
+            this.buttCash.UseVisualStyleBackColor = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(614, 127);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(199, 25);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "Select Payment Type:";
             // 
             // OrderingSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 600);
+            this.Controls.Add(this.pnlPayment);
             this.Controls.Add(this.pnlTakeOrder);
             this.Controls.Add(this.pnlTableView);
             this.Controls.Add(this.pnlDashboard);
@@ -358,6 +559,8 @@ namespace OrderingSystemUI
             this.pnlTableView.ResumeLayout(false);
             this.pnlTakeOrder.ResumeLayout(false);
             this.pnlTakeOrder.PerformLayout();
+            this.pnlPayment.ResumeLayout(false);
+            this.pnlPayment.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -392,6 +595,24 @@ namespace OrderingSystemUI
         private System.Windows.Forms.ColumnHeader ItemID;
         private System.Windows.Forms.ColumnHeader ItemName;
         private System.Windows.Forms.Panel pnlPayment;
+        private System.Windows.Forms.ListView listViewDisplayItems;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ColumnHeader Quantity;
+        private System.Windows.Forms.ColumnHeader ItemsPrice;
+        private System.Windows.Forms.ColumnHeader ItemsName;
+        private System.Windows.Forms.ColumnHeader Vat;
+        private System.Windows.Forms.ColumnHeader TotalWithVAT;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button buttCash;
+        private System.Windows.Forms.Button buttDebit;
+        private System.Windows.Forms.Button buttCredit;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

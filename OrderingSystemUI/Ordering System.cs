@@ -107,5 +107,7 @@ namespace OrderingSystemUI
             pnlTakeOrder.Hide();
             pnlPayment.Show();
         }
+
+       
     }
 }
