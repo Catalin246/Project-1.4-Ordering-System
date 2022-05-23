@@ -13,7 +13,7 @@ namespace OrderingSystemDAL
     {
         public List<Employee> GetAllAccounts()
         {
-            string query = "SELECT username, [password] FROM [Employee]";
+            string query = "SELECT username, [Password] FROM [Employee]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
