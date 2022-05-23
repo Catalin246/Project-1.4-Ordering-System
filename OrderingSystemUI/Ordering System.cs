@@ -72,22 +72,24 @@ namespace OrderingSystemUI
             showPanel("Take Order");
         }
 
+        //Create an order
+
+        Order order;
         private void btnDrinks_Click(object sender, EventArgs e)
         {
             try
             {
-                // fill the drinks listview within the drinks panel with a list of drinks
-                DrinkService drinkService = new DrinkService(); ;
-                List<Drink> drinks = drinkService.GetDrinks(); ;
+                DrinkService drinkService = new DrinkService(); 
+                List<Drink> drinks = drinkService.GetDrinks(); 
 
                 
                 listViewMenuItems.Items.Clear();
 
                 foreach (Drink drink in drinks)
                 {
-                    ListViewItem li = new ListViewItem(drink.Number.ToString());
-                    li.SubItems.Add(drink.Name);
-                    li.SubItems.Add(drink.Price.ToString());
+                    ListViewItem li = new ListViewItem(drink.DrinkId.ToString());
+                    li.SubItems.Add(drink.DrinkName);
+                    li.SubItems.Add(drink.DrinkPrice.ToString());
                    
                     li.Tag = drink;
 
@@ -98,6 +100,67 @@ namespace OrderingSystemUI
             {
                 MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
             }
+        }
+        private void btnStarters_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMains_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDesserts_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (listViewMenuItems.SelectedItems.Count == 0)
+                return;
+
+            ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
+            Item drinkSelected = (Drink)selectedItem.Tag;
+
+            order.items.Add(drinkSelected);
+
+            listViewOrderItems.Items.Clear();
+
+            foreach (Drink drink in order.items)
+            {
+                ListViewItem li = new ListViewItem(drink.DrinkId.ToString());
+                li.SubItems.Add(drink.DrinkName);
+                li.SubItems.Add(drink.DrinkPrice.ToString());
+
+                li.Tag = drink;
+
+                listViewOrderItems.Items.Add(li);
+            }
+        }
+
+        private void btnMinus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnReserveTable_Click(object sender, EventArgs e)
+        {
+            btnDrinks.Enabled = true;
+            btnDesserts.Enabled = true; 
+            btnMains.Enabled = true;    
+            btnStarters.Enabled = true; 
+
+            order = new Order();
+        }
+        //Payment
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            pnlDashboard.Hide();
+            pnlTableView.Hide();
+            pnlTakeOrder.Hide();
+            pnlPayment.Show();
         }
     }
 }

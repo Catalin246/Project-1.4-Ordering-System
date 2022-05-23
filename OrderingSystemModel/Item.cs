@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemModel
 {
-    public class Drink : Item
+    public abstract class Item
     {
-        public int DrinkId { get; set; }
-        public string DrinkName { get; set; }
-        public float DrinkPrice { get; set; }
     }
 }

@@ -17,6 +17,8 @@ namespace OrderingSystemDAL
             string query = "SELECT OrderId, TableId, OrderTime FROM dbo.Order ORDER BY [OrderId]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+
+            //should we assign orders' ids in sql server?
         }
 
         private List<Order> ReadTables(DataTable dataTable)
@@ -36,6 +38,13 @@ namespace OrderingSystemDAL
             }
             return orders;
         }
+
+        //public List<Drink> GetDrinkOrders()
+        //{
+        //    string query = "SELECT OrderId, TableId, OrderTime FROM dbo.Order WHERE  = 'Hardik'";
+        //    SqlParameter[] sqlParameters = new SqlParameter[0];
+        //    return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        //}
     }
 }
 
