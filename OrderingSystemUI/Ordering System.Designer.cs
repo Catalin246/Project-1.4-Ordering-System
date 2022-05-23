@@ -54,6 +54,8 @@ namespace OrderingSystemUI
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnTake = new System.Windows.Forms.Button();
             this.listViewOrderItems = new System.Windows.Forms.ListView();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.lblTableNumber = new System.Windows.Forms.Label();
             this.pnlPayment = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
@@ -74,8 +76,6 @@ namespace OrderingSystemUI
             this.ItemsPrice = new System.Windows.Forms.ColumnHeader();
             this.Vat = new System.Windows.Forms.ColumnHeader();
             this.TotalWithVAT = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.menuStrip1.SuspendLayout();
             this.pnlTableView.SuspendLayout();
             this.pnlTakeOrder.SuspendLayout();
@@ -179,6 +179,7 @@ namespace OrderingSystemUI
             // btnDesserts
             // 
             this.btnDesserts.BackColor = System.Drawing.Color.Teal;
+            this.btnDesserts.Enabled = false;
             this.btnDesserts.Location = new System.Drawing.Point(912, 155);
             this.btnDesserts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDesserts.Name = "btnDesserts";
@@ -186,21 +187,25 @@ namespace OrderingSystemUI
             this.btnDesserts.TabIndex = 30;
             this.btnDesserts.Text = "Desserts";
             this.btnDesserts.UseVisualStyleBackColor = false;
+            this.btnDesserts.Click += new System.EventHandler(this.btnDesserts_Click);
             // 
             // btnMains
             // 
             this.btnMains.BackColor = System.Drawing.Color.Teal;
-            this.btnMains.Location = new System.Drawing.Point(799, 154);
+            this.btnMains.Enabled = false;
+            this.btnMains.Location = new System.Drawing.Point(799, 155);
             this.btnMains.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMains.Name = "btnMains";
             this.btnMains.Size = new System.Drawing.Size(96, 55);
             this.btnMains.TabIndex = 29;
             this.btnMains.Text = "Mains";
             this.btnMains.UseVisualStyleBackColor = false;
+            this.btnMains.Click += new System.EventHandler(this.btnMains_Click);
             // 
             // btnStarters
             // 
             this.btnStarters.BackColor = System.Drawing.Color.Teal;
+            this.btnStarters.Enabled = false;
             this.btnStarters.Location = new System.Drawing.Point(682, 155);
             this.btnStarters.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnStarters.Name = "btnStarters";
@@ -208,10 +213,12 @@ namespace OrderingSystemUI
             this.btnStarters.TabIndex = 28;
             this.btnStarters.Text = "Starters";
             this.btnStarters.UseVisualStyleBackColor = false;
+            this.btnStarters.Click += new System.EventHandler(this.btnStarters_Click);
             // 
             // btnPayment
             // 
             this.btnPayment.BackColor = System.Drawing.Color.Teal;
+            this.btnPayment.Enabled = false;
             this.btnPayment.Location = new System.Drawing.Point(569, 545);
             this.btnPayment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnPayment.Name = "btnPayment";
@@ -224,6 +231,7 @@ namespace OrderingSystemUI
             // btnDrinks
             // 
             this.btnDrinks.BackColor = System.Drawing.Color.Teal;
+            this.btnDrinks.Enabled = false;
             this.btnDrinks.Location = new System.Drawing.Point(569, 154);
             this.btnDrinks.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDrinks.Name = "btnDrinks";
@@ -243,6 +251,7 @@ namespace OrderingSystemUI
             this.btnReserveTable.TabIndex = 24;
             this.btnReserveTable.Text = "Reserve Table";
             this.btnReserveTable.UseVisualStyleBackColor = false;
+            this.btnReserveTable.Click += new System.EventHandler(this.btnReserveTable_Click);
             // 
             // btnMinus
             // 
@@ -256,6 +265,7 @@ namespace OrderingSystemUI
             this.btnMinus.TabIndex = 14;
             this.btnMinus.Text = "- ";
             this.btnMinus.UseVisualStyleBackColor = true;
+            this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
             // 
             // btnAdd
             // 
@@ -269,6 +279,7 @@ namespace OrderingSystemUI
             this.btnAdd.TabIndex = 15;
             this.btnAdd.Text = "+ ";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // lblMenu
             // 
@@ -318,6 +329,7 @@ namespace OrderingSystemUI
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Red;
+            this.btnCancel.Enabled = false;
             this.btnCancel.Location = new System.Drawing.Point(809, 545);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancel.Name = "btnCancel";
@@ -329,6 +341,7 @@ namespace OrderingSystemUI
             // btnTake
             // 
             this.btnTake.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnTake.Enabled = false;
             this.btnTake.Location = new System.Drawing.Point(94, 545);
             this.btnTake.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnTake.Name = "btnTake";
@@ -350,6 +363,16 @@ namespace OrderingSystemUI
             this.listViewOrderItems.TabIndex = 6;
             this.listViewOrderItems.UseCompatibleStateImageBehavior = false;
             this.listViewOrderItems.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Item ID";
+            this.columnHeader1.Width = 100;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Item Name";
+            this.columnHeader2.Width = 100;
             // 
             // lblTableNumber
             // 
@@ -560,16 +583,6 @@ namespace OrderingSystemUI
             // 
             this.TotalWithVAT.Text = "Total With VAT";
             this.TotalWithVAT.Width = 150;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Item ID";
-            this.columnHeader1.Width = 100;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Item Name";
-            this.columnHeader2.Width = 100;
             // 
             // OrderingSystem
             // 
