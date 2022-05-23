@@ -79,22 +79,9 @@ namespace OrderingSystemUI
         {
             try
             {
-                DrinkService drinkService = new DrinkService(); 
-                List<Drink> drinks = drinkService.GetDrinks(); 
-
-                
-                listViewMenuItems.Items.Clear();
-
-                foreach (Drink drink in drinks)
-                {
-                    ListViewItem li = new ListViewItem(drink.DrinkId.ToString());
-                    li.SubItems.Add(drink.DrinkName);
-                    li.SubItems.Add(drink.DrinkPrice.ToString());
-                   
-                    li.Tag = drink;
-
-                    listViewMenuItems.Items.Add(li);
-                }
+                ItemService itemService = new ItemService();
+                List<Item> items = itemService.GetDrinks();
+                DisplayItems(items);
             }
             catch (Exception exp)
             {
@@ -103,38 +90,91 @@ namespace OrderingSystemUI
         }
         private void btnStarters_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ItemService itemService = new ItemService();
+                List<Item> items = itemService.GetStarters();
+                DisplayItems(items);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+            }
         }
 
         private void btnMains_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ItemService itemService = new ItemService();
+                List<Item> items = itemService.GetMains();
+                DisplayItems(items);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+            }
         }
 
         private void btnDesserts_Click(object sender, EventArgs e)
         {
+            try
+            {
+                ItemService itemService = new ItemService();
+                List<Item> items = itemService.GetDesserts();
+                DisplayItems(items);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+            }
+        }
 
+        public void DisplayItems(List<Item> items)
+        {
+            listViewMenuItems.Items.Clear();
+
+            foreach (Item item in items)
+            {
+                ListViewItem li = new ListViewItem(item.ItemName);
+                li.SubItems.Add(item.ItemPrice.ToString());
+                li.SubItems.Add(item.ItemCategory);
+                li.SubItems.Add(item.ItemAmount.ToString());
+                
+                li.Tag = item;
+
+                listViewMenuItems.Items.Add(li);
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (order == null)
+                order = new Order();
+
             if (listViewMenuItems.SelectedItems.Count == 0)
-                return;
+            return;
 
             ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
-            Item drinkSelected = (Drink)selectedItem.Tag;
+            Item itemSelected = (Item)selectedItem.Tag;
+            itemSelected.ItemAmount = 1;
 
-            order.items.Add(drinkSelected);
-
+            foreach (Item item in order.items)
+            {
+                if (itemSelected == item)
+                    itemSelected.ItemAmount++;
+            }
+            if (itemSelected.ItemAmount == 1)
+                order.items.Add(itemSelected);
             listViewOrderItems.Items.Clear();
 
-            foreach (Drink drink in order.items)
+            foreach (Item item in order.items)
             {
-                ListViewItem li = new ListViewItem(drink.DrinkId.ToString());
-                li.SubItems.Add(drink.DrinkName);
-                li.SubItems.Add(drink.DrinkPrice.ToString());
+                ListViewItem li = new ListViewItem(item.ItemName);
+                li.SubItems.Add(item.ItemPrice.ToString());
+                li.SubItems.Add(item.ItemAmount.ToString());
 
-                li.Tag = drink;
+                li.Tag = item;
 
                 listViewOrderItems.Items.Add(li);
             }
@@ -142,7 +182,30 @@ namespace OrderingSystemUI
 
         private void btnMinus_Click(object sender, EventArgs e)
         {
+            //if (listViewOrderItems.SelectedItems.Count == 0)
+            //  return;
 
+            ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
+            Item itemSelected = (Item)selectedItem.Tag;
+            
+            if (itemSelected.ItemAmount > 1)
+                itemSelected.ItemAmount--;
+            else
+                order.items.Remove(itemSelected);
+
+            listViewOrderItems.Items.Clear();
+
+            foreach (Item item in order.items)
+            {
+                ListViewItem li = new ListViewItem(item.ItemName);
+                li.SubItems.Add(item.ItemPrice.ToString());
+                li.SubItems.Add(item.ItemAmount.ToString());
+
+                li.Tag = item;
+
+                listViewOrderItems.Items.Add(li);
+            }
+            itemSelected = null;
         }
 
         private void btnReserveTable_Click(object sender, EventArgs e)
@@ -151,8 +214,13 @@ namespace OrderingSystemUI
             btnDesserts.Enabled = true; 
             btnMains.Enabled = true;    
             btnStarters.Enabled = true; 
+            btnCancel.Enabled = true;   
+        }
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            order.items = null;
 
-            order = new Order();
+            listViewOrderItems.Items.Clear();
         }
         //Payment
         private void btnPayment_Click(object sender, EventArgs e)
@@ -162,5 +230,6 @@ namespace OrderingSystemUI
             pnlTakeOrder.Hide();
             pnlPayment.Show();
         }
+
     }
 }

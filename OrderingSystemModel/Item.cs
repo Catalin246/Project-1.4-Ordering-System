@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemModel
 {
-    public abstract class Item
+    public class Item
     {
+        public int ItemId { get; set; }
+        public string ItemName { get; set; }
+        public string ItemCategory { get; set; }
+        public int ItemAmount { get; set;  }
+        public double ItemPrice { get; set; }
     }
 }
