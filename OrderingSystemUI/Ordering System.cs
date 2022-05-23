@@ -72,13 +72,13 @@ namespace OrderingSystemUI
             showPanel("Take Order");
         }
 
-        //comments
+        //Take order
         private void btnDrinks_Click(object sender, EventArgs e)
         {
             try
             {
-                DrinkService drinkService = new DrinkService(); ;
-                List<Drink> drinks = drinkService.GetDrinks(); ;
+                DrinkService drinkService = new DrinkService(); 
+                List<Drink> drinks = drinkService.GetDrinks(); 
 
                 
                 listViewMenuItems.Items.Clear();
@@ -99,6 +99,27 @@ namespace OrderingSystemUI
                 MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
             }
         }
+        private void btnStarters_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMains_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDesserts_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Payment
 
         private void btnPayment_Click(object sender, EventArgs e)
         {
@@ -112,5 +133,12 @@ namespace OrderingSystemUI
         {
 
         }
+
+        private void listViewOrderItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

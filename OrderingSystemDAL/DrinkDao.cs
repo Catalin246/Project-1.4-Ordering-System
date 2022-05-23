@@ -14,7 +14,7 @@ namespace OrderingSystemDAL
     {       
         public List<Drink> GetAllDrinks()
         {
-            string query = "SELECT drinkID, drinkName, drinkPrice FROM dbo.Drink ORDER BY [drinkID]";
+            string query = "SELECT drinkID, drinkName, drinkPrice FROM dbo.Drink";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -22,7 +22,7 @@ namespace OrderingSystemDAL
         private List<Drink> ReadTables(DataTable dataTable)
         {
             List<Drink> drinks = new List<Drink>();
-
+            OpenConnection();
             foreach (DataRow dr in dataTable.Rows)
             {
                 Drink drink = new Drink();

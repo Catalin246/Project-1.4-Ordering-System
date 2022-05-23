@@ -46,16 +46,15 @@ namespace OrderingSystemUI
             this.lblTableNumber = new System.Windows.Forms.Label();
             this.lblOrderNumber = new System.Windows.Forms.Label();
             this.lblMenu = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnDrinks = new System.Windows.Forms.Button();
             this.btnPayment = new System.Windows.Forms.Button();
             this.btnRserveTable = new System.Windows.Forms.Button();
             this.pnlTakeOrder = new System.Windows.Forms.Panel();
-            this.pnlPayment = new System.Windows.Forms.Panel();
-            this.btnDesserts = new System.Windows.Forms.Button();
-            this.btnStarters = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.btnMains = new System.Windows.Forms.Button();
+            this.btnStarters = new System.Windows.Forms.Button();
+            this.btnDesserts = new System.Windows.Forms.Button();
+            this.pnlPayment = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.pnlTableView.SuspendLayout();
             this.pnlTakeOrder.SuspendLayout();
@@ -141,6 +140,7 @@ namespace OrderingSystemUI
             this.listViewOrderItems.Size = new System.Drawing.Size(476, 327);
             this.listViewOrderItems.TabIndex = 6;
             this.listViewOrderItems.UseCompatibleStateImageBehavior = false;
+            this.listViewOrderItems.SelectedIndexChanged += new System.EventHandler(this.listViewOrderItems_SelectedIndexChanged);
             // 
             // btnTake
             // 
@@ -169,6 +169,7 @@ namespace OrderingSystemUI
             this.listViewMenuItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ItemID,
             this.ItemName});
+            this.listViewMenuItems.FullRowSelect = true;
             this.listViewMenuItems.HideSelection = false;
             this.listViewMenuItems.Location = new System.Drawing.Point(560, 216);
             this.listViewMenuItems.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -181,6 +182,7 @@ namespace OrderingSystemUI
             // ItemID
             // 
             this.ItemID.Text = "Item ID";
+            this.ItemID.Width = 100;
             // 
             // ItemName
             // 
@@ -216,32 +218,6 @@ namespace OrderingSystemUI
             this.lblMenu.Size = new System.Drawing.Size(57, 25);
             this.lblMenu.TabIndex = 12;
             this.lblMenu.Text = "Menu";
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(994, 216);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button2.Name = "button2";
-            this.button2.Padding = new System.Windows.Forms.Padding(2, 0, 0, 1);
-            this.button2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.button2.Size = new System.Drawing.Size(42, 44);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "+ ";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(504, 151);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(2, 0, 0, 1);
-            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.button1.Size = new System.Drawing.Size(41, 42);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "- ";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // btnDrinks
             // 
@@ -280,14 +256,13 @@ namespace OrderingSystemUI
             // 
             // pnlTakeOrder
             // 
+            this.pnlTakeOrder.Controls.Add(this.btnAdd);
             this.pnlTakeOrder.Controls.Add(this.btnMains);
             this.pnlTakeOrder.Controls.Add(this.btnStarters);
             this.pnlTakeOrder.Controls.Add(this.btnDesserts);
             this.pnlTakeOrder.Controls.Add(this.btnRserveTable);
             this.pnlTakeOrder.Controls.Add(this.btnPayment);
             this.pnlTakeOrder.Controls.Add(this.btnDrinks);
-            this.pnlTakeOrder.Controls.Add(this.button1);
-            this.pnlTakeOrder.Controls.Add(this.button2);
             this.pnlTakeOrder.Controls.Add(this.lblMenu);
             this.pnlTakeOrder.Controls.Add(this.lblOrderNumber);
             this.pnlTakeOrder.Controls.Add(this.lblTableNumber);
@@ -301,35 +276,15 @@ namespace OrderingSystemUI
             this.pnlTakeOrder.Size = new System.Drawing.Size(1109, 685);
             this.pnlTakeOrder.TabIndex = 3;
             // 
-            // pnlPayment
+            // btnAdd
             // 
-            this.pnlPayment.Location = new System.Drawing.Point(17, 45);
-            this.pnlPayment.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlPayment.Name = "pnlPayment";
-            this.pnlPayment.Size = new System.Drawing.Size(1112, 685);
-            this.pnlPayment.TabIndex = 32;
-            // 
-            // btnDesserts
-            // 
-            this.btnDesserts.BackColor = System.Drawing.Color.Teal;
-            this.btnDesserts.Location = new System.Drawing.Point(926, 151);
-            this.btnDesserts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnDesserts.Name = "btnDesserts";
-            this.btnDesserts.Size = new System.Drawing.Size(110, 55);
-            this.btnDesserts.TabIndex = 29;
-            this.btnDesserts.Text = "Desserts";
-            this.btnDesserts.UseVisualStyleBackColor = false;
-            // 
-            // btnStarters
-            // 
-            this.btnStarters.BackColor = System.Drawing.Color.Teal;
-            this.btnStarters.Location = new System.Drawing.Point(687, 151);
-            this.btnStarters.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnStarters.Name = "btnStarters";
-            this.btnStarters.Size = new System.Drawing.Size(110, 55);
-            this.btnStarters.TabIndex = 30;
-            this.btnStarters.Text = "Starters";
-            this.btnStarters.UseVisualStyleBackColor = false;
+            this.btnAdd.Location = new System.Drawing.Point(993, 216);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(43, 42);
+            this.btnAdd.TabIndex = 32;
+            this.btnAdd.Text = "+";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnMains
             // 
@@ -341,16 +296,49 @@ namespace OrderingSystemUI
             this.btnMains.TabIndex = 31;
             this.btnMains.Text = "Mains";
             this.btnMains.UseVisualStyleBackColor = false;
+            this.btnMains.Click += new System.EventHandler(this.btnMains_Click);
+            // 
+            // btnStarters
+            // 
+            this.btnStarters.BackColor = System.Drawing.Color.Teal;
+            this.btnStarters.Location = new System.Drawing.Point(687, 151);
+            this.btnStarters.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnStarters.Name = "btnStarters";
+            this.btnStarters.Size = new System.Drawing.Size(110, 55);
+            this.btnStarters.TabIndex = 30;
+            this.btnStarters.Text = "Starters";
+            this.btnStarters.UseVisualStyleBackColor = false;
+            this.btnStarters.Click += new System.EventHandler(this.btnStarters_Click);
+            // 
+            // btnDesserts
+            // 
+            this.btnDesserts.BackColor = System.Drawing.Color.Teal;
+            this.btnDesserts.Location = new System.Drawing.Point(926, 151);
+            this.btnDesserts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnDesserts.Name = "btnDesserts";
+            this.btnDesserts.Size = new System.Drawing.Size(110, 55);
+            this.btnDesserts.TabIndex = 29;
+            this.btnDesserts.Text = "Desserts";
+            this.btnDesserts.UseVisualStyleBackColor = false;
+            this.btnDesserts.Click += new System.EventHandler(this.btnDesserts_Click);
+            // 
+            // pnlPayment
+            // 
+            this.pnlPayment.Location = new System.Drawing.Point(17, 45);
+            this.pnlPayment.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlPayment.Name = "pnlPayment";
+            this.pnlPayment.Size = new System.Drawing.Size(1112, 685);
+            this.pnlPayment.TabIndex = 32;
             // 
             // OrderingSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1142, 750);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlTakeOrder);
             this.Controls.Add(this.pnlTableView);
             this.Controls.Add(this.pnlDashboard);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlPayment);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -386,8 +374,6 @@ namespace OrderingSystemUI
         private System.Windows.Forms.Label lblTableNumber;
         private System.Windows.Forms.Label lblOrderNumber;
         private System.Windows.Forms.Label lblMenu;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnDrinks;
         private System.Windows.Forms.Button btnPayment;
         private System.Windows.Forms.Button btnRserveTable;
@@ -396,6 +382,7 @@ namespace OrderingSystemUI
         private System.Windows.Forms.Button btnMains;
         private System.Windows.Forms.Button btnStarters;
         private System.Windows.Forms.Button btnDesserts;
+        private System.Windows.Forms.Button btnAdd;
     }
 }
 
