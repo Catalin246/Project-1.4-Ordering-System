@@ -183,6 +183,7 @@ namespace OrderingSystemUI
             // 
             this.btnDesserts.BackColor = System.Drawing.Color.Teal;
             this.btnDesserts.Enabled = false;
+            this.btnDesserts.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnDesserts.Location = new System.Drawing.Point(977, 144);
             this.btnDesserts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDesserts.Name = "btnDesserts";
@@ -196,6 +197,7 @@ namespace OrderingSystemUI
             // 
             this.btnMains.BackColor = System.Drawing.Color.Teal;
             this.btnMains.Enabled = false;
+            this.btnMains.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnMains.Location = new System.Drawing.Point(851, 143);
             this.btnMains.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMains.Name = "btnMains";
@@ -209,6 +211,7 @@ namespace OrderingSystemUI
             // 
             this.btnStarters.BackColor = System.Drawing.Color.Teal;
             this.btnStarters.Enabled = false;
+            this.btnStarters.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnStarters.Location = new System.Drawing.Point(711, 143);
             this.btnStarters.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnStarters.Name = "btnStarters";
@@ -222,6 +225,7 @@ namespace OrderingSystemUI
             // 
             this.btnPayment.BackColor = System.Drawing.Color.Teal;
             this.btnPayment.Enabled = false;
+            this.btnPayment.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnPayment.Location = new System.Drawing.Point(578, 525);
             this.btnPayment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnPayment.Name = "btnPayment";
@@ -235,6 +239,7 @@ namespace OrderingSystemUI
             // 
             this.btnDrinks.BackColor = System.Drawing.Color.Teal;
             this.btnDrinks.Enabled = false;
+            this.btnDrinks.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnDrinks.Location = new System.Drawing.Point(578, 144);
             this.btnDrinks.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDrinks.Name = "btnDrinks";
@@ -247,6 +252,7 @@ namespace OrderingSystemUI
             // btnReserveTable
             // 
             this.btnReserveTable.BackColor = System.Drawing.Color.Teal;
+            this.btnReserveTable.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnReserveTable.Location = new System.Drawing.Point(301, 525);
             this.btnReserveTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnReserveTable.Name = "btnReserveTable";
@@ -347,6 +353,7 @@ namespace OrderingSystemUI
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Red;
             this.btnCancel.Enabled = false;
+            this.btnCancel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCancel.Location = new System.Drawing.Point(853, 525);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancel.Name = "btnCancel";
@@ -360,6 +367,7 @@ namespace OrderingSystemUI
             // 
             this.btnTake.BackColor = System.Drawing.Color.ForestGreen;
             this.btnTake.Enabled = false;
+            this.btnTake.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnTake.Location = new System.Drawing.Point(26, 525);
             this.btnTake.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnTake.Name = "btnTake";
@@ -621,6 +629,7 @@ namespace OrderingSystemUI
             this.Controls.Add(this.pnlPayment);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Name = "OrderingSystem";
             this.Text = "Ordering System";
             this.Load += new System.EventHandler(this.OrderingSystem_Load);
             this.menuStrip1.ResumeLayout(false);
