@@ -629,7 +629,6 @@ namespace OrderingSystemUI
             this.Controls.Add(this.pnlPayment);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "OrderingSystem";
             this.Text = "Ordering System";
             this.Load += new System.EventHandler(this.OrderingSystem_Load);
             this.menuStrip1.ResumeLayout(false);
