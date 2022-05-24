@@ -65,9 +65,58 @@ namespace OrderingSystemUI
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showPanel("Table view");
+            //call a method
+        }
+        private void Tableavailability()
+        {
+
         }
 
         private void btnTable1_Click(object sender, EventArgs e)
+        {
+            showPanel("Take Order");
+        }
+        private void btnTable2_Click(object sender, EventArgs e)
+        {
+            showPanel("Take Order");
+        }
+
+        private void btnTable3_Click(object sender, EventArgs e)
+        {
+            showPanel("Take Order");
+        }
+
+        private void btnTable4_Click(object sender, EventArgs e)
+        {
+            showPanel("Take Order");
+        }
+
+        private void btnTable5_Click(object sender, EventArgs e)
+        {
+            showPanel("Take Order");
+        }
+
+        private void btnTable26_Click(object sender, EventArgs e)
+        {
+            showPanel("Take Order");
+        }
+
+        private void btnTable27_Click(object sender, EventArgs e)
+        {
+            showPanel("Take Order");
+        }
+
+        private void btnTable28_Click(object sender, EventArgs e)
+        {
+            showPanel("Take Order");
+        }
+
+        private void btnTable9_Click(object sender, EventArgs e)
+        {
+            showPanel("Take Order");
+        }
+
+        private void btnTable10_Click(object sender, EventArgs e)
         {
             showPanel("Take Order");
         }
@@ -161,6 +210,11 @@ namespace OrderingSystemUI
             pnlTableView.Hide();
             pnlTakeOrder.Hide();
             pnlPayment.Show();
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

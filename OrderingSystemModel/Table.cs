@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemModel
 {
-    public class Employee
+    public class Table
     {
-        public string userName { get; set; }
-        public string password { get; set; }
+        public int TableId { get; set; }
+        public bool TableAvailability { get; set; }
     }
 }
-
