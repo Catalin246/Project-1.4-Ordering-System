@@ -14,7 +14,7 @@ namespace OrderingSystemDAL
     {
         public List<Item> GetAllDrinks()
         {
-            string query = "SELECT Item_Id, Item_Name, Item_Amount, Item_Price, Category_Name FROM dbo.Item as I join dbo.Category as C on I.Item_Category = C.Category_Id where C.Category_Type = 'Drink' Order by C.Category_Name";
+            string query = "SELECT Item_Id, Item_Name, Item_Amount, Item_Price, C.Category_Name FROM dbo.Item as I join dbo.Category as C on I.Item_Category = C.Category_Id where C.Category_Type = 'Drink' Order by C.Category_Name";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -26,13 +26,13 @@ namespace OrderingSystemDAL
         }
         public List<Item> GetAllMains()
         {
-            string query = "SELECT ItemID, ItemName, ItemAmount, ItemPrice, CategoryName FROM dbo.Item as I join dbo.Category as C on I.ItemCategory = C.CategoryID where C.CategoryName = 'Mains'";
+            string query = "SELECT Item_Id, Item_Name, Item_Amount, Item_Price, Category_Name FROM dbo.Item as I join dbo.Category as C on I.Item_Category = C.Category_Id where C.Category_Name = 'Mains'";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
         public List<Item> GetAllDesserts()
         {
-            string query = "SELECT ItemID, ItemName, ItemAmount, ItemPrice, CategoryName FROM dbo.Item as I join dbo.Category as C on I.ItemCategory = C.CategoryID where C.CategoryName = 'Desserts'";
+            string query = "SELECT Item_Id, Item_Name, Item_Amount, Item_Price, Category_Name FROM dbo.Item as I join dbo.Category as C on I.Item_Category = C.Category_Id where C.Category_Name = 'Desserts'";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
