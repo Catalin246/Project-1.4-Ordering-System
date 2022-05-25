@@ -10,9 +10,9 @@ namespace OrderingSystemModel
     {
         public Order()
         {
-            items = new List<Item>();
+            items = new List<OrderedItem>();
         }
-        public List<Item> items;
+        public List<OrderedItem> items;
         public int OrderId { get; set; }
         public DateTime OrderTime { get; set; }
         public int BillId { get; set; }
