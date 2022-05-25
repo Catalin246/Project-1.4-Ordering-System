@@ -157,22 +157,29 @@ namespace OrderingSystemUI
 
             ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
             Item itemSelected = (Item)selectedItem.Tag;
-            itemSelected.ItemAmount = 1;
 
-            foreach (Item item in order.items)
+            //if (itemSelected.ItemOrdered == null)   
+            //    itemSelected.ItemOrdered = 1;
+
+            OrderedItem orderedItem = new OrderedItem(itemSelected,1,"");
+
+            foreach (OrderedItem item in order.items)
             {
-                if (itemSelected == item)
-                    itemSelected.ItemAmount++;
+                if (item.item == itemSelected)
+                    item.amount++;
+
             }
-            if (itemSelected.ItemAmount == 1)
-                order.items.Add(itemSelected);
+
+            //if (orderedItem.amount == 1)
+            //    order.items.Add(orderedItem);
+
             listViewOrderItems.Items.Clear();
 
-            foreach (Item item in order.items)
+            foreach (OrderedItem item in order.items)
             {
-                ListViewItem li = new ListViewItem(item.ItemName);
-                li.SubItems.Add(item.ItemPrice.ToString());
-                li.SubItems.Add(item.ItemAmount.ToString());
+                ListViewItem li = new ListViewItem(item.item.ItemName);
+                li.SubItems.Add(item.item.ItemPrice.ToString());
+                li.SubItems.Add(item.amount.ToString());
 
                 li.Tag = item;
 
@@ -185,27 +192,27 @@ namespace OrderingSystemUI
             //if (listViewOrderItems.SelectedItems.Count == 0)
             //  return;
 
-            ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
-            Item itemSelected = (Item)selectedItem.Tag;
+            //ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
+            //Item itemSelected = (Item)selectedItem.Tag;
             
-            if (itemSelected.ItemAmount > 1)
-                itemSelected.ItemAmount--;
-            else
-                order.items.Remove(itemSelected);
+            //if (itemSelected.ItemAmount > 1)
+            //    itemSelected.ItemAmount--;
+            //else
+            //    order.items.Remove(itemSelected);
 
-            listViewOrderItems.Items.Clear();
+            //listViewOrderItems.Items.Clear();
 
-            foreach (Item item in order.items)
-            {
-                ListViewItem li = new ListViewItem(item.ItemName);
-                li.SubItems.Add(item.ItemPrice.ToString());
-                li.SubItems.Add(item.ItemAmount.ToString());
+            //foreach (Item item in order.items)
+            //{
+            //    ListViewItem li = new ListViewItem(item.ItemName);
+            //    li.SubItems.Add(item.ItemPrice.ToString());
+            //    li.SubItems.Add(item.ItemAmount.ToString());
 
-                li.Tag = item;
+            //    li.Tag = item;
 
-                listViewOrderItems.Items.Add(li);
-            }
-            itemSelected = null;
+            //    listViewOrderItems.Items.Add(li);
+            //}
+            //itemSelected = null;
         }
 
         private void btnReserveTable_Click(object sender, EventArgs e)
@@ -231,5 +238,9 @@ namespace OrderingSystemUI
             pnlPayment.Show();
         }
 
+        private void pnlTakeOrder_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

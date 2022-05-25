@@ -178,6 +178,7 @@ namespace OrderingSystemUI
             this.pnlTakeOrder.Name = "pnlTakeOrder";
             this.pnlTakeOrder.Size = new System.Drawing.Size(1109, 685);
             this.pnlTakeOrder.TabIndex = 3;
+            this.pnlTakeOrder.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTakeOrder_Paint);
             // 
             // btnDesserts
             // 

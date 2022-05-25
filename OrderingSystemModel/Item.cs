@@ -11,7 +11,7 @@ namespace OrderingSystemModel
         public int ItemId { get; set; }
         public string ItemName { get; set; }
         public string ItemCategory { get; set; }
-        public int ItemAmount { get; set;  }
+        public int ItemAmount { get; set; }    // menu item 
         public double ItemPrice { get; set; }
     }
 }
