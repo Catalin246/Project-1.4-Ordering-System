@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlTakeOrder = new System.Windows.Forms.Panel();
+            this.lblEmployeeName = new System.Windows.Forms.Label();
             this.btnDesserts = new System.Windows.Forms.Button();
             this.btnMains = new System.Windows.Forms.Button();
             this.btnStarters = new System.Windows.Forms.Button();
@@ -61,6 +62,7 @@
             // 
             // pnlTakeOrder
             // 
+            this.pnlTakeOrder.Controls.Add(this.lblEmployeeName);
             this.pnlTakeOrder.Controls.Add(this.btnDesserts);
             this.pnlTakeOrder.Controls.Add(this.btnMains);
             this.pnlTakeOrder.Controls.Add(this.btnStarters);
@@ -81,14 +83,24 @@
             this.pnlTakeOrder.Size = new System.Drawing.Size(1109, 681);
             this.pnlTakeOrder.TabIndex = 4;
             // 
+            // lblEmployeeName
+            // 
+            this.lblEmployeeName.AutoSize = true;
+            this.lblEmployeeName.Location = new System.Drawing.Point(785, 16);
+            this.lblEmployeeName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmployeeName.Name = "lblEmployeeName";
+            this.lblEmployeeName.Size = new System.Drawing.Size(288, 25);
+            this.lblEmployeeName.TabIndex = 31;
+            this.lblEmployeeName.Text = "Emplyee Name: Avornicesei Catalin";
+            // 
             // btnDesserts
             // 
             this.btnDesserts.BackColor = System.Drawing.Color.Teal;
             this.btnDesserts.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDesserts.Location = new System.Drawing.Point(977, 144);
+            this.btnDesserts.Location = new System.Drawing.Point(855, 66);
             this.btnDesserts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDesserts.Name = "btnDesserts";
-            this.btnDesserts.Size = new System.Drawing.Size(96, 55);
+            this.btnDesserts.Size = new System.Drawing.Size(220, 55);
             this.btnDesserts.TabIndex = 30;
             this.btnDesserts.Text = "Desserts";
             this.btnDesserts.UseVisualStyleBackColor = false;
@@ -98,10 +110,10 @@
             // 
             this.btnMains.BackColor = System.Drawing.Color.Teal;
             this.btnMains.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnMains.Location = new System.Drawing.Point(851, 143);
+            this.btnMains.Location = new System.Drawing.Point(578, 66);
             this.btnMains.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMains.Name = "btnMains";
-            this.btnMains.Size = new System.Drawing.Size(96, 55);
+            this.btnMains.Size = new System.Drawing.Size(220, 55);
             this.btnMains.TabIndex = 29;
             this.btnMains.Text = "Mains";
             this.btnMains.UseVisualStyleBackColor = false;
@@ -111,10 +123,10 @@
             // 
             this.btnStarters.BackColor = System.Drawing.Color.Teal;
             this.btnStarters.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnStarters.Location = new System.Drawing.Point(711, 143);
+            this.btnStarters.Location = new System.Drawing.Point(301, 66);
             this.btnStarters.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnStarters.Name = "btnStarters";
-            this.btnStarters.Size = new System.Drawing.Size(96, 55);
+            this.btnStarters.Size = new System.Drawing.Size(220, 55);
             this.btnStarters.TabIndex = 28;
             this.btnStarters.Text = "Starters";
             this.btnStarters.UseVisualStyleBackColor = false;
@@ -136,10 +148,10 @@
             // 
             this.btnDrinks.BackColor = System.Drawing.Color.Teal;
             this.btnDrinks.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDrinks.Location = new System.Drawing.Point(578, 144);
+            this.btnDrinks.Location = new System.Drawing.Point(26, 66);
             this.btnDrinks.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDrinks.Name = "btnDrinks";
-            this.btnDrinks.Size = new System.Drawing.Size(96, 55);
+            this.btnDrinks.Size = new System.Drawing.Size(220, 55);
             this.btnDrinks.TabIndex = 26;
             this.btnDrinks.Text = "Drinks";
             this.btnDrinks.UseVisualStyleBackColor = false;
@@ -148,7 +160,7 @@
             // btnMinus
             // 
             this.btnMinus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnMinus.Location = new System.Drawing.Point(477, 143);
+            this.btnMinus.Location = new System.Drawing.Point(477, 211);
             this.btnMinus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMinus.Name = "btnMinus";
             this.btnMinus.Padding = new System.Windows.Forms.Padding(2, 0, 0, 1);
@@ -176,7 +188,7 @@
             // lblMenu
             // 
             this.lblMenu.AutoSize = true;
-            this.lblMenu.Location = new System.Drawing.Point(578, 108);
+            this.lblMenu.Location = new System.Drawing.Point(578, 138);
             this.lblMenu.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMenu.Name = "lblMenu";
             this.lblMenu.Size = new System.Drawing.Size(57, 25);
@@ -186,7 +198,7 @@
             // lblOrderNumber
             // 
             this.lblOrderNumber.AutoSize = true;
-            this.lblOrderNumber.Location = new System.Drawing.Point(25, 113);
+            this.lblOrderNumber.Location = new System.Drawing.Point(26, 169);
             this.lblOrderNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOrderNumber.Name = "lblOrderNumber";
             this.lblOrderNumber.Size = new System.Drawing.Size(156, 25);
@@ -256,6 +268,7 @@
             this.btnTake.TabIndex = 7;
             this.btnTake.Text = "Take order";
             this.btnTake.UseVisualStyleBackColor = false;
+            this.btnTake.Click += new System.EventHandler(this.btnTake_Click);
             // 
             // listViewOrderItems
             // 
@@ -265,10 +278,10 @@
             this.Amount});
             this.listViewOrderItems.FullRowSelect = true;
             this.listViewOrderItems.HideSelection = false;
-            this.listViewOrderItems.Location = new System.Drawing.Point(26, 143);
+            this.listViewOrderItems.Location = new System.Drawing.Point(26, 211);
             this.listViewOrderItems.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listViewOrderItems.Name = "listViewOrderItems";
-            this.listViewOrderItems.Size = new System.Drawing.Size(495, 363);
+            this.listViewOrderItems.Size = new System.Drawing.Size(495, 295);
             this.listViewOrderItems.TabIndex = 6;
             this.listViewOrderItems.UseCompatibleStateImageBehavior = false;
             this.listViewOrderItems.View = System.Windows.Forms.View.Details;
@@ -291,7 +304,7 @@
             // lblTableNumber
             // 
             this.lblTableNumber.AutoSize = true;
-            this.lblTableNumber.Location = new System.Drawing.Point(30, 88);
+            this.lblTableNumber.Location = new System.Drawing.Point(26, 138);
             this.lblTableNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTableNumber.Name = "lblTableNumber";
             this.lblTableNumber.Size = new System.Drawing.Size(73, 25);
@@ -336,6 +349,7 @@
             this.tableViewToolStripMenuItem.Name = "tableViewToolStripMenuItem";
             this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(108, 29);
             this.tableViewToolStripMenuItem.Text = "Table view";
+            this.tableViewToolStripMenuItem.Click += new System.EventHandler(this.tableViewToolStripMenuItem_Click);
             // 
             // TakeOrder
             // 
@@ -344,6 +358,7 @@
             this.ClientSize = new System.Drawing.Size(1142, 750);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlTakeOrder);
+            this.Name = "TakeOrder";
             this.Text = "TakeOrder";
             this.Load += new System.EventHandler(this.TakeOrder_Load);
             this.pnlTakeOrder.ResumeLayout(false);
@@ -384,5 +399,6 @@
         private System.Windows.Forms.ToolStripMenuItem barViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kitchenViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tableViewToolStripMenuItem;
+        private System.Windows.Forms.Label lblEmployeeName;
     }
 }
