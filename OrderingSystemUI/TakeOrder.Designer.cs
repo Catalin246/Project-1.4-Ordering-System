@@ -358,7 +358,6 @@
             this.ClientSize = new System.Drawing.Size(1142, 750);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlTakeOrder);
-            this.Name = "TakeOrder";
             this.Text = "TakeOrder";
             this.Load += new System.EventHandler(this.TakeOrder_Load);
             this.pnlTakeOrder.ResumeLayout(false);
