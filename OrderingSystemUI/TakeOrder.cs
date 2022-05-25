@@ -68,7 +68,7 @@ namespace OrderingSystemUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+                MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
 
@@ -82,7 +82,7 @@ namespace OrderingSystemUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+                MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
 
@@ -125,7 +125,7 @@ namespace OrderingSystemUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+                MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
 
@@ -172,7 +172,7 @@ namespace OrderingSystemUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+                MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
        
@@ -186,7 +186,7 @@ namespace OrderingSystemUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+                MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
 
@@ -200,7 +200,7 @@ namespace OrderingSystemUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+                MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
 
@@ -214,7 +214,7 @@ namespace OrderingSystemUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+                MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
 
@@ -228,7 +228,7 @@ namespace OrderingSystemUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+                MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
 
@@ -240,7 +240,7 @@ namespace OrderingSystemUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Something went wrong while loading the drinks : " + exp.Message);
+                MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
     }
