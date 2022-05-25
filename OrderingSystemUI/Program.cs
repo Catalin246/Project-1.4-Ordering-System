@@ -17,7 +17,8 @@ namespace OrderingSystemUI
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new OrderingSystem());
+            //Application.Run(new OrderingSystem());
+            Application.Run(new TakeOrder());
         }
     }
 }
