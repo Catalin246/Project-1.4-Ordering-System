@@ -18,7 +18,7 @@ namespace OrderingSystemUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new OrderingSystem());
-            Application.Run(new TakeOrder());
+            Application.Run(new TableView());
         }
     }
 }
