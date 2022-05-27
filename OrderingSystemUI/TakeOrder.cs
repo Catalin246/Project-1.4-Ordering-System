@@ -27,8 +27,9 @@ namespace OrderingSystemUI
 
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //OrderingSystem app = new OrderingSystem();
-            //app.Show();
+            this.Close();
+            TableView tableView = new TableView();
+            tableView.Show();
         }
         //private void showPanel(string panelName)
         //{
@@ -237,6 +238,21 @@ namespace OrderingSystemUI
             try
             {
 
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong : " + exp.Message);
+            }
+        }
+
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                this.Close();
+                Payment payment = new Payment();
+                payment.Show();
             }
             catch (Exception exp)
             {
