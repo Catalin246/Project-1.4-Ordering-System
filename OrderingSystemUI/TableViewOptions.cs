@@ -25,6 +25,12 @@ namespace OrderingSystemUI
         private void btnOrder_Click(object sender, EventArgs e)
         {
             //showPanel("Take Order");
+
+            //Show take order form (catalin;)))
+            this.Close();
+            TakeOrder takeOrder = new TakeOrder();
+            takeOrder.Show();
+            
         }
 
         private void btnSeatingACustomer_Click(object sender, EventArgs e)
