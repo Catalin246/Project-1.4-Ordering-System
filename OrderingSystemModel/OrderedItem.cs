@@ -19,5 +19,6 @@ namespace OrderingSystemModel
         public int amount;
 
         public string remark; //note
+
     }
 }

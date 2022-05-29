@@ -6,41 +6,58 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemModel
 {
+    public enum PaymentType{ cash, creditCard, debitCard}
     public class Bill
     {
+        List<Order> orders; // to get to the list of ordered items in the order class
         public int BillId { get; set; }
-        public string PaymentType { get; set; }
-        public string BillNote { get; set; }
+        public PaymentType PaymentType { get { return this.PaymentType; } set { PaymentType = value; } }
+        public string BillFeedback { get; set; }
         public float Tip { get; set; }
+        public int tableId;
 
-        public float Total { get; set; }
+        public bool ClosedBill;
 
-        public List<Item> OrderItems;
-        public float CalculateTotal()
+        public float BillTotal
         {
-            float total = 0; 
-            foreach(Item item in OrderItems)
+            get
             {
-                if (item.ItemCategory != "Alcoholic")
-                {
-                    total += (float)((item.ItemPrice * item.ItemAmount) * 1.06); // 6% tax
-                } else
-                {
-                    total += (float)((item.ItemPrice * item.ItemAmount) * 1.21); // 21% tax
-                }
+                return this.BillTotal;
             }
-            total += Tip;
-            return total;
+            set
+            {
+                float total = 0;
+                /*foreach (Order order in orders)
+                {
+                    foreach(OrderedItem item in order.orderedItems)
+                        if (item. != "Alcoholic")
+                        {
+                            total += item.* nonalcoholicVAT); // 6% tax
+                        }
+                        else
+                        {
+                            total += (float)((item.ItemPrice * item.ItemAmount) * AlcoholicVAT); // 21% tax
+                        }
+                }
+                total += Tip;*/
+            }
         }
-        public  Bill()
+
+        // public List<OrderedItem> orderedItem;
+        public Bill()
         {
 
         }
-        public Bill(int billId, string paymentType, string billNotes)
+        public  Bill(int billId)
         {
             this.BillId = billId;
-            this.BillNote = billNotes;
+        }
+        public void updateBill(PaymentType paymentType, string billFeedback)
+        {
+            this.BillFeedback = billFeedback;
             this.PaymentType = paymentType;
         }
+
+
     }
 }

@@ -31,6 +31,13 @@ namespace OrderingSystemDAL
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
+
+        public List<Bill> GetOpenBills(int tableID)
+        {
+            string query = "SELECT BillID from [ValidBill] WHERE TableId = @tableID and ClosedBill = 0 ";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
         public List<Bill> ReadTables(DataTable dataTable)
         {
             List<Bill> bills = new List<Bill>();
@@ -40,8 +47,10 @@ namespace OrderingSystemDAL
                 Bill bill = new Bill()
                 {
                     BillId = (int)dr["billId"],
-                    BillNote = (string)(dr["billNotes"]),
-                    PaymentType = (string)(dr["paymentType"])
+                    BillFeedback = (string)(dr["billFeedback"]),
+                    PaymentType = (PaymentType)(dr["paymentType"]),
+                    tableId = (int)dr["tableId"],
+                    ClosedBill = (bool)dr["closedBill"]
                 };
                 bills.Add(bill);
             }
