@@ -23,6 +23,11 @@ namespace OrderingSystemLogic
             return orders;
         }
 
+        public List<Order> GetOrdersForTable(int tableID)
+        {
+            List<Order> orders = orderdb.GetAllOrders();
+            return orders;
+        }
         //public List<Order> GetDrinkOrders()
         //{
         //    List<Drink> drinkOrders = orderdb.GetDrinkOrders();

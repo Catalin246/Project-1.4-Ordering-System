@@ -15,8 +15,10 @@ namespace OrderingSystemUI
 {
     public partial class Payment : Form
     {
+        public Bill bill; 
         public Payment()
         {
+            
             InitializeComponent();
         }
 
@@ -82,6 +84,30 @@ namespace OrderingSystemUI
             pnlPayment.Show();
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBoxTotal.Text != null)
+            {
+                btnSaveTotal.Enabled = true;
+            } else
+            {
+                btnSaveTotal.Enabled = false;
+            }
+        }
 
+        private void btnSaveTotal_Click(object sender, EventArgs e)
+        {
+            // determine if valid update
+            float desiredTotal = float.Parse(txtBoxTotal.Text); 
+            if (desiredTotal > bill.BillTotalWithoutTip)
+            {
+                float updatedTip = desiredTotal - bill.BillTotalWithoutTip;
+                bill.Tip = updatedTip;
+                // display  tip amount
+                labelDisplayTip.Text = updatedTip.ToString();
+                // display total with tip 
+                labelDisplayTotalWithTip.Text = desiredTotal.ToString(); 
+            }
+        }
     }
 }

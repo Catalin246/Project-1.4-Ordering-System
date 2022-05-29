@@ -30,7 +30,8 @@ namespace OrderingSystemUI
         {
             if (panelName == "TableView")
             {
-                pnlTableView.Show();
+                // pnlTableView.Show();
+                new Payment().Show();
             }
         }
         public void ChangeColor(int number)
@@ -129,6 +130,7 @@ namespace OrderingSystemUI
         private void btnSeatingACustomer_Click(object sender, EventArgs e)
         {
             ChangeColor(number);
+            
         }        
 
         private void panel1_Paint(object sender, PaintEventArgs e)

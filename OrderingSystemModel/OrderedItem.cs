@@ -19,5 +19,13 @@ namespace OrderingSystemModel
         public int amount;
 
         public string remark; //note
+
+        //have  a calculte property in here to calculate the item amount and price 
+        public float TotalPriceItem
+        {
+
+            get { return TotalPriceItem; }
+            set { TotalPriceItem = (float)(amount * item.ItemPrice); }
+        }
     }
 }

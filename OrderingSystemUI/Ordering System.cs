@@ -150,7 +150,7 @@ namespace OrderingSystemUI
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (order == null)
-                order = new Order();
+                //order = new Order();
 
             if (listViewMenuItems.SelectedItems.Count == 0)
             return;
