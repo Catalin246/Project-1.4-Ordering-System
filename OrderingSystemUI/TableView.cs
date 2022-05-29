@@ -63,6 +63,7 @@ namespace OrderingSystemUI
 
         private void btnTable01_Click(object sender, EventArgs e)
         {
+            //this.Close(); // close the form
             showPanel("pnlTableOptions");
             CallPnlOptions(1);
         }
@@ -139,7 +140,7 @@ namespace OrderingSystemUI
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            showPanel("TableView");
+           
         }
 
         private void btnCanselSeating_Click(object sender, EventArgs e)
