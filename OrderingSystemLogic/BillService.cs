@@ -8,8 +8,6 @@ namespace OrderingSystemLogic
    
     public class BillService
     {
-        public const float AlcoholicVAT = 1.21f;
-        public const float nonalcoholicVAT = 1.06f;
         BillDAO billDb;
 
         public BillService()
@@ -33,5 +31,6 @@ namespace OrderingSystemLogic
         {
             // connect to database and set bill.ClosedBill =  1
         }
+
     }
 }

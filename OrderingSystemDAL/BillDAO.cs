@@ -50,12 +50,19 @@ namespace OrderingSystemDAL
                     BillFeedback = (string)(dr["billFeedback"]),
                     PaymentType = (PaymentType)(dr["paymentType"]),
                     tableId = (int)dr["tableId"],
-                    ClosedBill = (bool)dr["closedBill"]
                 };
                 bills.Add(bill);
             }
             return bills;
         }
+
+        public void CloseBill(int billID)
+        {
+            string query = "UPDATE [ValidBill] SET ClosedBill = 1 WHERE BillId = @billID";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            ExecuteSelectQuery(query, sqlParameters);
+        }
+
         /*public Bill GetBillByTable(int tableId)
         {
             dbConnection.Open();

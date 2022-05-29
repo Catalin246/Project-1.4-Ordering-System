@@ -13,6 +13,12 @@ namespace OrderingSystemModel
             items = new List<OrderedItem>();
             this.TableId = tableID;
         }
+
+        public Order()
+        {
+
+        }
+
         public List<OrderedItem> items;
         public int OrderId { get; set; }
         public DateTime OrderTime { get; set; }

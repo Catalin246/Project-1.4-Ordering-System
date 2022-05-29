@@ -9,37 +9,38 @@ namespace OrderingSystemModel
     public enum PaymentType{ cash, creditCard, debitCard}
     public class Bill
     {
-        List<Order> orders; // to get to the list of ordered items in the order class
+        public const float AlcoholicVAT = 1.21f;
+        public const float nonalcoholicVAT = 1.06f;
+
+        List<OrderedItem> orderedItems; // to get to the list of ordered items in the order class
         public int BillId { get; set; }
         public PaymentType PaymentType { get { return this.PaymentType; } set { PaymentType = value; } }
         public string BillFeedback { get; set; }
         public float Tip { get; set; }
         public int tableId;
 
-        public bool ClosedBill;
 
-        public float BillTotal
+        public float BillTotalWithoutTip
         {
             get
             {
-                return this.BillTotal;
+                return this.BillTotalWithoutTip;
             }
             set
             {
                 float total = 0;
-                /*foreach (Order order in orders)
-                {
-                    foreach(OrderedItem item in order.orderedItems)
-                        if (item. != "Alcoholic")
-                        {
-                            total += item.* nonalcoholicVAT); // 6% tax
-                        }
-                        else
-                        {
-                            total += (float)((item.ItemPrice * item.ItemAmount) * AlcoholicVAT); // 21% tax
-                        }
+                foreach (OrderedItem orderedItem in orderedItems)
+                { 
+                    if (orderedItem.item.ItemCategory == "Drink" && 0 == 1) // determine way to figure out if a drink is alco
+                    {
+                        total += orderedItem.TotalPriceItem * AlcoholicVAT; // 21% tax
+                    }
+                    else
+                    {
+                        total += orderedItem.TotalPriceItem * nonalcoholicVAT; // 6% tax
+                    }
                 }
-                total += Tip;*/
+                BillTotalWithoutTip = total;
             }
         }
 

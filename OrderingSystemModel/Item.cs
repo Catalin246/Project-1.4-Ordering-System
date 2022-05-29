@@ -13,16 +13,10 @@ namespace OrderingSystemModel
         public string ItemCategory { get; set; }
         public int ItemAmount { get; set; }    // menu item 
         public double ItemPrice { get; set; }
-        public float totalPriceItem;
 
 
-        //have  a calculte property in here to calculate the item amount and price 
-        public float CalculateItemTotalPrice
-        {
-            
-            get { return totalPriceItem; }
-            set { totalPriceItem = (float)ItemAmount * (float)ItemPrice; }
-        }
+
+        
 
     }
 }

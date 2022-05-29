@@ -43,12 +43,10 @@ namespace OrderingSystemUI
             this.buttCash = new System.Windows.Forms.Button();
             this.buttDebit = new System.Windows.Forms.Button();
             this.buttCredit = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtBoxTotal = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.listViewDisplayItems = new System.Windows.Forms.ListView();
@@ -74,6 +72,9 @@ namespace OrderingSystemUI
             this.btnTake = new System.Windows.Forms.Button();
             this.listViewOrderItems = new System.Windows.Forms.ListView();
             this.lblTableNumber = new System.Windows.Forms.Label();
+            this.btnSaveTotal = new System.Windows.Forms.Button();
+            this.labelDisplayTotalWithTip = new System.Windows.Forms.Label();
+            this.labelDisplayTip = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.pnlTableView.SuspendLayout();
             this.pnlTakeOrder.SuspendLayout();
@@ -177,16 +178,17 @@ namespace OrderingSystemUI
             // 
             // pnlPayment
             // 
+            this.pnlPayment.Controls.Add(this.labelDisplayTip);
+            this.pnlPayment.Controls.Add(this.labelDisplayTotalWithTip);
+            this.pnlPayment.Controls.Add(this.btnSaveTotal);
             this.pnlPayment.Controls.Add(this.label6);
             this.pnlPayment.Controls.Add(this.buttCash);
             this.pnlPayment.Controls.Add(this.buttDebit);
             this.pnlPayment.Controls.Add(this.buttCredit);
-            this.pnlPayment.Controls.Add(this.textBox1);
+            this.pnlPayment.Controls.Add(this.txtBoxTotal);
             this.pnlPayment.Controls.Add(this.label5);
             this.pnlPayment.Controls.Add(this.label4);
             this.pnlPayment.Controls.Add(this.label3);
-            this.pnlPayment.Controls.Add(this.button3);
-            this.pnlPayment.Controls.Add(this.button4);
             this.pnlPayment.Controls.Add(this.label1);
             this.pnlPayment.Controls.Add(this.label2);
             this.pnlPayment.Controls.Add(this.listViewDisplayItems);
@@ -241,19 +243,20 @@ namespace OrderingSystemUI
             this.buttCredit.Text = "CREDIT";
             this.buttCredit.UseVisualStyleBackColor = false;
             // 
-            // textBox1
+            // txtBoxTotal
             // 
-            this.textBox1.Location = new System.Drawing.Point(721, 77);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(140, 27);
-            this.textBox1.TabIndex = 23;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtBoxTotal.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.txtBoxTotal.Location = new System.Drawing.Point(673, 79);
+            this.txtBoxTotal.Name = "txtBoxTotal";
+            this.txtBoxTotal.Size = new System.Drawing.Size(140, 27);
+            this.txtBoxTotal.TabIndex = 23;
+            this.txtBoxTotal.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(571, 79);
+            this.label5.Location = new System.Drawing.Point(537, 78);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(144, 25);
             this.label5.TabIndex = 22;
@@ -278,32 +281,6 @@ namespace OrderingSystemUI
             this.label3.Size = new System.Drawing.Size(148, 28);
             this.label3.TabIndex = 20;
             this.label3.Text = "Total with TIP:";
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(3, 107);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button3.Name = "button3";
-            this.button3.Padding = new System.Windows.Forms.Padding(2, 0, 0, 1);
-            this.button3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.button3.Size = new System.Drawing.Size(25, 29);
-            this.button3.TabIndex = 18;
-            this.button3.Text = "- ";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(522, 99);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button4.Name = "button4";
-            this.button4.Padding = new System.Windows.Forms.Padding(2, 0, 0, 1);
-            this.button4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.button4.Size = new System.Drawing.Size(25, 29);
-            this.button4.TabIndex = 19;
-            this.button4.Text = "+ ";
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -540,6 +517,34 @@ namespace OrderingSystemUI
             this.lblTableNumber.TabIndex = 10;
             this.lblTableNumber.Text = "Table#1";
             // 
+            // btnSaveTotal
+            // 
+            this.btnSaveTotal.Location = new System.Drawing.Point(651, 271);
+            this.btnSaveTotal.Name = "btnSaveTotal";
+            this.btnSaveTotal.Size = new System.Drawing.Size(94, 29);
+            this.btnSaveTotal.TabIndex = 4;
+            this.btnSaveTotal.Text = "Update";
+            this.btnSaveTotal.UseVisualStyleBackColor = true;
+            this.btnSaveTotal.Click += new System.EventHandler(this.btnSaveTotal_Click);
+            // 
+            // labelDisplayTotalWithTip
+            // 
+            this.labelDisplayTotalWithTip.AutoSize = true;
+            this.labelDisplayTotalWithTip.Location = new System.Drawing.Point(673, 379);
+            this.labelDisplayTotalWithTip.Name = "labelDisplayTotalWithTip";
+            this.labelDisplayTotalWithTip.Size = new System.Drawing.Size(50, 20);
+            this.labelDisplayTotalWithTip.TabIndex = 28;
+            this.labelDisplayTotalWithTip.Text = "label7";
+            // 
+            // labelDisplayTip
+            // 
+            this.labelDisplayTip.AutoSize = true;
+            this.labelDisplayTip.Location = new System.Drawing.Point(569, 379);
+            this.labelDisplayTip.Name = "labelDisplayTip";
+            this.labelDisplayTip.Size = new System.Drawing.Size(50, 20);
+            this.labelDisplayTip.TabIndex = 28;
+            this.labelDisplayTip.Text = "label7";
+            // 
             // Payment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -596,8 +601,6 @@ namespace OrderingSystemUI
         private System.Windows.Forms.ColumnHeader ItemName;
         private System.Windows.Forms.Panel pnlPayment;
         private System.Windows.Forms.ListView listViewDisplayItems;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ColumnHeader Quantity;
@@ -612,7 +615,10 @@ namespace OrderingSystemUI
         private System.Windows.Forms.Button buttCash;
         private System.Windows.Forms.Button buttDebit;
         private System.Windows.Forms.Button buttCredit;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtBoxTotal;
+        private System.Windows.Forms.Button btnSaveTotal;
+        private System.Windows.Forms.Label labelDisplayTip;
+        private System.Windows.Forms.Label labelDisplayTotalWithTip;
     }
 }
 
