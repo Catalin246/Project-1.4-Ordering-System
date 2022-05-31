@@ -35,12 +35,12 @@ namespace OrderingSystemUI
 
         private void btnSeatingACustomer_Click(object sender, EventArgs e)
         {
-            tableView.ChangeColor(number);
+            tableView.ChangeColor(number, "Sit");
         }
 
         private void btnCanselSeating_Click(object sender, EventArgs e)
         {
-            
+            tableView.ChangeColor(number,"Cancel" );
         }
     }
 }
