@@ -61,6 +61,15 @@ namespace OrderingSystemDAL
             }
             conn.Close();
         }
+
+        // Gets list of Order IDs with associated Table ID
+        public List<Order> GetOrderIDsByTable(int tableID)
+        {
+            string query = "SELECT Order_Id FROM dbo.[Order] WHERE Table_Id = @tableID;";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
     }
 }
 

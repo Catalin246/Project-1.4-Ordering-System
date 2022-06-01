@@ -21,5 +21,10 @@ namespace OrderingSystemLogic
         {
             orderedItemdb.Add(orderedItem,order);
         }
+
+        public List<OrderedItem> GetOrderedItemsByOrder(int orderID)
+        {
+            return orderedItemdb.GetOrderedItemsByOrder(orderID);
+        }
     }
 }

@@ -37,5 +37,10 @@ namespace OrderingSystemLogic
             List<Item> items = itemdb.GetAllDesserts();
             return items;
         }
+
+        public Item GetItem(int itemID)
+        {
+            return itemdb.GetItem(itemID);
+        }
     }
 }

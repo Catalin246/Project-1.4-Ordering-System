@@ -34,7 +34,7 @@ namespace OrderingSystemDAL
 
         public List<Bill> GetOpenBills(int tableID)
         {
-            string query = "SELECT BillID from [ValidBill] WHERE TableId = @tableID and ClosedBill = 0 ";
+            string query = "SELECT BillID from [Bill] WHERE TableId = @tableID and ClosedBill = 0 ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -65,12 +65,11 @@ namespace OrderingSystemDAL
 
         /*public Bill GetBillByTable(int tableId)
         {
-            dbConnection.Open();
-            SqlCommand command = new SqlCommand("SELECT * FROM Table WHERE TableId = @tableId", dbConnection);
+            
+            SqlCommand command = new SqlCommand("SELECT * FROM Table WHERE TableId = @tableId");
             command.Parameters.AddWithValue("@TableId", tableId);//@Id is a sql parameter that will be filled with your customerId variable
             SqlDataReader reader = command.ExecuteReader();
 
-            order.TableId = null;
             if (reader.Read())
             {
                 order = ReadTable(reader);//
@@ -78,10 +77,6 @@ namespace OrderingSystemDAL
             reader.Close();
             dbConnection.Close();
             return order;
-        }
-        public List<OrderItems> ReadTables(DataTable dataTable)
-        {
-
         }*/
 
 

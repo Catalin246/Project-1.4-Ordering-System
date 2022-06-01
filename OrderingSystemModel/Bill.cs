@@ -24,13 +24,9 @@ namespace OrderingSystemModel
         {
             get
             {
-                return this.BillTotalWithoutTip;
-            }
-            set
-            {
                 float total = 0;
                 foreach (OrderedItem orderedItem in orderedItems)
-                { 
+                {
                     if (orderedItem.item.ItemCategory == "Drink" && 0 == 1) // determine way to figure out if a drink is alco
                     {
                         total += orderedItem.TotalPriceItem * AlcoholicVAT; // 21% tax
@@ -40,18 +36,20 @@ namespace OrderingSystemModel
                         total += orderedItem.TotalPriceItem * nonalcoholicVAT; // 6% tax
                     }
                 }
-                BillTotalWithoutTip = total;
+                return total;
             }
+            
         }
+      
 
         // public List<OrderedItem> orderedItem;
         public Bill()
         {
 
         }
-        public  Bill(int billId)
+        public  Bill(int tableId)
         {
-            this.BillId = billId;
+            this.tableId = tableId;
         }
         public void updateBill(PaymentType paymentType, string billFeedback)
         {

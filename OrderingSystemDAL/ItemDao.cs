@@ -55,5 +55,13 @@ namespace OrderingSystemDAL
             }
             return items;
         }
+
+        public Item GetItem(int itemID)
+        {
+            string query = "SELECT * FROM dbo.Item where Item_Id = @itemID";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            List<Item> items =  ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            return items[0];
+        }
     }
 }
