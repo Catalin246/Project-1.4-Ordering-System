@@ -8,6 +8,11 @@ namespace OrderingSystemModel
 {
     public class OrderedItem
     {
+        public OrderedItem()
+        {
+
+        }
+
         public OrderedItem(Item item, int amount, string note)
         {
             this.item = item;
@@ -15,6 +20,8 @@ namespace OrderingSystemModel
             this.note = note;
         }
         public Item item;
+
+        public int itemID;
 
         public int amount;
 
@@ -29,5 +36,6 @@ namespace OrderingSystemModel
             get { return totalPriceItem; }
             set { totalPriceItem = (float)(amount * item.ItemPrice); }
         }
+
     }
 }

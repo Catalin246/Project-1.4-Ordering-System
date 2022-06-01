@@ -10,7 +10,7 @@ using System.Data;
 
 namespace OrderingSystemDAL
 {
-    public class OrderedItemDao
+    public class OrderedItemDao : BaseDao
     {
 
         private SqlConnection conn;
@@ -60,6 +60,30 @@ namespace OrderingSystemDAL
                 throw new Exception("Take order failed! " + e.Message);
             }
             conn.Close();
+        }
+
+        public List<OrderedItem> GetOrderedItemsByOrder(int orderID)
+        {
+            string query = "SELECT * FROM dbo.[OrderedItem] WHERE Order_Id = @orderID;";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        private List<OrderedItem> ReadTables(DataTable dataTable)
+        {
+            List<OrderedItem> orderedItems = new List<OrderedItem>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                OrderedItem orderedItem = new OrderedItem()
+                {
+                    itemID = (int)dr["Item_Id"],
+                    note = (string)dr["Ordered_Item_Note"],
+                    amount = (int)dr["Ordered_Item_Amount"]
+                };
+                orderedItems.Add(orderedItem);
+            }
+            return orderedItems;
         }
     }
 }

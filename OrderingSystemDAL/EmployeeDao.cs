@@ -24,8 +24,8 @@ namespace OrderingSystemDAL
             {
                 Employee accounts = new Employee()
                 {
-                    userName = (string)dr["USERNAME"],
-                    password = (string)dr["PASSWORD"],
+                    UserName = (string)dr["USERNAME"],
+                    Password = (string)dr["PASSWORD"],
                 };
 
                 account.Add(accounts);

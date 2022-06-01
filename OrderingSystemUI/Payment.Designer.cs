@@ -29,16 +29,24 @@ namespace OrderingSystemUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Payment));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kitchenViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.billViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlDashboard = new System.Windows.Forms.Panel();
             this.pnlTableView = new System.Windows.Forms.Panel();
             this.btnTable1 = new System.Windows.Forms.Button();
             this.pnlTakeOrder = new System.Windows.Forms.Panel();
             this.pnlPayment = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.txtBoxTableNumber = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.labelDisplayTip = new System.Windows.Forms.Label();
+            this.labelDisplayTotalWithTip = new System.Windows.Forms.Label();
+            this.btnSaveTotal = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.buttCash = new System.Windows.Forms.Button();
             this.buttDebit = new System.Windows.Forms.Button();
@@ -47,9 +55,7 @@ namespace OrderingSystemUI
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.listViewDisplayItems = new System.Windows.Forms.ListView();
+            this.listViewDisplaybillItems = new System.Windows.Forms.ListView();
             this.ItemsName = new System.Windows.Forms.ColumnHeader();
             this.Quantity = new System.Windows.Forms.ColumnHeader();
             this.ItemsPrice = new System.Windows.Forms.ColumnHeader();
@@ -72,9 +78,7 @@ namespace OrderingSystemUI
             this.btnTake = new System.Windows.Forms.Button();
             this.listViewOrderItems = new System.Windows.Forms.ListView();
             this.lblTableNumber = new System.Windows.Forms.Label();
-            this.btnSaveTotal = new System.Windows.Forms.Button();
-            this.labelDisplayTotalWithTip = new System.Windows.Forms.Label();
-            this.labelDisplayTip = new System.Windows.Forms.Label();
+            this.btnSearchTable = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlTableView.SuspendLayout();
             this.pnlTakeOrder.SuspendLayout();
@@ -88,7 +92,8 @@ namespace OrderingSystemUI
             this.dashboardToolStripMenuItem,
             this.barViewToolStripMenuItem,
             this.kitchenViewToolStripMenuItem,
-            this.tableViewToolStripMenuItem});
+            this.tableViewToolStripMenuItem,
+            this.billViewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
@@ -123,6 +128,12 @@ namespace OrderingSystemUI
             this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(92, 24);
             this.tableViewToolStripMenuItem.Text = "Table view";
             this.tableViewToolStripMenuItem.Click += new System.EventHandler(this.tableViewToolStripMenuItem_Click);
+            // 
+            // billViewToolStripMenuItem
+            // 
+            this.billViewToolStripMenuItem.Name = "billViewToolStripMenuItem";
+            this.billViewToolStripMenuItem.Size = new System.Drawing.Size(78, 24);
+            this.billViewToolStripMenuItem.Text = "Bill view";
             // 
             // pnlDashboard
             // 
@@ -178,6 +189,10 @@ namespace OrderingSystemUI
             // 
             // pnlPayment
             // 
+            this.pnlPayment.Controls.Add(this.btnSearchTable);
+            this.pnlPayment.Controls.Add(this.button3);
+            this.pnlPayment.Controls.Add(this.txtBoxTableNumber);
+            this.pnlPayment.Controls.Add(this.label7);
             this.pnlPayment.Controls.Add(this.labelDisplayTip);
             this.pnlPayment.Controls.Add(this.labelDisplayTotalWithTip);
             this.pnlPayment.Controls.Add(this.btnSaveTotal);
@@ -189,19 +204,72 @@ namespace OrderingSystemUI
             this.pnlPayment.Controls.Add(this.label5);
             this.pnlPayment.Controls.Add(this.label4);
             this.pnlPayment.Controls.Add(this.label3);
-            this.pnlPayment.Controls.Add(this.label1);
-            this.pnlPayment.Controls.Add(this.label2);
-            this.pnlPayment.Controls.Add(this.listViewDisplayItems);
+            this.pnlPayment.Controls.Add(this.listViewDisplaybillItems);
             this.pnlPayment.Location = new System.Drawing.Point(0, 0);
             this.pnlPayment.Name = "pnlPayment";
             this.pnlPayment.Size = new System.Drawing.Size(887, 545);
             this.pnlPayment.TabIndex = 29;
             // 
+            // button3
+            // 
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Location = new System.Drawing.Point(15, 409);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(501, 55);
+            this.button3.TabIndex = 31;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // txtBoxTableNumber
+            // 
+            this.txtBoxTableNumber.Location = new System.Drawing.Point(209, 14);
+            this.txtBoxTableNumber.Name = "txtBoxTableNumber";
+            this.txtBoxTableNumber.Size = new System.Drawing.Size(145, 27);
+            this.txtBoxTableNumber.TabIndex = 30;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(15, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(184, 28);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Search Bill by table";
+            // 
+            // labelDisplayTip
+            // 
+            this.labelDisplayTip.AutoSize = true;
+            this.labelDisplayTip.Location = new System.Drawing.Point(716, 152);
+            this.labelDisplayTip.Name = "labelDisplayTip";
+            this.labelDisplayTip.Size = new System.Drawing.Size(50, 20);
+            this.labelDisplayTip.TabIndex = 28;
+            this.labelDisplayTip.Text = "label7";
+            // 
+            // labelDisplayTotalWithTip
+            // 
+            this.labelDisplayTotalWithTip.AutoSize = true;
+            this.labelDisplayTotalWithTip.Location = new System.Drawing.Point(716, 211);
+            this.labelDisplayTotalWithTip.Name = "labelDisplayTotalWithTip";
+            this.labelDisplayTotalWithTip.Size = new System.Drawing.Size(50, 20);
+            this.labelDisplayTotalWithTip.TabIndex = 28;
+            this.labelDisplayTotalWithTip.Text = "label7";
+            // 
+            // btnSaveTotal
+            // 
+            this.btnSaveTotal.Location = new System.Drawing.Point(778, 79);
+            this.btnSaveTotal.Name = "btnSaveTotal";
+            this.btnSaveTotal.Size = new System.Drawing.Size(94, 29);
+            this.btnSaveTotal.TabIndex = 4;
+            this.btnSaveTotal.Text = "Update";
+            this.btnSaveTotal.UseVisualStyleBackColor = true;
+            this.btnSaveTotal.Click += new System.EventHandler(this.btnSaveTotal_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(614, 127);
+            this.label6.Location = new System.Drawing.Point(604, 293);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(199, 25);
             this.label6.TabIndex = 27;
@@ -212,7 +280,7 @@ namespace OrderingSystemUI
             this.buttCash.BackColor = System.Drawing.Color.Teal;
             this.buttCash.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttCash.ForeColor = System.Drawing.Color.White;
-            this.buttCash.Location = new System.Drawing.Point(767, 189);
+            this.buttCash.Location = new System.Drawing.Point(778, 354);
             this.buttCash.Name = "buttCash";
             this.buttCash.Size = new System.Drawing.Size(94, 29);
             this.buttCash.TabIndex = 26;
@@ -224,7 +292,7 @@ namespace OrderingSystemUI
             this.buttDebit.BackColor = System.Drawing.Color.Teal;
             this.buttDebit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttDebit.ForeColor = System.Drawing.Color.White;
-            this.buttDebit.Location = new System.Drawing.Point(651, 189);
+            this.buttDebit.Location = new System.Drawing.Point(661, 354);
             this.buttDebit.Name = "buttDebit";
             this.buttDebit.Size = new System.Drawing.Size(94, 29);
             this.buttDebit.TabIndex = 25;
@@ -236,7 +304,7 @@ namespace OrderingSystemUI
             this.buttCredit.BackColor = System.Drawing.Color.Teal;
             this.buttCredit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttCredit.ForeColor = System.Drawing.Color.White;
-            this.buttCredit.Location = new System.Drawing.Point(541, 189);
+            this.buttCredit.Location = new System.Drawing.Point(537, 354);
             this.buttCredit.Name = "buttCredit";
             this.buttCredit.Size = new System.Drawing.Size(94, 29);
             this.buttCredit.TabIndex = 24;
@@ -248,74 +316,57 @@ namespace OrderingSystemUI
             this.txtBoxTotal.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.txtBoxTotal.Location = new System.Drawing.Point(673, 79);
             this.txtBoxTotal.Name = "txtBoxTotal";
-            this.txtBoxTotal.Size = new System.Drawing.Size(140, 27);
+            this.txtBoxTotal.Size = new System.Drawing.Size(93, 27);
             this.txtBoxTotal.TabIndex = 23;
             this.txtBoxTotal.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label5.Location = new System.Drawing.Point(537, 78);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(144, 25);
+            this.label5.Size = new System.Drawing.Size(135, 25);
             this.label5.TabIndex = 22;
             this.label5.Text = "SET TOTAL TO: ";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(34, 372);
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(541, 144);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 28);
+            this.label4.Size = new System.Drawing.Size(52, 28);
             this.label4.TabIndex = 21;
             this.label4.Text = "TIP: ";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(266, 372);
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(541, 203);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(148, 28);
+            this.label3.Size = new System.Drawing.Size(140, 28);
             this.label3.TabIndex = 20;
             this.label3.Text = "Total with TIP:";
             // 
-            // label1
+            // listViewDisplaybillItems
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(390, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 20);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "Order No. 001347";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 20);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Table#1";
-            // 
-            // listViewDisplayItems
-            // 
-            this.listViewDisplayItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listViewDisplaybillItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ItemsName,
             this.Quantity,
             this.ItemsPrice,
             this.Vat,
             this.TotalWithVAT});
-            this.listViewDisplayItems.HideSelection = false;
-            this.listViewDisplayItems.Location = new System.Drawing.Point(34, 79);
-            this.listViewDisplayItems.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.listViewDisplayItems.Name = "listViewDisplayItems";
-            this.listViewDisplayItems.Size = new System.Drawing.Size(482, 291);
-            this.listViewDisplayItems.TabIndex = 7;
-            this.listViewDisplayItems.UseCompatibleStateImageBehavior = false;
-            this.listViewDisplayItems.View = System.Windows.Forms.View.Details;
+            this.listViewDisplaybillItems.HideSelection = false;
+            this.listViewDisplaybillItems.Location = new System.Drawing.Point(14, 79);
+            this.listViewDisplaybillItems.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listViewDisplaybillItems.Name = "listViewDisplaybillItems";
+            this.listViewDisplaybillItems.Size = new System.Drawing.Size(502, 304);
+            this.listViewDisplaybillItems.TabIndex = 7;
+            this.listViewDisplaybillItems.UseCompatibleStateImageBehavior = false;
+            this.listViewDisplaybillItems.View = System.Windows.Forms.View.Details;
+            this.listViewDisplaybillItems.SelectedIndexChanged += new System.EventHandler(this.listViewDisplaybillItems_SelectedIndexChanged);
             // 
             // ItemsName
             // 
@@ -517,33 +568,15 @@ namespace OrderingSystemUI
             this.lblTableNumber.TabIndex = 10;
             this.lblTableNumber.Text = "Table#1";
             // 
-            // btnSaveTotal
+            // btnSearchTable
             // 
-            this.btnSaveTotal.Location = new System.Drawing.Point(651, 271);
-            this.btnSaveTotal.Name = "btnSaveTotal";
-            this.btnSaveTotal.Size = new System.Drawing.Size(94, 29);
-            this.btnSaveTotal.TabIndex = 4;
-            this.btnSaveTotal.Text = "Update";
-            this.btnSaveTotal.UseVisualStyleBackColor = true;
-            this.btnSaveTotal.Click += new System.EventHandler(this.btnSaveTotal_Click);
-            // 
-            // labelDisplayTotalWithTip
-            // 
-            this.labelDisplayTotalWithTip.AutoSize = true;
-            this.labelDisplayTotalWithTip.Location = new System.Drawing.Point(673, 379);
-            this.labelDisplayTotalWithTip.Name = "labelDisplayTotalWithTip";
-            this.labelDisplayTotalWithTip.Size = new System.Drawing.Size(50, 20);
-            this.labelDisplayTotalWithTip.TabIndex = 28;
-            this.labelDisplayTotalWithTip.Text = "label7";
-            // 
-            // labelDisplayTip
-            // 
-            this.labelDisplayTip.AutoSize = true;
-            this.labelDisplayTip.Location = new System.Drawing.Point(569, 379);
-            this.labelDisplayTip.Name = "labelDisplayTip";
-            this.labelDisplayTip.Size = new System.Drawing.Size(50, 20);
-            this.labelDisplayTip.TabIndex = 28;
-            this.labelDisplayTip.Text = "label7";
+            this.btnSearchTable.Location = new System.Drawing.Point(389, 14);
+            this.btnSearchTable.Name = "btnSearchTable";
+            this.btnSearchTable.Size = new System.Drawing.Size(94, 29);
+            this.btnSearchTable.TabIndex = 32;
+            this.btnSearchTable.Text = "search";
+            this.btnSearchTable.UseVisualStyleBackColor = true;
+            this.btnSearchTable.Click += new System.EventHandler(this.btnSearchTable_Click);
             // 
             // Payment
             // 
@@ -600,9 +633,7 @@ namespace OrderingSystemUI
         private System.Windows.Forms.ColumnHeader ItemID;
         private System.Windows.Forms.ColumnHeader ItemName;
         private System.Windows.Forms.Panel pnlPayment;
-        private System.Windows.Forms.ListView listViewDisplayItems;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListView listViewDisplaybillItems;
         private System.Windows.Forms.ColumnHeader Quantity;
         private System.Windows.Forms.ColumnHeader ItemsPrice;
         private System.Windows.Forms.ColumnHeader ItemsName;
@@ -619,6 +650,11 @@ namespace OrderingSystemUI
         private System.Windows.Forms.Button btnSaveTotal;
         private System.Windows.Forms.Label labelDisplayTip;
         private System.Windows.Forms.Label labelDisplayTotalWithTip;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtBoxTableNumber;
+        private System.Windows.Forms.ToolStripMenuItem billViewToolStripMenuItem;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnSearchTable;
     }
 }
 
