@@ -8,24 +8,26 @@ namespace OrderingSystemModel
 {
     public class OrderedItem
     {
-        public OrderedItem(Item item, int amount, string remark)
+        public OrderedItem(Item item, int amount, string note)
         {
             this.item = item;
             this.amount = amount;
-            this.remark = remark;
+            this.note = note;
         }
         public Item item;
 
         public int amount;
 
-        public string remark; //note
+        public string note; //note
 
-        //have  a calculte property in here to calculate the item amount and price 
+        private float totalPriceItem;
+
+        //have a calculte property in here to calculate the item amount and price
         public float TotalPriceItem
         {
 
-            get { return TotalPriceItem; }
-            set { TotalPriceItem = (float)(amount * item.ItemPrice); }
+            get { return totalPriceItem; }
+            set { totalPriceItem = (float)(amount * item.ItemPrice); }
         }
     }
 }

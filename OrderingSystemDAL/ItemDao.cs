@@ -14,7 +14,7 @@ namespace OrderingSystemDAL
     {
         public List<Item> GetAllDrinks()
         {
-            string query = "SELECT Item_Id, Item_Name, Item_Amount, Item_Price, C.Category_Name FROM dbo.Item as I join dbo.Category as C on I.Item_Category = C.Category_Id where C.Category_Type = 'Drink' Order by C.Category_Name";
+            string query = "SELECT Item_Id, Item_Name, Item_Amount, Item_Price, C.Category_Name FROM dbo.Item as I join dbo.Category as C on I.Item_Category = C.Category_Id where C.Category_Type = 'Alcoholic' or C.Category_Type = 'NonAlcoholic' Order by C.Category_Name";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -45,6 +45,7 @@ namespace OrderingSystemDAL
             {
                 Item item = new Item();
                 {
+                    item.ItemId = (int)dr["Item_Id"];
                     item.ItemName = (string)dr["Item_Name"].ToString();
                     item.ItemAmount = (int)dr["Item_Amount"];
                     item.ItemPrice = (double)dr["Item_Price"];

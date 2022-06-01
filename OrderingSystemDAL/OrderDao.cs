@@ -12,14 +12,19 @@ namespace OrderingSystemDAL
 {
     public class OrderDao : BaseDao
     {
+        private SqlConnection conn;
+        public OrderDao()
+        {
+            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
+        }
+
         public List<Order> GetAllOrders()
         {
-            string query = "SELECT OrderId, TableId, OrderTime FROM dbo.Order ORDER BY [OrderId]";
+            string query = "SELECT Order_Id FROM dbo.[Order]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-
-            //should we assign orders' ids in sql server?
         }
+
 
         private List<Order> ReadTables(DataTable dataTable)
         {
@@ -27,24 +32,35 @@ namespace OrderingSystemDAL
 
             foreach (DataRow dr in dataTable.Rows)
             {
-                Order order = new Order()
+                Order order = new Order(1)
                 {
-                    OrderId = (int)dr["OrderId"],
-                    TableId = (int)dr["TableId"],
-                    OrderTime = (DateTime)dr["OrderTime"],
-                    BillId = (int)dr["BillId"]
+                    OrderId = (int)dr["Order_Id"],
                 };
                 orders.Add(order);
             }
             return orders;
         }
 
-        //public List<Drink> GetDrinkOrders()
-        //{
-        //    string query = "SELECT OrderId, TableId, OrderTime FROM dbo.Order WHERE  = 'Hardik'";
-        //    SqlParameter[] sqlParameters = new SqlParameter[0];
-        //    return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        //}
+        public void Add(Order order)
+        {
+            conn.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("INSERT INTO dbo.[Order] " +
+                        "VALUES(@Order_Id, @Order_Time, @Table_Id);", conn);
+
+                command.Parameters.AddWithValue("@Order_Id", order.OrderId);
+                command.Parameters.AddWithValue("@Order_Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                command.Parameters.AddWithValue("@Table_id", order.TableId);
+
+                int nrOfRowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Take order failed! " + e.Message);
+            }
+            conn.Close();
+        }
     }
 }
 

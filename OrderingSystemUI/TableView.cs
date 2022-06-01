@@ -30,8 +30,8 @@ namespace OrderingSystemUI
         {
             if (panelName == "TableView")
             {
-                // pnlTableView.Show();
-                new Payment().Show();
+                pnlTableView.Show();
+                //new Payment().Show();
             }
         }
         public void ChangeColor(int number)
@@ -68,8 +68,8 @@ namespace OrderingSystemUI
 
         private void btnTable01_Click(object sender, EventArgs e)
         {
-            //this.Close(); // close the form
-            showPanel("pnlTableOptions");
+            //showPanel("pnlTableOptions");
+            //this.Close();
             CallPnlOptions(1);
         }
 

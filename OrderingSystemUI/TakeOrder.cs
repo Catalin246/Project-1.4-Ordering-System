@@ -77,7 +77,12 @@ namespace OrderingSystemUI
         {
             try
             {
-                order.items = null;
+
+                btnPayment.Enabled = false;
+                btnTake.Enabled = false;
+                btnCancel.Enabled = false;
+
+                order.items = new List<OrderedItem>();
 
                 listViewOrderItems.Items.Clear();
             }
@@ -134,9 +139,13 @@ namespace OrderingSystemUI
         {
             try
             {
+                btnPayment.Enabled = true;
+                btnTake.Enabled = true; 
+                btnCancel.Enabled = true;   
+
                 bool contains = false;
                 if (order == null)
-                    order = new Order();
+                    order = new Order(1);
 
                 if (listViewMenuItems.SelectedItems.Count == 0)
                     return;
@@ -157,7 +166,7 @@ namespace OrderingSystemUI
                 }
 
                 if (!contains)
-                    order.items.Add(orderedItem);
+                   order.items.Add(orderedItem);
 
                 listViewOrderItems.Items.Clear();
 
@@ -238,7 +247,19 @@ namespace OrderingSystemUI
         {
             try
             {
+                btnTake.Enabled = false;
+                btnCancel.Enabled = false;
+                List<Order> orders = new List<Order>();
+                OrderService orderService = new OrderService();
+                OrderedItemService orderedItemService = new OrderedItemService();   
+                orders = orderService.GetOrders();
+                order.OrderId = orders[orders.Count - 1].OrderId + 1;
+                orderService.AddOrder(order);
 
+                foreach(OrderedItem item in order.items)
+                {
+                    orderedItemService.AddOrderesItem(item, order); 
+                }
             }
             catch (Exception exp)
             {
