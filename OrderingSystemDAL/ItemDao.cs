@@ -82,7 +82,7 @@ namespace OrderingSystemDAL
                 throw new Exception("Update amount failed! " + e.Message);
             }
             conn.Close();
-            
+        }
         public Item GetItem(int itemID)
         {
             string query = "SELECT * FROM dbo.Item where Item_Id = @itemID";
