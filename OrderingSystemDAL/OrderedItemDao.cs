@@ -88,5 +88,18 @@ namespace OrderingSystemDAL
             }
             return orderedItems;
         }
+
+        public List<OrderedItem> GetAllFoodOrders()
+        {
+            string query = "SELECT Item_Name, Category_Name " +
+                "FROM dbo.Item as I " +
+                "join dbo.Category as C on I.Item_Category = C.Category_Id " +
+                "where C.Category_Name = 'Starters' " +
+                "OR C.Category_Name ='Mains' " +
+                "OR C.Category_Name ='Desserts' " +
+                "OR C.Category_Name ='Entremets'";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
     }
 }
