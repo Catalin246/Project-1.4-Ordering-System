@@ -38,6 +38,11 @@ namespace OrderingSystemLogic
             return items;
         }
 
+
+        public void Update(OrderedItem orderedItem)
+        {
+            itemdb.Update(orderedItem);
+
         public Item GetItem(int itemID)
         {
             return itemdb.GetItem(itemID);

@@ -55,6 +55,7 @@
             this.barViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kitchenViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Note = new System.Windows.Forms.ColumnHeader();
             this.pnlTakeOrder.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -267,7 +268,8 @@
             this.listViewOrderItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Name,
             this.Price,
-            this.Amount});
+            this.Amount,
+            this.Note});
             this.listViewOrderItems.FullRowSelect = true;
             this.listViewOrderItems.HideSelection = false;
             this.listViewOrderItems.Location = new System.Drawing.Point(26, 212);
@@ -277,6 +279,7 @@
             this.listViewOrderItems.TabIndex = 6;
             this.listViewOrderItems.UseCompatibleStateImageBehavior = false;
             this.listViewOrderItems.View = System.Windows.Forms.View.Details;
+            this.listViewOrderItems.DoubleClick += new System.EventHandler(this.listViewOrderItems_DoubleClick);
             // 
             // Name
             // 
@@ -299,9 +302,8 @@
             this.lblTableNumber.Location = new System.Drawing.Point(26, 138);
             this.lblTableNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTableNumber.Name = "lblTableNumber";
-            this.lblTableNumber.Size = new System.Drawing.Size(73, 25);
+            this.lblTableNumber.Size = new System.Drawing.Size(0, 25);
             this.lblTableNumber.TabIndex = 10;
-            this.lblTableNumber.Text = "Table#1";
             // 
             // menuStrip1
             // 
@@ -342,6 +344,10 @@
             this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(108, 29);
             this.tableViewToolStripMenuItem.Text = "Table view";
             this.tableViewToolStripMenuItem.Click += new System.EventHandler(this.tableViewToolStripMenuItem_Click);
+            // 
+            // Note
+            // 
+            this.Note.Text = "Note";
             // 
             // TakeOrder
             // 
@@ -390,5 +396,6 @@
         private System.Windows.Forms.ToolStripMenuItem kitchenViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tableViewToolStripMenuItem;
         private System.Windows.Forms.Label lblEmployeeName;
+        private System.Windows.Forms.ColumnHeader Note;
     }
 }

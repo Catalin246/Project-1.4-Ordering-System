@@ -56,6 +56,7 @@ namespace OrderingSystemUI
         }
         private void CallPnlOptions(int number)
         {
+            
             TableViewOptions options = new TableViewOptions(number,this);
             options.Show();
         }

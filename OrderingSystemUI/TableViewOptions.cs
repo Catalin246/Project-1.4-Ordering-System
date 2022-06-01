@@ -27,8 +27,9 @@ namespace OrderingSystemUI
             //showPanel("Take Order");
             //Show take order form (catalin;)))  
             ACustomerIsSitting(number, "sit");
-            this.Close();
-            TakeOrder takeOrder = new TakeOrder();
+
+            this.Hide();
+            TakeOrder takeOrder = new TakeOrder(number);
             takeOrder.Show();
         }
 
