@@ -155,6 +155,8 @@ namespace OrderingSystemUI
                 ItemService itemService = new ItemService();   
                 
                 btnCancel.Enabled = true;   
+                btnPayment.Enabled = true;  
+                btnTake.Enabled = true;
 
                 bool contains = false;
                 if (order == null)
@@ -186,6 +188,8 @@ namespace OrderingSystemUI
                     orderedItem.item.ItemAmount--;
                     itemService.Update(orderedItem);
                 }
+
+                listViewOrderItems.Items.Clear();
 
                 foreach (OrderedItem item in order.items)
                 {
