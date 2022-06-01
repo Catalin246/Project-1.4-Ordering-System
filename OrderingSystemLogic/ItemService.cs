@@ -42,6 +42,7 @@ namespace OrderingSystemLogic
         public void Update(OrderedItem orderedItem)
         {
             itemdb.Update(orderedItem);
+        }
 
         public Item GetItem(int itemID)
         {
