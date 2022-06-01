@@ -146,6 +146,7 @@ namespace OrderingSystemUI
 
                 OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "");
 
+                if(order.items != null)
                 foreach (OrderedItem item in order.items)
                 {
                     if (item.item == itemSelected)

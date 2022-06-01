@@ -40,7 +40,7 @@ namespace OrderingSystemUI
 
         private void btnCanselSeating_Click(object sender, EventArgs e)
         {
-            
+            tableView.ChangeColor(number);
         }
     }
 }

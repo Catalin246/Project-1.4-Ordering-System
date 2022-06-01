@@ -42,7 +42,12 @@ namespace OrderingSystemUI
             {
                 if (buttons[i].Text == name)
                 {
-                    buttons[i].BackColor = Color.Red;
+                    if (buttons[i].BackColor == Color.Red)
+                    {
+                        buttons[i].BackColor = Color.Transparent;
+                    }
+                    else
+                        buttons[i].BackColor = Color.Red;
                 }
                 //}
 
