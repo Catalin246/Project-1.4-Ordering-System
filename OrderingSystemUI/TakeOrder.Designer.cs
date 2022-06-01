@@ -38,7 +38,6 @@
             this.btnMinus = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.lblMenu = new System.Windows.Forms.Label();
-            this.lblOrderNumber = new System.Windows.Forms.Label();
             this.listViewMenuItems = new System.Windows.Forms.ListView();
             this.ItemName = new System.Windows.Forms.ColumnHeader();
             this.ItemPrice = new System.Windows.Forms.ColumnHeader();
@@ -72,7 +71,6 @@
             this.pnlTakeOrder.Controls.Add(this.btnMinus);
             this.pnlTakeOrder.Controls.Add(this.btnAdd);
             this.pnlTakeOrder.Controls.Add(this.lblMenu);
-            this.pnlTakeOrder.Controls.Add(this.lblOrderNumber);
             this.pnlTakeOrder.Controls.Add(this.listViewMenuItems);
             this.pnlTakeOrder.Controls.Add(this.btnCancel);
             this.pnlTakeOrder.Controls.Add(this.btnTake);
@@ -136,6 +134,7 @@
             // btnPayment
             // 
             this.btnPayment.BackColor = System.Drawing.Color.Teal;
+            this.btnPayment.Enabled = false;
             this.btnPayment.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnPayment.Location = new System.Drawing.Point(406, 525);
             this.btnPayment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -197,16 +196,6 @@
             this.lblMenu.TabIndex = 12;
             this.lblMenu.Text = "Menu";
             // 
-            // lblOrderNumber
-            // 
-            this.lblOrderNumber.AutoSize = true;
-            this.lblOrderNumber.Location = new System.Drawing.Point(26, 168);
-            this.lblOrderNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblOrderNumber.Name = "lblOrderNumber";
-            this.lblOrderNumber.Size = new System.Drawing.Size(156, 25);
-            this.lblOrderNumber.TabIndex = 11;
-            this.lblOrderNumber.Text = "Order No. 001347";
-            // 
             // listViewMenuItems
             // 
             this.listViewMenuItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -249,6 +238,7 @@
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Red;
+            this.btnCancel.Enabled = false;
             this.btnCancel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCancel.Location = new System.Drawing.Point(794, 525);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -262,6 +252,7 @@
             // btnTake
             // 
             this.btnTake.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnTake.Enabled = false;
             this.btnTake.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnTake.Location = new System.Drawing.Point(26, 525);
             this.btnTake.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -387,7 +378,6 @@
         private System.Windows.Forms.Button btnMinus;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label lblMenu;
-        private System.Windows.Forms.Label lblOrderNumber;
         private System.Windows.Forms.ListView listViewMenuItems;
         private System.Windows.Forms.ColumnHeader ItemName;
         private System.Windows.Forms.ColumnHeader ItemPrice;

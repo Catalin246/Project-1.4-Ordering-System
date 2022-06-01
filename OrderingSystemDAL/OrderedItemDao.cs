@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OrderingSystemModel;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
 
 namespace OrderingSystemDAL
 {
-    public class OrderedItemDao
+    public class OrderedItemDao : BaseDao
     {
 
         private SqlConnection conn;
@@ -44,6 +48,7 @@ namespace OrderingSystemDAL
             try
             {
                 SqlCommand command = new SqlCommand("INSERT INTO dbo.[OrderedItem] " +
+
                         "VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount);", conn);
 
                 command.Parameters.AddWithValue("@Item_Id", orderedItem.item.ItemId);
@@ -58,6 +63,30 @@ namespace OrderingSystemDAL
                 throw new Exception("Take order failed! " + e.Message);
             }
             conn.Close();
+        }
+
+        public List<OrderedItem> GetOrderedItemsByOrder(int orderID)
+        {
+            string query = "SELECT * FROM dbo.[OrderedItem] WHERE Order_Id = @orderID;";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        private List<OrderedItem> ReadTables(DataTable dataTable)
+        {
+            List<OrderedItem> orderedItems = new List<OrderedItem>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                OrderedItem orderedItem = new OrderedItem()
+                {
+                    itemID = (int)dr["Item_Id"],
+                    note = (string)dr["Ordered_Item_Note"],
+                    amount = (int)dr["Ordered_Item_Amount"]
+                };
+                orderedItems.Add(orderedItem);
+            }
+            return orderedItems;
         }
     }
 }
