@@ -34,7 +34,7 @@ namespace OrderingSystemUI
                 //new Payment().Show();
             }
         }
-        public void ChangeColor(int number)
+        public void ChangeColor(int number, string btnInput)
         {
             string name = $"Table {number.ToString()}";
             List<Button> buttons = this.Controls.OfType<Button>().ToList();
@@ -42,100 +42,82 @@ namespace OrderingSystemUI
             {
                 if (buttons[i].Text == name)
                 {
-                    if (buttons[i].BackColor == Color.Red)
+                    switch (btnInput.ToLower())
                     {
-                        buttons[i].BackColor = Color.Transparent;
+                        case "sit":
+                            buttons[i].BackColor = Color.Red;
+                            break;
+                        default:
+                            buttons[i].BackColor = Color.Transparent;
+                            break;
                     }
-                    else
-                        buttons[i].BackColor = Color.Red;
                 }
-                //}
-
-                //foreach (var button in this.Controls.OfType<Button>())
-                //{
-                //    if (button.Text == name)
-                //        button.BackColor = Color.Red;
-                //    else
-                //        button.BackColor = Color.Green;
-                //
             }
         }
         private void CallPnlOptions(int number)
         {
             TableViewOptions options = new TableViewOptions(number,this);
-            options.ShowDialog();
+            options.Show();
         }
 
         private void btnTable01_Click(object sender, EventArgs e)
         {
-            //showPanel("pnlTableOptions");
-            //this.Close();
             CallPnlOptions(1);
         }
 
         private void btnTable02_Click(object sender, EventArgs e)
         {
-            showPanel("pnlTableOptions");
-            number = 2;
+            CallPnlOptions(2);
         }
 
         private void btnTable03_Click(object sender, EventArgs e)
         {
-            showPanel("pnlTableOptions");
-            number = 3;
+            CallPnlOptions(3);
         }
 
         private void btnTable04_Click(object sender, EventArgs e)
         {
-            showPanel("pnlTableOptions");
-            number = 4;
+            CallPnlOptions(4);
         }
 
         private void btnTable05_Click(object sender, EventArgs e)
         {
-            showPanel("pnlTableOptions");
-            number = 5;
+            CallPnlOptions(5);
         }
 
         private void btnTable06_Click(object sender, EventArgs e)
         {
-            showPanel("pnlTableOptions");
-            number = 6;
+            CallPnlOptions(6);
         }
 
         private void btnTable07_Click(object sender, EventArgs e)
         {
-            showPanel("pnlTableOptions");
-            number = 7;
+            CallPnlOptions(7);
         }
 
         private void btnTable08_Click(object sender, EventArgs e)
         {
-            showPanel("pnlTableOptions");
-            number = 8;
+            CallPnlOptions(8);
         }
 
         private void btnTable09_Click(object sender, EventArgs e)
         {
-            showPanel("pnlTableOptions");
-            number = 9;
+            CallPnlOptions(9);
         }
 
         private void btnTable010_Click(object sender, EventArgs e)
         {
-            showPanel("pnlTableOptions");
-            number = 10;
+            CallPnlOptions(10); ;
         }
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            showPanel("Take Order");
+
         }
 
         private void btnSeatingACustomer_Click(object sender, EventArgs e)
         {
-            ChangeColor(number);
-            
+                     
         }        
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -150,7 +132,7 @@ namespace OrderingSystemUI
 
         private void btnCanselSeating_Click(object sender, EventArgs e)
         {
-            //ResetColor(number);
+
         }
     }
 }
