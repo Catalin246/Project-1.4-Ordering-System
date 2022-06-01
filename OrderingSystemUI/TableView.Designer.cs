@@ -69,6 +69,9 @@
             this.btnTable03 = new System.Windows.Forms.Button();
             this.btnTable02 = new System.Windows.Forms.Button();
             this.btnTable07 = new System.Windows.Forms.Button();
+            this.tableOrderNumber = new System.Windows.Forms.ColumnHeader();
+            this.whereToPickUpOrder = new System.Windows.Forms.ColumnHeader();
+            this.time = new System.Windows.Forms.ColumnHeader();
             this.menuStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -274,6 +277,10 @@
             // 
             // listView2
             // 
+            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.tableOrderNumber,
+            this.whereToPickUpOrder,
+            this.time});
             this.listView2.HideSelection = false;
             this.listView2.Location = new System.Drawing.Point(413, 54);
             this.listView2.Name = "listView2";
@@ -287,7 +294,7 @@
             this.btnTable010.Name = "btnTable010";
             this.btnTable010.Size = new System.Drawing.Size(69, 66);
             this.btnTable010.TabIndex = 9;
-            this.btnTable010.Text = "button 10";
+            this.btnTable010.Text = "Table 10";
             this.btnTable010.UseVisualStyleBackColor = true;
             this.btnTable010.Click += new System.EventHandler(this.btnTable010_Click);
             // 
@@ -308,7 +315,7 @@
             this.btnTable05.Name = "btnTable05";
             this.btnTable05.Size = new System.Drawing.Size(69, 66);
             this.btnTable05.TabIndex = 4;
-            this.btnTable05.Text = "button5";
+            this.btnTable05.Text = "Table 5";
             this.btnTable05.UseVisualStyleBackColor = true;
             this.btnTable05.Click += new System.EventHandler(this.btnTable05_Click);
             // 
@@ -318,7 +325,7 @@
             this.btnTable09.Name = "btnTable09";
             this.btnTable09.Size = new System.Drawing.Size(69, 66);
             this.btnTable09.TabIndex = 8;
-            this.btnTable09.Text = "button9";
+            this.btnTable09.Text = "Table 9";
             this.btnTable09.UseVisualStyleBackColor = true;
             this.btnTable09.Click += new System.EventHandler(this.btnTable09_Click);
             // 
@@ -328,7 +335,7 @@
             this.btnTable04.Name = "btnTable04";
             this.btnTable04.Size = new System.Drawing.Size(69, 66);
             this.btnTable04.TabIndex = 3;
-            this.btnTable04.Text = "button4";
+            this.btnTable04.Text = "Table 4";
             this.btnTable04.UseVisualStyleBackColor = true;
             this.btnTable04.Click += new System.EventHandler(this.btnTable04_Click);
             // 
@@ -338,7 +345,7 @@
             this.btnTable06.Name = "btnTable06";
             this.btnTable06.Size = new System.Drawing.Size(69, 66);
             this.btnTable06.TabIndex = 5;
-            this.btnTable06.Text = "button6";
+            this.btnTable06.Text = "Table 6";
             this.btnTable06.UseVisualStyleBackColor = true;
             this.btnTable06.Click += new System.EventHandler(this.btnTable06_Click);
             // 
@@ -348,7 +355,7 @@
             this.btnTable08.Name = "btnTable08";
             this.btnTable08.Size = new System.Drawing.Size(69, 66);
             this.btnTable08.TabIndex = 7;
-            this.btnTable08.Text = "button8";
+            this.btnTable08.Text = "Table 8";
             this.btnTable08.UseVisualStyleBackColor = true;
             this.btnTable08.Click += new System.EventHandler(this.btnTable08_Click);
             // 
@@ -358,7 +365,7 @@
             this.btnTable03.Name = "btnTable03";
             this.btnTable03.Size = new System.Drawing.Size(69, 66);
             this.btnTable03.TabIndex = 2;
-            this.btnTable03.Text = "button3";
+            this.btnTable03.Text = "Table 3";
             this.btnTable03.UseVisualStyleBackColor = true;
             this.btnTable03.Click += new System.EventHandler(this.btnTable03_Click);
             // 
@@ -378,9 +385,21 @@
             this.btnTable07.Name = "btnTable07";
             this.btnTable07.Size = new System.Drawing.Size(69, 66);
             this.btnTable07.TabIndex = 6;
-            this.btnTable07.Text = "button7";
+            this.btnTable07.Text = "Table 7";
             this.btnTable07.UseVisualStyleBackColor = true;
             this.btnTable07.Click += new System.EventHandler(this.btnTable07_Click);
+            // 
+            // tableOrderNumber
+            // 
+            this.tableOrderNumber.Text = "Table Order";
+            // 
+            // whereToPickUpOrder
+            // 
+            this.whereToPickUpOrder.Text = "Where to pickup order";
+            // 
+            // time
+            // 
+            this.time.Text = "Time";
             // 
             // TableView
             // 
@@ -449,5 +468,8 @@
         private System.Windows.Forms.Button btnTable02;
         private System.Windows.Forms.Button btnTable01;
         private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ColumnHeader tableOrderNumber;
+        private System.Windows.Forms.ColumnHeader whereToPickUpOrder;
+        private System.Windows.Forms.ColumnHeader time;
     }
 }
