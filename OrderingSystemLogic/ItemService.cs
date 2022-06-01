@@ -37,5 +37,10 @@ namespace OrderingSystemLogic
             List<Item> items = itemdb.GetAllDesserts();
             return items;
         }
+
+        public void Update(OrderedItem orderedItem)
+        {
+            itemdb.Update(orderedItem);
+        }
     }
 }

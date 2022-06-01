@@ -8,5 +8,56 @@ namespace OrderingSystemDAL
 {
     public class OrderedItemDao
     {
+
+        private SqlConnection conn;
+        public OrderedItemDao()
+        {
+            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
+        }
+
+        //public List<Order> GetAllOrdereditems()
+        //{
+        //    string query = "SELECT Order_Id FROM dbo.[OrderedItem]";
+        //    SqlParameter[] sqlParameters = new SqlParameter[0];
+        //    return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        //}
+
+
+        //private List<Order> ReadTables(DataTable dataTable)
+        //{
+        //    List<Order> orders = new List<Order>();
+
+        //    foreach (DataRow dr in dataTable.Rows)
+        //    {
+        //        Order order = new Order(1)
+        //        {
+        //            OrderId = (int)dr["Order_Id"],
+        //        };
+        //        orders.Add(order);
+        //    }
+        //    return orders;
+        //}
+
+        public void Add(OrderedItem orderedItem, Order order)
+        {
+            conn.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("INSERT INTO dbo.[OrderedItem] " +
+                        "VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount);", conn);
+
+                command.Parameters.AddWithValue("@Item_Id", orderedItem.item.ItemId);
+                command.Parameters.AddWithValue("@Order_Id", order.OrderId);
+                command.Parameters.AddWithValue("@Ordered_Item_Note", orderedItem.note);
+                command.Parameters.AddWithValue("@Ordered_Item_Amount", orderedItem.amount);
+
+                int nrOfRowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Take order failed! " + e.Message);
+            }
+            conn.Close();
+        }
     }
 }

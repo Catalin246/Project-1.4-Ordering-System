@@ -16,9 +16,11 @@ namespace OrderingSystemUI
 {
     public partial class TakeOrder : Form
     {
-        public TakeOrder()
+        public TakeOrder(int tableNumber)
         {
             InitializeComponent();
+            lblTableNumber.Text = "Table#" + tableNumber.ToString();
+
         }
         private void TakeOrder_Load(object sender, EventArgs e)
         {
@@ -91,6 +93,7 @@ namespace OrderingSystemUI
         {
             try
             {
+                ItemService itemService = new ItemService();
                 bool contains = false;
 
                 if (listViewMenuItems.SelectedItems.Count == 0)
@@ -105,11 +108,20 @@ namespace OrderingSystemUI
                         if (item.amount == 1)
                             contains = true;
                         else
+                        {
+                            item.item.ItemAmount++;
                             item.amount--;
+                            itemService.Update(itemSelected);
+                        }
                 }
 
                 if (contains)
+                {
+                    itemSelected.item.ItemAmount++;
                     order.items.Remove(itemSelected);
+                    itemService.Update(itemSelected);
+                }
+
 
                 listViewOrderItems.Items.Clear();
 
@@ -118,6 +130,7 @@ namespace OrderingSystemUI
                     ListViewItem li = new ListViewItem(item.item.ItemName);
                     li.SubItems.Add(item.item.ItemPrice.ToString());
                     li.SubItems.Add(item.amount.ToString());
+                    li.SubItems.Add(item.note.ToString());
 
                     li.Tag = item;
 
@@ -134,6 +147,12 @@ namespace OrderingSystemUI
         {
             try
             {
+                ItemService itemService = new ItemService();   
+                
+                btnPayment.Enabled = true;
+                btnTake.Enabled = true; 
+                btnCancel.Enabled = true;   
+
                 bool contains = false;
                 if (order == null)
                     order = new Order();
@@ -144,19 +163,25 @@ namespace OrderingSystemUI
                 ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
                 Item itemSelected = (Item)selectedItem.Tag;
 
-                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "");
+                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "none");
 
                 foreach (OrderedItem item in order.items)
                 {
                     if (item.item == itemSelected)
                     {
                         item.amount++;
+                        item.item.ItemAmount--;
+                        itemService.Update(orderedItem);
                         contains = true;
                     }
                 }
 
                 if (!contains)
+                {
                     order.items.Add(orderedItem);
+                    orderedItem.item.ItemAmount--;
+                    itemService.Update(orderedItem);
+                }
 
                 listViewOrderItems.Items.Clear();
 
@@ -165,6 +190,7 @@ namespace OrderingSystemUI
                     ListViewItem li = new ListViewItem(item.item.ItemName);
                     li.SubItems.Add(item.item.ItemPrice.ToString());
                     li.SubItems.Add(item.amount.ToString());
+                    li.SubItems.Add(item.note.ToString());
 
                     li.Tag = item;
 
@@ -238,6 +264,44 @@ namespace OrderingSystemUI
             try
             {
 
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong : " + exp.Message);
+            }
+        }
+
+        //add note for an item
+        private void listViewOrderItems_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                AddNote addNote = new AddNote();
+                addNote.Show();
+                string note = addNote.Note();
+
+
+                //if (listViewMenuItems.SelectedItems.Count == 0)
+                //    return;
+
+                //ListViewItem selectedItem = listViewOrderItems.SelectedItems[0];
+                //OrderedItem itemSelected = (OrderedItem)selectedItem.Tag;
+
+                //itemSelected.note = note;
+
+                //listViewOrderItems.Items.Clear();
+
+                //foreach (OrderedItem item in order.items)
+                //{
+                //    ListViewItem li = new ListViewItem(item.item.ItemName);
+                //    li.SubItems.Add(item.item.ItemPrice.ToString());
+                //    li.SubItems.Add(item.amount.ToString());
+                //    li.SubItems.Add(item.note.ToString());
+
+                //    li.Tag = item;
+
+                //    listViewOrderItems.Items.Add(li);
+                //}
             }
             catch (Exception exp)
             {
