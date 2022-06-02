@@ -11,9 +11,9 @@ namespace OrderingSystemDAL
 {
     public class EmployeeDao : BaseDao
     {
-        public List<Employee> GetAllAccounts()
+        public List<Employee> GetAllEmployee()
         {
-            string query = "SELECT USERNAME, [PASSWORD] FROM [ACCOUNT]";
+            string query = "SELECT USERNAME, [Employee_Name] FROM [Employee_Password]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -24,8 +24,8 @@ namespace OrderingSystemDAL
             {
                 Employee accounts = new Employee()
                 {
-                    userName = (string)dr["USERNAME"],
-                    password = (string)dr["PASSWORD"],
+                    EmployeeName = (string)dr["Employee_Name"],
+                    EmployeePassword = (string)dr["Employee_Password"],
                 };
 
                 account.Add(accounts);
