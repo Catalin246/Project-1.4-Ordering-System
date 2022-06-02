@@ -171,7 +171,9 @@ namespace OrderingSystemUI
             if (bill != null)
             {
                 bill.PaymentType = PaymentType.creditCard;
-            } else
+                MessageBox.Show("Credit card payment option approved.");
+            }
+            else
             {
                 MessageBox.Show("Please search for a bill first!");
             }
@@ -183,6 +185,7 @@ namespace OrderingSystemUI
             if (bill != null)
             {
                 bill.PaymentType = PaymentType.debitCard;
+                MessageBox.Show("Debit card payment option approved.");
             }
             else
             {
@@ -195,6 +198,7 @@ namespace OrderingSystemUI
             if (bill != null)
             {
                 bill.PaymentType = PaymentType.cash;
+                MessageBox.Show("Cash payment option approved.");
             }
             else
             {
