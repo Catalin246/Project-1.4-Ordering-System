@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KitchenView));
             this.listViewKitchen = new System.Windows.Forms.ListView();
             this.colTableNo = new System.Windows.Forms.ColumnHeader();
             this.colTime = new System.Windows.Forms.ColumnHeader();
@@ -43,8 +42,10 @@
             this.lblTime = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.btnReadyToServe = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnViewOrderNote = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listViewKitchen
@@ -166,16 +167,6 @@
             this.btnReadyToServe.Text = "Ready To Serve";
             this.btnReadyToServe.UseVisualStyleBackColor = false;
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackColor = System.Drawing.Color.White;
-            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
-            this.btnRefresh.Location = new System.Drawing.Point(801, 46);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(39, 37);
-            this.btnRefresh.TabIndex = 14;
-            this.btnRefresh.UseVisualStyleBackColor = false;
-            // 
             // btnViewOrderNote
             // 
             this.btnViewOrderNote.BackColor = System.Drawing.Color.Teal;
@@ -187,11 +178,39 @@
             this.btnViewOrderNote.Text = "View Order Note";
             this.btnViewOrderNote.UseVisualStyleBackColor = false;
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(724, 57);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 23);
+            this.comboBox2.TabIndex = 23;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(597, 57);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 23);
+            this.comboBox1.TabIndex = 22;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(550, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 15);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "Select:";
+            // 
             // KitchenView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 484);
+            this.ClientSize = new System.Drawing.Size(849, 495);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.listViewKitchen);
             this.Controls.Add(this.lblEmployeeName);
             this.Controls.Add(this.btnViewCompletedOrders);
@@ -199,7 +218,6 @@
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnReadyToServe);
-            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnViewOrderNote);
             this.Name = "KitchenView";
             this.Text = "KitchenView";
@@ -224,7 +242,9 @@
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnReadyToServe;
-        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnViewOrderNote;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label3;
     }
 }
