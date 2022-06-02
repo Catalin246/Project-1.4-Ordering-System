@@ -29,7 +29,6 @@ namespace OrderingSystemUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Payment));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,8 +36,9 @@ namespace OrderingSystemUI
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.billViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlPayment = new System.Windows.Forms.Panel();
+            this.txtBoxFeedBack = new System.Windows.Forms.RichTextBox();
             this.btnSearchTable = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.bttAddFeedBack = new System.Windows.Forms.Button();
             this.txtBoxTableNumber = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.labelDisplayTip = new System.Windows.Forms.Label();
@@ -116,8 +116,9 @@ namespace OrderingSystemUI
             // 
             // pnlPayment
             // 
+            this.pnlPayment.Controls.Add(this.txtBoxFeedBack);
             this.pnlPayment.Controls.Add(this.btnSearchTable);
-            this.pnlPayment.Controls.Add(this.button3);
+            this.pnlPayment.Controls.Add(this.bttAddFeedBack);
             this.pnlPayment.Controls.Add(this.txtBoxTableNumber);
             this.pnlPayment.Controls.Add(this.label7);
             this.pnlPayment.Controls.Add(this.labelDisplayTip);
@@ -137,6 +138,14 @@ namespace OrderingSystemUI
             this.pnlPayment.Size = new System.Drawing.Size(884, 545);
             this.pnlPayment.TabIndex = 29;
             // 
+            // txtBoxFeedBack
+            // 
+            this.txtBoxFeedBack.Location = new System.Drawing.Point(14, 409);
+            this.txtBoxFeedBack.Name = "txtBoxFeedBack";
+            this.txtBoxFeedBack.Size = new System.Drawing.Size(273, 120);
+            this.txtBoxFeedBack.TabIndex = 34;
+            this.txtBoxFeedBack.Text = "";
+            // 
             // btnSearchTable
             // 
             this.btnSearchTable.Location = new System.Drawing.Point(389, 14);
@@ -147,15 +156,17 @@ namespace OrderingSystemUI
             this.btnSearchTable.UseVisualStyleBackColor = true;
             this.btnSearchTable.Click += new System.EventHandler(this.btnSearchTable_Click);
             // 
-            // button3
+            // bttAddFeedBack
             // 
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(15, 409);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(501, 55);
-            this.button3.TabIndex = 31;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.bttAddFeedBack.BackColor = System.Drawing.Color.Teal;
+            this.bttAddFeedBack.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bttAddFeedBack.Location = new System.Drawing.Point(320, 448);
+            this.bttAddFeedBack.Name = "bttAddFeedBack";
+            this.bttAddFeedBack.Size = new System.Drawing.Size(196, 55);
+            this.bttAddFeedBack.TabIndex = 31;
+            this.bttAddFeedBack.Text = "Add FeedBack";
+            this.bttAddFeedBack.UseVisualStyleBackColor = false;
+            this.bttAddFeedBack.Click += new System.EventHandler(this.bttAddFeedBack_Click);
             // 
             // txtBoxTableNumber
             // 
@@ -373,7 +384,7 @@ namespace OrderingSystemUI
         private System.Windows.Forms.ToolStripMenuItem billViewToolStripMenuItem;
         private System.Windows.Forms.Panel pnlPayment;
         private System.Windows.Forms.Button btnSearchTable;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button bttAddFeedBack;
         private System.Windows.Forms.TextBox txtBoxTableNumber;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelDisplayTip;
@@ -394,6 +405,7 @@ namespace OrderingSystemUI
         private System.Windows.Forms.ColumnHeader Vat;
         private System.Windows.Forms.ColumnHeader TotalWithVAT;
         private System.Windows.Forms.Panel pnlTakeOrder;
+        private System.Windows.Forms.RichTextBox txtBoxFeedBack;
     }
 }
 

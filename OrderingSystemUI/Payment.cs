@@ -170,8 +170,21 @@ namespace OrderingSystemUI
         {
             if (bill != null)
             {
-                bill.PaymentType = PaymentType.creditCard;
-                MessageBox.Show("Credit card payment option approved.");
+                DialogResult res = MessageBox.Show("Are you sure you want to Finalize Payment?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (res == DialogResult.Yes)
+                {
+                    //call function to delete all orders and all ordered itemsn from the table
+                    bill.PaymentType = PaymentType.creditCard;
+                    MessageBox.Show("Credit card payment option approved.");
+                    //Some task…
+
+                }
+                if (res == DialogResult.No)
+                {
+                    MessageBox.Show("Just in time to change your mind...");
+                    //Some task…
+                }
+            
             }
             else
             {
@@ -199,6 +212,29 @@ namespace OrderingSystemUI
             {
                 bill.PaymentType = PaymentType.cash;
                 MessageBox.Show("Cash payment option approved.");
+            }
+            else
+            {
+                MessageBox.Show("Please search for a bill first!");
+            }
+        }
+
+    
+
+    
+
+        private void bttAddFeedBack_Click(object sender, EventArgs e)
+        {
+            if (bill != null)
+            {
+                if (txtBoxFeedBack.Text != null)
+                {
+                    bill.BillFeedback = txtBoxFeedBack.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Please enter feedback first.");
+                }
             }
             else
             {
