@@ -162,7 +162,7 @@ namespace OrderingSystemUI
             //if (itemSelected.ItemOrdered == null)   
             //    itemSelected.ItemOrdered = 1;
 
-            OrderedItem orderedItem = new OrderedItem(itemSelected,1,"");
+            OrderedItem orderedItem = new OrderedItem(itemSelected,1,"", 1);
 
             foreach (OrderedItem item in order.items)
             {
