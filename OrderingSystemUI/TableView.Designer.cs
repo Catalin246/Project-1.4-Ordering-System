@@ -59,6 +59,9 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.listView2 = new System.Windows.Forms.ListView();
+            this.tableOrderNumber = new System.Windows.Forms.ColumnHeader();
+            this.whereToPickUpOrder = new System.Windows.Forms.ColumnHeader();
+            this.time = new System.Windows.Forms.ColumnHeader();
             this.btnTable010 = new System.Windows.Forms.Button();
             this.btnTable01 = new System.Windows.Forms.Button();
             this.btnTable05 = new System.Windows.Forms.Button();
@@ -69,9 +72,6 @@
             this.btnTable03 = new System.Windows.Forms.Button();
             this.btnTable02 = new System.Windows.Forms.Button();
             this.btnTable07 = new System.Windows.Forms.Button();
-            this.tableOrderNumber = new System.Windows.Forms.ColumnHeader();
-            this.whereToPickUpOrder = new System.Windows.Forms.ColumnHeader();
-            this.time = new System.Windows.Forms.ColumnHeader();
             this.menuStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -267,6 +267,7 @@
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(86, 20);
             this.toolStripMenuItem3.Text = "Kitchen view";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
@@ -287,6 +288,18 @@
             this.listView2.Size = new System.Drawing.Size(373, 350);
             this.listView2.TabIndex = 12;
             this.listView2.UseCompatibleStateImageBehavior = false;
+            // 
+            // tableOrderNumber
+            // 
+            this.tableOrderNumber.Text = "Table Order";
+            // 
+            // whereToPickUpOrder
+            // 
+            this.whereToPickUpOrder.Text = "Where to pickup order";
+            // 
+            // time
+            // 
+            this.time.Text = "Time";
             // 
             // btnTable010
             // 
@@ -388,18 +401,6 @@
             this.btnTable07.Text = "Table 7";
             this.btnTable07.UseVisualStyleBackColor = true;
             this.btnTable07.Click += new System.EventHandler(this.btnTable07_Click);
-            // 
-            // tableOrderNumber
-            // 
-            this.tableOrderNumber.Text = "Table Order";
-            // 
-            // whereToPickUpOrder
-            // 
-            this.whereToPickUpOrder.Text = "Where to pickup order";
-            // 
-            // time
-            // 
-            this.time.Text = "Time";
             // 
             // TableView
             // 

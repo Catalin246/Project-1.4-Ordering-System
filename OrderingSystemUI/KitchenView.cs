@@ -20,6 +20,7 @@ namespace OrderingSystemUI
         {
             InitializeComponent();
             orderedItemService = new OrderedItemService();
+            lblTime.Text = DateTime.Now.ToString("HH:mm");
         }
 
         public void ReadListOfFoodOrders()

@@ -59,7 +59,8 @@ namespace OrderingSystemUI
 
         private void kitchenViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            KitchenView kitchenViewForm = new KitchenView();
+            kitchenViewForm.Show();
         }
 
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)

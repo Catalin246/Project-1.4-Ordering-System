@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KitchenView));
             this.listViewKitchen = new System.Windows.Forms.ListView();
             this.colTableNo = new System.Windows.Forms.ColumnHeader();
             this.colTime = new System.Windows.Forms.ColumnHeader();
@@ -107,7 +108,7 @@
             // lblEmployeeName
             // 
             this.lblEmployeeName.AutoSize = true;
-            this.lblEmployeeName.Location = new System.Drawing.Point(629, 6);
+            this.lblEmployeeName.Location = new System.Drawing.Point(629, 9);
             this.lblEmployeeName.Name = "lblEmployeeName";
             this.lblEmployeeName.Size = new System.Drawing.Size(130, 15);
             this.lblEmployeeName.TabIndex = 11;
@@ -147,7 +148,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.Brown;
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(765, -3);
+            this.button1.Location = new System.Drawing.Point(765, 1);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 30);
             this.button1.TabIndex = 16;
@@ -167,12 +168,13 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(796, 46);
+            this.btnRefresh.BackColor = System.Drawing.Color.White;
+            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
+            this.btnRefresh.Location = new System.Drawing.Point(801, 46);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(44, 37);
+            this.btnRefresh.Size = new System.Drawing.Size(39, 37);
             this.btnRefresh.TabIndex = 14;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.UseVisualStyleBackColor = false;
             // 
             // btnViewOrderNote
             // 
