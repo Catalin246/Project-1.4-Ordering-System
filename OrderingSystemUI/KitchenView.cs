@@ -15,11 +15,13 @@ namespace OrderingSystemUI
     public partial class KitchenView : Form
     {
         OrderedItemService orderedItemService;
+        OrderService orderService;
 
         public KitchenView()
         {
             InitializeComponent();
             orderedItemService = new OrderedItemService();
+            orderService = new OrderService();
             lblTime.Text = DateTime.Now.ToString("HH:mm");
         }
 
@@ -28,12 +30,12 @@ namespace OrderingSystemUI
             List<OrderedItem> foodOrderList = orderedItemService.GetFoodOrders();
 
             listViewKitchen.Items.Clear();
-            listViewKitchen.FullRowSelect = true;
-
-            int tableNo = 0; //this will be changed later
+            listViewKitchen.FullRowSelect = true;            
 
             foreach (OrderedItem foodOrder in foodOrderList)
             {
+                //Order order = new Order()
+
                 //ListViewItem listViewKitchenItem = new ListViewItem(tableNo.ToString());
                 //listViewKitchenItem.SubItems.Add()
             }
@@ -48,5 +50,10 @@ namespace OrderingSystemUI
             b = DateTime.Now;
             return $"(b.Subtract(a).TotalMinutes) minutes ago";
         }
+
+        //public int GetTableNoFromOrderedItem()
+        //{
+
+        //}
     }
 }
