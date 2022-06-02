@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OrderingSystemLogic;
+using OrderingSystemModel;
 
 namespace OrderingSystemUI
 {
@@ -16,6 +18,8 @@ namespace OrderingSystemUI
         public TableView()
         {
             InitializeComponent();
+
+            ShowListView();
         }
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -32,6 +36,19 @@ namespace OrderingSystemUI
             {
                 pnlTableView.Show();
                 //new Payment().Show();
+            }
+        }
+        public void ShowListView()
+        {
+            TableService tableService = new TableService();
+            List<Table> orders = tableService.GetTable();
+            listViewTableOrder.Items.Clear();
+            foreach (Table table in orders)
+            {
+                ListViewItem li = new ListViewItem(table.TableId.ToString());
+                li.SubItems.Add(table.Time.ToString("H:m"));
+                li.SubItems.Add(table.OrderId.ToString());
+                listViewTableOrder.Items.Add(li);
             }
         }
         public void ChangeColor(int number, string btnInput)
@@ -108,17 +125,7 @@ namespace OrderingSystemUI
         private void btnTable010_Click(object sender, EventArgs e)
         {
             CallPnlOptions(10); ;
-        }
-
-        private void btnOrder_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSeatingACustomer_Click(object sender, EventArgs e)
-        {
-                     
-        }        
+        }   
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -130,9 +137,18 @@ namespace OrderingSystemUI
            
         }
 
-        private void btnCanselSeating_Click(object sender, EventArgs e)
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnServed_Click(object sender, EventArgs e)
+        {
+            if (listViewTableOrder.SelectedItems.Count == 0)
+                return;
+            ListViewItem selectedItem = listViewTableOrder.SelectedItems[0];
+            Table table= new Table();
+            TableService tableService = new TableService();
         }
     }
 }

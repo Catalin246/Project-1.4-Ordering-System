@@ -31,11 +31,13 @@ namespace OrderingSystemUI
                     lblwrongPasscode.Text = "Please enter your passcode";                
                 Username = txtBoxUsername.Text;
                 Passcode = txtBoxPasscode.Text;
-                if (TryUserName(Username)&&(TryPasscode(Passcode)))
+                if ((TryUserName(Username) && (TryPasscode(Passcode))))
                 {
                     TableView tableView = new TableView();
                     tableView.Show();
-                    this.Close();
+                    this.Hide();
+                    //Login login = new Login();
+                    //login.Hide();
                 }
             }
             catch (Exception)
@@ -52,7 +54,8 @@ namespace OrderingSystemUI
             list = accountService.GetEmployee();
             foreach (Employee em in list)
             {
-                return (username == em.EmployeeName);
+                if(username == em.EmployeeName)
+                    return true;
             }
             return false;
         }
@@ -64,7 +67,8 @@ namespace OrderingSystemUI
             list = accountService.GetEmployee();
             foreach (Employee em in list)
             {
-                return (passcode == em.EmployeePassword);
+                if(passcode == em.EmployeePassword)
+                    return true;
             }
             return false;
         }
