@@ -165,5 +165,41 @@ namespace OrderingSystemUI
                 MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
+
+        private void buttCredit_Click(object sender, EventArgs e)
+        {
+            if (bill != null)
+            {
+                bill.PaymentType = PaymentType.creditCard;
+            } else
+            {
+                MessageBox.Show("Please search for a bill first!");
+            }
+            
+        }
+
+        private void buttDebit_Click(object sender, EventArgs e)
+        {
+            if (bill != null)
+            {
+                bill.PaymentType = PaymentType.debitCard;
+            }
+            else
+            {
+                MessageBox.Show("Please search for a bill first!");
+            }
+        }
+
+        private void buttCash_Click(object sender, EventArgs e)
+        {
+            if (bill != null)
+            {
+                bill.PaymentType = PaymentType.cash;
+            }
+            else
+            {
+                MessageBox.Show("Please search for a bill first!");
+            }
+        }
     }
 }

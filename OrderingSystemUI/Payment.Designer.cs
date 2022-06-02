@@ -37,27 +37,27 @@ namespace OrderingSystemUI
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.billViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlPayment = new System.Windows.Forms.Panel();
+            this.btnSearchTable = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.txtBoxTableNumber = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.labelDisplayTip = new System.Windows.Forms.Label();
+            this.labelDisplayTotalWithTip = new System.Windows.Forms.Label();
+            this.btnSaveTotal = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.buttCash = new System.Windows.Forms.Button();
+            this.buttDebit = new System.Windows.Forms.Button();
+            this.buttCredit = new System.Windows.Forms.Button();
+            this.txtBoxTotal = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.listViewDisplaybillItems = new System.Windows.Forms.ListView();
             this.ItemsName = new System.Windows.Forms.ColumnHeader();
             this.Quantity = new System.Windows.Forms.ColumnHeader();
             this.ItemsPrice = new System.Windows.Forms.ColumnHeader();
             this.Vat = new System.Windows.Forms.ColumnHeader();
             this.TotalWithVAT = new System.Windows.Forms.ColumnHeader();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtBoxTotal = new System.Windows.Forms.TextBox();
-            this.buttCredit = new System.Windows.Forms.Button();
-            this.buttDebit = new System.Windows.Forms.Button();
-            this.buttCash = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnSaveTotal = new System.Windows.Forms.Button();
-            this.labelDisplayTotalWithTip = new System.Windows.Forms.Label();
-            this.labelDisplayTip = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtBoxTableNumber = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.btnSearchTable = new System.Windows.Forms.Button();
             this.pnlTakeOrder = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.pnlPayment.SuspendLayout();
@@ -137,6 +137,159 @@ namespace OrderingSystemUI
             this.pnlPayment.Size = new System.Drawing.Size(884, 545);
             this.pnlPayment.TabIndex = 29;
             // 
+            // btnSearchTable
+            // 
+            this.btnSearchTable.Location = new System.Drawing.Point(389, 14);
+            this.btnSearchTable.Name = "btnSearchTable";
+            this.btnSearchTable.Size = new System.Drawing.Size(94, 29);
+            this.btnSearchTable.TabIndex = 32;
+            this.btnSearchTable.Text = "search";
+            this.btnSearchTable.UseVisualStyleBackColor = true;
+            this.btnSearchTable.Click += new System.EventHandler(this.btnSearchTable_Click);
+            // 
+            // button3
+            // 
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Location = new System.Drawing.Point(15, 409);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(501, 55);
+            this.button3.TabIndex = 31;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // txtBoxTableNumber
+            // 
+            this.txtBoxTableNumber.Location = new System.Drawing.Point(209, 14);
+            this.txtBoxTableNumber.Name = "txtBoxTableNumber";
+            this.txtBoxTableNumber.Size = new System.Drawing.Size(145, 27);
+            this.txtBoxTableNumber.TabIndex = 30;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(15, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(184, 28);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Search Bill by table";
+            // 
+            // labelDisplayTip
+            // 
+            this.labelDisplayTip.AutoSize = true;
+            this.labelDisplayTip.Location = new System.Drawing.Point(716, 152);
+            this.labelDisplayTip.Name = "labelDisplayTip";
+            this.labelDisplayTip.Size = new System.Drawing.Size(50, 20);
+            this.labelDisplayTip.TabIndex = 28;
+            this.labelDisplayTip.Text = "label7";
+            // 
+            // labelDisplayTotalWithTip
+            // 
+            this.labelDisplayTotalWithTip.AutoSize = true;
+            this.labelDisplayTotalWithTip.Location = new System.Drawing.Point(716, 211);
+            this.labelDisplayTotalWithTip.Name = "labelDisplayTotalWithTip";
+            this.labelDisplayTotalWithTip.Size = new System.Drawing.Size(50, 20);
+            this.labelDisplayTotalWithTip.TabIndex = 28;
+            this.labelDisplayTotalWithTip.Text = "label7";
+            // 
+            // btnSaveTotal
+            // 
+            this.btnSaveTotal.Location = new System.Drawing.Point(778, 79);
+            this.btnSaveTotal.Name = "btnSaveTotal";
+            this.btnSaveTotal.Size = new System.Drawing.Size(94, 29);
+            this.btnSaveTotal.TabIndex = 4;
+            this.btnSaveTotal.Text = "Update";
+            this.btnSaveTotal.UseVisualStyleBackColor = true;
+            this.btnSaveTotal.Click += new System.EventHandler(this.btnSaveTotal_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(604, 293);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(199, 25);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "Select Payment Type:";
+            // 
+            // buttCash
+            // 
+            this.buttCash.BackColor = System.Drawing.Color.Teal;
+            this.buttCash.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttCash.ForeColor = System.Drawing.Color.White;
+            this.buttCash.Location = new System.Drawing.Point(778, 354);
+            this.buttCash.Name = "buttCash";
+            this.buttCash.Size = new System.Drawing.Size(94, 29);
+            this.buttCash.TabIndex = 26;
+            this.buttCash.Text = "CASH";
+            this.buttCash.UseVisualStyleBackColor = false;
+            this.buttCash.Click += new System.EventHandler(this.buttCash_Click);
+            // 
+            // buttDebit
+            // 
+            this.buttDebit.BackColor = System.Drawing.Color.Teal;
+            this.buttDebit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttDebit.ForeColor = System.Drawing.Color.White;
+            this.buttDebit.Location = new System.Drawing.Point(661, 354);
+            this.buttDebit.Name = "buttDebit";
+            this.buttDebit.Size = new System.Drawing.Size(94, 29);
+            this.buttDebit.TabIndex = 25;
+            this.buttDebit.Text = "DEBIT";
+            this.buttDebit.UseVisualStyleBackColor = false;
+            this.buttDebit.Click += new System.EventHandler(this.buttDebit_Click);
+            // 
+            // buttCredit
+            // 
+            this.buttCredit.BackColor = System.Drawing.Color.Teal;
+            this.buttCredit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttCredit.ForeColor = System.Drawing.Color.White;
+            this.buttCredit.Location = new System.Drawing.Point(537, 354);
+            this.buttCredit.Name = "buttCredit";
+            this.buttCredit.Size = new System.Drawing.Size(94, 29);
+            this.buttCredit.TabIndex = 24;
+            this.buttCredit.Text = "CREDIT";
+            this.buttCredit.UseVisualStyleBackColor = false;
+            this.buttCredit.Click += new System.EventHandler(this.buttCredit_Click);
+            // 
+            // txtBoxTotal
+            // 
+            this.txtBoxTotal.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.txtBoxTotal.Location = new System.Drawing.Point(673, 79);
+            this.txtBoxTotal.Name = "txtBoxTotal";
+            this.txtBoxTotal.Size = new System.Drawing.Size(93, 27);
+            this.txtBoxTotal.TabIndex = 23;
+            this.txtBoxTotal.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(537, 78);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(135, 25);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "SET TOTAL TO: ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(541, 144);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 28);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "TIP: ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(541, 203);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(140, 28);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Total with TIP:";
+            // 
             // listViewDisplaybillItems
             // 
             this.listViewDisplaybillItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -178,156 +331,6 @@ namespace OrderingSystemUI
             // 
             this.TotalWithVAT.Text = "Total With VAT";
             this.TotalWithVAT.Width = 150;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(541, 203);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(140, 28);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "Total with TIP:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(541, 144);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 28);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "TIP: ";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(537, 78);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(135, 25);
-            this.label5.TabIndex = 22;
-            this.label5.Text = "SET TOTAL TO: ";
-            // 
-            // txtBoxTotal
-            // 
-            this.txtBoxTotal.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.txtBoxTotal.Location = new System.Drawing.Point(673, 79);
-            this.txtBoxTotal.Name = "txtBoxTotal";
-            this.txtBoxTotal.Size = new System.Drawing.Size(93, 27);
-            this.txtBoxTotal.TabIndex = 23;
-            this.txtBoxTotal.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // buttCredit
-            // 
-            this.buttCredit.BackColor = System.Drawing.Color.Teal;
-            this.buttCredit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttCredit.ForeColor = System.Drawing.Color.White;
-            this.buttCredit.Location = new System.Drawing.Point(537, 354);
-            this.buttCredit.Name = "buttCredit";
-            this.buttCredit.Size = new System.Drawing.Size(94, 29);
-            this.buttCredit.TabIndex = 24;
-            this.buttCredit.Text = "CREDIT";
-            this.buttCredit.UseVisualStyleBackColor = false;
-            // 
-            // buttDebit
-            // 
-            this.buttDebit.BackColor = System.Drawing.Color.Teal;
-            this.buttDebit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttDebit.ForeColor = System.Drawing.Color.White;
-            this.buttDebit.Location = new System.Drawing.Point(661, 354);
-            this.buttDebit.Name = "buttDebit";
-            this.buttDebit.Size = new System.Drawing.Size(94, 29);
-            this.buttDebit.TabIndex = 25;
-            this.buttDebit.Text = "DEBIT";
-            this.buttDebit.UseVisualStyleBackColor = false;
-            // 
-            // buttCash
-            // 
-            this.buttCash.BackColor = System.Drawing.Color.Teal;
-            this.buttCash.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttCash.ForeColor = System.Drawing.Color.White;
-            this.buttCash.Location = new System.Drawing.Point(778, 354);
-            this.buttCash.Name = "buttCash";
-            this.buttCash.Size = new System.Drawing.Size(94, 29);
-            this.buttCash.TabIndex = 26;
-            this.buttCash.Text = "CASH";
-            this.buttCash.UseVisualStyleBackColor = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(604, 293);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(199, 25);
-            this.label6.TabIndex = 27;
-            this.label6.Text = "Select Payment Type:";
-            // 
-            // btnSaveTotal
-            // 
-            this.btnSaveTotal.Location = new System.Drawing.Point(778, 79);
-            this.btnSaveTotal.Name = "btnSaveTotal";
-            this.btnSaveTotal.Size = new System.Drawing.Size(94, 29);
-            this.btnSaveTotal.TabIndex = 4;
-            this.btnSaveTotal.Text = "Update";
-            this.btnSaveTotal.UseVisualStyleBackColor = true;
-            this.btnSaveTotal.Click += new System.EventHandler(this.btnSaveTotal_Click);
-            // 
-            // labelDisplayTotalWithTip
-            // 
-            this.labelDisplayTotalWithTip.AutoSize = true;
-            this.labelDisplayTotalWithTip.Location = new System.Drawing.Point(716, 211);
-            this.labelDisplayTotalWithTip.Name = "labelDisplayTotalWithTip";
-            this.labelDisplayTotalWithTip.Size = new System.Drawing.Size(50, 20);
-            this.labelDisplayTotalWithTip.TabIndex = 28;
-            this.labelDisplayTotalWithTip.Text = "label7";
-            // 
-            // labelDisplayTip
-            // 
-            this.labelDisplayTip.AutoSize = true;
-            this.labelDisplayTip.Location = new System.Drawing.Point(716, 152);
-            this.labelDisplayTip.Name = "labelDisplayTip";
-            this.labelDisplayTip.Size = new System.Drawing.Size(50, 20);
-            this.labelDisplayTip.TabIndex = 28;
-            this.labelDisplayTip.Text = "label7";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(15, 10);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(184, 28);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Search Bill by table";
-            // 
-            // txtBoxTableNumber
-            // 
-            this.txtBoxTableNumber.Location = new System.Drawing.Point(209, 14);
-            this.txtBoxTableNumber.Name = "txtBoxTableNumber";
-            this.txtBoxTableNumber.Size = new System.Drawing.Size(145, 27);
-            this.txtBoxTableNumber.TabIndex = 30;
-            // 
-            // button3
-            // 
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(15, 409);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(501, 55);
-            this.button3.TabIndex = 31;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // btnSearchTable
-            // 
-            this.btnSearchTable.Location = new System.Drawing.Point(389, 14);
-            this.btnSearchTable.Name = "btnSearchTable";
-            this.btnSearchTable.Size = new System.Drawing.Size(94, 29);
-            this.btnSearchTable.TabIndex = 32;
-            this.btnSearchTable.Text = "search";
-            this.btnSearchTable.UseVisualStyleBackColor = true;
-            this.btnSearchTable.Click += new System.EventHandler(this.btnSearchTable_Click);
             // 
             // pnlTakeOrder
             // 
