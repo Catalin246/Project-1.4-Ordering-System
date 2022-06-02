@@ -8,6 +8,8 @@ namespace OrderingSystemModel
 {
     public class OrderedItem
     {
+        public const float AlcoholicVAT = 0.21f;
+        public const float NonAlcoholicVAT = 0.06f;
         public OrderedItem()
         {
 
@@ -32,12 +34,29 @@ namespace OrderingSystemModel
 
         private float totalPriceItem;
 
+        private float vatAmount;
+
         //have a calculte property in here to calculate the item amount and price
         public float TotalPriceItem
         {
 
             get { return totalPriceItem; }
             set { totalPriceItem = (float)(amount * item.ItemPrice); }
+        }
+
+        public float VatAmount
+        {
+            get { return vatAmount; }
+            set
+            {
+                if (item.ItemCategory.ToLower() == "alcoholic")
+                {
+                    vatAmount = totalPriceItem * AlcoholicVAT;
+                } else
+                {
+                    vatAmount = totalPriceItem * NonAlcoholicVAT;
+                }
+            }
         }
 
     }
