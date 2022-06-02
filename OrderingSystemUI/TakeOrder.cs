@@ -168,7 +168,7 @@ namespace OrderingSystemUI
                 ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
                 Item itemSelected = (Item)selectedItem.Tag;
 
-                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "none");
+                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "none",0);
 
                 if(order.items != null)
                 foreach (OrderedItem item in order.items)

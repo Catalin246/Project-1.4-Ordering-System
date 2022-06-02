@@ -13,13 +13,16 @@ namespace OrderingSystemModel
 
         }
 
-        public OrderedItem(Item item, int amount, string note)
+        public OrderedItem(Item item, int amount, string note, int orderId)
         {
             this.item = item;
             this.amount = amount;
             this.note = note;
+            this.orderId = orderId;
         }
         public Item item;
+
+        public int orderId;
 
         public int itemID;
 

@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using OrderingSystemModel;
 using OrderingSystemLogic;
@@ -16,12 +10,16 @@ namespace OrderingSystemUI
     {
         OrderedItemService orderedItemService;
         OrderService orderService;
+        TableService tableService;
+        ItemService itemService;
 
         public KitchenView()
         {
             InitializeComponent();
             orderedItemService = new OrderedItemService();
             orderService = new OrderService();
+            tableService = new TableService();
+            ItemService itemService = new ItemService();
             lblTime.Text = DateTime.Now.ToString("HH:mm");
         }
 
@@ -29,15 +27,23 @@ namespace OrderingSystemUI
         {
             List<OrderedItem> foodOrderList = orderedItemService.GetFoodOrders();
 
+            int tableNo = 0; //change this later
+
             listViewKitchen.Items.Clear();
-            listViewKitchen.FullRowSelect = true;            
+            listViewKitchen.FullRowSelect = true;
 
             foreach (OrderedItem foodOrder in foodOrderList)
             {
-                //Order order = new Order()
+                Item item = itemService.GetItem(foodOrder.itemID);
 
-                //ListViewItem listViewKitchenItem = new ListViewItem(tableNo.ToString());
-                //listViewKitchenItem.SubItems.Add()
+                ListViewItem li = new ListViewItem(foodOrder.orderId.ToString());
+                li.SubItems.Add(tableNo.ToString());
+                li.SubItems.Add(GetCalculatedTime(foodOrder.orderId));
+                li.SubItems.Add(item.ItemCategory.ToString());
+                li.SubItems.Add(foodOrder.amount.ToString());
+                li.SubItems.Add(item.ItemName.ToString());
+                li.SubItems.Add(foodOrder.note.ToString());
+                li.SubItems.Add("Running");
             }
         }
 
