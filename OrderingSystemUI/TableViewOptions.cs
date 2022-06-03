@@ -34,6 +34,7 @@ namespace OrderingSystemUI
             //TakeOrder takeOrder = new TakeOrder(number);
             takeOrder.Show();
             takeOrder.tableView = tableView;
+            tableView.Hide();
         }
 
         private void btnSeatingACustomer_Click(object sender, EventArgs e)
