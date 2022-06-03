@@ -332,15 +332,8 @@
             // 
             // logoutToolStripMenuItem
             // 
-            this.barViewToolStripMenuItem.Name = "barViewToolStripMenuItem";
-            this.barViewToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
-            this.barViewToolStripMenuItem.Text = "Bar view";
             // 
             // exitToolStripMenuItem
-            // 
-            this.kitchenViewToolStripMenuItem.Name = "kitchenViewToolStripMenuItem";
-            this.kitchenViewToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
-            this.kitchenViewToolStripMenuItem.Text = "Kitchen view";
             // 
             // tableViewToolStripMenuItem
             // 
