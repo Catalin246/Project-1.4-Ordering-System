@@ -170,5 +170,11 @@ namespace OrderingSystemUI
             Table table= new Table();
             TableService tableService = new TableService();
         }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            Payment paymentView = new Payment();
+            paymentView.Show();
+        }
     }
 }
