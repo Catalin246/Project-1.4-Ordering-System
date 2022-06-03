@@ -21,7 +21,7 @@ namespace OrderingSystemDAL
         private List<Table> ReadTables(DataTable dataTable)
         {
             List<Table> tables = new List<Table>();
-            DataRow dr in dataTable.Rows)
+            foreach(DataRow dr in dataTable.Rows)
             {
                 Table table = new Table();
                 {

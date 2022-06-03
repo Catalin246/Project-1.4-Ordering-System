@@ -25,10 +25,10 @@ namespace OrderingSystemDAL
 
                         " VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount);", conn);
 
-                command.Parameters.AddWithValue("@Item_Id", orderedItem.item.ItemId);
+                command.Parameters.AddWithValue("@Item_Id", orderedItem.Item.ItemId);
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);
-                command.Parameters.AddWithValue("@Ordered_Item_Note", orderedItem.note);
-                command.Parameters.AddWithValue("@Ordered_Item_Amount", orderedItem.amount);
+                command.Parameters.AddWithValue("@Ordered_Item_Note", orderedItem.Note);
+                command.Parameters.AddWithValue("@Ordered_Item_Amount", orderedItem.Amount);
 
                 int nrOfRowsAffected = command.ExecuteNonQuery();
             }
@@ -54,9 +54,9 @@ namespace OrderingSystemDAL
             {
                 OrderedItem orderedItem = new OrderedItem()
                 {
-                    itemID = (int)dr["Item_Id"],
-                    note = (string)dr["Ordered_Item_Note"],
-                    amount = (int)dr["Ordered_Item_Amount"]
+                    ItemID = (int)dr["Item_Id"],
+                    Note = (string)dr["Ordered_Item_Note"],
+                    Amount = (int)dr["Ordered_Item_Amount"]
                 };
                 orderedItems.Add(orderedItem);
             }

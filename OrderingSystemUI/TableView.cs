@@ -22,6 +22,11 @@ namespace OrderingSystemUI
             this.takeOrder = takeOrder; 
             ShowListView();
         }
+
+        public TableView()
+        {
+
+        }
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showPanel("TableView");
@@ -155,6 +160,7 @@ namespace OrderingSystemUI
         {
             Payment paymentView = new Payment();
             paymentView.Show();
+        }
 
         private void btnServed_Click(object sender, EventArgs e)
         {

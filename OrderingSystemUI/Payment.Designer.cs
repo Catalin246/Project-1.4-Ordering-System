@@ -318,7 +318,7 @@ namespace OrderingSystemUI
             this.listViewDisplaybillItems.TabIndex = 7;
             this.listViewDisplaybillItems.UseCompatibleStateImageBehavior = false;
             this.listViewDisplaybillItems.View = System.Windows.Forms.View.Details;
-            this.listViewDisplaybillItems.SelectedIndexChanged += new System.EventHandler(this.listViewDisplaybillItems_SelectedIndexChanged);
+            // this.listViewDisplaybillItems.SelectedIndexChanged += new System.EventHandler(this.listViewDisplaybillItems_SelectedIndexChanged);
             // 
             // ItemsName
             // 

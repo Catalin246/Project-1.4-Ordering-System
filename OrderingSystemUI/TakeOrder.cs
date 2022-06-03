@@ -72,10 +72,10 @@ namespace OrderingSystemUI
 
                 foreach (OrderedItem item in order.items)
                 {
-                    ListViewItem li = new ListViewItem(item.item.ItemName);
-                    li.SubItems.Add(item.item.ItemPrice.ToString());
-                    li.SubItems.Add(item.amount.ToString());
-                    li.SubItems.Add(item.note.ToString());
+                    ListViewItem li = new ListViewItem(item.Item.ItemName);
+                    li.SubItems.Add(item.Item.ItemPrice.ToString());
+                    li.SubItems.Add(item.Amount.ToString());
+                    li.SubItems.Add(item.Note.ToString());
 
                     li.Tag = item;
 
@@ -104,17 +104,17 @@ namespace OrderingSystemUI
                 foreach (OrderedItem item in order.items)
                 {
                     if (itemSelected == item)
-                        item.note = note;
+                        item.Note = note;
                 }
 
                 listViewOrderItems.Items.Clear();
 
                 foreach (OrderedItem item in order.items)
                 {
-                    ListViewItem li = new ListViewItem(item.item.ItemName);
-                    li.SubItems.Add(item.item.ItemPrice.ToString());
-                    li.SubItems.Add(item.amount.ToString());
-                    li.SubItems.Add(item.note.ToString());
+                    ListViewItem li = new ListViewItem(item.Item.ItemName);
+                    li.SubItems.Add(item.Item.ItemPrice.ToString());
+                    li.SubItems.Add(item.Amount.ToString());
+                    li.SubItems.Add(item.Note.ToString());
 
                     li.Tag = item;
 
@@ -160,19 +160,19 @@ namespace OrderingSystemUI
                 foreach (OrderedItem item in order.items)
                 {
                     if (itemSelected == item)
-                        if (item.amount == 1)
+                        if (item.Amount == 1)
                             contains = true;
                         else
                         {
-                            item.item.ItemAmount++;
-                            item.amount--;
+                            item.Item.ItemAmount++;
+                            item.Amount--;
                             itemService.Update(itemSelected);
                         }
                 }
 
                 if (contains)
                 {
-                    itemSelected.item.ItemAmount++;
+                    itemSelected.Item.ItemAmount++;
                     order.items.Remove(itemSelected);
                     itemService.Update(itemSelected);
                 }
@@ -210,10 +210,10 @@ namespace OrderingSystemUI
                 if (order.items != null)
                     foreach (OrderedItem item in order.items)
                     {
-                        if (item.item == itemSelected)
+                        if (item.Item == itemSelected)
                         {
-                            item.amount++;
-                            item.item.ItemAmount--;
+                            item.Amount++;
+                            item.Item.ItemAmount--;
                             itemService.Update(orderedItem);
                             contains = true;
                         }
@@ -222,7 +222,7 @@ namespace OrderingSystemUI
                 if (!contains)
                 {
                     order.items.Add(orderedItem);
-                    orderedItem.item.ItemAmount--;
+                    orderedItem.Item.ItemAmount--;
                     itemService.Update(orderedItem);
                 }
 
@@ -230,10 +230,10 @@ namespace OrderingSystemUI
 
                 foreach (OrderedItem item in order.items)
                 {
-                    ListViewItem li = new ListViewItem(item.item.ItemName);
-                    li.SubItems.Add(item.item.ItemPrice.ToString());
-                    li.SubItems.Add(item.amount.ToString());
-                    li.SubItems.Add(item.note.ToString());
+                    ListViewItem li = new ListViewItem(item.Item.ItemName);
+                    li.SubItems.Add(item.Item.ItemPrice.ToString());
+                    li.SubItems.Add(item.Amount.ToString());
+                    li.SubItems.Add(item.Note.ToString());
 
                     li.Tag = item;
 
