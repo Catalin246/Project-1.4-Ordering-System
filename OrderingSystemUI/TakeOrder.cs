@@ -203,7 +203,7 @@ namespace OrderingSystemUI
                 ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
                 Item itemSelected = (Item)selectedItem.Tag;
 
-                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "none", 0);
+                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "none");
 
                 if(order.items != null)
                 foreach (OrderedItem item in order.items)
@@ -350,6 +350,7 @@ namespace OrderingSystemUI
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
         //Log out
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -357,5 +358,5 @@ namespace OrderingSystemUI
         }
     }
 }
-    }
-}
+    
+
