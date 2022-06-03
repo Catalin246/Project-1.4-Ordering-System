@@ -33,7 +33,7 @@ namespace OrderingSystemLogic
         //    return orderedFoods;
         //}
 
-        public void ChangeStatus(OrderedItem2 item)
+        public void ChangeStatus(OrderedItem item)
         {
            // orderedItemdb.ChangeStatusToReady(item);
         }

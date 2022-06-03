@@ -62,6 +62,7 @@
             this.tableOrderNumber = new System.Windows.Forms.ColumnHeader();
             this.whereToPickUpOrder = new System.Windows.Forms.ColumnHeader();
             this.time = new System.Windows.Forms.ColumnHeader();
+            this.orderId = new System.Windows.Forms.ColumnHeader();
             this.btnTable010 = new System.Windows.Forms.Button();
             this.btnTable01 = new System.Windows.Forms.Button();
             this.btnTable05 = new System.Windows.Forms.Button();
@@ -73,7 +74,7 @@
             this.btnTable02 = new System.Windows.Forms.Button();
             this.btnTable07 = new System.Windows.Forms.Button();
             this.btnServed = new System.Windows.Forms.Button();
-            this.orderId = new System.Windows.Forms.ColumnHeader();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -246,7 +247,7 @@
             this.toolStripMenuItem2,
             this.toolStripMenuItem3,
             this.toolStripMenuItem4,
-            this.billViewToolStripMenuItem});
+            this.toolStripMenuItem5});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(812, 28);
@@ -310,17 +311,9 @@
             this.time.Text = "Time";
             this.time.Width = 120;
             // 
-            // tableOrderNumber
+            // orderId
             // 
-            this.tableOrderNumber.Text = "Table Order";
-            // 
-            // whereToPickUpOrder
-            // 
-            this.whereToPickUpOrder.Text = "Where to pickup order";
-            // 
-            // time
-            // 
-            this.time.Text = "Time";
+            this.orderId.Text = "Order Id";
             // 
             // btnTable010
             // 
@@ -423,12 +416,6 @@
             this.btnTable07.UseVisualStyleBackColor = true;
             this.btnTable07.Click += new System.EventHandler(this.btnTable07_Click);
             // 
-            // billViewToolStripMenuItem
-            // 
-            this.billViewToolStripMenuItem.Name = "billViewToolStripMenuItem";
-            this.billViewToolStripMenuItem.Size = new System.Drawing.Size(78, 24);
-            this.billViewToolStripMenuItem.Text = "Bill view";
-            this.billViewToolStripMenuItem.Click += new System.EventHandler(this.billViewToolStripMenuItem_Click);
             // btnServed
             // 
             this.btnServed.Location = new System.Drawing.Point(386, 362);
@@ -439,9 +426,12 @@
             this.btnServed.UseVisualStyleBackColor = true;
             this.btnServed.Click += new System.EventHandler(this.btnServed_Click);
             // 
-            // orderId
+            // toolStripMenuItem5
             // 
-            this.orderId.Text = "Order Id";
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(78, 24);
+            this.toolStripMenuItem5.Text = "Bill view";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // TableView
             // 
@@ -517,5 +507,6 @@
         private System.Windows.Forms.ToolStripMenuItem billViewToolStripMenuItem;
         private System.Windows.Forms.Button btnServed;
         private System.Windows.Forms.ColumnHeader orderId;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
     }
 }
