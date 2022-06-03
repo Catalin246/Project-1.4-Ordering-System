@@ -39,11 +39,17 @@ namespace OrderingSystemUI
             {
                 if (order.OrderTime.Date == DateTime.Now.Date)
                 {
-                    foreach (OrderedItem2 ordereditem in order.OrderedItems)
+                    foreach (OrderedItem ordereditem in order.OrderedItems)
                     {
                         if (ordereditem.Status != Status.Preparing)
                         {
-                            string[] listview = { order.OrderId.ToString(), order.TableId.ToString(), order.OrderTime.ToString("HH:mm:ss"), $"{order.TimePassed.Minutes:00}:{order.TimePassed.Seconds:00}", ordereditem.Item.ItemName, ordereditem.Amount.ToString(), ordereditem.Note };
+                            string[] listview = { order.OrderId.ToString(), 
+                                order.TableId.ToString(), 
+                                order.OrderTime.ToString("HH:mm:ss"), 
+                                $"{order.TimePassed.Minutes:00}:{order.TimePassed.Seconds:00}", 
+                                ordereditem.Item.ItemName, 
+                                ordereditem.Amount.ToString(), 
+                                ordereditem.Note };
                             ListViewItem li = new ListViewItem(listview);
                             li.Tag = ordereditem;
                             listViewKitchen.Items.Add(li);
@@ -54,16 +60,17 @@ namespace OrderingSystemUI
         }
 
         private void btnReadyToServe_Click(object sender, EventArgs e)
-        {            
-        
+        {           
             {
                 foreach (ListViewItem item in listViewKitchen.SelectedItems)
                 {
-                    orderedItemService.ChangeStatus((OrderedItem2)item.Tag);
+                    orderedItemService.ChangeStatus((OrderedItem)item.Tag);
                 }
                 //ListViewLoad();
             }
 
         }
+
+
     }
 }
