@@ -241,5 +241,7 @@ namespace OrderingSystemUI
                 MessageBox.Show("Please search for a bill first!");
             }
         }
+
+     
     }
 }

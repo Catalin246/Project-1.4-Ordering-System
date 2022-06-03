@@ -55,7 +55,7 @@ namespace OrderingSystemUI
 
         private void btnReadyToServe_Click(object sender, EventArgs e)
         {            
-            if
+        
             {
                 foreach (ListViewItem item in listViewKitchen.SelectedItems)
                 {

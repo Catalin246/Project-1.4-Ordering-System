@@ -17,22 +17,25 @@ namespace OrderingSystemModel
 
         public OrderedItem(Item item, int amount, string note, int orderId)
         {
-            this.item = item;
-            this.amount = amount;
-            this.note = note;
-            this.orderId = orderId;
+            this.Item = item;
+            this.Amount = amount;
+            this.Note = note;
+            this.OrderId = orderId;
         }
-        public Item item;
 
-        public int orderId;
+        public Item Item { get; set; }
+        public int OrderId { get; set; }
+        public Status Status { get; set; }
+        public string Note { get; set; }
+        public int Amount { get; set; }
 
-        public int itemID;
+   
 
-        public int amount;
+        public int ItemID { get; set; }
 
-        public string note; //note
-
+     
         private float totalPriceItem;
+       
 
         private float vatAmount;
 
@@ -41,7 +44,7 @@ namespace OrderingSystemModel
         {
 
             get { return totalPriceItem; }
-            set { totalPriceItem = (float)(amount * item.ItemPrice); }
+            set { totalPriceItem = (float)(Amount * Item.ItemPrice); }
         }
 
         public float VatAmount
@@ -49,7 +52,7 @@ namespace OrderingSystemModel
             get { return vatAmount; }
             set
             {
-                if (item.ItemCategory.ToLower() == "alcoholic")
+                if (Item.ItemCategory.ToLower() == "alcoholic")
                 {
                     vatAmount = totalPriceItem * AlcoholicVAT;
                 } else
@@ -58,6 +61,18 @@ namespace OrderingSystemModel
                 }
             }
         }
-
+        public OrderedItem(Item menuItem)
+        {
+            Item = menuItem;
+            Amount = 1;
+            Note = "";
+        }
+     
     }
+    public enum Status
+    {
+        Preparing, Ready, Served, Paid
+    }
+
 }
+

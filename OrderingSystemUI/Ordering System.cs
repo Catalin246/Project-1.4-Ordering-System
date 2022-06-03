@@ -243,5 +243,10 @@ namespace OrderingSystemUI
         {
 
         }
+
+        private void billViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
