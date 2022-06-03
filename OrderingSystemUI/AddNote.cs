@@ -12,10 +12,12 @@ namespace OrderingSystemUI
 {
     public partial class AddNote : Form
     {
-        string note;
-        public AddNote()
+        
+        TakeOrder takeOrder;
+        public AddNote(TakeOrder takeOrder)
         {
             InitializeComponent();
+            this.takeOrder = takeOrder; 
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -27,18 +29,15 @@ namespace OrderingSystemUI
         {
             try
             {
-                note = txtAddNote.Text;
+                takeOrder.note = txtAddNote.Text;
                 this.Close();
+
+                takeOrder.DisplayOrderItems(takeOrder.order.items);
             }
             catch (Exception exp)
             {
                 MessageBox.Show("Something went wrong : " + exp.Message);
             }
-        }
-
-        public string Note()
-        {
-            return this.note;
         }
     }
 }

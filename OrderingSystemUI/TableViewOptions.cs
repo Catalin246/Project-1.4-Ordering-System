@@ -14,9 +14,11 @@ namespace OrderingSystemUI
     public partial class TableViewOptions : Form
     {
         private TableView tableView;
+        private TakeOrder takeOrder;
         private int number;
-        public TableViewOptions(int number, TableView tableView)
+        public TableViewOptions(int number, TableView tableView,TakeOrder takeOrder)
         {
+            this.takeOrder = takeOrder; 
             this.number = number;
             this.tableView = tableView;
             InitializeComponent();
@@ -27,10 +29,11 @@ namespace OrderingSystemUI
             //showPanel("Take Order");
             //Show take order form (catalin;)))  
             ACustomerIsSitting(number, "sit");
-
+            tableView.Hide();
             this.Hide();
-            TakeOrder takeOrder = new TakeOrder(number);
+            //TakeOrder takeOrder = new TakeOrder(number);
             takeOrder.Show();
+            takeOrder.tableView = tableView;
         }
 
         private void btnSeatingACustomer_Click(object sender, EventArgs e)

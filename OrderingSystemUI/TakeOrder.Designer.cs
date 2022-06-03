@@ -76,8 +76,9 @@
             this.pnlTakeOrder.Controls.Add(this.btnTake);
             this.pnlTakeOrder.Controls.Add(this.listViewOrderItems);
             this.pnlTakeOrder.Controls.Add(this.lblTableNumber);
-            this.pnlTakeOrder.Location = new System.Drawing.Point(13, 40);
-            this.pnlTakeOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlTakeOrder.Location = new System.Drawing.Point(16, 50);
+            this.pnlTakeOrder.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+
             this.pnlTakeOrder.Name = "pnlTakeOrder";
             this.pnlTakeOrder.Size = new System.Drawing.Size(887, 546);
             this.pnlTakeOrder.TabIndex = 4;
@@ -85,7 +86,8 @@
             // lblEmployeeName
             // 
             this.lblEmployeeName.AutoSize = true;
-            this.lblEmployeeName.Location = new System.Drawing.Point(629, 14);
+            this.lblEmployeeName.Location = new System.Drawing.Point(786, 18);
+            this.lblEmployeeName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEmployeeName.Name = "lblEmployeeName";
             this.lblEmployeeName.Size = new System.Drawing.Size(243, 20);
             this.lblEmployeeName.TabIndex = 31;
@@ -95,8 +97,8 @@
             // 
             this.btnDesserts.BackColor = System.Drawing.Color.Teal;
             this.btnDesserts.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDesserts.Location = new System.Drawing.Point(683, 54);
-            this.btnDesserts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDesserts.Location = new System.Drawing.Point(854, 68);
+            this.btnDesserts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDesserts.Name = "btnDesserts";
             this.btnDesserts.Size = new System.Drawing.Size(176, 44);
             this.btnDesserts.TabIndex = 30;
@@ -108,8 +110,8 @@
             // 
             this.btnMains.BackColor = System.Drawing.Color.Teal;
             this.btnMains.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnMains.Location = new System.Drawing.Point(463, 54);
-            this.btnMains.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnMains.Location = new System.Drawing.Point(579, 68);
+            this.btnMains.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMains.Name = "btnMains";
             this.btnMains.Size = new System.Drawing.Size(176, 44);
             this.btnMains.TabIndex = 29;
@@ -121,8 +123,10 @@
             // 
             this.btnStarters.BackColor = System.Drawing.Color.Teal;
             this.btnStarters.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnStarters.Location = new System.Drawing.Point(241, 54);
-            this.btnStarters.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+
+            this.btnStarters.Location = new System.Drawing.Point(301, 68);
+            this.btnStarters.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
             this.btnStarters.Name = "btnStarters";
             this.btnStarters.Size = new System.Drawing.Size(176, 44);
             this.btnStarters.TabIndex = 28;
@@ -148,8 +152,10 @@
             // 
             this.btnDrinks.BackColor = System.Drawing.Color.Teal;
             this.btnDrinks.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDrinks.Location = new System.Drawing.Point(21, 54);
-            this.btnDrinks.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+
+            this.btnDrinks.Location = new System.Drawing.Point(26, 68);
+            this.btnDrinks.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
             this.btnDrinks.Name = "btnDrinks";
             this.btnDrinks.Size = new System.Drawing.Size(176, 44);
             this.btnDrinks.TabIndex = 26;
@@ -160,12 +166,14 @@
             // btnMinus
             // 
             this.btnMinus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnMinus.Location = new System.Drawing.Point(382, 170);
-            this.btnMinus.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+
+            this.btnMinus.Location = new System.Drawing.Point(478, 212);
+            this.btnMinus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMinus.Name = "btnMinus";
             this.btnMinus.Padding = new System.Windows.Forms.Padding(1, 0, 0, 2);
             this.btnMinus.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnMinus.Size = new System.Drawing.Size(35, 34);
+            this.btnMinus.Size = new System.Drawing.Size(44, 42);
+
             this.btnMinus.TabIndex = 14;
             this.btnMinus.Text = "- ";
             this.btnMinus.UseVisualStyleBackColor = true;
@@ -179,7 +187,9 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Padding = new System.Windows.Forms.Padding(1, 0, 0, 2);
             this.btnAdd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnAdd.Size = new System.Drawing.Size(35, 34);
+
+            this.btnAdd.Size = new System.Drawing.Size(44, 42);
+
             this.btnAdd.TabIndex = 15;
             this.btnAdd.Text = "+ ";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -316,8 +326,9 @@
             this.tableViewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(913, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1141, 33);
+
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -353,8 +364,7 @@
             this.ClientSize = new System.Drawing.Size(913, 600);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlTakeOrder);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            //this.Name = "TakeOrder";
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Text = "TakeOrder";
             this.Load += new System.EventHandler(this.TakeOrder_Load);
             this.pnlTakeOrder.ResumeLayout(false);

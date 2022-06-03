@@ -49,7 +49,7 @@ namespace OrderingSystemDAL
             {
                 SqlCommand command = new SqlCommand("INSERT INTO dbo.[OrderedItem] " +
 
-                        "VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount);", conn);
+                        " VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount);", conn);
 
                 command.Parameters.AddWithValue("@Item_Id", orderedItem.item.ItemId);
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);

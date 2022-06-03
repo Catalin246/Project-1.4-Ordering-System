@@ -47,11 +47,12 @@ namespace OrderingSystemDAL
             try
             {
                 SqlCommand command = new SqlCommand("INSERT INTO dbo.[Order] " +
-                        "VALUES(@Order_Id, @Order_Time, @Table_Id);", conn);
+                        "VALUES(@Order_Id, @Order_Time, @Table_Id, @Order_Status);", conn);
 
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);
                 command.Parameters.AddWithValue("@Order_Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-                command.Parameters.AddWithValue("@Table_id", order.TableId);
+                command.Parameters.AddWithValue("@Table_Id", order.TableId);
+                //command.Parameters.AddWithValue("@Order_Status", false);
 
                 int nrOfRowsAffected = command.ExecuteNonQuery();
             }

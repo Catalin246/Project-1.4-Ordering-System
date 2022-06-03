@@ -25,6 +25,8 @@ namespace OrderingSystemModel
         public int BillId { get; set; }
         public int TableId { get; set; }
 
+        public Boolean Status { get; set; }
+
         public int determineBillID()
         {
             // List<Bill> = call get open bills getOpenBills(this.TableID)

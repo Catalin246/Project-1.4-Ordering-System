@@ -40,13 +40,13 @@
             this.txtAddNote.Location = new System.Drawing.Point(29, 30);
             this.txtAddNote.Multiline = true;
             this.txtAddNote.Name = "txtAddNote";
-            this.txtAddNote.Size = new System.Drawing.Size(326, 123);
+            this.txtAddNote.Size = new System.Drawing.Size(326, 83);
             this.txtAddNote.TabIndex = 0;
             // 
             // btnOk
             // 
             this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnOk.Location = new System.Drawing.Point(26, 171);
+            this.btnOk.Location = new System.Drawing.Point(29, 119);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(112, 34);
             this.btnOk.TabIndex = 1;
@@ -57,7 +57,7 @@
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Red;
-            this.btnCancel.Location = new System.Drawing.Point(243, 171);
+            this.btnCancel.Location = new System.Drawing.Point(233, 119);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(112, 34);
             this.btnCancel.TabIndex = 2;
@@ -69,7 +69,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(386, 217);
+            this.ClientSize = new System.Drawing.Size(386, 169);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtAddNote);
