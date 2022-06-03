@@ -9,32 +9,24 @@ namespace OrderingSystemModel
     public enum PaymentType{ cash, creditCard, debitCard}
     public class Bill
     {
-        public const float AlcoholicVAT = 1.21f;
-        public const float nonalcoholicVAT = 1.06f;
 
-        List<OrderedItem> orderedItems; // to get to the list of ordered items in the order class
+        private List<OrderedItem> orderedItems; // to get to the list of ordered items in the order class
         public int BillId { get; set; }
         public PaymentType PaymentType { get { return this.PaymentType; } set { PaymentType = value; } }
         public string BillFeedback { get; set; }
-        public float Tip { get; set; }
+        public float Tip { get { return this.Tip; } set { this.Tip = value; } }
         public int tableId;
 
+        public List<OrderedItem> OrderedItems { get { return this.orderedItems; } set { this.orderedItems = value; } }
 
         public float BillTotalWithoutTip
         {
             get
             {
                 float total = 0;
-                foreach (OrderedItem orderedItem in orderedItems)
+                foreach (OrderedItem orderedItem in this.orderedItems)
                 {
-                    if (orderedItem.item.ItemCategory == "Drink" && 0 == 1) // determine way to figure out if a drink is alco
-                    {
-                        total += orderedItem.TotalPriceItem * AlcoholicVAT; // 21% tax
-                    }
-                    else
-                    {
-                        total += orderedItem.TotalPriceItem * nonalcoholicVAT; // 6% tax
-                    }
+                    total += orderedItem.TotalPriceItem + orderedItem.VatAmount;
                 }
                 return total;
             }

@@ -192,6 +192,8 @@ namespace OrderingSystemUI
                 ItemService itemService = new ItemService();   
                 
                 btnCancel.Enabled = true;   
+                btnPayment.Enabled = true;  
+                btnTake.Enabled = true;
 
                 bool contains = false;
                 if (order == null)
@@ -203,7 +205,7 @@ namespace OrderingSystemUI
                 ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
                 Item itemSelected = (Item)selectedItem.Tag;
 
-                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "none");
+                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "none",0);
 
                 if(order.items != null)
                 foreach (OrderedItem item in order.items)
@@ -224,7 +226,19 @@ namespace OrderingSystemUI
                     itemService.Update(orderedItem);
                 }
 
-                DisplayOrderItems(order.items);
+                listViewOrderItems.Items.Clear();
+
+                foreach (OrderedItem item in order.items)
+                {
+                    ListViewItem li = new ListViewItem(item.item.ItemName);
+                    li.SubItems.Add(item.item.ItemPrice.ToString());
+                    li.SubItems.Add(item.amount.ToString());
+                    li.SubItems.Add(item.note.ToString());
+
+                    li.Tag = item;
+
+                    listViewOrderItems.Items.Add(li);
+                }
 
                 //DisplayItems();
             }
@@ -356,6 +370,7 @@ namespace OrderingSystemUI
         {
 
         }
+
     }
 }
     

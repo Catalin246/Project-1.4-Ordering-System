@@ -59,7 +59,8 @@ namespace OrderingSystemUI
 
         private void kitchenViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            KitchenView kitchenViewForm = new KitchenView();
+            kitchenViewForm.Show();
         }
 
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -161,7 +162,7 @@ namespace OrderingSystemUI
             //if (itemSelected.ItemOrdered == null)   
             //    itemSelected.ItemOrdered = 1;
 
-            OrderedItem orderedItem = new OrderedItem(itemSelected,1,"");
+            OrderedItem orderedItem = new OrderedItem(itemSelected,1,"", 1);
 
             foreach (OrderedItem item in order.items)
             {

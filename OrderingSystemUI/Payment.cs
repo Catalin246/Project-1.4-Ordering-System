@@ -28,24 +28,17 @@ namespace OrderingSystemUI
         }
         private void showPanel(string panelName)
         {
-
-            if (panelName == "Dashboard")
+            if (panelName == "Take Order")
             {
-                pnlTakeOrder.Hide();
-                pnlTableView.Hide();
-                pnlDashboard.Show();
-            }
-            else if (panelName == "Table view")
-            {
-                pnlTakeOrder.Hide();
-                pnlDashboard.Hide();
-                pnlTableView.Show();
-            }
-            else if (panelName == "Take Order")
-            {
-                pnlDashboard.Hide();
-                pnlTableView.Hide();
                 pnlTakeOrder.Show();
+                pnlPayment.Show();
+            } 
+            else if (panelName == "Bill view")
+            {
+                //pnlDashboard.Hide();
+                //pnlTableView.Hide();
+                pnlTakeOrder.Show();
+                pnlPayment.Show();
             }
         }
 
@@ -78,9 +71,9 @@ namespace OrderingSystemUI
 
         private void btnPayment_Click(object sender, EventArgs e)
         {
-            pnlDashboard.Hide();
-            pnlTableView.Hide();
-            pnlTakeOrder.Hide();
+            // pnlDashboard.Hide();
+            // pnlTableView.Hide();
+            pnlTakeOrder.Show();
             pnlPayment.Show();
         }
 
@@ -99,55 +92,33 @@ namespace OrderingSystemUI
         private void btnSaveTotal_Click(object sender, EventArgs e)
         {
             // determine if valid update
-            float desiredTotal = float.Parse(txtBoxTotal.Text);
-            if (desiredTotal > bill.BillTotalWithoutTip)
+            if (bill != null)
             {
-                float updatedTip = desiredTotal - bill.BillTotalWithoutTip;
-                bill.Tip = updatedTip;
-                // display  tip amount
-                labelDisplayTip.Text = updatedTip.ToString();
-                // display total with tip 
-                labelDisplayTotalWithTip.Text = desiredTotal.ToString();
-            }
-        }
-
-        private void listViewDisplaybillItems_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                /*// fill the bill listview within list of orderedItemns
-                OrderedItemns teachService = new TeacherService(); ;
-                List<Teacher> teacherList = teachService.GetTeachers(); ;
-
-                // clear the listview before filling it again
-                listViewTeacher.Clear();
-
-                listViewTeacher.View = View.Details;
-                listViewTeacher.FullRowSelect = true;
-                listViewTeacher.Columns.Add("Id", 200);
-                listViewTeacher.Columns.Add("First Name", 200);
-                listViewTeacher.Columns.Add("Last Name", 200);
-
-                foreach (Teacher t in teacherList)
+                float desiredTotal = float.Parse(txtBoxTotal.Text);
+                if (desiredTotal > bill.BillTotalWithoutTip)
                 {
-                    string[] listViewStrings = { t.Number.ToString(), t.FirstName, t.LastName };
-                    ListViewItem li = new ListViewItem(listViewStrings);
-                    listViewTeacher.Items.Add(li);
-
-                }*/
-            }
-            catch (Exception)
+                    float updatedTip = desiredTotal - bill.BillTotalWithoutTip;
+                    bill.Tip = updatedTip;
+                    // display  tip amount
+                    labelDisplayTip.Text = updatedTip.ToString();
+                    // display total with tip 
+                    labelDisplayTotalWithTip.Text = desiredTotal.ToString();
+                } else
+                {
+                    MessageBox.Show("Please enter a desired amount greater than the Bill total without Tip :)");
+                }
+            } else
             {
-                //MessageBox.Show("Something went wrong while loading the Teachers: " + e.Message);
+                MessageBox.Show("Please search for a bill first!");
             }
-
-
+            
         }
 
         private void btnSearchTable_Click(object sender, EventArgs e)
         {
             if (txtBoxTableNumber.Text != null)
             {
+                bill = new Bill();
                 int tableID = int.Parse(txtBoxTableNumber.Text);
                 OrderService orderService = new OrderService();
                 OrderedItemService orderedItemService = new OrderedItemService();
@@ -163,8 +134,111 @@ namespace OrderingSystemUI
                 {
                     orderedItem.item = itemService.GetItem(orderedItem.itemID);
                 }
+                bill.OrderedItems = orderedItems;
+                // Display the ordered items associated with the bill 
+                DisplayOrderedItems(orderedItems);
 
+            }
+        }
 
+        public void DisplayOrderedItems(List<OrderedItem> orderedItems)
+        {
+            try
+            {
+                listViewDisplaybillItems.Items.Clear();
+
+                foreach (OrderedItem orderedItem in orderedItems)
+                {
+                    ListViewItem li = new ListViewItem(orderedItem.item.ItemName);
+                    li.SubItems.Add(orderedItem.amount.ToString());
+                    li.SubItems.Add(orderedItem.TotalPriceItem.ToString());
+                    li.SubItems.Add(orderedItem.VatAmount.ToString());
+                    li.SubItems.Add((orderedItem.TotalPriceItem + orderedItem.VatAmount).ToString());
+
+                    li.Tag = orderedItem;
+
+                    listViewDisplaybillItems.Items.Add(li);
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong : " + exp.Message);
+            }
+        }
+
+        private void buttCredit_Click(object sender, EventArgs e)
+        {
+            if (bill != null)
+            {
+                DialogResult res = MessageBox.Show("Are you sure you want to Finalize Payment?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (res == DialogResult.Yes)
+                {
+                    //call function to delete all orders and all ordered itemsn from the table
+                    bill.PaymentType = PaymentType.creditCard;
+                    MessageBox.Show("Credit card payment option approved.");
+                    //Some task…
+
+                }
+                if (res == DialogResult.No)
+                {
+                    MessageBox.Show("Just in time to change your mind...");
+                    //Some task…
+                }
+            
+            }
+            else
+            {
+                MessageBox.Show("Please search for a bill first!");
+            }
+            
+        }
+
+        private void buttDebit_Click(object sender, EventArgs e)
+        {
+            if (bill != null)
+            {
+                bill.PaymentType = PaymentType.debitCard;
+                MessageBox.Show("Debit card payment option approved.");
+            }
+            else
+            {
+                MessageBox.Show("Please search for a bill first!");
+            }
+        }
+
+        private void buttCash_Click(object sender, EventArgs e)
+        {
+            if (bill != null)
+            {
+                bill.PaymentType = PaymentType.cash;
+                MessageBox.Show("Cash payment option approved.");
+            }
+            else
+            {
+                MessageBox.Show("Please search for a bill first!");
+            }
+        }
+
+    
+
+    
+
+        private void bttAddFeedBack_Click(object sender, EventArgs e)
+        {
+            if (bill != null)
+            {
+                if (txtBoxFeedBack.Text != null)
+                {
+                    bill.BillFeedback = txtBoxFeedBack.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Please enter feedback first.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please search for a bill first!");
             }
         }
     }
