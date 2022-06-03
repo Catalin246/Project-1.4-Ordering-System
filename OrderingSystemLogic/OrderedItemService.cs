@@ -27,11 +27,15 @@ namespace OrderingSystemLogic
             return orderedItemdb.GetOrderedItemsByOrder(orderID);
         }
 
-        public List<OrderedItem> GetFoodOrders()
-        {
-            List<OrderedItem> orderedFoods = orderedItemdb.GetAllFoodOrders();
-            return orderedFoods;
-        }
+        //public List<OrderedItem> GetFoodOrders()
+        //{
+        //    //List<OrderedItem> orderedFoods = orderedItemdb.GetAllFoodOrders();
+        //    return orderedFoods;
+        //}
 
+        public void ChangeStatus(OrderedItem2 item)
+        {
+            orderedItemdb.ChangeStatusToReady(item);
+        }
     }
 }

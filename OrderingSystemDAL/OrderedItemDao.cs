@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OrderingSystemModel;
 using System.Data.SqlClient;
 using System.Configuration;
@@ -18,29 +15,6 @@ namespace OrderingSystemDAL
         {
             conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
         }
-
-        //public List<Order> GetAllOrdereditems()
-        //{
-        //    string query = "SELECT Order_Id FROM dbo.[OrderedItem]";
-        //    SqlParameter[] sqlParameters = new SqlParameter[0];
-        //    return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        //}
-
-
-        //private List<Order> ReadTables(DataTable dataTable)
-        //{
-        //    List<Order> orders = new List<Order>();
-
-        //    foreach (DataRow dr in dataTable.Rows)
-        //    {
-        //        Order order = new Order(1)
-        //        {
-        //            OrderId = (int)dr["Order_Id"],
-        //        };
-        //        orders.Add(order);
-        //    }
-        //    return orders;
-        //}
 
         public void Add(OrderedItem orderedItem, Order order)
         {
@@ -89,29 +63,37 @@ namespace OrderingSystemDAL
             return orderedItems;
         }
 
-        public List<OrderedItem> GetAllFoodOrders()
-        {
-            string query = "SELECT Item_Name, Category_Name " +
-                "FROM dbo.Item as I " +
-                "join dbo.Category as C on I.Item_Category = C.Category_Id " +
-                "where C.Category_Name = 'Starters' " +
-                "OR C.Category_Name ='Mains' " +
-                "OR C.Category_Name ='Desserts' " +
-                "OR C.Category_Name ='Entremets'";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        }
+        /// 
+        /// 
+        /// 
+        /// 
+        /// 
 
-        //public int GetTableNoFromOrderedItem()
+        //public List<Food> GetAllOrderedFoods()
         //{
-        //    string query = "select Table_Id " +
-        //        "from [Order] as O " +
-        //        "join OrderedItem as OI on O.Order_Id = OI.Order_Id " +
-        //        "join Item as I on OI.Item_Id = I.Item_Id " +
-        //        "join Category as C on I.Item_Category = C.Category_Id " +
-        //        "where C.Category_Name = 'Starters' OR C.Category_Name ='Mains' OR C.Category_Name ='Desserts' OR C.Category_Name ='Entremets'";
+        //    string query = "Fill In";
         //    SqlParameter[] sqlParameters = new SqlParameter[0];
-        //    return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        //}        
+        //    return ReadFoodTables(ExecuteSelectQuery(query, sqlParameters));
+        //}
+
+        //private List<Food> ReadFoodTables(DataTable dataTable)
+        //{
+        //    List<Food> foods = new List<Food>();
+
+        //    foreach (DataRow dr in dataTable.Rows)
+        //    {
+        //        Food food = new Food()
+        //        {
+        //            //fill in
+        //        };
+        //        foods.Add(food);
+        //    }
+        //    return foods;
+        //}
+
+        //public void ChangeStatusToReady()
+        //{
+        //    string query = "";
+        //}
     }
 }

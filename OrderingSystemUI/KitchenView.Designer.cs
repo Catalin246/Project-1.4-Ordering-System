@@ -166,6 +166,7 @@
             this.btnReadyToServe.TabIndex = 15;
             this.btnReadyToServe.Text = "Ready To Serve";
             this.btnReadyToServe.UseVisualStyleBackColor = false;
+            this.btnReadyToServe.Click += new System.EventHandler(this.btnReadyToServe_Click);
             // 
             // btnViewOrderNote
             // 
