@@ -26,7 +26,7 @@ namespace OrderingSystemModel
         public int TableId { get; set; }
 
         public Boolean Status { get; set; }
-        public List<OrderedItem2> OrderedItems { get; set; }
+        public List<OrderedItem> OrderedItems { get; set; }
         public TimeSpan TimePassed { get { return DateTime.Now.TimeOfDay - OrderTime.TimeOfDay; } }
 
 
