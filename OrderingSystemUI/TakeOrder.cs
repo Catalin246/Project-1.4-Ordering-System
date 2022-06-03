@@ -371,6 +371,10 @@ namespace OrderingSystemUI
 
         }
 
+        private void TakeOrder_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
     
