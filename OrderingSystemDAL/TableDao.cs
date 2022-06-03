@@ -40,5 +40,13 @@ namespace OrderingSystemDAL
             }
             return tables;
         }
+
+        public List<Table> GetTableByID(int id)
+        {
+            string query = "SELECT Table_Id, Employee_Id FROM [dbo.Table] where Table_Id=@TableNumber";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@TableNumber", id);
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
     }
 }
