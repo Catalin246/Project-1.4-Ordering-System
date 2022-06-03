@@ -13,9 +13,11 @@ namespace OrderingSystemUI
     public partial class TableView : Form
     {
         private int number;
-        public TableView()
+        TakeOrder takeOrder;
+        public TableView(TakeOrder takeOrder)
         {
             InitializeComponent();
+            this.takeOrder = takeOrder; 
         }
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -57,12 +59,13 @@ namespace OrderingSystemUI
         private void CallPnlOptions(int number)
         {
             
-            TableViewOptions options = new TableViewOptions(number,this);
+            TableViewOptions options = new TableViewOptions(number,this,takeOrder);
             options.Show();
         }
 
         private void btnTable01_Click(object sender, EventArgs e)
         {
+            takeOrder = new TakeOrder(1);
             CallPnlOptions(1);
         }
 

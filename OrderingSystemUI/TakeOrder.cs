@@ -16,39 +16,33 @@ namespace OrderingSystemUI
 {
     public partial class TakeOrder : Form
     {
+        public string note;
+        public int tableNumber;
+        public TableView tableView;
+        public AddNote addNote;
+        public Order order;
         public TakeOrder(int tableNumber)
         {
+            this.tableNumber = tableNumber;
             InitializeComponent();
-            lblTableNumber.Text = "Table#" + tableNumber.ToString();
-
+            lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
+            //addNote = new AddNote(this);
+        }
+        public TakeOrder()
+        {
+            InitializeComponent();
+            lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
         }
         private void TakeOrder_Load(object sender, EventArgs e)
         {
-            //showPanel("Take Order");
+            
         }
 
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
-            TableView tableView = new TableView();
+            this.Hide();
             tableView.Show();
         }
-        //private void showPanel(string panelName)
-        //{
-        //    if (panelName == "Take Order")
-        //    {
-        //        pnlTakeOrder.Show();
-        //    }
-        //}
-
-        //private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    showPanel("Take OrderS");
-        //}
-
-        //Create an order
-
-        Order order;
 
         //Display items
         public void DisplayItems(List<Item> items)
@@ -67,6 +61,30 @@ namespace OrderingSystemUI
                     li.Tag = item;
 
                     listViewMenuItems.Items.Add(li);
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong : " + exp.Message);
+            }
+        }
+
+        public void DisplayOrderItems(List<OrderedItem> items)
+        {
+            try
+            {
+                listViewOrderItems.Items.Clear();
+
+                foreach (OrderedItem item in order.items)
+                {
+                    ListViewItem li = new ListViewItem(item.item.ItemName);
+                    li.SubItems.Add(item.item.ItemPrice.ToString());
+                    li.SubItems.Add(item.amount.ToString());
+                    li.SubItems.Add(item.note.ToString());
+
+                    li.Tag = item;
+
+                    listViewOrderItems.Items.Add(li);
                 }
             }
             catch (Exception exp)
@@ -198,6 +216,8 @@ namespace OrderingSystemUI
 
                     listViewOrderItems.Items.Add(li);
                 }
+
+                //DisplayItems();
             }
             catch (Exception exp)
             {
@@ -290,32 +310,8 @@ namespace OrderingSystemUI
         {
             try
             {
-                AddNote addNote = new AddNote();
+                addNote = new AddNote(this);
                 addNote.Show();
-                string note = addNote.Note();
-
-
-                //if (listViewMenuItems.SelectedItems.Count == 0)
-                //    return;
-
-                //ListViewItem selectedItem = listViewOrderItems.SelectedItems[0];
-                //OrderedItem itemSelected = (OrderedItem)selectedItem.Tag;
-
-                //itemSelected.note = note;
-
-                //listViewOrderItems.Items.Clear();
-
-                //foreach (OrderedItem item in order.items)
-                //{
-                //    ListViewItem li = new ListViewItem(item.item.ItemName);
-                //    li.SubItems.Add(item.item.ItemPrice.ToString());
-                //    li.SubItems.Add(item.amount.ToString());
-                //    li.SubItems.Add(item.note.ToString());
-
-                //    li.Tag = item;
-
-                //    listViewOrderItems.Items.Add(li);
-                //}
             }
             catch (Exception exp)
             {

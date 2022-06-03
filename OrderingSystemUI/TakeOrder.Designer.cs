@@ -77,7 +77,7 @@
             this.pnlTakeOrder.Controls.Add(this.listViewOrderItems);
             this.pnlTakeOrder.Controls.Add(this.lblTableNumber);
             this.pnlTakeOrder.Location = new System.Drawing.Point(16, 50);
-            this.pnlTakeOrder.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pnlTakeOrder.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.pnlTakeOrder.Name = "pnlTakeOrder";
             this.pnlTakeOrder.Size = new System.Drawing.Size(1109, 682);
             this.pnlTakeOrder.TabIndex = 4;
@@ -85,7 +85,7 @@
             // lblEmployeeName
             // 
             this.lblEmployeeName.AutoSize = true;
-            this.lblEmployeeName.Location = new System.Drawing.Point(786, 17);
+            this.lblEmployeeName.Location = new System.Drawing.Point(786, 18);
             this.lblEmployeeName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEmployeeName.Name = "lblEmployeeName";
             this.lblEmployeeName.Size = new System.Drawing.Size(288, 25);
@@ -96,7 +96,7 @@
             // 
             this.btnDesserts.BackColor = System.Drawing.Color.Teal;
             this.btnDesserts.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDesserts.Location = new System.Drawing.Point(854, 67);
+            this.btnDesserts.Location = new System.Drawing.Point(854, 68);
             this.btnDesserts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDesserts.Name = "btnDesserts";
             this.btnDesserts.Size = new System.Drawing.Size(220, 55);
@@ -109,7 +109,7 @@
             // 
             this.btnMains.BackColor = System.Drawing.Color.Teal;
             this.btnMains.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnMains.Location = new System.Drawing.Point(579, 67);
+            this.btnMains.Location = new System.Drawing.Point(579, 68);
             this.btnMains.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMains.Name = "btnMains";
             this.btnMains.Size = new System.Drawing.Size(220, 55);
@@ -122,7 +122,7 @@
             // 
             this.btnStarters.BackColor = System.Drawing.Color.Teal;
             this.btnStarters.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnStarters.Location = new System.Drawing.Point(301, 67);
+            this.btnStarters.Location = new System.Drawing.Point(301, 68);
             this.btnStarters.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnStarters.Name = "btnStarters";
             this.btnStarters.Size = new System.Drawing.Size(220, 55);
@@ -149,7 +149,7 @@
             // 
             this.btnDrinks.BackColor = System.Drawing.Color.Teal;
             this.btnDrinks.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDrinks.Location = new System.Drawing.Point(26, 67);
+            this.btnDrinks.Location = new System.Drawing.Point(26, 68);
             this.btnDrinks.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDrinks.Name = "btnDrinks";
             this.btnDrinks.Size = new System.Drawing.Size(220, 55);
@@ -161,12 +161,12 @@
             // btnMinus
             // 
             this.btnMinus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnMinus.Location = new System.Drawing.Point(477, 212);
+            this.btnMinus.Location = new System.Drawing.Point(478, 212);
             this.btnMinus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMinus.Name = "btnMinus";
             this.btnMinus.Padding = new System.Windows.Forms.Padding(1, 0, 0, 2);
             this.btnMinus.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnMinus.Size = new System.Drawing.Size(44, 43);
+            this.btnMinus.Size = new System.Drawing.Size(44, 42);
             this.btnMinus.TabIndex = 14;
             this.btnMinus.Text = "- ";
             this.btnMinus.UseVisualStyleBackColor = true;
@@ -180,7 +180,7 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Padding = new System.Windows.Forms.Padding(1, 0, 0, 2);
             this.btnAdd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnAdd.Size = new System.Drawing.Size(44, 43);
+            this.btnAdd.Size = new System.Drawing.Size(44, 42);
             this.btnAdd.TabIndex = 15;
             this.btnAdd.Text = "+ ";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -315,8 +315,8 @@
             this.tableViewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1141, 35);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1141, 33);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -356,6 +356,7 @@
             this.ClientSize = new System.Drawing.Size(1141, 750);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlTakeOrder);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Text = "TakeOrder";
             this.Load += new System.EventHandler(this.TakeOrder_Load);
             this.pnlTakeOrder.ResumeLayout(false);
