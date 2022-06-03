@@ -138,5 +138,17 @@ namespace OrderingSystemUI
         {
 
         }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            KitchenView kitchenViewForm = new KitchenView();
+            kitchenViewForm.Show();
+        }
+
+        private void billViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Payment paymentView = new Payment();
+            paymentView.Show();
+        }
     }
 }

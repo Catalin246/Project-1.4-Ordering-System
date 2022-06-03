@@ -26,5 +26,12 @@ namespace OrderingSystemLogic
         {
             return orderedItemdb.GetOrderedItemsByOrder(orderID);
         }
+
+        public List<OrderedItem> GetFoodOrders()
+        {
+            List<OrderedItem> orderedFoods = orderedItemdb.GetAllFoodOrders();
+            return orderedFoods;
+        }
+
     }
 }

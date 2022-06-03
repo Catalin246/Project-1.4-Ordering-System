@@ -32,7 +32,7 @@ namespace OrderingSystemDAL
 
             foreach (DataRow dr in dataTable.Rows)
             {
-                Order order = new Order(1)
+                Order order = new Order()
                 {
                     OrderId = (int)dr["Order_Id"],
                 };
