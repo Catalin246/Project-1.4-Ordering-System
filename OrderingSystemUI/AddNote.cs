@@ -14,10 +14,12 @@ namespace OrderingSystemUI
     {
         
         TakeOrder takeOrder;
-        public AddNote(TakeOrder takeOrder)
+        ListViewItem selectedItem;
+        public AddNote(TakeOrder takeOrder, ListViewItem selectedItem)
         {
             InitializeComponent();
-            this.takeOrder = takeOrder; 
+            this.takeOrder = takeOrder;
+            this.selectedItem = selectedItem;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -32,7 +34,7 @@ namespace OrderingSystemUI
                 takeOrder.note = txtAddNote.Text;
                 this.Close();
 
-                takeOrder.DisplayOrderItems(takeOrder.order.items);
+                takeOrder.DisplayOrderItemsNote(takeOrder.order.items, takeOrder.note, selectedItem);
             }
             catch (Exception exp)
             {

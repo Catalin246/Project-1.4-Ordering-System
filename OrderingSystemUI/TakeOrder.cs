@@ -26,25 +26,20 @@ namespace OrderingSystemUI
             this.tableNumber = tableNumber;
             InitializeComponent();
             lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
-            //addNote = new AddNote(this);
         }
         public TakeOrder()
         {
             InitializeComponent();
             lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
         }
-        private void TakeOrder_Load(object sender, EventArgs e)
-        {
-            
-        }
-
+       
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
             tableView.Show();
         }
 
-        //Display items
+        //Display menu items
         public void DisplayItems(List<Item> items)
         {
             try
@@ -56,7 +51,6 @@ namespace OrderingSystemUI
                     ListViewItem li = new ListViewItem(item.ItemName);
                     li.SubItems.Add(item.ItemPrice.ToString());
                     li.SubItems.Add(item.ItemCategory);
-                    li.SubItems.Add(item.ItemAmount.ToString());
 
                     li.Tag = item;
 
@@ -69,6 +63,7 @@ namespace OrderingSystemUI
             }
         }
 
+        //Display order items
         public void DisplayOrderItems(List<OrderedItem> items)
         {
             try
@@ -93,11 +88,48 @@ namespace OrderingSystemUI
             }
         }
 
+        //Display order items and add note
+
+        public void DisplayOrderItemsNote(List<OrderedItem> items, string note,ListViewItem selectedItem)
+        {
+            try
+            {
+                ItemService itemService = new ItemService();
+
+                if (listViewMenuItems.SelectedItems.Count == 0)
+                    return;
+
+                OrderedItem itemSelected = (OrderedItem)selectedItem.Tag;
+
+                foreach (OrderedItem item in order.items)
+                {
+                    if (itemSelected == item)
+                        item.note = note;
+                }
+
+                listViewOrderItems.Items.Clear();
+
+                foreach (OrderedItem item in order.items)
+                {
+                    ListViewItem li = new ListViewItem(item.item.ItemName);
+                    li.SubItems.Add(item.item.ItemPrice.ToString());
+                    li.SubItems.Add(item.amount.ToString());
+                    li.SubItems.Add(item.note.ToString());
+
+                    li.Tag = item;
+
+                    listViewOrderItems.Items.Add(li);
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong : " + exp.Message);
+            }
+        }
         private void btnCancel_Click_1(object sender, EventArgs e)
         {
             try
             {
-
                 btnPayment.Enabled = false;
                 btnTake.Enabled = false;
                 btnCancel.Enabled = false;
@@ -145,20 +177,7 @@ namespace OrderingSystemUI
                     itemService.Update(itemSelected);
                 }
 
-
-                listViewOrderItems.Items.Clear();
-
-                foreach (OrderedItem item in order.items)
-                {
-                    ListViewItem li = new ListViewItem(item.item.ItemName);
-                    li.SubItems.Add(item.item.ItemPrice.ToString());
-                    li.SubItems.Add(item.amount.ToString());
-                    li.SubItems.Add(item.note.ToString());
-
-                    li.Tag = item;
-
-                    listViewOrderItems.Items.Add(li);
-                }
+                DisplayOrderItems(order.items);
             }
             catch (Exception exp)
             {
@@ -184,7 +203,7 @@ namespace OrderingSystemUI
                 ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
                 Item itemSelected = (Item)selectedItem.Tag;
 
-                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "none");
+                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "none", 0);
 
                 if(order.items != null)
                 foreach (OrderedItem item in order.items)
@@ -205,17 +224,7 @@ namespace OrderingSystemUI
                     itemService.Update(orderedItem);
                 }
 
-                foreach (OrderedItem item in order.items)
-                {
-                    ListViewItem li = new ListViewItem(item.item.ItemName);
-                    li.SubItems.Add(item.item.ItemPrice.ToString());
-                    li.SubItems.Add(item.amount.ToString());
-                    li.SubItems.Add(item.note.ToString());
-
-                    li.Tag = item;
-
-                    listViewOrderItems.Items.Add(li);
-                }
+                DisplayOrderItems(order.items);
 
                 //DisplayItems();
             }
@@ -305,12 +314,14 @@ namespace OrderingSystemUI
             }
         }
 
-        //add note for an item
+        //Add note for an item
         private void listViewOrderItems_DoubleClick(object sender, EventArgs e)
         {
             try
             {
-                addNote = new AddNote(this);
+                ListViewItem selectedItem = listViewOrderItems.SelectedItems[0];
+
+                addNote = new AddNote(this, selectedItem);
                 addNote.Show();
             }
             catch (Exception exp)
@@ -319,6 +330,7 @@ namespace OrderingSystemUI
             }
         }
 
+        //Open payment form
         private void btnPayment_Click(object sender, EventArgs e)
         {
 
@@ -333,5 +345,17 @@ namespace OrderingSystemUI
                 MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
+
+        //Close app
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        //Log out
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
     }
 }
