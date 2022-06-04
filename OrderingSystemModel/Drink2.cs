@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemModel
 {
-    public enum DrinkType
-    {
-        SoftDrink, Beer, Wine, SpiritDrink, CoffeeOrTea
-    }
-
     public class Drink2 : Item
     {
-        public bool AlcoholicorNonAlcoholic;
+        public bool AlcoholicOrNonAlcoholic;
     }
 }
