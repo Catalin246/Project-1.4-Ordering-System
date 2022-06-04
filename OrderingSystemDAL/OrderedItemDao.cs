@@ -44,14 +44,14 @@ namespace OrderingSystemDAL
                 Drink2 drink = new Drink2()
                 {
                     ItemId = (int)dr["ItemId"],
-                    Name = (string)dr["Item_Name"],
-                    Stock = (int)dr["ItemStock"],
-                    Price = (decimal)dr["ItemPrice"],
-                    IsAlcoholic = (bool)dr["DrinkType"]
+                    ItemName = (string)dr["Item_Name"],
+                    ItemStock = (int)dr["ItemStock"],
+                    ItemPrice = (double)dr["ItemPrice"],
+                    AlcoholicOrNonAlcoholic = (bool)dr["DrinkType"]
                 };
-                foods.Add(food);
+                drinks.Add(drink);
             }
-            return foods;
+            return drinks;
         }
 
         public void Add(OrderedItem orderedItem, Order order)
