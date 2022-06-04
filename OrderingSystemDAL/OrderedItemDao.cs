@@ -140,15 +140,15 @@ namespace OrderingSystemDAL
 
             SqlParameter[] sqlParameters =
             {
-                new SqlParameter("@MenuItemId", orderedITem.Item.ItemId),
-                new SqlParameter("@OrderId", orderedITem.OrderId)
+                new SqlParameter("@Item_Id", orderedITem.Item.ItemId),
+                new SqlParameter("@Order_Id", orderedITem.OrderId)
             };
             ExecuteEditQuery(query, sqlParameters);
         }
 
         private List<> ReadKitchenTables()
         {
-
+            //i will fill in this
         }
     }
 }
