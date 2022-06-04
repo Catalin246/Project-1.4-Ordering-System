@@ -145,5 +145,10 @@ namespace OrderingSystemDAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
+
+        private List<> ReadKitchenTables()
+        {
+
+        }
     }
 }
