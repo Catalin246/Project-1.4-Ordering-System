@@ -86,9 +86,6 @@
             this.lblEmployeeName.AutoSize = true;
             this.lblEmployeeName.Location = new System.Drawing.Point(786, 32);
             this.lblEmployeeName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lblEmployeeName.Name = "lblEmployeeName";
-            this.lblEmployeeName.Size = new System.Drawing.Size(288, 25);
-            this.lblEmployeeName.TabIndex = 31;
             this.lblEmployeeName.Text = "Emplyee Name: Avornicesei Catalin";
             // 
             // btnDesserts
@@ -309,7 +306,6 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(14, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1141, 33);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -387,6 +383,5 @@
         private System.Windows.Forms.Label lblEmployeeName;
         private System.Windows.Forms.ColumnHeader Note;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }

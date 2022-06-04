@@ -9,6 +9,9 @@ namespace OrderingSystemModel
     public class Table
     {
         public int TableId { get; set; }
-        public int EmployeeId { get; set; }
+        public string EmployeeId { get; set; }
+        public string OrderStatus { get; set; }
+        public DateTime Time { get; set; }
+        public int OrderId { get; set; }
     }
 }

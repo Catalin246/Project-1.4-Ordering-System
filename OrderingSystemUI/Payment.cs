@@ -132,7 +132,7 @@ namespace OrderingSystemUI
                 }
                 foreach(OrderedItem orderedItem in orderedItems)
                 {
-                    orderedItem.item = itemService.GetItem(orderedItem.itemID);
+                    orderedItem.Item = itemService.GetItem(orderedItem.ItemID);
                 }
                 bill.OrderedItems = orderedItems;
                 // Display the ordered items associated with the bill 
@@ -149,8 +149,8 @@ namespace OrderingSystemUI
 
                 foreach (OrderedItem orderedItem in orderedItems)
                 {
-                    ListViewItem li = new ListViewItem(orderedItem.item.ItemName);
-                    li.SubItems.Add(orderedItem.amount.ToString());
+                    ListViewItem li = new ListViewItem(orderedItem.Item.ItemName);
+                    li.SubItems.Add(orderedItem.Amount.ToString());
                     li.SubItems.Add(orderedItem.TotalPriceItem.ToString());
                     li.SubItems.Add(orderedItem.VatAmount.ToString());
                     li.SubItems.Add((orderedItem.TotalPriceItem + orderedItem.VatAmount).ToString());
@@ -241,5 +241,7 @@ namespace OrderingSystemUI
                 MessageBox.Show("Please search for a bill first!");
             }
         }
+
+     
     }
 }

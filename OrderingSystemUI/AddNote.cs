@@ -12,7 +12,7 @@ namespace OrderingSystemUI
 {
     public partial class AddNote : Form
     {
-        
+
         TakeOrder takeOrder;
         ListViewItem selectedItem;
         public AddNote(TakeOrder takeOrder, ListViewItem selectedItem)

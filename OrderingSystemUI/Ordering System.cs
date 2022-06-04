@@ -166,8 +166,8 @@ namespace OrderingSystemUI
 
             foreach (OrderedItem item in order.items)
             {
-                if (item.item == itemSelected)
-                    item.amount++;
+                if (item.Item == itemSelected)
+                    item.Amount++;
 
             }
 
@@ -178,9 +178,9 @@ namespace OrderingSystemUI
 
             foreach (OrderedItem item in order.items)
             {
-                ListViewItem li = new ListViewItem(item.item.ItemName);
-                li.SubItems.Add(item.item.ItemPrice.ToString());
-                li.SubItems.Add(item.amount.ToString());
+                ListViewItem li = new ListViewItem(item.Item.ItemName);
+                li.SubItems.Add(item.Item.ItemPrice.ToString());
+                li.SubItems.Add(item.Amount.ToString());
 
                 li.Tag = item;
 
@@ -240,6 +240,11 @@ namespace OrderingSystemUI
         }
 
         private void pnlTakeOrder_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void billViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

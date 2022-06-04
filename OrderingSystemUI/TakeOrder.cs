@@ -33,8 +33,6 @@ namespace OrderingSystemUI
             lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
         }
        
-        private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
             this.Hide();
             tableView.Show();
         }
@@ -72,10 +70,10 @@ namespace OrderingSystemUI
 
                 foreach (OrderedItem item in order.items)
                 {
-                    ListViewItem li = new ListViewItem(item.item.ItemName);
-                    li.SubItems.Add(item.item.ItemPrice.ToString());
-                    li.SubItems.Add(item.amount.ToString());
-                    li.SubItems.Add(item.note.ToString());
+                    ListViewItem li = new ListViewItem(item.Item.ItemName);
+                    li.SubItems.Add(item.Item.ItemPrice.ToString());
+                    li.SubItems.Add(item.Amount.ToString());
+                    li.SubItems.Add(item.Note.ToString());
 
                     li.Tag = item;
 
@@ -160,19 +158,19 @@ namespace OrderingSystemUI
                 foreach (OrderedItem item in order.items)
                 {
                     if (itemSelected == item)
-                        if (item.amount == 1)
+                        if (item.Amount == 1)
                             contains = true;
                         else
                         {
-                            item.item.ItemAmount++;
-                            item.amount--;
+                            item.Item.ItemAmount++;
+                            item.Amount--;
                             itemService.Update(itemSelected);
                         }
                 }
 
                 if (contains)
                 {
-                    itemSelected.item.ItemAmount++;
+                    itemSelected.Item.ItemAmount++;
                     order.items.Remove(itemSelected);
                     itemService.Update(itemSelected);
                 }
@@ -189,10 +187,10 @@ namespace OrderingSystemUI
         {
             try
             {
-                ItemService itemService = new ItemService();   
-                
-                btnCancel.Enabled = true;   
-                btnPayment.Enabled = true;  
+                ItemService itemService = new ItemService();
+
+                btnCancel.Enabled = true;
+                btnPayment.Enabled = true;
                 btnTake.Enabled = true;
 
                 bool contains = false;
@@ -205,24 +203,24 @@ namespace OrderingSystemUI
                 ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
                 Item itemSelected = (Item)selectedItem.Tag;
 
-                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "none",0);
+                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "none", 0);
 
-                if(order.items != null)
-                foreach (OrderedItem item in order.items)
-                {
-                    if (item.item == itemSelected)
+                if (order.items != null)
+                    foreach (OrderedItem item in order.items)
                     {
-                        item.amount++;
-                        item.item.ItemAmount--;
-                        itemService.Update(orderedItem);
-                        contains = true;
+                        if (item.Item == itemSelected)
+                        {
+                            item.Amount++;
+                            item.Item.ItemAmount--;
+                            itemService.Update(orderedItem);
+                            contains = true;
+                        }
                     }
-                }
 
                 if (!contains)
                 {
                     order.items.Add(orderedItem);
-                    orderedItem.item.ItemAmount--;
+                    orderedItem.Item.ItemAmount--;
                     itemService.Update(orderedItem);
                 }
 
@@ -230,10 +228,10 @@ namespace OrderingSystemUI
 
                 foreach (OrderedItem item in order.items)
                 {
-                    ListViewItem li = new ListViewItem(item.item.ItemName);
-                    li.SubItems.Add(item.item.ItemPrice.ToString());
-                    li.SubItems.Add(item.amount.ToString());
-                    li.SubItems.Add(item.note.ToString());
+                    ListViewItem li = new ListViewItem(item.Item.ItemName);
+                    li.SubItems.Add(item.Item.ItemPrice.ToString());
+                    li.SubItems.Add(item.Amount.ToString());
+                    li.SubItems.Add(item.Note.ToString());
 
                     li.Tag = item;
 
@@ -247,7 +245,7 @@ namespace OrderingSystemUI
                 MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
-       
+
         private void btnDrinks_Click_1(object sender, EventArgs e)
         {
             try
@@ -312,14 +310,14 @@ namespace OrderingSystemUI
                 btnCancel.Enabled = false;
                 List<Order> orders = new List<Order>();
                 OrderService orderService = new OrderService();
-                OrderedItemService orderedItemService = new OrderedItemService();   
+                OrderedItemService orderedItemService = new OrderedItemService();
                 orders = orderService.GetOrders();
                 order.OrderId = orders[orders.Count - 1].OrderId + 1;
                 orderService.AddOrder(order);
 
-                foreach(OrderedItem item in order.items)
+                foreach (OrderedItem item in order.items)
                 {
-                    orderedItemService.AddOrderesItem(item, order); 
+                    orderedItemService.AddOrderesItem(item, order);
                 }
             }
             catch (Exception exp)

@@ -150,7 +150,7 @@ namespace OrderingSystemUI
             // 
             this.btnSearchTable.Location = new System.Drawing.Point(389, 14);
             this.btnSearchTable.Name = "btnSearchTable";
-            this.btnSearchTable.Size = new System.Drawing.Size(94, 29);
+            this.btnSearchTable.Size = new System.Drawing.Size(127, 29);
             this.btnSearchTable.TabIndex = 32;
             this.btnSearchTable.Text = "search";
             this.btnSearchTable.UseVisualStyleBackColor = true;
@@ -159,6 +159,7 @@ namespace OrderingSystemUI
             // bttAddFeedBack
             // 
             this.bttAddFeedBack.BackColor = System.Drawing.Color.Teal;
+            this.bttAddFeedBack.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.bttAddFeedBack.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.bttAddFeedBack.Location = new System.Drawing.Point(320, 448);
             this.bttAddFeedBack.Name = "bttAddFeedBack";
@@ -317,6 +318,7 @@ namespace OrderingSystemUI
             this.listViewDisplaybillItems.TabIndex = 7;
             this.listViewDisplaybillItems.UseCompatibleStateImageBehavior = false;
             this.listViewDisplaybillItems.View = System.Windows.Forms.View.Details;
+            // this.listViewDisplaybillItems.SelectedIndexChanged += new System.EventHandler(this.listViewDisplaybillItems_SelectedIndexChanged);
             // 
             // ItemsName
             // 

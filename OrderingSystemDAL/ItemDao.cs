@@ -70,8 +70,8 @@ namespace OrderingSystemDAL
                 SqlCommand command = new SqlCommand("Update dbo.[Item] " +
                         "SET Item_Amount = @Item_Amount WHERE Item_Id = @Item_Id;", conn);
 
-                command.Parameters.AddWithValue("@Item_Amount", orderedItem.item.ItemAmount);
-                command.Parameters.AddWithValue("@Item_Id", orderedItem.item.ItemId);
+                command.Parameters.AddWithValue("@Item_Amount", orderedItem.Item.ItemAmount);
+                command.Parameters.AddWithValue("@Item_Id", orderedItem.Item.ItemId);
 
                 int nrOfRowsAffected = command.ExecuteNonQuery();
                 if (nrOfRowsAffected == 0)
