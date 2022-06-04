@@ -140,7 +140,7 @@ namespace OrderingSystemUI
                 ListViewItem li = new ListViewItem(item.ItemName);
                 li.SubItems.Add(item.ItemPrice.ToString());
                 li.SubItems.Add(item.ItemCategory);
-                li.SubItems.Add(item.ItemAmount.ToString());
+                li.SubItems.Add(item.ItemStock.ToString());
                 
                 li.Tag = item;
 

@@ -6,13 +6,25 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemModel
 {
+    public enum Status
+    {
+        Preparing, Ready, Served, Paid
+    }
+
     public class OrderedItem
     {
         public const float AlcoholicVAT = 0.21f;
         public const float NonAlcoholicVAT = 0.06f;
         public OrderedItem()
         {
-
+            Amount = 1;
+            Note = ""; 
+        }
+        public OrderedItem(Item item)
+        {
+            Item = item;
+            Amount = 1;
+            Note = ""; //or "none"
         }
 
         public OrderedItem(Item item, int amount, string note, int orderId)
@@ -29,13 +41,9 @@ namespace OrderingSystemModel
         public string Note { get; set; }
         public int Amount { get; set; }
 
-   
-
         public int ItemID { get; set; }
-
-     
-        private float totalPriceItem;
-       
+             
+        private float totalPriceItem;       
 
         private float vatAmount;
 
@@ -61,18 +69,7 @@ namespace OrderingSystemModel
                 }
             }
         }
-        public OrderedItem(Item menuItem)
-        {
-            Item = menuItem;
-            Amount = 1;
-            Note = "";
-        }
-     
-    }
-    public enum Status
-    {
-        Preparing, Ready, Served, Paid
-    }
-
+        
+    }    
 }
 
