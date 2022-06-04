@@ -32,9 +32,7 @@ namespace OrderingSystemUI
             InitializeComponent();
             lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
         }
-
-        private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+       
             this.Hide();
             tableView.Show();
         }
@@ -90,7 +88,7 @@ namespace OrderingSystemUI
 
         //Display order items and add note
 
-        public void DisplayOrderItemsNote(List<OrderedItem> items, string note, ListViewItem selectedItem)
+        public void DisplayOrderItemsNote(List<OrderedItem> items, string note,ListViewItem selectedItem)
         {
             try
             {
@@ -104,17 +102,17 @@ namespace OrderingSystemUI
                 foreach (OrderedItem item in order.items)
                 {
                     if (itemSelected == item)
-                        item.Note = note;
+                        item.note = note;
                 }
 
                 listViewOrderItems.Items.Clear();
 
                 foreach (OrderedItem item in order.items)
                 {
-                    ListViewItem li = new ListViewItem(item.Item.ItemName);
-                    li.SubItems.Add(item.Item.ItemPrice.ToString());
-                    li.SubItems.Add(item.Amount.ToString());
-                    li.SubItems.Add(item.Note.ToString());
+                    ListViewItem li = new ListViewItem(item.item.ItemName);
+                    li.SubItems.Add(item.item.ItemPrice.ToString());
+                    li.SubItems.Add(item.amount.ToString());
+                    li.SubItems.Add(item.note.ToString());
 
                     li.Tag = item;
 
@@ -377,3 +375,5 @@ namespace OrderingSystemUI
         }
     }
 }
+    
+

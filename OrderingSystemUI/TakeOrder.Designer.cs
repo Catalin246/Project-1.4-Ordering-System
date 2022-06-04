@@ -52,6 +52,7 @@
             this.lblTableNumber = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlTakeOrder.SuspendLayout();
@@ -83,11 +84,8 @@
             // lblEmployeeName
             // 
             this.lblEmployeeName.AutoSize = true;
-            this.lblEmployeeName.Location = new System.Drawing.Point(786, 20);
-            this.lblEmployeeName.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblEmployeeName.Name = "lblEmployeeName";
-            this.lblEmployeeName.Size = new System.Drawing.Size(288, 25);
-            this.lblEmployeeName.TabIndex = 31;
+            this.lblEmployeeName.Location = new System.Drawing.Point(786, 32);
+            this.lblEmployeeName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEmployeeName.Text = "Emplyee Name: Avornicesei Catalin";
             // 
             // btnDesserts
@@ -95,7 +93,7 @@
             this.btnDesserts.BackColor = System.Drawing.Color.Teal;
             this.btnDesserts.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnDesserts.Location = new System.Drawing.Point(854, 85);
-            this.btnDesserts.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.btnDesserts.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.btnDesserts.Name = "btnDesserts";
             this.btnDesserts.Size = new System.Drawing.Size(220, 55);
             this.btnDesserts.TabIndex = 30;
@@ -108,7 +106,7 @@
             this.btnMains.BackColor = System.Drawing.Color.Teal;
             this.btnMains.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnMains.Location = new System.Drawing.Point(579, 85);
-            this.btnMains.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.btnMains.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.btnMains.Name = "btnMains";
             this.btnMains.Size = new System.Drawing.Size(220, 55);
             this.btnMains.TabIndex = 29;
@@ -236,6 +234,7 @@
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel order";
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.ForeColorChanged += new System.EventHandler(this.btnCancel_Click_1);
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click_1);
             // 
             // btnTake
@@ -306,24 +305,28 @@
             this.tableViewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(11, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1141, 33);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(14, 2, 0, 2);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // dashboardToolStripMenuItem
             // 
             this.dashboardToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logoutToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
             this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(116, 29);
             this.dashboardToolStripMenuItem.Text = "Dashboard";
             // 
+            // logoutToolStripMenuItem
+            // 
+            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(102, 34);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(102, 34);
             // 
             // tableViewToolStripMenuItem
             // 
@@ -340,7 +343,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlTakeOrder);
             this.Margin = new System.Windows.Forms.Padding(2);
-            //this.Name = "TakeOrder";
+            this.Name = "TakeOrder";
             this.Text = "TakeOrder";
             this.Load += new System.EventHandler(this.TakeOrder_Load);
             this.pnlTakeOrder.ResumeLayout(false);
@@ -367,7 +370,6 @@
         private System.Windows.Forms.ColumnHeader ItemName;
         private System.Windows.Forms.ColumnHeader ItemPrice;
         private System.Windows.Forms.ColumnHeader Category;
-        private System.Windows.Forms.ColumnHeader ItemAmount;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnTake;
         private System.Windows.Forms.ListView listViewOrderItems;
@@ -380,6 +382,6 @@
         private System.Windows.Forms.ToolStripMenuItem tableViewToolStripMenuItem;
         private System.Windows.Forms.Label lblEmployeeName;
         private System.Windows.Forms.ColumnHeader Note;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
     }
 }
