@@ -10,7 +10,7 @@ namespace OrderingSystemModel
     {
         public Order(int tableID)
         {
-            items = new List<OrderedItem>();
+            OrderedItems = new List<OrderedItem>();
             this.TableId = tableID;
         }
 
@@ -19,7 +19,6 @@ namespace OrderingSystemModel
             OrderTime = DateTime.Now;
         }
         
-        public List<OrderedItem> items;
         public int OrderId { get; set; }
         public DateTime OrderTime { get; set; }
         public int BillId { get; set; }
@@ -27,7 +26,13 @@ namespace OrderingSystemModel
 
         public Boolean Status { get; set; }
         public List<OrderedItem> OrderedItems { get; set; }
-        public TimeSpan TimePassed { get { return DateTime.Now.TimeOfDay - OrderTime.TimeOfDay; } }
+        public TimeSpan TimePassed 
+        { 
+            get 
+            { 
+                return (DateTime.Now.TimeOfDay - OrderTime.TimeOfDay); 
+            } 
+        }
 
 
         public int determineBillID()

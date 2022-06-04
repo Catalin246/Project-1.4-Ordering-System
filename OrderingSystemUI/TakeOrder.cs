@@ -162,7 +162,7 @@ namespace OrderingSystemUI
                             contains = true;
                         else
                         {
-                            item.Item.ItemAmount++;
+                            item.Item.ItemStock++;
                             item.Amount--;
                             itemService.Update(itemSelected);
                         }
@@ -170,7 +170,7 @@ namespace OrderingSystemUI
 
                 if (contains)
                 {
-                    itemSelected.Item.ItemAmount++;
+                    itemSelected.Item.ItemStock++;
                     order.items.Remove(itemSelected);
                     itemService.Update(itemSelected);
                 }
@@ -211,7 +211,7 @@ namespace OrderingSystemUI
                         if (item.Item == itemSelected)
                         {
                             item.Amount++;
-                            item.Item.ItemAmount--;
+                            item.Item.ItemStock--;
                             itemService.Update(orderedItem);
                             contains = true;
                         }
@@ -220,7 +220,7 @@ namespace OrderingSystemUI
                 if (!contains)
                 {
                     order.items.Add(orderedItem);
-                    orderedItem.Item.ItemAmount--;
+                    orderedItem.Item.ItemStock--;
                     itemService.Update(orderedItem);
                 }
 
