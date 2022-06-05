@@ -61,12 +61,13 @@ namespace OrderingSystemDAL
             {
                 SqlCommand command = new SqlCommand("INSERT INTO dbo.[OrderedItem] " +
 
-                        " VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount);", conn);
+                        " VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount, @Ordered_Item_Status);", conn);
 
                 command.Parameters.AddWithValue("@Item_Id", orderedItem.Item.ItemId);
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);
                 command.Parameters.AddWithValue("@Ordered_Item_Note", orderedItem.Note);
                 command.Parameters.AddWithValue("@Ordered_Item_Amount", orderedItem.Amount);
+                command.Parameters.AddWithValue("@Ordered_Item_Status", "Preparing");
 
                 int nrOfRowsAffected = command.ExecuteNonQuery();
             }
@@ -121,16 +122,16 @@ namespace OrderingSystemDAL
             return ReadDrinkTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public List<OrderedItem> GetPreparingFoods()
-        {
-            string query = "SELECT I.ItemId, i.ItemName, i.ItemStock,I.ItemPrice, OI.Ordered_Item_Note, F.FoodType, OI.Ordered_Item_Amount " +
-                "FROM Item AS I " +
-                "JOIN FOOD AS F ON F.FoodItemId = I.ItemId " +
-                "JOIN OrderedItem AS OI ON OI.Item_Id = I.ItemId " +
-                "WHERE Ordered_Item_Status = 'Preparing'";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadKitchenTables(ExecuteSelectQuery(query, sqlParameters));
-        }
+        //public List<OrderedItem> GetPreparingFoods()
+        //{
+        //    string query = "SELECT I.ItemId, i.ItemName, i.ItemStock,I.ItemPrice, OI.Ordered_Item_Note, F.FoodType, OI.Ordered_Item_Amount " +
+        //        "FROM Item AS I " +
+        //        "JOIN FOOD AS F ON F.FoodItemId = I.ItemId " +
+        //        "JOIN OrderedItem AS OI ON OI.Item_Id = I.ItemId " +
+        //        "WHERE Ordered_Item_Status = 'Preparing'";
+        //    SqlParameter[] sqlParameters = new SqlParameter[0];
+        //    return ReadKitchenTables(ExecuteSelectQuery(query, sqlParameters));
+        //}
 
         public void UpdateStatusToReady(OrderedItem orderedITem)
         {
@@ -146,9 +147,9 @@ namespace OrderingSystemDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        private List<> ReadKitchenTables()
-        {
-            //i will fill in this
-        }
+        //private List<> ReadKitchenTables()
+        //{
+        //    //i will fill in this
+        //}
     }
 }

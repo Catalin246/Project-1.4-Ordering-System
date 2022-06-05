@@ -60,7 +60,7 @@ namespace OrderingSystemModel
             get { return vatAmount; }
             set
             {
-                if (Item.ItemCategory.ToLower() == "alcoholic")
+                if (Item.ItemType.ToLower() == "alcoholic")
                 {
                     vatAmount = totalPriceItem * AlcoholicVAT;
                 } else

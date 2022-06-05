@@ -10,7 +10,7 @@ namespace OrderingSystemModel
     {
         public int ItemId { get; set; }
         public string ItemName { get; set; }
-        public string ItemCategory { get; set; }
+        public string ItemType { get; set; }
         public int ItemStock { get; set; }    // menu item 
         public double ItemPrice { get; set; }
     }
