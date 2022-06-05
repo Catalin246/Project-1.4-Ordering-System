@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listViewKitchen = new System.Windows.Forms.ListView();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.colTableNo = new System.Windows.Forms.ColumnHeader();
             this.colTime = new System.Windows.Forms.ColumnHeader();
             this.colCategory = new System.Windows.Forms.ColumnHeader();
@@ -36,21 +38,22 @@
             this.colFoodName = new System.Windows.Forms.ColumnHeader();
             this.colOrderNote = new System.Windows.Forms.ColumnHeader();
             this.colStatus = new System.Windows.Forms.ColumnHeader();
-            this.lblEmployeeName = new System.Windows.Forms.Label();
-            this.btnViewCompletedOrders = new System.Windows.Forms.Button();
-            this.btnViewRunningOrders = new System.Windows.Forms.Button();
             this.lblTime = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnReadyToServe = new System.Windows.Forms.Button();
             this.btnViewOrderNote = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.comboBoxShowOrders = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listViewKitchen
             // 
             this.listViewKitchen.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
             this.colTableNo,
             this.colTime,
             this.colCategory,
@@ -65,10 +68,17 @@
             this.listViewKitchen.TabIndex = 12;
             this.listViewKitchen.UseCompatibleStateImageBehavior = false;
             this.listViewKitchen.View = System.Windows.Forms.View.Details;
+            this.listViewKitchen.SelectedIndexChanged += new System.EventHandler(this.listViewKitchen_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Order No";
+            this.columnHeader1.Width = 70;
             // 
             // colTableNo
             // 
             this.colTableNo.Text = "Table No";
+            this.colTableNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.colTableNo.Width = 70;
             // 
             // colTime
@@ -92,7 +102,7 @@
             // 
             this.colFoodName.Text = "Food Name";
             this.colFoodName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.colFoodName.Width = 330;
+            this.colFoodName.Width = 280;
             // 
             // colOrderNote
             // 
@@ -106,35 +116,6 @@
             this.colStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.colStatus.Width = 90;
             // 
-            // lblEmployeeName
-            // 
-            this.lblEmployeeName.AutoSize = true;
-            this.lblEmployeeName.Location = new System.Drawing.Point(629, 9);
-            this.lblEmployeeName.Name = "lblEmployeeName";
-            this.lblEmployeeName.Size = new System.Drawing.Size(130, 15);
-            this.lblEmployeeName.TabIndex = 11;
-            this.lblEmployeeName.Text = "Employee: Beril Dündar";
-            // 
-            // btnViewCompletedOrders
-            // 
-            this.btnViewCompletedOrders.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnViewCompletedOrders.Location = new System.Drawing.Point(244, 52);
-            this.btnViewCompletedOrders.Name = "btnViewCompletedOrders";
-            this.btnViewCompletedOrders.Size = new System.Drawing.Size(148, 31);
-            this.btnViewCompletedOrders.TabIndex = 10;
-            this.btnViewCompletedOrders.Text = "View Completed Orders";
-            this.btnViewCompletedOrders.UseVisualStyleBackColor = false;
-            // 
-            // btnViewRunningOrders
-            // 
-            this.btnViewRunningOrders.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnViewRunningOrders.Location = new System.Drawing.Point(88, 52);
-            this.btnViewRunningOrders.Name = "btnViewRunningOrders";
-            this.btnViewRunningOrders.Size = new System.Drawing.Size(150, 31);
-            this.btnViewRunningOrders.TabIndex = 9;
-            this.btnViewRunningOrders.Text = "View Running Orders";
-            this.btnViewRunningOrders.UseVisualStyleBackColor = false;
-            // 
             // lblTime
             // 
             this.lblTime.AutoSize = true;
@@ -144,17 +125,6 @@
             this.lblTime.Size = new System.Drawing.Size(50, 20);
             this.lblTime.TabIndex = 17;
             this.lblTime.Text = "label1";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Brown;
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(765, 1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 30);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Log Out";
-            this.button1.UseVisualStyleBackColor = false;
             // 
             // btnReadyToServe
             // 
@@ -204,20 +174,51 @@
             this.label3.TabIndex = 21;
             this.label3.Text = "Select:";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(719, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(121, 23);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // comboBoxShowOrders
+            // 
+            this.comboBoxShowOrders.FormattingEnabled = true;
+            this.comboBoxShowOrders.Location = new System.Drawing.Point(166, 57);
+            this.comboBoxShowOrders.Name = "comboBoxShowOrders";
+            this.comboBoxShowOrders.Size = new System.Drawing.Size(183, 23);
+            this.comboBoxShowOrders.TabIndex = 25;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(87, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 15);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "View Orders:";
+            // 
             // KitchenView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(849, 495);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBoxShowOrders);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.listViewKitchen);
-            this.Controls.Add(this.lblEmployeeName);
-            this.Controls.Add(this.btnViewCompletedOrders);
-            this.Controls.Add(this.btnViewRunningOrders);
             this.Controls.Add(this.lblTime);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnReadyToServe);
             this.Controls.Add(this.btnViewOrderNote);
             this.Name = "KitchenView";
@@ -237,15 +238,16 @@
         private System.Windows.Forms.ColumnHeader colFoodName;
         private System.Windows.Forms.ColumnHeader colOrderNote;
         private System.Windows.Forms.ColumnHeader colStatus;
-        private System.Windows.Forms.Label lblEmployeeName;
-        private System.Windows.Forms.Button btnViewCompletedOrders;
-        private System.Windows.Forms.Button btnViewRunningOrders;
         private System.Windows.Forms.Label lblTime;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnReadyToServe;
         private System.Windows.Forms.Button btnViewOrderNote;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ComboBox comboBoxShowOrders;
+        private System.Windows.Forms.Label label1;
     }
 }
