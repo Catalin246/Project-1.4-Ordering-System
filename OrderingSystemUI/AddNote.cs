@@ -34,7 +34,7 @@ namespace OrderingSystemUI
                 takeOrder.note = txtAddNote.Text;
                 this.Close();
 
-                takeOrder.DisplayOrderItemsNote(takeOrder.order.items, takeOrder.note, selectedItem);
+                takeOrder.DisplayOrderItemsNote(takeOrder.order.OrderedItems, takeOrder.note, selectedItem);
             }
             catch (Exception exp)
             {

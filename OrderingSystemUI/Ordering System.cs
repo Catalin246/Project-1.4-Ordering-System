@@ -139,7 +139,7 @@ namespace OrderingSystemUI
             {
                 ListViewItem li = new ListViewItem(item.ItemName);
                 li.SubItems.Add(item.ItemPrice.ToString());
-                li.SubItems.Add(item.ItemCategory);
+                li.SubItems.Add(item.ItemType);
                 li.SubItems.Add(item.ItemStock.ToString());
                 
                 li.Tag = item;
@@ -164,7 +164,7 @@ namespace OrderingSystemUI
 
             OrderedItem orderedItem = new OrderedItem(itemSelected,1,"", 1);
 
-            foreach (OrderedItem item in order.items)
+            foreach (OrderedItem item in order.OrderedItems)
             {
                 if (item.Item == itemSelected)
                     item.Amount++;
@@ -176,7 +176,7 @@ namespace OrderingSystemUI
 
             listViewOrderItems.Items.Clear();
 
-            foreach (OrderedItem item in order.items)
+            foreach (OrderedItem item in order.OrderedItems)
             {
                 ListViewItem li = new ListViewItem(item.Item.ItemName);
                 li.SubItems.Add(item.Item.ItemPrice.ToString());
@@ -226,7 +226,7 @@ namespace OrderingSystemUI
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            order.items = null;
+            order.OrderedItems = null;
 
             listViewOrderItems.Items.Clear();
         }

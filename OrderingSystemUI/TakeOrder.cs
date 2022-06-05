@@ -33,10 +33,6 @@ namespace OrderingSystemUI
             lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
         }
        
-            this.Hide();
-            tableView.Show();
-        }
-
         //Display menu items
         public void DisplayItems(List<Item> items)
         {
@@ -48,7 +44,7 @@ namespace OrderingSystemUI
                 {
                     ListViewItem li = new ListViewItem(item.ItemName);
                     li.SubItems.Add(item.ItemPrice.ToString());
-                    li.SubItems.Add(item.ItemCategory);
+                    li.SubItems.Add(item.ItemType);
 
                     li.Tag = item;
 
@@ -68,7 +64,7 @@ namespace OrderingSystemUI
             {
                 listViewOrderItems.Items.Clear();
 
-                foreach (OrderedItem item in order.items)
+                foreach (OrderedItem item in order.OrderedItems)
                 {
                     ListViewItem li = new ListViewItem(item.Item.ItemName);
                     li.SubItems.Add(item.Item.ItemPrice.ToString());
@@ -99,20 +95,20 @@ namespace OrderingSystemUI
 
                 OrderedItem itemSelected = (OrderedItem)selectedItem.Tag;
 
-                foreach (OrderedItem item in order.items)
+                foreach (OrderedItem item in order.OrderedItems)
                 {
                     if (itemSelected == item)
-                        item.note = note;
+                        item.Note = note;
                 }
 
                 listViewOrderItems.Items.Clear();
 
-                foreach (OrderedItem item in order.items)
+                foreach (OrderedItem item in order.OrderedItems)
                 {
-                    ListViewItem li = new ListViewItem(item.item.ItemName);
-                    li.SubItems.Add(item.item.ItemPrice.ToString());
-                    li.SubItems.Add(item.amount.ToString());
-                    li.SubItems.Add(item.note.ToString());
+                    ListViewItem li = new ListViewItem(item.Item.ItemName);
+                    li.SubItems.Add(item.Item.ItemPrice.ToString());
+                    li.SubItems.Add(item.Amount.ToString());
+                    li.SubItems.Add(item.Note.ToString());
 
                     li.Tag = item;
 
@@ -132,7 +128,7 @@ namespace OrderingSystemUI
                 btnTake.Enabled = false;
                 btnCancel.Enabled = false;
 
-                order.items = new List<OrderedItem>();
+                order.OrderedItems = new List<OrderedItem>();
 
                 listViewOrderItems.Items.Clear();
             }
@@ -155,7 +151,7 @@ namespace OrderingSystemUI
                 ListViewItem selectedItem = listViewOrderItems.SelectedItems[0];
                 OrderedItem itemSelected = (OrderedItem)selectedItem.Tag;
 
-                foreach (OrderedItem item in order.items)
+                foreach (OrderedItem item in order.OrderedItems)
                 {
                     if (itemSelected == item)
                         if (item.Amount == 1)
@@ -171,11 +167,11 @@ namespace OrderingSystemUI
                 if (contains)
                 {
                     itemSelected.Item.ItemStock++;
-                    order.items.Remove(itemSelected);
+                    order.OrderedItems.Remove(itemSelected);
                     itemService.Update(itemSelected);
                 }
 
-                DisplayOrderItems(order.items);
+                DisplayOrderItems(order.OrderedItems);
             }
             catch (Exception exp)
             {
@@ -203,10 +199,10 @@ namespace OrderingSystemUI
                 ListViewItem selectedItem = listViewMenuItems.SelectedItems[0];
                 Item itemSelected = (Item)selectedItem.Tag;
 
-                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "none", 0);
+                OrderedItem orderedItem = new OrderedItem(itemSelected, 1, "", 0);
 
-                if (order.items != null)
-                    foreach (OrderedItem item in order.items)
+                if (order.OrderedItems != null)
+                    foreach (OrderedItem item in order.OrderedItems)
                     {
                         if (item.Item == itemSelected)
                         {
@@ -219,14 +215,14 @@ namespace OrderingSystemUI
 
                 if (!contains)
                 {
-                    order.items.Add(orderedItem);
+                    order.OrderedItems.Add(orderedItem);
                     orderedItem.Item.ItemStock--;
                     itemService.Update(orderedItem);
                 }
 
                 listViewOrderItems.Items.Clear();
 
-                foreach (OrderedItem item in order.items)
+                foreach (OrderedItem item in order.OrderedItems)
                 {
                     ListViewItem li = new ListViewItem(item.Item.ItemName);
                     li.SubItems.Add(item.Item.ItemPrice.ToString());
@@ -315,10 +311,11 @@ namespace OrderingSystemUI
                 order.OrderId = orders[orders.Count - 1].OrderId + 1;
                 orderService.AddOrder(order);
 
-                foreach (OrderedItem item in order.items)
+                foreach (OrderedItem item in order.OrderedItems)
                 {
                     orderedItemService.AddOrderesItem(item, order);
                 }
+                MessageBox.Show("Order was taken successfully");
             }
             catch (Exception exp)
             {
@@ -358,20 +355,20 @@ namespace OrderingSystemUI
             }
         }
 
-        //Close app
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-        //Log out
-        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void TakeOrder_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            tableView.Show();
+        }
+
+        private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            tableView.Close();
         }
     }
 }

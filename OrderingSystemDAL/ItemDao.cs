@@ -19,29 +19,47 @@ namespace OrderingSystemDAL
         }
         public List<Item> GetAllDrinks()
         {
-            string query = "SELECT ItemId, ItemName, ItemStock, ItemPrice FROM dbo.Item"; //as I join dbo.Category as C on I.Item_Category = C.Category_Id where C.Category_Type = 'Alcoholic' or C.Category_Type = 'NonAlcoholic' Order by C.Category_Name";
+            string query = "SELECT * FROM dbo.Item as I join dbo.Drink as D on I.ItemId = D.DrinkItemId";
             SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters), "DrinkType"  );
         }
         public List<Item> GetAllStarters()
         {
-            string query = "SELECT Item_Id, Item_Name, Item_Amount, Item_Price, Category_Name FROM dbo.Item as I join dbo.Category as C on I.Item_Category = C.Category_Id where C.Category_Name = 'Starters'";
+            string query = "SELECT * FROM dbo.Item as I join dbo.Food as F on I.ItemId = F.FoodItemId where F.FoodType = 'Lunch Starter' or F.FoodType = 'Diner Starter' or F.FoodType = 'Diner Entrement'";
             SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters), "FoodType");
         }
         public List<Item> GetAllMains()
         {
-            string query = "SELECT Item_Id, Item_Name, Item_Amount, Item_Price, Category_Name FROM dbo.Item as I join dbo.Category as C on I.Item_Category = C.Category_Id where C.Category_Name = 'Mains'";
+            string query = "SELECT * FROM dbo.Item as I join dbo.Food as F on I.ItemId = F.FoodItemId where F.FoodType = 'Lunch Main' or F.FoodType = 'Diner Main'";
             SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters), "FoodType");
         }
         public List<Item> GetAllDesserts()
         {
-            string query = "SELECT Item_Id, Item_Name, Item_Amount, Item_Price, Category_Name FROM dbo.Item as I join dbo.Category as C on I.Item_Category = C.Category_Id where C.Category_Name = 'Desserts'";
+            string query = "SELECT * FROM dbo.Item as I join dbo.Food as F on I.ItemId = F.FoodItemId where F.FoodType = 'Lunch Desert' or F.FoodType = 'Diner Desert'";
             SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters), "FoodType");
         }
 
+        private List<Item> ReadTables(DataTable dataTable,string type)
+        {
+            List<Item> items = new List<Item>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Item item = new Item();
+                {
+                    item.ItemId = (int)dr["ItemId"];
+                    item.ItemName = (string)dr["ItemName"].ToString();
+                    item.ItemStock = (int)dr["ItemStock"];
+                    item.ItemPrice = (double)dr["ItemPrice"];
+                    item.ItemType = (string)dr[type];
+                };
+                items.Add(item);
+            }
+            return items;
+        }
         private List<Item> ReadTables(DataTable dataTable)
         {
             List<Item> items = new List<Item>();
@@ -54,7 +72,6 @@ namespace OrderingSystemDAL
                     item.ItemName = (string)dr["ItemName"].ToString();
                     item.ItemStock = (int)dr["ItemStock"];
                     item.ItemPrice = (double)dr["ItemPrice"];
-                    //item.ItemCategory = (string)dr["Category_Name"];
                 };
                 items.Add(item);
             }
@@ -68,10 +85,10 @@ namespace OrderingSystemDAL
             try
             {
                 SqlCommand command = new SqlCommand("Update dbo.[Item] " +
-                        "SET Item_Amount = @Item_Amount WHERE Item_Id = @Item_Id;", conn);
+                        "SET ItemStock = @ItemStock WHERE ItemId = @ItemId;", conn);
 
-                command.Parameters.AddWithValue("@Item_Amount", orderedItem.Item.ItemStock);
-                command.Parameters.AddWithValue("@Item_Id", orderedItem.Item.ItemId);
+                command.Parameters.AddWithValue("@ItemStock", orderedItem.Item.ItemStock);
+                command.Parameters.AddWithValue("@ItemId", orderedItem.Item.ItemId);
 
                 int nrOfRowsAffected = command.ExecuteNonQuery();
                 if (nrOfRowsAffected == 0)

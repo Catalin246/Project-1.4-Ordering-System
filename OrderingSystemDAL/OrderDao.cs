@@ -57,18 +57,18 @@ namespace OrderingSystemDAL
 
                 OrderedItemDao orderedItemsdb = new OrderedItemDao();
 
-                List<OrderedItem> orderedFoods = orderedItemsdb.GetFoodOrdersByOrderId(order.OrderId);
-                List<OrderedItem> orderedDrinks = orderedItemsdb.GetDrinkOrdersByOrderId(order.OrderId);
+                //List<OrderedItem> orderedFoods = orderedItemsdb.GetFoodOrdersByOrderId(order.OrderId);
+                //List<OrderedItem> orderedDrinks = orderedItemsdb.GetDrinkOrdersByOrderId(order.OrderId);
                 
-                foreach (OrderedItem food in orderedFoods)
-                {
-                    order.OrderedItems.Add(food);
-                }
+                //foreach (OrderedItem food in orderedFoods)
+                //{
+                //    order.OrderedItems.Add(food);
+                //}
                     
-                foreach (OrderedItem drink in orderedDrinks)
-                {
-                    order.OrderedItems.Add(drink);
-                }
+                //foreach (OrderedItem drink in orderedDrinks)
+                //{
+                //    order.OrderedItems.Add(drink);
+                //}
 
                 orders.Add(order);
             }
@@ -86,7 +86,7 @@ namespace OrderingSystemDAL
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);
                 command.Parameters.AddWithValue("@Order_Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 command.Parameters.AddWithValue("@Table_Id", order.TableId);
-                command.Parameters.AddWithValue("@Order_Status", false);
+                command.Parameters.AddWithValue("@Order_Status", "Preaparing");
 
                 int nrOfRowsAffected = command.ExecuteNonQuery();
             }
@@ -179,12 +179,12 @@ namespace OrderingSystemDAL
 
                 OrderedItemDao orderedItemdb = new OrderedItemDao();
 
-                List<OrderedItem> orderedFoods = orderedItemdb.GetFoodOrdersByOrderId(order.OrderId);
+                //List<OrderedItem> orderedFoods = orderedItemdb.GetFoodOrdersByOrderId(order.OrderId);
 
-                foreach (OrderedItem food in orderedFoods)
-                {
-                    order.OrderedItems.Add(food);
-                }
+                //foreach (OrderedItem food in orderedFoods)
+                //{
+                //    order.OrderedItems.Add(food);
+                //}
                 
                 foodOrders.Add(order);
             }
@@ -207,12 +207,12 @@ namespace OrderingSystemDAL
 
                 OrderedItemDao orderedItemdb = new OrderedItemDao();
 
-                List<OrderedItem> orderedDrinks = orderedItemdb.GetDrinkOrdersByOrderId(order.OrderId);
+                //List<OrderedItem> orderedDrinks = orderedItemdb.GetDrinkOrdersByOrderId(order.OrderId);
 
-                foreach (OrderedItem food in orderedDrinks)
-                {
-                    order.OrderedItems.Add(food);
-                }
+                //foreach (OrderedItem food in orderedDrinks)
+                //{
+                //    order.OrderedItems.Add(food);
+                //}
 
                 drinkOrders.Add(order);
             }
