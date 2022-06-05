@@ -105,9 +105,9 @@ namespace OrderingSystemDAL
         public List<Food> GetAllOrderedFoods()
         {
             string query = "SELECT I.ItemId, I.Item_Name, I.ItemStock, I.ItemPrice, F.FoodType " +
-                "FROM Item AS I " +
-                "JOIN FOOD AS F ON F.FoodItemId = I.ItemId " +
-                "JOIN OrderedItem AS OI ON OI.Item_Id = I.ItemId ";
+                " FROM Item AS I " +
+                " JOIN FOOD AS F ON F.FoodItemId = I.ItemId " +
+                " JOIN OrderedItem AS OI ON OI.Item_Id = I.ItemId ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadFoodTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -115,9 +115,9 @@ namespace OrderingSystemDAL
         public List<Drink2> GetAllOrderedDrinks()
         {
             string query = "SELECT I.ItemId, I.ItemName, I.ItemStock, I.ItemPrice, D.DrinkType " +
-                "FROM Item AS I " +
-                "JOIN Drink AS D ON D.DrinkItemId = I.ItemId " +
-                "JOIN OrderedItem AS OI ON OI.Item_Id = I.ItemId";
+                " FROM Item AS I " +
+                " JOIN Drink AS D ON D.DrinkItemId = I.ItemId " +
+                " JOIN OrderedItem AS OI ON OI.Item_Id = I.ItemId";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDrinkTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -125,19 +125,19 @@ namespace OrderingSystemDAL
         public List<OrderedItem> GetPreparingFoods()
         {
             string query = "SELECT I.ItemId, i.ItemName, i.ItemStock,I.ItemPrice, OI.Ordered_Item_Note, F.FoodType, OI.Ordered_Item_Amount " +
-                "FROM Item AS I " +
-                "JOIN FOOD AS F ON F.FoodItemId = I.ItemId " +
-                "JOIN OrderedItem AS OI ON OI.Item_Id = I.ItemId " +
-                "WHERE Ordered_Item_Status = 'Preparing'";
+                " FROM Item AS I " +
+                " JOIN FOOD AS F ON F.FoodItemId = I.ItemId " +
+                " JOIN OrderedItem AS OI ON OI.Item_Id = I.ItemId " +
+                " WHERE Ordered_Item_Status = 'Preparing'";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadKitchenTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
         public void UpdateStatusToReady(OrderedItem orderedITem)
         {
-            string query = "UPDATE OrderedItem " +
-                "SET Ordered_Item_Status = 'Ready' " +
-                "WHERE Item_Id = Item_Id AND Order_Id = Order_Id";
+            string query = " UPDATE OrderedItem " +
+                " SET Ordered_Item_Status = 'Ready' " +
+                " WHERE Item_Id = Item_Id AND Order_Id = Order_Id";
 
             SqlParameter[] sqlParameters =
             {
@@ -164,11 +164,11 @@ namespace OrderingSystemDAL
 
                 OrderedItem orderedItem = new OrderedItem(food)
                 {
-                    Note = (string)dr["Ordered_Item_Note"],
+                    Note = dr["Ordered_Item_Note"].ToString(),
                     Amount = (int)dr["Ordered_Item_Amount"],
                     OrderId = (int)dr["Order_Id"],
-                    Status = MakeStatusEnum((string)dr["Ordered_Item_Status"]),
-                    FoodCategory = MakeFoodTypeEnum((string)dr["FoodType"])
+                    Status = MakeStatusEnum((string)dr["Ordered_Item_Status"].ToString()),
+                    FoodCategory = MakeFoodTypeEnum(dr["FoodType"].ToString())
 
                 };
                 orderedItems.Add(orderedItem);
@@ -294,11 +294,20 @@ namespace OrderingSystemDAL
 
         public List<OrderedItem> GetFoodOrdersByOrderId(int orderId)
         {
-            string query = "SELECT i.ItemId, i.ItemName, i.ItemStock, i.ItemPrice, oi.Ordered_Item_Note, f.FoodType, oi.Ordered_Item_Amount, oi.Order_Id, oi.Ordered_Item_Status FROM dbo.[Item] AS i JOIN FOOD AS f ON i.ItemId = f.FoodItemId JOIN dbo.[OrderedItem] AS oi ON i.ItemId = oi.Item_Id" +
-                "WHERE oi.Order_Id = @orderId";
+            string query = " SELECT i.ItemId, i.ItemName, i.ItemStock, i.ItemPrice, oi.Ordered_Item_Note, f.FoodType, oi.Ordered_Item_Amount, oi.Order_Id, oi.Ordered_Item_Status FROM dbo.[Item] AS i JOIN Food AS f ON i.ItemId = f.FoodItemId JOIN dbo.[OrderedItem] AS oi ON i.ItemId = oi.Item_Id " +
+                " WHERE oi.Order_Id = @orderId";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@orderId", orderId);
             return ReadKitchenTables(ExecuteSelectQuery(query, sqlParameters));
         }
+        public List<OrderedItem> GetDrinkOrdersByOrderId(int orderId)
+        {
+            string query = "SELECT i.ItemId, i.ItemName, i.ItemStock, i.ItemPrice, oi.Ordered_Item_Note, d.DrinkType, oi.Ordered_Item_Amount, oi.Order_Id, oi.Ordered_Item_Status FROM dbo.[Item] AS i JOIN Drink AS d ON i.ItemId = d.DrinkItemId JOIN dbo.[OrderedItem] AS oi ON i.ItemId = oi.Item_Id " +
+                " WHERE oi.Order_Id = @orderId";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@orderId", orderId);
+            return ReadBarTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
     }
 }

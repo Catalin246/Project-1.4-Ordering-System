@@ -196,6 +196,7 @@
             this.comboBoxShowOrders.Name = "comboBoxShowOrders";
             this.comboBoxShowOrders.Size = new System.Drawing.Size(183, 23);
             this.comboBoxShowOrders.TabIndex = 25;
+            this.comboBoxShowOrders.SelectedIndexChanged += new System.EventHandler(this.comboBoxShowOrders_SelectedIndexChanged);
             // 
             // label1
             // 

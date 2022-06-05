@@ -22,7 +22,6 @@ namespace OrderingSystemUI
             tableService = new TableService();
             ItemService itemService = new ItemService();
             
-            runningOrFinished = true;
             LoadListView();
 
             if (listViewKitchen.SelectedItems.Count < 1)
@@ -34,6 +33,7 @@ namespace OrderingSystemUI
             comboBoxShowOrders.Items.Clear();
             comboBoxShowOrders.Items.Add("Running Orders");
             comboBoxShowOrders.Items.Add("Finished Orders");
+            comboBoxShowOrders.SelectedIndex = 0;
         }
 
         private void LoadListView()
@@ -184,6 +184,18 @@ namespace OrderingSystemUI
                 output = $"{order.TimePassed.Minutes:00} min ago";
             }
             return output;
+        }
+
+        private void comboBoxShowOrders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxShowOrders.SelectedIndex == 0)
+            {
+                runningOrFinished = false;
+            }
+            else
+            {
+                runningOrFinished = true;
+            }
         }
     }
 }
