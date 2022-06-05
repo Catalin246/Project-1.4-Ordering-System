@@ -13,8 +13,7 @@ namespace OrderingSystemUI
         TableService tableService;
         ItemService itemService;
 
-        bool readyToServe;
-
+        private bool runningOrFinished;
         public KitchenView()
         {
             InitializeComponent();
@@ -23,15 +22,27 @@ namespace OrderingSystemUI
             tableService = new TableService();
             ItemService itemService = new ItemService();
             lblTime.Text = DateTime.Now.ToString("HH:mm");
-            readyToServe = true;
+            runningOrFinished = true;
+            LoadListView();
 
             if (listViewKitchen.SelectedItems.Count < 1)
                 btnReadyToServe.Enabled = false;
-            
+
         }
 
-        //loading the listview
-        public void ReadListOfFoodOrders(List<Order> orders)
+        private void LoadListView()
+        {
+            if (runningOrFinished == true)
+            {
+                LoadRunningOrders(orderService.GetAllFoodOrders());
+            }
+            else
+            {
+                LoadFinishedOrders(orderService.GetAllFinishedFoodOrders());
+            }
+        }
+
+        private void LoadRunningOrders(List<Order> orders)
         {
             listViewKitchen.Items.Clear();
 
@@ -39,19 +50,50 @@ namespace OrderingSystemUI
             {
                 if (order.OrderTime.Date == DateTime.Now.Date)
                 {
-                    foreach (OrderedItem ordereditem in order.OrderedItems)
+                    foreach (OrderedItem orderedItem in order.OrderedItems)
                     {
-                        if (ordereditem.Status != Status.Preparing)
+                        if (orderedItem.Status == Status.Preparing)
                         {
-                            string[] listview = { order.OrderId.ToString(), 
-                                order.TableId.ToString(), 
-                                order.OrderTime.ToString("HH:mm:ss"), 
-                                $"{order.TimePassed.Minutes:00}:{order.TimePassed.Seconds:00}", 
-                                ordereditem.Item.ItemName, 
-                                ordereditem.Amount.ToString(), 
-                                ordereditem.Note };
+                            string[] listview = { order.OrderId.ToString(),
+                                order.TableId.ToString(),
+                                $"{order.TimePassed.Minutes:00}:{order.TimePassed.Seconds:00}",
+                                orderedItem.Amount.ToString(),
+                                orderedItem.Item.ItemName,
+                                orderedItem.Note,
+                                orderedItem.Status.ToString()};
+
                             ListViewItem li = new ListViewItem(listview);
-                            li.Tag = ordereditem;
+                            li.Tag = orderedItem;
+                            listViewKitchen.Items.Add(li);
+                        }
+                    }
+                }
+            }
+
+        }
+
+        public void LoadFinishedOrders(List<Order> orders)
+        {
+            listViewKitchen.Items.Clear();
+
+            foreach (Order order in orders)
+            {
+                if (order.OrderTime.Date == DateTime.Now.Date)
+                {
+                    foreach (OrderedItem orderedItem in order.OrderedItems)
+                    {
+                        if (orderedItem.Status != Status.Preparing)
+                        {
+                            string[] listview = { order.OrderId.ToString(),
+                                order.TableId.ToString(),
+                                $"{order.TimePassed.Minutes:00}:{order.TimePassed.Seconds:00}",
+                                orderedItem.Amount.ToString(),
+                                orderedItem.Item.ItemName,
+                                orderedItem.Note,
+                                orderedItem.Status.ToString()};
+
+                            ListViewItem li = new ListViewItem(listview);
+                            li.Tag = orderedItem;
                             listViewKitchen.Items.Add(li);
                         }
                     }
@@ -59,18 +101,19 @@ namespace OrderingSystemUI
             }
         }
 
+
+
         private void btnReadyToServe_Click(object sender, EventArgs e)
-        {           
+        {
             {
                 foreach (ListViewItem item in listViewKitchen.SelectedItems)
                 {
-                    orderedItemService.ChangeStatus((OrderedItem)item.Tag);
+                    orderedItemService.UpdateStatusReady((OrderedItem)item.Tag);
                 }
-                //ListViewLoad();
+
+                LoadListView();
             }
 
         }
-
-
     }
 }
