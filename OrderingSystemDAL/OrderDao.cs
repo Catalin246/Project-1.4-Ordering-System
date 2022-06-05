@@ -179,12 +179,12 @@ namespace OrderingSystemDAL
 
                 OrderedItemDao orderedItemdb = new OrderedItemDao();
 
-                //List<OrderedItem> orderedFoods = orderedItemdb.GetFoodOrdersByOrderId(order.OrderId);
+                List<OrderedItem> orderedFoods = orderedItemdb.GetFoodOrdersByOrderId(order.OrderId);
 
-                //foreach (OrderedItem food in orderedFoods)
-                //{
-                //    order.OrderedItems.Add(food);
-                //}
+                foreach (OrderedItem food in orderedFoods)
+                {
+                    order.OrderedItems.Add(food);
+                }
                 
                 foodOrders.Add(order);
             }

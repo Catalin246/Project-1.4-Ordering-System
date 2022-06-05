@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.listViewKitchen = new System.Windows.Forms.ListView();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.colTableNo = new System.Windows.Forms.ColumnHeader();
             this.colTime = new System.Windows.Forms.ColumnHeader();
             this.colCategory = new System.Windows.Forms.ColumnHeader();
@@ -45,7 +46,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.comboBoxShowOrders = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listViewKitchen
@@ -67,6 +69,11 @@
             this.listViewKitchen.UseCompatibleStateImageBehavior = false;
             this.listViewKitchen.View = System.Windows.Forms.View.Details;
             this.listViewKitchen.SelectedIndexChanged += new System.EventHandler(this.listViewKitchen_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Order No";
+            this.columnHeader1.Width = 70;
             // 
             // colTableNo
             // 
@@ -182,16 +189,30 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // columnHeader1
+            // comboBoxShowOrders
             // 
-            this.columnHeader1.Text = "Order No";
-            this.columnHeader1.Width = 70;
+            this.comboBoxShowOrders.FormattingEnabled = true;
+            this.comboBoxShowOrders.Location = new System.Drawing.Point(166, 57);
+            this.comboBoxShowOrders.Name = "comboBoxShowOrders";
+            this.comboBoxShowOrders.Size = new System.Drawing.Size(183, 23);
+            this.comboBoxShowOrders.TabIndex = 25;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(87, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 15);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "View Orders:";
             // 
             // KitchenView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(849, 495);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBoxShowOrders);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
@@ -226,5 +247,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ComboBox comboBoxShowOrders;
+        private System.Windows.Forms.Label label1;
     }
 }

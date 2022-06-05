@@ -30,8 +30,10 @@ namespace OrderingSystemUI
                 btnReadyToServe.Enabled = false;
                 btnViewOrderNote.Enabled = false;
             }
-            
 
+            comboBoxShowOrders.Items.Clear();
+            comboBoxShowOrders.Items.Add("Running Orders");
+            comboBoxShowOrders.Items.Add("Finished Orders");
         }
 
         private void LoadListView()

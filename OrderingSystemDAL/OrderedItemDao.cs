@@ -291,5 +291,14 @@ namespace OrderingSystemDAL
             }
             return drinkType;
         }
+
+        public List<OrderedItem> GetFoodOrdersByOrderId(int orderId)
+        {
+            string query = "SELECT i.ItemId, i.ItemName, i.ItemStock, i.ItemPrice, oi.Ordered_Item_Note, f.FoodType, oi.Ordered_Item_Amount, oi.Order_Id, oi.Ordered_Item_Status FROM dbo.[Item] AS i JOIN FOOD AS f ON i.ItemId = f.FoodItemId JOIN dbo.[OrderedItem] AS oi ON i.ItemId = oi.Item_Id" +
+                "WHERE oi.Order_Id = @orderId";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@orderId", orderId);
+            return ReadKitchenTables(ExecuteSelectQuery(query, sqlParameters));
+        }
     }
 }
