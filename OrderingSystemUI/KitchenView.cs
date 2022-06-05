@@ -21,17 +21,23 @@ namespace OrderingSystemUI
             orderService = new OrderService();
             tableService = new TableService();
             ItemService itemService = new ItemService();
-            lblTime.Text = DateTime.Now.ToString("HH:mm");
+            
             runningOrFinished = true;
             LoadListView();
 
             if (listViewKitchen.SelectedItems.Count < 1)
+            {
                 btnReadyToServe.Enabled = false;
+                btnViewOrderNote.Enabled = false;
+            }
+            
 
         }
 
         private void LoadListView()
         {
+            lblTime.Text = DateTime.Now.ToString("HH:mm");
+
             if (runningOrFinished == true)
             {
                 LoadRunningOrders(orderService.GetAllFoodOrders());
@@ -56,10 +62,11 @@ namespace OrderingSystemUI
                         {
                             string[] listview = { order.OrderId.ToString(),
                                 order.TableId.ToString(),
-                                $"{order.TimePassed.Minutes:00}:{order.TimePassed.Seconds:00}",
+                                ShowTimePassed(order).ToString(),
+                                orderedItem.FoodCategory.ToString(),
                                 orderedItem.Amount.ToString(),
                                 orderedItem.Item.ItemName,
-                                orderedItem.Note,
+                                ShowNoteText(orderedItem.Note).ToString(),
                                 orderedItem.Status.ToString()};
 
                             ListViewItem li = new ListViewItem(listview);
@@ -86,10 +93,11 @@ namespace OrderingSystemUI
                         {
                             string[] listview = { order.OrderId.ToString(),
                                 order.TableId.ToString(),
-                                $"{order.TimePassed.Minutes:00}:{order.TimePassed.Seconds:00}",
+                                $"{order.TimePassed.Minutes:00} min ago",
+                                orderedItem.FoodCategory.ToString(),
                                 orderedItem.Amount.ToString(),
                                 orderedItem.Item.ItemName,
-                                orderedItem.Note,
+                                ShowNoteText(orderedItem.Note).ToString(),
                                 orderedItem.Status.ToString()};
 
                             ListViewItem li = new ListViewItem(listview);
@@ -114,6 +122,66 @@ namespace OrderingSystemUI
                 LoadListView();
             }
 
+        }
+
+        private void listViewKitchen_SelectedIndexChanged(object sender, EventArgs e)
+        {            
+            try
+            {
+                if (listViewKitchen.SelectedItems.Count == 0)
+                {
+                    return;
+                }
+                btnReadyToServe.Enabled = true;
+                btnViewOrderNote.Enabled = true;
+
+                OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+                if (selectedItem.Note == "")
+                {
+                    btnViewOrderNote.Enabled = false;
+                }
+                else if (listViewKitchen.SelectedItems.Count >= 1)
+                {
+                    btnViewOrderNote.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            LoadListView();
+        }
+
+        private string ShowNoteText(string noteInput)
+        {
+            string output = "";
+            if (noteInput == null)
+            {
+                output = "No";
+            }
+            else
+            {
+                output = "YES";
+            }
+            return output;
+        }
+
+        private string ShowTimePassed(Order order)
+        {
+            string output = "";
+            if (order.TimePassed > new TimeSpan(10, 0, 0))
+            {
+                output = $"!!! {order.TimePassed.Minutes:00} min ago";
+            }
+            else
+            {
+                output = $"{order.TimePassed.Minutes:00} min ago";
+            }
+            return output;
         }
     }
 }

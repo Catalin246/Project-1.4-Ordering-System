@@ -167,7 +167,9 @@ namespace OrderingSystemDAL
                     Note = (string)dr["Ordered_Item_Note"],
                     Amount = (int)dr["Ordered_Item_Amount"],
                     OrderId = (int)dr["Order_Id"],
-                    Status = MakeStatusEnum((string)dr["Ordered_Item_Status"])
+                    Status = MakeStatusEnum((string)dr["Ordered_Item_Status"]),
+                    FoodCategory = MakeFoodTypeEnum((string)dr["FoodType"])
+
                 };
                 orderedItems.Add(orderedItem);
             }
@@ -196,7 +198,8 @@ namespace OrderingSystemDAL
                     Note = (string)dr["Ordered_Item_Note"],
                     Amount = (int)dr["Ordered_Item_Amount"],
                     OrderId = (int)dr["Order_Id"],
-                    Status = MakeStatusEnum((string)dr["Ordered_Item_Status"])
+                    Status = MakeStatusEnum((string)dr["Ordered_Item_Status"]),
+                    DrinkCategory = MakeDrinkCategoryEnum((string)dr["DrinkType"])
                 };
                 orderedItems.Add(orderedItem);
             }
