@@ -28,7 +28,7 @@ namespace OrderingSystemDAL
                     ItemName = (string)dr["Item_Name"],
                     ItemPrice = (double)dr["ItemPrice"],
                     ItemStock = (int)dr["ItemStock"],                    
-                    FoodType = (FoodType)dr["FoodType"]
+                    FoodType = MakeFoodTypeEnum((string)dr["FoodType"])
                 };
                 foods.Add(food);
             }
@@ -47,7 +47,7 @@ namespace OrderingSystemDAL
                     ItemName = (string)dr["Item_Name"],
                     ItemStock = (int)dr["ItemStock"],
                     ItemPrice = (double)dr["ItemPrice"],
-                    AlcoholicOrNonAlcoholic = (bool)dr["DrinkType"]
+                    DrinkCategory = MakeDrinkCategoryEnum((string)dr["DrinkType"])
                 };
                 drinks.Add(drink);
             }
@@ -122,16 +122,16 @@ namespace OrderingSystemDAL
             return ReadDrinkTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        //public List<OrderedItem> GetPreparingFoods()
-        //{
-        //    string query = "SELECT I.ItemId, i.ItemName, i.ItemStock,I.ItemPrice, OI.Ordered_Item_Note, F.FoodType, OI.Ordered_Item_Amount " +
-        //        "FROM Item AS I " +
-        //        "JOIN FOOD AS F ON F.FoodItemId = I.ItemId " +
-        //        "JOIN OrderedItem AS OI ON OI.Item_Id = I.ItemId " +
-        //        "WHERE Ordered_Item_Status = 'Preparing'";
-        //    SqlParameter[] sqlParameters = new SqlParameter[0];
-        //    return ReadKitchenTables(ExecuteSelectQuery(query, sqlParameters));
-        //}
+        public List<OrderedItem> GetPreparingFoods()
+        {
+            string query = "SELECT I.ItemId, i.ItemName, i.ItemStock,I.ItemPrice, OI.Ordered_Item_Note, F.FoodType, OI.Ordered_Item_Amount " +
+                "FROM Item AS I " +
+                "JOIN FOOD AS F ON F.FoodItemId = I.ItemId " +
+                "JOIN OrderedItem AS OI ON OI.Item_Id = I.ItemId " +
+                "WHERE Ordered_Item_Status = 'Preparing'";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadKitchenTables(ExecuteSelectQuery(query, sqlParameters));
+        }
 
         public void UpdateStatusToReady(OrderedItem orderedITem)
         {
@@ -147,9 +147,146 @@ namespace OrderingSystemDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        //private List<> ReadKitchenTables()
-        //{
-        //    //i will fill in this
-        //}
+        private List<OrderedItem> ReadKitchenTables(DataTable dataTable)
+        {
+            List<OrderedItem> orderedItems = new List<OrderedItem>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Food food = new Food()
+                {
+                    ItemId = (int)dr["ItemId"],
+                    ItemName = (string)dr["ItemName"],
+                    ItemStock = (int)dr["ItemStock"],
+                    ItemPrice = (double)dr["ItemPrice"],
+                    FoodType = MakeFoodTypeEnum((string)dr["FoodType"])
+                };
+
+                OrderedItem orderedItem = new OrderedItem(food)
+                {
+                    Note = (string)dr["Ordered_Item_Note"],
+                    Amount = (int)dr["Ordered_Item_Amount"],
+                    OrderId = (int)dr["Order_Id"],
+                    Status = MakeStatusEnum((string)dr["Ordered_Item_Status"])
+                };
+                orderedItems.Add(orderedItem);
+            }
+            return orderedItems;
+        }
+
+        private List<OrderedItem> ReadBarTables(DataTable dataTable)
+        {
+            List<OrderedItem> orderedItems = new List<OrderedItem>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                string foodTypeString = (string)dr["FoodType"];
+
+                Drink2 drink = new Drink2()
+                {
+                    ItemId = (int)dr["ItemId"],
+                    ItemName = (string)dr["ItemName"],
+                    ItemStock = (int)dr["ItemStock"],
+                    ItemPrice = (double)dr["ItemPrice"],
+                    DrinkCategory = MakeDrinkCategoryEnum((string)dr["DrinkType"])
+                };
+
+                OrderedItem orderedItem = new OrderedItem(drink)
+                {
+                    Note = (string)dr["Ordered_Item_Note"],
+                    Amount = (int)dr["Ordered_Item_Amount"],
+                    OrderId = (int)dr["Order_Id"],
+                    Status = MakeStatusEnum((string)dr["Ordered_Item_Status"])
+                };
+                orderedItems.Add(orderedItem);
+            }
+            return orderedItems;
+        }
+
+        private Status MakeStatusEnum(string notEnumStatus)
+        {
+            switch (notEnumStatus)
+            {
+                case "BeingPrepared":
+                    return Status.Preparing;
+                case "Ready":
+                    return Status.Ready;
+                case "Delivered":
+                    return Status.Served;
+                case "Paid":
+                    return Status.Paid;
+            }
+            return Status.Paid; //the last status
+        }
+
+        private FoodTypes MakeFoodTypeEnum(string notEnumType)
+        {
+            FoodTypes foodType = new FoodTypes();
+
+            try
+            {
+                switch (notEnumType)
+                {
+                    case "Lunch Starter":
+                        foodType = FoodTypes.LunchStarter;
+                        break;
+                    case "Lunch Main":
+                        foodType = FoodTypes.LunchMain;
+                        break;
+                    case "Lunch Desert":
+                        foodType = FoodTypes.LunchDessert;
+                        break;
+                    case "Diner Starter":
+                        foodType = FoodTypes.DinnerStarter;
+                        break;
+                    case "Diner Entrement":
+                        foodType = FoodTypes.DinnerEntremets;
+                        break;
+                    case "Diner Main":
+                        foodType = FoodTypes.DinnerMain;
+                        break;
+                    case "Diner Desert":
+                        foodType = FoodTypes.DinnerDessert;
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseDao.ErrorLogging(ex);
+            }
+            return foodType;
+        }
+
+        private DrinkCategories MakeDrinkCategoryEnum(string notEnumType)
+        {
+            DrinkCategories drinkType = new DrinkCategories();
+
+            try
+            {
+                switch (notEnumType)
+                {
+                    case "Soft Drink":
+                        drinkType = DrinkCategories.SoftDrink;
+                        break;
+                    case "Beer":
+                        drinkType = DrinkCategories.Beer;
+                        break;
+                    case "Wine":
+                        drinkType = DrinkCategories.Wine;
+                        break;
+                    case "Spirit Drink":
+                        drinkType = DrinkCategories.SpiritDrink;
+                        break;
+                    case "Coffee Tea":
+                        drinkType = DrinkCategories.CoffeeAndTea;
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseDao.ErrorLogging(ex);
+            }
+            return drinkType;
+        }
     }
 }

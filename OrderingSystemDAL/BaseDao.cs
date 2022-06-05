@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.IO;
 
 namespace OrderingSystemDAL
 {
@@ -113,6 +114,22 @@ namespace OrderingSystemDAL
                 CloseConnection();
             }
             return dataTable;
+        }
+        public static void ErrorLogging(Exception ex)
+        {
+            string strPath = @"..\..\..\ExceptionLog.txt";
+            if (!File.Exists(strPath))
+            {
+                File.Create(strPath).Dispose();
+            }
+            using (StreamWriter sw = File.AppendText(strPath))
+            {
+                sw.WriteLine("=============Error Logging ===========");
+                sw.WriteLine("===========Start============= " + DateTime.Now);
+                sw.WriteLine("Error Message: " + ex.Message);
+                sw.WriteLine("Stack Trace: " + ex.StackTrace);
+                sw.WriteLine("===========End============= " + DateTime.Now);
+            }
         }
     }
 }

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemModel
 {
-    public enum FoodType
+    public enum FoodTypes
     {
         LunchStarter, LunchMain, LunchDessert, DinnerStarter, DinnerEntremets, DinnerMain, DinnerDessert
     }
     public class Food : Item
     {
-        public FoodType FoodType { get; set; }
+        public FoodTypes FoodType { get; set; }
     }
 }
