@@ -380,6 +380,14 @@ namespace OrderingSystemUI
         {
             tableView.Close();
         }
+
+        private void lblEmployeeName_MouseClick(object sender, MouseEventArgs e)
+        {
+            Login login = new Login();
+            //MessageBox.Show("Are you sure you want to log out?");
+            //this.Hide();
+            login.Show();
+        }
     }
 }
     
