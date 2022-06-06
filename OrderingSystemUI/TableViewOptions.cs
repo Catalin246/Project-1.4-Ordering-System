@@ -32,9 +32,9 @@ namespace OrderingSystemUI
             tableView.Hide();
             this.Hide();
             //TakeOrder takeOrder = new TakeOrder(number);
-            takeOrder.Show();
             takeOrder.tableView = tableView;
-            tableView.Hide();
+            takeOrder.Show();
+            // tableView.Hide();
         }
 
         private void btnSeatingACustomer_Click(object sender, EventArgs e)

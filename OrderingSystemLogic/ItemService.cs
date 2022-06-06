@@ -22,19 +22,31 @@ namespace OrderingSystemLogic
             List<Item> items = itemdb.GetAllDrinks();
             return items;
         }
-        public List<Item> GetStarters()
+        public List<Item> GetStarters(bool var)
         {
-            List<Item> items = itemdb.GetAllStarters();
+            List<Item> items;
+            if (var)
+                items = itemdb.GetDinnerStarters();
+            else
+                items = itemdb.GetLunchStarters();
             return items;
         }
-        public List<Item> GetMains()
+        public List<Item> GetMains(bool var)
         {
-            List<Item> items = itemdb.GetAllMains();
+            List<Item> items;
+            if (var)
+                items = itemdb.GetDinerMains();
+            else
+                items = itemdb.GetLunchMains();
             return items;
         }
-        public List<Item> GetDesserts()
+        public List<Item> GetDeserts(bool var)
         {
-            List<Item> items = itemdb.GetAllDesserts();
+            List<Item> items;
+            if (var)
+                items = itemdb.GetDinerDeserts();
+            else
+                items = itemdb.GetLunchDeserts();
             return items;
         }
 
