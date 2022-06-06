@@ -37,7 +37,7 @@ namespace OrderingSystemUI
         public void DisplayItems(List<Item> items)
         {
             try
-            {
+            {                
                 listViewMenuItems.Items.Clear();
 
                 foreach (Item item in items)
@@ -256,13 +256,23 @@ namespace OrderingSystemUI
             }
         }
 
+        private bool CheckDinerTime()
+        {
+            bool dinerTime = false;
+            TimeSpan timeNow = DateTime.Now.TimeOfDay;
+            TimeSpan startTimeForDinner = new TimeSpan(18, 00, 00);
+            if (timeNow > startTimeForDinner)
+                dinerTime = true;
+            return dinerTime;
+        }
+
         private void btnStarters_Click_1(object sender, EventArgs e)
         {
             try
             {
                 ItemService itemService = new ItemService();
-                List<Item> items = itemService.GetStarters();
-                DisplayItems(items);
+                List<Item> items = itemService.GetStarters(CheckDinerTime());
+                DisplayItems(items);                               
             }
             catch (Exception exp)
             {
@@ -275,7 +285,7 @@ namespace OrderingSystemUI
             try
             {
                 ItemService itemService = new ItemService();
-                List<Item> items = itemService.GetMains();
+                List<Item> items = itemService.GetMains(CheckDinerTime());
                 DisplayItems(items);
             }
             catch (Exception exp)
@@ -289,7 +299,7 @@ namespace OrderingSystemUI
             try
             {
                 ItemService itemService = new ItemService();
-                List<Item> items = itemService.GetDesserts();
+                List<Item> items = itemService.GetDeserts(CheckDinerTime());
                 DisplayItems(items);
             }
             catch (Exception exp)
