@@ -88,7 +88,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
             // 
@@ -317,6 +317,7 @@
             this.lblEmployeeName.Size = new System.Drawing.Size(288, 25);
             this.lblEmployeeName.TabIndex = 0;
             this.lblEmployeeName.Text = "Emplyee Name: Avornicesei Catalin";
+            this.lblEmployeeName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblEmployeeName_MouseClick);
             // 
             // miniToolStrip
             // 
