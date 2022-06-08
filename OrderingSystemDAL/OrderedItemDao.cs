@@ -80,8 +80,9 @@ namespace OrderingSystemDAL
 
         public List<OrderedItem> GetOrderedItemsByOrder(int orderID)
         {
-            string query = "SELECT * FROM dbo.[OrderedItem] WHERE Order_Id = @orderID;";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = "SELECT * FROM dbo.[OrderedItem] WHERE [Order_Id] = @orderID";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("orderID", orderID);
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 

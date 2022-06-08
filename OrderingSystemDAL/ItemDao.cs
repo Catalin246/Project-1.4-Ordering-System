@@ -122,8 +122,9 @@ namespace OrderingSystemDAL
         
         public Item GetItem(int itemID)
         {
-            string query = "SELECT * FROM dbo.Item where Item_Id = @itemID";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = "SELECT * FROM dbo.[Item] WHERE [ItemId]=@itemID";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@itemID", itemID);
             List<Item> items =  ReadTables(ExecuteSelectQuery(query, sqlParameters));
             return items[0];
 

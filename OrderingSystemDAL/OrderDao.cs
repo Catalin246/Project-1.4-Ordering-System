@@ -33,7 +33,7 @@ namespace OrderingSystemDAL
             {
                 Order order = new Order()
                 {
-                    OrderId = (int)dr["Order_ID"]
+                    OrderId = (int)dr["Order_Id"]
                 };
                 orders.Add(order);
             }
@@ -100,8 +100,10 @@ namespace OrderingSystemDAL
         // Gets list of Order IDs with associated Table ID
         public List<Order> GetOrderIDsByTable(int tableID)
         {
-            string query = "SELECT Order_Id FROM dbo.[Order] WHERE Table_Id = @tableID; ";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            // string query = "SELECT Order_Id FROM dbo.[Order] WHERE Table_Id=@tableID; ";
+            string query = "SELECT * FROM dbo.[Order] WHERE [Table_id]=@tableID";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@tableID", tableID);
             return ReadTableOnlyOrderID(ExecuteSelectQuery(query, sqlParameters));
         }
 
