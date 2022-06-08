@@ -41,19 +41,22 @@ namespace OrderingSystemUI
 
         private void btnSeatingACustomer_Click(object sender, EventArgs e)
         {
-            ACustomerIsSitting(number, "sit");
+            ACustomerIsSitting(number, "sit"); 
+            TableService tableService = new TableService();
+            tableService.Sit(number);
         }
 
         private void btnCanselSeating_Click(object sender, EventArgs e)
         {
             tableView.ChangeColor(number, "Cancel");
-            Table table = new Table();
             TableService tableService = new TableService();
+            tableService.CancelSit(number);
         }
         private void ACustomerIsSitting(int number, string sit)
         {
-
-            tableView.ChangeColor(number, "Sit");
+            tableView.ChangeColor(number, "Sit"); 
+            TableService tableService = new TableService();
+            tableService.Sit(number);
         }
     }
 }

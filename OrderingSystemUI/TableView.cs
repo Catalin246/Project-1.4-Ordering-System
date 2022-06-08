@@ -45,28 +45,28 @@ namespace OrderingSystemUI
         {
             TableService tableService = new TableService();
             //DrinkService drinkService = new DrinkService();
-            List<Table> orders = tableService.GetTable();
+            //List<Table> tables = tableService.GetTable();
+            List<Table> tableStatus = tableService.GetTablesStatus();
             //List<Drink> drinks = drinkService.GetDrinks();
             listViewTableOrder.Items.Clear();
-            //foreach (Drink t in drinks)
-            //{
-
-            //}
-            foreach (Table table in orders)
+            foreach (Table table in tableStatus)
             {
                 if (table.TableStatus == "Close")
                 {
-                    ChangeColor(table.TableId,"Sit");
+                    ChangeColor(table.TableId, "Sit");
                 }
-                if (table.OrderStatus == "Ready")
-                {                    
-                    ListViewItem li = new ListViewItem(table.OrderStatus);
-                    li.SubItems.Add(table.TableId.ToString());
-                    li.SubItems.Add(table.Time.ToString("H:m"));
-                    li.SubItems.Add(table.OrderId.ToString());
-                    listViewTableOrder.Items.Add(li);
-                }
-            }
+            }            
+            //foreach (Table table in tables)
+            //{
+            //    if (table.OrderStatus == "Ready")
+            //    {                    
+            //        ListViewItem li = new ListViewItem(table.OrderStatus);
+            //        li.SubItems.Add(table.TableId.ToString());
+            //        li.SubItems.Add(table.Time.ToString("H:m"));
+            //        li.SubItems.Add(table.OrderId.ToString());
+            //        listViewTableOrder.Items.Add(li);
+            //    }
+            //}
         }
         public void ChangeColor(int number, string btnInput)
         {
@@ -162,7 +162,7 @@ namespace OrderingSystemUI
         {
             if (takeOrders[9] == null)
                 takeOrders[9] = new TakeOrder(10);
-            CallPnlOptions(10, takeOrders[2]);
+            CallPnlOptions(10, takeOrders[9]);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

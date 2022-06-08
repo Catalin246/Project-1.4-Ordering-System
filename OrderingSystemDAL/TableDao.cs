@@ -11,7 +11,6 @@ namespace OrderingSystemDAL
 {
     public class TableDao : BaseDao
     {
-        public List<Table> tables;
         public List<Table> GetAllTable()
         {
             string query = "SELECT t.[Table_Id], O.Order_Time, O.Order_Status, O.Order_Id,t.Table_Status FROM dbo.[Table] as T join dbo.[Order] as O on T.Table_Id = O.Table_Id";
@@ -21,7 +20,7 @@ namespace OrderingSystemDAL
 
         private List<Table> ReadTables(DataTable dataTable)
         {
-            tables = new List<Table>();
+            List<Table> tables = new List<Table>();
             foreach (DataRow dr in dataTable.Rows)
             {
                 Table table = new Table();
@@ -36,13 +35,43 @@ namespace OrderingSystemDAL
             }
             return tables;
         }
-        
+        public List<Table> GetTableStatus()
+        {
+            string query = "SELECT Table_Id,Table_Status FROM dbo.[Table]";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTablesStatus(ExecuteSelectQuery(query, sqlParameters));
+        }
+        private List<Table> ReadTablesStatus(DataTable dataTable)
+        {
+            List<Table> tables = new List<Table>();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Table table = new Table();
+                {
+                    table.TableId = (int)dr["Table_Id"];
+                    table.TableStatus = (string)dr["Table_Status"];
+                };
+                tables.Add(table);
+            }
+            return tables;
+        }
+        public void Sit(int number)
+        {
+            string query = $"UPDATE dbo.[Table] SET Table_Status = 'Close' WHERE Table_Id = {number}; ";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        public void CancelSit(int number)
+        {
+            string query = $"UPDATE dbo.[Table] SET Table_Status = 'Open' WHERE Table_Id = {number} ";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
         public void Served(Table servedOrder)
         {
             string query = "UPDATE dbo.[Order] SET Order_Status = served  WHERE Order_Id = @OrderId; ";
-            SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@drinkName", servedOrder.OrderId);
-            sqlParameters[1] = new SqlParameter("@price", servedOrder.OrderStatus);
+            SqlParameter[] sqlParameters = new SqlParameter[0];
             ExecuteEditQuery(query, sqlParameters);
         }
     }
