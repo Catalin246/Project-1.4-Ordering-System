@@ -126,10 +126,13 @@ namespace OrderingSystemUI
 
                 List<Order> orders = orderService.GetOrdersByTable(tableID);
                 List<OrderedItem> orderedItems = new List<OrderedItem>(); // use this list
+                // combine all the ordered items from various orders
                 foreach (Order order in orders)
                 {
-                    orderedItems.Concat(orderedItemService.GetOrderedItemsByOrder(order.OrderId));
+                    orderedItems.AddRange(orderedItemService.GetOrderedItemsByOrder(order.OrderId));
                 }
+                // NICE TO DO, create query to select all associated ordered items in one call
+                // get all the open ordered items (non closed) 
                 foreach(OrderedItem orderedItem in orderedItems)
                 {
                     orderedItem.Item = itemService.GetItem(orderedItem.ItemID);
