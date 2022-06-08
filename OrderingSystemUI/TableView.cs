@@ -15,18 +15,16 @@ namespace OrderingSystemUI
     public partial class TableView : Form
     {
         private int number;
-        TakeOrder takeOrder;
-        public TableView(TakeOrder takeOrder)
-        {
-            InitializeComponent();
-            this.takeOrder = takeOrder; 
-            ShowListView();
-        }
+        List<TakeOrder> takeOrders = new List<TakeOrder>();
 
         public TableView()
         {
-
+            InitializeComponent();
+            ShowListView();
+            for (int i = 0; i < 10; i++)
+                takeOrders.Add(null);
         }
+
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showPanel("TableView");
@@ -41,20 +39,29 @@ namespace OrderingSystemUI
             if (panelName == "TableView")
             {
                 pnlTableView.Show();
-                //new Payment().Show();
             }
         }
         public void ShowListView()
         {
             TableService tableService = new TableService();
+            //DrinkService drinkService = new DrinkService();
             List<Table> orders = tableService.GetTable();
+            //List<Drink> drinks = drinkService.GetDrinks();
             listViewTableOrder.Items.Clear();
+            //foreach (Drink t in drinks)
+            //{
+
+            //}
             foreach (Table table in orders)
             {
-                ListViewItem li = new ListViewItem(table.TableId.ToString());
-                li.SubItems.Add(table.Time.ToString("H:m"));
-                li.SubItems.Add(table.OrderId.ToString());
-                listViewTableOrder.Items.Add(li);
+                if (table.OrderStatus == "Ready")
+                {
+                    ListViewItem li = new ListViewItem(table.OrderStatus);
+                    li.SubItems.Add(table.TableId.ToString());
+                    li.SubItems.Add(table.Time.ToString("H:m"));
+                    li.SubItems.Add(table.OrderId.ToString());
+                    listViewTableOrder.Items.Add(li);
+                }
             }
         }
         public void ChangeColor(int number, string btnInput)
@@ -77,72 +84,84 @@ namespace OrderingSystemUI
                 }
             }
         }
-        private void CallPnlOptions(int number)
+        private void CallPnlOptions(int number, TakeOrder takeOrder)
         {
-            
-            TableViewOptions options = new TableViewOptions(number,this,takeOrder);
+
+            TableViewOptions options = new TableViewOptions(number, this, takeOrder);
             options.Show();
         }
 
         private void btnTable01_Click(object sender, EventArgs e)
         {
-            takeOrder = new TakeOrder(1);
-            CallPnlOptions(1);
+            if (takeOrders[0] == null)
+                takeOrders[0] = new TakeOrder(1);
+            CallPnlOptions(1, takeOrders[0]);
         }
 
         private void btnTable02_Click(object sender, EventArgs e)
         {
-            CallPnlOptions(2);
+            if (takeOrders[1] == null)
+                takeOrders[1] = new TakeOrder(2);
+            CallPnlOptions(2, takeOrders[1]);
         }
 
         private void btnTable03_Click(object sender, EventArgs e)
         {
-            CallPnlOptions(3);
+            if (takeOrders[2] == null)
+                takeOrders[2] = new TakeOrder(3);
+            CallPnlOptions(3, takeOrders[2]);
         }
 
         private void btnTable04_Click(object sender, EventArgs e)
         {
-            CallPnlOptions(4);
+            //takeOrder = new TakeOrder(4);
+            //CallPnlOptions(4);
         }
 
         private void btnTable05_Click(object sender, EventArgs e)
         {
-            CallPnlOptions(5);
+            //takeOrder = new TakeOrder(5);
+            //CallPnlOptions(5);
         }
 
         private void btnTable06_Click(object sender, EventArgs e)
         {
-            CallPnlOptions(6);
+            //takeOrder = new TakeOrder(6);
+            //CallPnlOptions(6);
         }
 
         private void btnTable07_Click(object sender, EventArgs e)
         {
-            CallPnlOptions(7);
+            //takeOrder = new TakeOrder(7);
+            //CallPnlOptions(7);
         }
 
         private void btnTable08_Click(object sender, EventArgs e)
         {
-            CallPnlOptions(8);
+            //takeOrder = new TakeOrder(8);
+            //CallPnlOptions(8);
         }
 
         private void btnTable09_Click(object sender, EventArgs e)
         {
-            CallPnlOptions(9);
+            //takeOrder = new TakeOrder(9);
+            //CallPnlOptions(9);
         }
 
         private void btnTable010_Click(object sender, EventArgs e)
         {
-            CallPnlOptions(10); ;
-        }   
+            //takeOrder = new TakeOrder(10);
+            //CallPnlOptions(10); ;
+        }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
@@ -167,7 +186,7 @@ namespace OrderingSystemUI
             if (listViewTableOrder.SelectedItems.Count == 0)
                 return;
             ListViewItem selectedItem = listViewTableOrder.SelectedItems[0];
-            Table table= new Table();
+            Table table = new Table();
             TableService tableService = new TableService();
         }
 
