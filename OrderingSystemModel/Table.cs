@@ -13,5 +13,6 @@ namespace OrderingSystemModel
         public string OrderStatus { get; set; }
         public DateTime Time { get; set; }
         public int OrderId { get; set; }
+        public string TableStatus { get; set; }
     }
 }

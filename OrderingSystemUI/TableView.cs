@@ -114,44 +114,51 @@ namespace OrderingSystemUI
 
         private void btnTable04_Click(object sender, EventArgs e)
         {
-            //takeOrder = new TakeOrder(4);
-            //CallPnlOptions(4);
+            if (takeOrders[3] == null)
+                takeOrders[3] = new TakeOrder(4);
+            CallPnlOptions(4, takeOrders[3]);
         }
 
         private void btnTable05_Click(object sender, EventArgs e)
         {
-            //takeOrder = new TakeOrder(5);
-            //CallPnlOptions(5);
+            if (takeOrders[4] == null)
+                takeOrders[4] = new TakeOrder(5);
+            CallPnlOptions(5, takeOrders[4]);
         }
 
         private void btnTable06_Click(object sender, EventArgs e)
         {
-            //takeOrder = new TakeOrder(6);
-            //CallPnlOptions(6);
+            if (takeOrders[5] == null)
+                takeOrders[5] = new TakeOrder(6);
+            CallPnlOptions(6, takeOrders[5]);
         }
 
         private void btnTable07_Click(object sender, EventArgs e)
         {
-            //takeOrder = new TakeOrder(7);
-            //CallPnlOptions(7);
+            if (takeOrders[6] == null)
+                takeOrders[6] = new TakeOrder(7);
+            CallPnlOptions(7, takeOrders[6]);
         }
 
         private void btnTable08_Click(object sender, EventArgs e)
         {
-            //takeOrder = new TakeOrder(8);
-            //CallPnlOptions(8);
+            if (takeOrders[7] == null)
+                takeOrders[7] = new TakeOrder(8);
+            CallPnlOptions(8, takeOrders[7]);
         }
 
         private void btnTable09_Click(object sender, EventArgs e)
         {
-            //takeOrder = new TakeOrder(9);
-            //CallPnlOptions(9);
+            if (takeOrders[8] == null)
+                takeOrders[8] = new TakeOrder(9);
+            CallPnlOptions(9, takeOrders[8]);
         }
 
         private void btnTable010_Click(object sender, EventArgs e)
         {
-            //takeOrder = new TakeOrder(10);
-            //CallPnlOptions(10); ;
+            if (takeOrders[9] == null)
+                takeOrders[9] = new TakeOrder(10);
+            CallPnlOptions(10, takeOrders[2]);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
