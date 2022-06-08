@@ -60,6 +60,7 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.listViewTableOrder = new System.Windows.Forms.ListView();
+            this.OrderStatus = new System.Windows.Forms.ColumnHeader();
             this.tableOrderNumber = new System.Windows.Forms.ColumnHeader();
             this.whereToPickUpOrder = new System.Windows.Forms.ColumnHeader();
             this.time = new System.Windows.Forms.ColumnHeader();
@@ -75,7 +76,6 @@
             this.btnTable02 = new System.Windows.Forms.Button();
             this.btnTable07 = new System.Windows.Forms.Button();
             this.btnServed = new System.Windows.Forms.Button();
-            this.OrderStatus = new System.Windows.Forms.ColumnHeader();
             this.menuStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -305,6 +305,11 @@
             this.listViewTableOrder.View = System.Windows.Forms.View.Details;
             this.listViewTableOrder.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
             // 
+            // OrderStatus
+            // 
+            this.OrderStatus.Text = "OrderStatus";
+            this.OrderStatus.Width = 90;
+            // 
             // tableOrderNumber
             // 
             this.tableOrderNumber.Text = "Table Order";
@@ -435,11 +440,6 @@
             this.btnServed.Text = "Served";
             this.btnServed.UseVisualStyleBackColor = true;
             this.btnServed.Click += new System.EventHandler(this.btnServed_Click);
-            // 
-            // OrderStatus
-            // 
-            this.OrderStatus.Text = "OrderStatus";
-            this.OrderStatus.Width = 90;
             // 
             // TableView
             // 
