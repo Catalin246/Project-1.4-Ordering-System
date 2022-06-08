@@ -54,8 +54,12 @@ namespace OrderingSystemUI
             //}
             foreach (Table table in orders)
             {
-                if (table.OrderStatus == "Ready")
+                if (table.TableStatus == "Close")
                 {
+                    ChangeColor(table.TableId,"Sit");
+                }
+                if (table.OrderStatus == "Ready")
+                {                    
                     ListViewItem li = new ListViewItem(table.OrderStatus);
                     li.SubItems.Add(table.TableId.ToString());
                     li.SubItems.Add(table.Time.ToString("H:m"));

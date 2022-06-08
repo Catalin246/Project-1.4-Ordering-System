@@ -14,7 +14,7 @@ namespace OrderingSystemDAL
         public List<Table> tables;
         public List<Table> GetAllTable()
         {
-            string query = "SELECT t.[Table_Id], O.Order_Time, O.Order_Status, O.Order_Id FROM dbo.[Table] as T join dbo.[Order] as O on T.Table_Id = O.Table_Id";
+            string query = "SELECT t.[Table_Id], O.Order_Time, O.Order_Status, O.Order_Id,t.Table_Status FROM dbo.[Table] as T join dbo.[Order] as O on T.Table_Id = O.Table_Id";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -30,7 +30,7 @@ namespace OrderingSystemDAL
                     table.Time = (DateTime)dr["Order_Time"];
                     table.TableId = (int)dr["Table_Id"];
                     table.OrderStatus = (string)dr["Order_Status"];
-                    //table.TableStatus = (string)dr["Table_Status"];
+                    table.TableStatus = (string)dr["Table_Status"];
                 };
                 tables.Add(table);
             }

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OrderingSystemUI;
+using OrderingSystemLogic;
+using OrderingSystemModel;
 
 namespace OrderingSystemUI
 {
@@ -45,6 +47,8 @@ namespace OrderingSystemUI
         private void btnCanselSeating_Click(object sender, EventArgs e)
         {
             tableView.ChangeColor(number, "Cancel");
+            Table table = new Table();
+            TableService tableService = new TableService();
         }
         private void ACustomerIsSitting(int number, string sit)
         {
