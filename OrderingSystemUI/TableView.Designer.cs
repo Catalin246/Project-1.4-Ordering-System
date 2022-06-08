@@ -58,6 +58,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.listViewTableOrder = new System.Windows.Forms.ListView();
             this.tableOrderNumber = new System.Windows.Forms.ColumnHeader();
             this.whereToPickUpOrder = new System.Windows.Forms.ColumnHeader();
@@ -74,7 +75,7 @@
             this.btnTable02 = new System.Windows.Forms.Button();
             this.btnTable07 = new System.Windows.Forms.Button();
             this.btnServed = new System.Windows.Forms.Button();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.OrderStatus = new System.Windows.Forms.ColumnHeader();
             this.menuStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -96,25 +97,25 @@
             // dashboardToolStripMenuItem
             // 
             this.dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
-            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.dashboardToolStripMenuItem.Text = "Dashboard";
             // 
             // barViewToolStripMenuItem
             // 
             this.barViewToolStripMenuItem.Name = "barViewToolStripMenuItem";
-            this.barViewToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.barViewToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
             this.barViewToolStripMenuItem.Text = "Bar view";
             // 
             // kitchenViewToolStripMenuItem
             // 
             this.kitchenViewToolStripMenuItem.Name = "kitchenViewToolStripMenuItem";
-            this.kitchenViewToolStripMenuItem.Size = new System.Drawing.Size(106, 20);
+            this.kitchenViewToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.kitchenViewToolStripMenuItem.Text = "Kitchen view";
             // 
             // tableViewToolStripMenuItem
             // 
             this.tableViewToolStripMenuItem.Name = "tableViewToolStripMenuItem";
-            this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
+            this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
             this.tableViewToolStripMenuItem.Text = "Table view";
             this.tableViewToolStripMenuItem.Click += new System.EventHandler(this.tableViewToolStripMenuItem_Click);
             // 
@@ -250,47 +251,55 @@
             this.toolStripMenuItem5});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(812, 28);
+            this.menuStrip2.Size = new System.Drawing.Size(812, 24);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(96, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(76, 20);
             this.toolStripMenuItem1.Text = "Dashboard";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(79, 24);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(63, 20);
             this.toolStripMenuItem2.Text = "Bar view";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(106, 24);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(86, 20);
             this.toolStripMenuItem3.Text = "Kitchen view";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(92, 24);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(73, 20);
             this.toolStripMenuItem4.Text = "Table view";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(62, 20);
+            this.toolStripMenuItem5.Text = "Bill view";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // listViewTableOrder
             // 
             this.listViewTableOrder.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.OrderStatus,
             this.tableOrderNumber,
             this.whereToPickUpOrder,
             this.time,
             this.orderId});
             this.listViewTableOrder.HideSelection = false;
-            this.listViewTableOrder.Location = new System.Drawing.Point(386, 51);
+            this.listViewTableOrder.Location = new System.Drawing.Point(353, 51);
             this.listViewTableOrder.Name = "listViewTableOrder";
-            this.listViewTableOrder.Size = new System.Drawing.Size(414, 305);
+            this.listViewTableOrder.Size = new System.Drawing.Size(447, 305);
             this.listViewTableOrder.TabIndex = 12;
             this.listViewTableOrder.UseCompatibleStateImageBehavior = false;
             this.listViewTableOrder.View = System.Windows.Forms.View.Details;
@@ -309,11 +318,12 @@
             // time
             // 
             this.time.Text = "Time";
-            this.time.Width = 120;
+            this.time.Width = 50;
             // 
             // orderId
             // 
             this.orderId.Text = "Order Id";
+            this.orderId.Width = 70;
             // 
             // btnTable010
             // 
@@ -418,7 +428,7 @@
             // 
             // btnServed
             // 
-            this.btnServed.Location = new System.Drawing.Point(386, 362);
+            this.btnServed.Location = new System.Drawing.Point(353, 362);
             this.btnServed.Name = "btnServed";
             this.btnServed.Size = new System.Drawing.Size(140, 43);
             this.btnServed.TabIndex = 13;
@@ -426,12 +436,10 @@
             this.btnServed.UseVisualStyleBackColor = true;
             this.btnServed.Click += new System.EventHandler(this.btnServed_Click);
             // 
-            // toolStripMenuItem5
+            // OrderStatus
             // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(78, 24);
-            this.toolStripMenuItem5.Text = "Bill view";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            this.OrderStatus.Text = "OrderStatus";
+            this.OrderStatus.Width = 90;
             // 
             // TableView
             // 
@@ -508,5 +516,6 @@
         private System.Windows.Forms.Button btnServed;
         private System.Windows.Forms.ColumnHeader orderId;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ColumnHeader OrderStatus;
     }
 }
