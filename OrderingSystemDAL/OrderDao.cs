@@ -20,9 +20,9 @@ namespace OrderingSystemDAL
 
         public List<Order> GetAllOrders()
         {
-            string query = " SELECT Order_Id, Table_Id, Order_Time FROM dbo.[Order] ";
+            string query = " SELECT Order_Id FROM dbo.[Order] ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            return ReadTableOnlyOrderID(ExecuteSelectQuery(query, sqlParameters));
         }
 
         private List<Order> ReadTableOnlyOrderID(DataTable dataTable)
