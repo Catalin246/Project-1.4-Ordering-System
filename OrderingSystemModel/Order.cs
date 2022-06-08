@@ -17,8 +17,10 @@ namespace OrderingSystemModel
         public Order()
         {
             OrderTime = DateTime.Now;
+            OrderedItems = new List<OrderedItem>();
         }
-        
+
+        public Order PreviousOrder;
         public int OrderId { get; set; }
         public DateTime OrderTime { get; set; }
         public int BillId { get; set; }

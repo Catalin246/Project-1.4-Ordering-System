@@ -83,7 +83,6 @@ namespace OrderingSystemUI
         }
 
         //Display order items and add note
-
         public void DisplayOrderItemsNote(List<OrderedItem> items, string note,ListViewItem selectedItem)
         {
             try
@@ -220,21 +219,7 @@ namespace OrderingSystemUI
                     itemService.Update(orderedItem);
                 }
 
-                listViewOrderItems.Items.Clear();
-
-                foreach (OrderedItem item in order.OrderedItems)
-                {
-                    ListViewItem li = new ListViewItem(item.Item.ItemName);
-                    li.SubItems.Add(item.Item.ItemPrice.ToString());
-                    li.SubItems.Add(item.Amount.ToString());
-                    li.SubItems.Add(item.Note.ToString());
-
-                    li.Tag = item;
-
-                    listViewOrderItems.Items.Add(li);
-                }
-
-                //DisplayItems();
+                DisplayOrderItems(order.OrderedItems);
             }
             catch (Exception exp)
             {
@@ -314,17 +299,32 @@ namespace OrderingSystemUI
             {
                 btnTake.Enabled = false;
                 btnCancel.Enabled = false;
+                btnAdd.Enabled = false;
+                btnMinus.Enabled = false;   
+
                 List<Order> orders = new List<Order>();
                 OrderService orderService = new OrderService();
                 OrderedItemService orderedItemService = new OrderedItemService();
                 orders = orderService.GetOrders();
-                order.OrderId = orders[orders.Count - 1].OrderId + 1;
-                orderService.AddOrder(order);
+                if (btnModify.Enabled == true)
+                {
+                    order.OrderId = orders[orders.Count - 1].OrderId + 1;
+                    orderService.AddOrder(order);
+                }
 
                 foreach (OrderedItem item in order.OrderedItems)
                 {
-                    orderedItemService.AddOrderesItem(item, order);
+                    if (item.ItemAddedInDatabase == false)
+                    {
+                        orderedItemService.AddOrderesItem(item, order);
+                        item.ItemAddedInDatabase = true;
+                    }
+                    else
+                    {
+                        orderedItemService.UpdateAmount(item, order.OrderId);
+                    }
                 }
+                btnModify.Enabled = true;
                 MessageBox.Show("Order was taken successfully");
             }
             catch (Exception exp)
@@ -348,6 +348,21 @@ namespace OrderingSystemUI
                 MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                btnModify.Enabled = false;
+                btnAdd.Enabled = true;
+                btnMinus.Enabled = true;
+                btnTake.Enabled = true;
+                btnCancel.Enabled = true;
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong : " + exp.Message);
+            }
+        }
 
         //Open payment form
         private void btnPayment_Click(object sender, EventArgs e)
@@ -355,6 +370,7 @@ namespace OrderingSystemUI
 
             try
             {
+                btnPayment.Enabled = false;
                 this.Close();
                 Payment payment = new Payment();
                 payment.Show();
@@ -363,11 +379,6 @@ namespace OrderingSystemUI
             {
                 MessageBox.Show("Something went wrong : " + exp.Message);
             }
-        }
-
-        private void TakeOrder_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -388,6 +399,8 @@ namespace OrderingSystemUI
             //this.Hide();
             login.Show();
         }
+
+       
     }
 }
     

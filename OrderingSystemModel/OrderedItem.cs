@@ -49,6 +49,8 @@ namespace OrderingSystemModel
 
         private float vatAmount;
 
+        public bool ItemAddedInDatabase = false;   
+
         //have a calculte property in here to calculate the item amount and price
         public float TotalPriceItem
         {
