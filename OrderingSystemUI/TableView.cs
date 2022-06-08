@@ -43,9 +43,9 @@ namespace OrderingSystemUI
         }
         public void ShowListView()
         {
-            TableService tableService = new TableService();
-            //DrinkService drinkService = new DrinkService();
-            //List<Table> tables = tableService.GetTable();
+            TableService tableService = new TableService();            DrinkService drinkService = new DrinkService();
+            List<Table> tables = tableService.GetTable();
+
             List<Table> tableStatus = tableService.GetTablesStatus();
             //List<Drink> drinks = drinkService.GetDrinks();
             listViewTableOrder.Items.Clear();
@@ -55,18 +55,18 @@ namespace OrderingSystemUI
                 {
                     ChangeColor(table.TableId, "Sit");
                 }
-            }            
-            //foreach (Table table in tables)
-            //{
-            //    if (table.OrderStatus == "Ready")
-            //    {                    
-            //        ListViewItem li = new ListViewItem(table.OrderStatus);
-            //        li.SubItems.Add(table.TableId.ToString());
-            //        li.SubItems.Add(table.Time.ToString("H:m"));
-            //        li.SubItems.Add(table.OrderId.ToString());
-            //        listViewTableOrder.Items.Add(li);
-            //    }
-            //}
+            }
+            foreach (Table table in tables)
+            {
+                if (table.OrderStatus == "Ready")
+                {
+                    ListViewItem li = new ListViewItem(table.OrderStatus);
+                    li.SubItems.Add(table.TableId.ToString());
+                    li.SubItems.Add(table.Time.ToString("H:m"));
+                    li.SubItems.Add(table.OrderId.ToString());
+                    listViewTableOrder.Items.Add(li);
+                }
+            }
         }
         public void ChangeColor(int number, string btnInput)
         {

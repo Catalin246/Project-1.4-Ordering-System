@@ -296,6 +296,7 @@
             this.whereToPickUpOrder,
             this.time,
             this.orderId});
+            this.listViewTableOrder.FullRowSelect = true;
             this.listViewTableOrder.HideSelection = false;
             this.listViewTableOrder.Location = new System.Drawing.Point(353, 51);
             this.listViewTableOrder.Name = "listViewTableOrder";
