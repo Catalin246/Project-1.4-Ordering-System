@@ -38,5 +38,26 @@ namespace OrderingSystemLogic
         {
             return orderdb.GetOrderIDsByTable(TableID);
         }
+
+        public List<Order> GetAllFoodOrders()
+        {
+            return orderdb.GetFoodOrders();
+        }
+
+        public List<Order> GetAllDrinkOrders()
+        {
+            return orderdb.GetDrinkOrders();
+        }
+
+        public List<Order> GetAllFinishedFoodOrders()
+        {
+            return orderdb.GetFinishedFoodOrders();
+        }
+
+        public List<Order> GetFinishedDrinkOrders()
+        {
+            return orderdb.GetFinishedDrinkOrders();
+        }
+
     }
 }
