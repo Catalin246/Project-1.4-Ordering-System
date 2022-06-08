@@ -40,7 +40,7 @@ namespace OrderingSystemLogic
 
         public void ChangeStatus(OrderedItem item)
         {
-           // orderedItemdb.ChangeStatusToReady(item);
+            orderedItemdb.UpdateStatusToReady(orderedItem);
         }
     }
 }

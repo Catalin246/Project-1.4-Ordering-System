@@ -57,18 +57,18 @@ namespace OrderingSystemDAL
 
                 OrderedItemDao orderedItemsdb = new OrderedItemDao();
 
-                //List<OrderedItem> orderedFoods = orderedItemsdb.GetFoodOrdersByOrderId(order.OrderId);
-                //List<OrderedItem> orderedDrinks = orderedItemsdb.GetDrinkOrdersByOrderId(order.OrderId);
-                
-                //foreach (OrderedItem food in orderedFoods)
-                //{
-                //    order.OrderedItems.Add(food);
-                //}
-                    
-                //foreach (OrderedItem drink in orderedDrinks)
-                //{
-                //    order.OrderedItems.Add(drink);
-                //}
+                List<OrderedItem> orderedFoods = orderedItemsdb.GetFoodOrdersByOrderId(order.OrderId);
+                List<OrderedItem> orderedDrinks = orderedItemsdb.GetDrinkOrdersByOrderId(order.OrderId);
+
+                foreach (OrderedItem food in orderedFoods)
+                {
+                    order.OrderedItems.Add(food);
+                }
+
+                foreach (OrderedItem drink in orderedDrinks)
+                {
+                    order.OrderedItems.Add(drink);
+                }
 
                 orders.Add(order);
             }
@@ -80,8 +80,8 @@ namespace OrderingSystemDAL
             conn.Open();
             try
             {
-                SqlCommand command = new SqlCommand("INSERT INTO dbo.[Order] " +
-                        "VALUES(@Order_Id, @Order_Time, @Table_Id, @Order_Status);", conn);
+                SqlCommand command = new SqlCommand(" INSERT INTO dbo.[Order] " +
+                        " VALUES(@Order_Id, @Order_Time, @Table_Id, @Order_Status);", conn);
 
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);
                 command.Parameters.AddWithValue("@Order_Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
@@ -100,7 +100,7 @@ namespace OrderingSystemDAL
         // Gets list of Order IDs with associated Table ID
         public List<Order> GetOrderIDsByTable(int tableID)
         {
-            string query = "SELECT Order_Id FROM dbo.[Order] WHERE Table_Id = @tableID;";
+            string query = "SELECT Order_Id FROM dbo.[Order] WHERE Table_Id = @tableID; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTableOnlyOrderID(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -121,32 +121,32 @@ namespace OrderingSystemDAL
         }
         public List<Order> GetFoodOrders()
         {
-            string query = "SELECT DISTINCT O.Order_Id, Table_Id, Order_Time " +
-                "FROM dbo.[Order] AS O " +
-                "JOIN OrderedItem AS OI ON O.Order_Id = OI.Order_Id " +
-                "WHERE OI.Ordered_Item_Status = 'Preparing' " +
-                "ORDER BY O.Order_Id, O.Table_Id, O.Order_Time";
+            string query = " SELECT DISTINCT O.Order_Id, Table_Id, Order_Time " +
+                " FROM dbo.[Order] AS O " +
+                " JOIN OrderedItem AS OI ON O.Order_Id = OI.Order_Id " +
+                " WHERE OI.Ordered_Item_Status = 'Preparing' " +
+                " ORDER BY O.Order_Id, O.Table_Id, O.Order_Time";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadFoodTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
         public List<Order> GetFinishedFoodOrders()
         {
-            string query = "SELECT DISTINCT O.Order_Id, Table_Id, Order_Time " +
-                "FROM dbo.[ORDER] AS O " +
-                "JOIN OrderedItem AS OI ON O.Order_Id = OI.Order_Id " +
-                "WHERE OI.Ordered_Item_Status != 'Preparing' " +
-                "ORDER BY O.Order_Id, O.Table_Id, O.Order_Time;";
+            string query = " SELECT DISTINCT O.Order_Id, Table_Id, Order_Time " +
+                " FROM dbo.[ORDER] AS O " +
+                " JOIN OrderedItem AS OI ON O.Order_Id = OI.Order_Id " +
+                " WHERE OI.Ordered_Item_Status != 'Preparing' " +
+                " ORDER BY O.Order_Id, O.Table_Id, O.Order_Time;";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadFoodTables(ExecuteSelectQuery(query, sqlParameters));
         }
         public List<Order> GetDrinkOrders()
         {
             string query = "SELECT DISTINCT O.Order_Id, Table_Id, Order_Time " +
-                "FROM dbo.[ORDER] as O " +
-                "JOIN OrderedItem AS OI ON O.Order_Id = OI.Order_Id " +
-                "WHERE oi.Ordered_Item_Status = 'Preparing' " +
-                "ORDER BY o.Order_Id, o.Table_Id, o.Order_Time;";
+                " FROM dbo.[ORDER] as O " +
+                " JOIN OrderedItem AS OI ON O.Order_Id = OI.Order_Id " +
+                " WHERE oi.Ordered_Item_Status = 'Preparing' " +
+                " ORDER BY o.Order_Id, o.Table_Id, o.Order_Time;";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDrinkTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -154,10 +154,10 @@ namespace OrderingSystemDAL
         public List<Order> GetFinishedDrinkOrders()
         {
             string query = "SELECT DISTINCT O.Order_Id, Table_Id, Order_Time " +
-                "FROM dbo.[ORDER] as O " +
-                "JOIN OrderedItem AS OI ON O.Order_Id = OI.Order_Id " +
-                "WHERE OI.Ordered_Item_Status != 'Preparing' " +
-                "ORDER BY o.Order_Id, o.Table_Id, o.Order_Time;";
+                " FROM dbo.[ORDER] as O " +
+                " JOIN OrderedItem AS OI ON O.Order_Id = OI.Order_Id " +
+                " WHERE OI.Ordered_Item_Status != 'Preparing' " +
+                " ORDER BY o.Order_Id, o.Table_Id, o.Order_Time;";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDrinkTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -179,6 +179,13 @@ namespace OrderingSystemDAL
 
                 OrderedItemDao orderedItemdb = new OrderedItemDao();
 
+                List<OrderedItem> orderedFoods = orderedItemdb.GetFoodOrdersByOrderId(order.OrderId);
+
+                foreach (OrderedItem food in orderedFoods)
+                {
+                    order.OrderedItems.Add(food);
+                }
+                
                 foodOrders.Add(order);
             }
             return foodOrders;
@@ -199,6 +206,13 @@ namespace OrderingSystemDAL
                 order.OrderedItems = new List<OrderedItem>();
 
                 OrderedItemDao orderedItemdb = new OrderedItemDao();
+
+                List<OrderedItem> orderedDrinks = orderedItemdb.GetDrinkOrdersByOrderId(order.OrderId);
+
+                foreach (OrderedItem food in orderedDrinks)
+                {
+                    order.OrderedItems.Add(food);
+                }
 
                 drinkOrders.Add(order);
             }
