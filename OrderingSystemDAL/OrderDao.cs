@@ -179,13 +179,6 @@ namespace OrderingSystemDAL
 
                 OrderedItemDao orderedItemdb = new OrderedItemDao();
 
-                //List<OrderedItem> orderedFoods = orderedItemdb.GetFoodOrdersByOrderId(order.OrderId);
-
-                //foreach (OrderedItem food in orderedFoods)
-                //{
-                //    order.OrderedItems.Add(food);
-                //}
-                
                 foodOrders.Add(order);
             }
             return foodOrders;
@@ -206,13 +199,6 @@ namespace OrderingSystemDAL
                 order.OrderedItems = new List<OrderedItem>();
 
                 OrderedItemDao orderedItemdb = new OrderedItemDao();
-
-                //List<OrderedItem> orderedDrinks = orderedItemdb.GetDrinkOrdersByOrderId(order.OrderId);
-
-                //foreach (OrderedItem food in orderedDrinks)
-                //{
-                //    order.OrderedItems.Add(food);
-                //}
 
                 drinkOrders.Add(order);
             }

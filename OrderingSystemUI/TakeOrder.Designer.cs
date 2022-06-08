@@ -34,7 +34,7 @@
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTableNumber = new System.Windows.Forms.Label();
             this.listViewOrderItems = new System.Windows.Forms.ListView();
-            this.Name = new System.Windows.Forms.ColumnHeader();
+            this.Name_Item = new System.Windows.Forms.ColumnHeader();
             this.Price = new System.Windows.Forms.ColumnHeader();
             this.Amount = new System.Windows.Forms.ColumnHeader();
             this.Note = new System.Windows.Forms.ColumnHeader();
@@ -58,6 +58,7 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlTakeOrder = new System.Windows.Forms.Panel();
+            this.btnModify = new System.Windows.Forms.Button();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.menuStrip1.SuspendLayout();
             this.pnlTakeOrder.SuspendLayout();
@@ -111,7 +112,7 @@
             // listViewOrderItems
             // 
             this.listViewOrderItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Name,
+            this.Name_Item,
             this.Price,
             this.Amount,
             this.Note});
@@ -126,10 +127,10 @@
             this.listViewOrderItems.View = System.Windows.Forms.View.Details;
             this.listViewOrderItems.DoubleClick += new System.EventHandler(this.listViewOrderItems_DoubleClick);
             // 
-            // Name
+            // Name_Item
             // 
-            this.Name.Text = "Item Name";
-            this.Name.Width = 150;
+            this.Name_Item.Text = "Item Name";
+            this.Name_Item.Width = 150;
             // 
             // Price
             // 
@@ -153,7 +154,7 @@
             this.btnTake.Location = new System.Drawing.Point(26, 525);
             this.btnTake.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnTake.Name = "btnTake";
-            this.btnTake.Size = new System.Drawing.Size(280, 55);
+            this.btnTake.Size = new System.Drawing.Size(226, 55);
             this.btnTake.TabIndex = 7;
             this.btnTake.Text = "Take order";
             this.btnTake.UseVisualStyleBackColor = false;
@@ -164,10 +165,10 @@
             this.btnCancel.BackColor = System.Drawing.Color.Red;
             this.btnCancel.Enabled = false;
             this.btnCancel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCancel.Location = new System.Drawing.Point(794, 525);
+            this.btnCancel.Location = new System.Drawing.Point(854, 525);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(280, 55);
+            this.btnCancel.Size = new System.Drawing.Size(220, 55);
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel order";
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -260,10 +261,10 @@
             this.btnPayment.BackColor = System.Drawing.Color.Teal;
             this.btnPayment.Enabled = false;
             this.btnPayment.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnPayment.Location = new System.Drawing.Point(406, 525);
+            this.btnPayment.Location = new System.Drawing.Point(579, 525);
             this.btnPayment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(280, 55);
+            this.btnPayment.Size = new System.Drawing.Size(220, 55);
             this.btnPayment.TabIndex = 27;
             this.btnPayment.Text = "Pay";
             this.btnPayment.UseVisualStyleBackColor = false;
@@ -353,6 +354,7 @@
             // 
             // pnlTakeOrder
             // 
+            this.pnlTakeOrder.Controls.Add(this.btnModify);
             this.pnlTakeOrder.Controls.Add(this.lblEmployeeName);
             this.pnlTakeOrder.Controls.Add(this.btnDesserts);
             this.pnlTakeOrder.Controls.Add(this.btnMains);
@@ -372,6 +374,19 @@
             this.pnlTakeOrder.Name = "pnlTakeOrder";
             this.pnlTakeOrder.Size = new System.Drawing.Size(1109, 606);
             this.pnlTakeOrder.TabIndex = 4;
+            // 
+            // btnModify
+            // 
+            this.btnModify.BackColor = System.Drawing.Color.Teal;
+            this.btnModify.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnModify.Location = new System.Drawing.Point(301, 525);
+            this.btnModify.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnModify.Name = "btnModify";
+            this.btnModify.Size = new System.Drawing.Size(220, 55);
+            this.btnModify.TabIndex = 31;
+            this.btnModify.Text = "Modify Order";
+            this.btnModify.UseVisualStyleBackColor = false;
+            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
             // 
             // menuStrip2
             // 
@@ -394,8 +409,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlTakeOrder);
             this.Margin = new System.Windows.Forms.Padding(2);
-            //this.Name = "TakeOrder";
-            this.Load += new System.EventHandler(this.TakeOrder_Load);
+            this.Name = "TakeOrder";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnlTakeOrder.ResumeLayout(false);
@@ -413,7 +427,7 @@
         private System.Windows.Forms.ToolStripMenuItem tableViewToolStripMenuItem;
         private System.Windows.Forms.Label lblTableNumber;
         private System.Windows.Forms.ListView listViewOrderItems;
-        private System.Windows.Forms.ColumnHeader Name;
+        private System.Windows.Forms.ColumnHeader Name_Item;
         private System.Windows.Forms.ColumnHeader Price;
         private System.Windows.Forms.ColumnHeader Amount;
         private System.Windows.Forms.ColumnHeader Note;
@@ -422,7 +436,6 @@
         private System.Windows.Forms.ListView listViewMenuItems;
         private System.Windows.Forms.ColumnHeader ItemName;
         private System.Windows.Forms.ColumnHeader ItemPrice;
-        private System.Windows.Forms.ColumnHeader Category;
         private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnMinus;
@@ -440,5 +453,6 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader Type;
+        private System.Windows.Forms.Button btnModify;
     }
 }

@@ -27,6 +27,11 @@ namespace OrderingSystemLogic
             return orderedItemdb.GetOrderedItemsByOrder(orderID);
         }
 
+        public void UpdateAmount(OrderedItem orderedITem, int orderId)
+        {
+            orderedItemdb.UpdateAmount(orderedITem, orderId);
+        }
+
         //public List<OrderedItem> GetFoodOrders()
         //{
         //    //List<OrderedItem> orderedFoods = orderedItemdb.GetAllFoodOrders();

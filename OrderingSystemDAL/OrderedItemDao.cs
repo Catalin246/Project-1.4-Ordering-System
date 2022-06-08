@@ -147,6 +147,22 @@ namespace OrderingSystemDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
+        public void UpdateAmount(OrderedItem orderedITem, int orderId)
+        {
+            string query = "UPDATE OrderedItem " +
+                " SET Ordered_Item_Amount = @Ordered_Item_Amount, Ordered_Item_Note = @Ordered_Item_Note " +
+                "WHERE Item_Id = @Item_Id AND Order_Id = @Order_Id";
+
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@Item_Id", orderedITem.Item.ItemId),
+                new SqlParameter("@Order_Id", orderId),
+                new SqlParameter("@Ordered_Item_Amount", orderedITem.Amount),
+                new SqlParameter("@Ordered_Item_Note", orderedITem.Note)
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
         //private List<> ReadKitchenTables()
         //{
         //    //i will fill in this
