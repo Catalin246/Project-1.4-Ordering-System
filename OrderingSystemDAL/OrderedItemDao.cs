@@ -325,9 +325,7 @@ namespace OrderingSystemDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        //private List<> ReadKitchenTables()
-        //{
-        //    //i will fill in this
+        
         //}
 
         public List<OrderedItem> GetPreparingFoodItemsFromDatabase()
@@ -404,7 +402,7 @@ namespace OrderingSystemDAL
 
         public void ChangeFoodAndDrinkStatusToReady(int orderNo, string itemName)
         {
-            string query = "UPDATE OrderedItem  SET Ordered_Item_Status = 'Preparing'  from OrderedItem as oi join item as i on oi.Item_Id = Item_Id       WHERE ItemName = @itemName AND Order_Id = @orderId";
+            string query = "UPDATE OrderedItem  SET Ordered_Item_Status = 'Ready' from OrderedItem as oi join item as i on oi.Item_Id = Item_Id WHERE ItemName = @itemName AND Order_Id = @orderId";
 
             SqlParameter[] sqlParameters =
             {

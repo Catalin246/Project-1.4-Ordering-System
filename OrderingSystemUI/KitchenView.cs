@@ -28,11 +28,10 @@ namespace OrderingSystemUI
             
             LoadListView();
 
-            if (listViewKitchen.SelectedItems.Count < 1)
-            {
-                btnReadyToServe.Enabled = false;
-                btnViewOrderNote.Enabled = false;
-            }
+            
+            btnReadyToServe.Enabled = false;
+            btnViewOrderNote.Enabled = false;
+            
 
             comboBoxShowOrders.Items.Clear();
             comboBoxShowOrders.Items.Add("Running Orders");
@@ -132,24 +131,26 @@ namespace OrderingSystemUI
                 {
                     return;
                 }
-
-                btnReadyToServe.Enabled = true;
-
-                if (listViewKitchen.SelectedItems.Count > 1)
-                {
-                    btnViewOrderNote.Enabled = false;
-                }
                 else
                 {
-                    OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+                    btnReadyToServe.Enabled = true;
 
-                    if (selectedItem.Note == "No")
+                    if (listViewKitchen.SelectedItems.Count > 1)
                     {
                         btnViewOrderNote.Enabled = false;
                     }
                     else
                     {
-                        btnViewOrderNote.Enabled = true;
+                        OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+
+                        if (selectedItem.Note == "No")
+                        {
+                            btnViewOrderNote.Enabled = false;
+                        }
+                        else
+                        {
+                            btnViewOrderNote.Enabled = true;
+                        }
                     }
                 }
             }
@@ -249,6 +250,8 @@ namespace OrderingSystemUI
 
                     orderedItemService.ChangeOrderStatusToReady(orderId, itemName);                    
                 }
+
+                btnReadyToServe.Enabled = false;
 
                 LoadListView();
             }
