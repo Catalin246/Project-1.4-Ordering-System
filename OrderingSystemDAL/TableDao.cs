@@ -13,7 +13,7 @@ namespace OrderingSystemDAL
     {
         public List<Table> GetAllTable()
         {
-            string query = "SELECT t.[Table_Id], O.Order_Time, O.Order_Status, O.Order_Id,t.Table_Status FROM dbo.[Table] as T join dbo.[Order] as O on T.Table_Id = O.Table_Id";
+            string query = "SELECT t.[Table_Id], O.Order_Time, i.Ordered_Item_Status, O.Order_Id,t.Table_Status,I.Item_Id FROM dbo.[Table] as T join dbo.[Order] as O on T.Table_Id = O.Table_Id join dbo.[OrderedItem] as I on i.Order_Id = o.Order_Id;";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -28,7 +28,8 @@ namespace OrderingSystemDAL
                     table.OrderId = (int)dr["Order_Id"];
                     table.Time = (DateTime)dr["Order_Time"];
                     table.TableId = (int)dr["Table_Id"];
-                    table.OrderStatus = (string)dr["Order_Status"];
+                    table.ItemId = (int)dr["Item_Id"];
+                    table.OrderStatus = (string)dr["Ordered_Item_Status"];
                     table.TableStatus = (string)dr["Table_Status"];
                 };
                 tables.Add(table);
@@ -75,10 +76,11 @@ namespace OrderingSystemDAL
         }
 
         public void Served(Table servedOrder)
-        {            
-            string query = "UPDATE dbo.[Order] SET Order_Status = 'Served' WHERE Order_Id = @OrderId; ";
-            SqlParameter[] sqlParameters = new SqlParameter[1];
+        {
+            string query = "UPDATE dbo.OrderedItem SET Ordered_Item_Status = 'Served' WHERE Order_Id = @OrderId AND Item_Id = @ItemId;";
+            SqlParameter[] sqlParameters = new SqlParameter[2];
             sqlParameters[0] = new SqlParameter("@OrderId", servedOrder.OrderId);
+            sqlParameters[1] = new SqlParameter("@ItemId", servedOrder.ItemId);
             ExecuteEditQuery(query, sqlParameters);
         }
     }
