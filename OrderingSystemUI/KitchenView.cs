@@ -113,6 +113,7 @@ namespace OrderingSystemUI
                     list.SubItems.Add(ShowNoteTextWithNotification(orderitem.Note));
                     list.SubItems.Add(orderitem.Status.ToString());
 
+
                     list.Tag = orderitem;
                     listViewKitchen.Items.Add(list);
                 }

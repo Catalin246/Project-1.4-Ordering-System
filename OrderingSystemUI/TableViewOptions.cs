@@ -28,15 +28,14 @@ namespace OrderingSystemUI
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            //showPanel("Take Order");
             //Show take order form (catalin;)))  
-            ACustomerIsSitting(number, "sit");
+            ACustomerIsSitting(number, "order");
+            TableService tableService = new TableService();
+            tableService.Order(number);
             tableView.Hide();
             this.Hide();
-            //TakeOrder takeOrder = new TakeOrder(number);
             takeOrder.tableView = tableView;
             takeOrder.Show();
-            // tableView.Hide();
         }
 
         private void btnSeatingACustomer_Click(object sender, EventArgs e)
@@ -52,9 +51,9 @@ namespace OrderingSystemUI
             TableService tableService = new TableService();
             tableService.CancelSit(number);
         }
-        private void ACustomerIsSitting(int number, string sit)
+        private void ACustomerIsSitting(int number, string input)
         {
-            tableView.ChangeColor(number, "Sit"); 
+            tableView.ChangeColor(number, input); 
             TableService tableService = new TableService();
             tableService.Sit(number);
         }

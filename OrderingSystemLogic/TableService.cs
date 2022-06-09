@@ -34,6 +34,10 @@ namespace OrderingSystemLogic
         {
             tabledb.Sit(number);
         }
+        public void Order(int number)
+        {
+            tabledb.Order(number);
+        }
         public void CancelSit(int number)
         {
             tabledb.CancelSit(number);

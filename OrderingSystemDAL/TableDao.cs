@@ -55,9 +55,15 @@ namespace OrderingSystemDAL
             }
             return tables;
         }
-        public void Sit(int number)
+        public void Order(int number)
         {
             string query = $"UPDATE dbo.[Table] SET Table_Status = 'Close' WHERE Table_Id = {number}; ";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        public void Sit(int number)
+        {
+            string query = $"UPDATE dbo.[Table] SET Table_Status = 'Sit' WHERE Table_Id = {number}; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             ExecuteEditQuery(query, sqlParameters);
         }
@@ -69,9 +75,10 @@ namespace OrderingSystemDAL
         }
 
         public void Served(Table servedOrder)
-        {
-            string query = "UPDATE dbo.[Order] SET Order_Status = served  WHERE Order_Id = @OrderId; ";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+        {            
+            string query = "UPDATE dbo.[Order] SET Order_Status = 'Served' WHERE Order_Id = @OrderId; ";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@OrderId", servedOrder.OrderId);
             ExecuteEditQuery(query, sqlParameters);
         }
     }
