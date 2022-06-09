@@ -27,9 +27,9 @@ namespace OrderingSystemLogic
             return bills;
         }
 
-        public void CloseBill(int billID)
+        public void CloseBill(Bill bill, float splitAmong = 1)
         {
-            // connect to database and set bill.ClosedBill =  1
+            billDb.CloseBill(bill, splitAmong);
         }
 
     }

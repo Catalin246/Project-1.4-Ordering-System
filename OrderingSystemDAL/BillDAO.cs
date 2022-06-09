@@ -56,10 +56,15 @@ namespace OrderingSystemDAL
             return bills;
         }
 
-        public void CloseBill(Bill bill)
+        public void CloseBill(Bill bill, float splitAmong = 1)
         {
-            string query = "INSERT INTO dbo.Bill VALUES(@bill.PaymentType, @bill.BillFeedback, @bill.Tip, 1)";
+            string query = "INSERT INTO dbo.Bill VALUES(@PaymentType, @BillFeedback, @BillTotal, @Tip, @TableID, 1)";
             SqlParameter[] sqlParameters = new SqlParameter[0];
+            sqlParameters[0] = new SqlParameter("@PaymentType", bill.PaymentType.ToString());
+            sqlParameters[1] = new SqlParameter("@BillFeedback", bill.BillFeedback);
+            sqlParameters[2] = new SqlParameter("@BillTotal", Decimal.Round((decimal)(bill.BillTotalWithoutTip / splitAmong), 2));
+            sqlParameters[3] = new SqlParameter("@Tip", Decimal.Round((decimal)(bill.Tip / splitAmong), 2));
+            sqlParameters[4] = new SqlParameter("@TableID", bill.tableId);
             ExecuteSelectQuery(query, sqlParameters);
         }
 
