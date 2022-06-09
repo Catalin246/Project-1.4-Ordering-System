@@ -79,6 +79,9 @@
             this.lblOrderId = new System.Windows.Forms.Label();
             this.txtEmployee = new System.Windows.Forms.Label();
             this.txtEmployeeName = new System.Windows.Forms.Label();
+            this.lblItemId = new System.Windows.Forms.Label();
+            this.LabelItemId = new System.Windows.Forms.Label();
+            this.labelOrderId = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -448,7 +451,7 @@
             // lblOrderId
             // 
             this.lblOrderId.AutoSize = true;
-            this.lblOrderId.Location = new System.Drawing.Point(365, 401);
+            this.lblOrderId.Location = new System.Drawing.Point(448, 401);
             this.lblOrderId.Name = "lblOrderId";
             this.lblOrderId.Size = new System.Drawing.Size(38, 15);
             this.lblOrderId.TabIndex = 14;
@@ -472,9 +475,40 @@
             this.txtEmployeeName.TabIndex = 16;
             this.txtEmployeeName.Text = "....";
             // 
+            // lblItemId
+            // 
+            this.lblItemId.AutoSize = true;
+            this.lblItemId.Location = new System.Drawing.Point(448, 432);
+            this.lblItemId.Name = "lblItemId";
+            this.lblItemId.Size = new System.Drawing.Size(38, 15);
+            this.lblItemId.TabIndex = 17;
+            this.lblItemId.Text = "label1";
+            this.lblItemId.Click += new System.EventHandler(this.txtItemId_Click);
+            // 
+            // LabelItemId
+            // 
+            this.LabelItemId.AutoSize = true;
+            this.LabelItemId.Location = new System.Drawing.Point(365, 432);
+            this.LabelItemId.Name = "LabelItemId";
+            this.LabelItemId.Size = new System.Drawing.Size(50, 15);
+            this.LabelItemId.TabIndex = 18;
+            this.LabelItemId.Text = "Item Id :";
+            // 
+            // labelOrderId
+            // 
+            this.labelOrderId.AutoSize = true;
+            this.labelOrderId.Location = new System.Drawing.Point(365, 401);
+            this.labelOrderId.Name = "labelOrderId";
+            this.labelOrderId.Size = new System.Drawing.Size(56, 15);
+            this.labelOrderId.TabIndex = 19;
+            this.labelOrderId.Text = "Order Id :";
+            // 
             // TableView
             // 
             this.ClientSize = new System.Drawing.Size(812, 456);
+            this.Controls.Add(this.labelOrderId);
+            this.Controls.Add(this.LabelItemId);
+            this.Controls.Add(this.lblItemId);
             this.Controls.Add(this.txtEmployeeName);
             this.Controls.Add(this.txtEmployee);
             this.Controls.Add(this.lblOrderId);
@@ -555,5 +589,8 @@
         private System.Windows.Forms.Label lblOrderId;
         private System.Windows.Forms.Label txtEmployee;
         private System.Windows.Forms.Label txtEmployeeName;
+        private System.Windows.Forms.Label lblItemId;
+        private System.Windows.Forms.Label LabelItemId;
+        private System.Windows.Forms.Label labelOrderId;
     }
 }

@@ -198,6 +198,7 @@ namespace OrderingSystemUI
             ListViewItem selectedItem = listViewTableOrder.SelectedItems[0];
             Table selectedOrder = (Table)selectedItem.Tag;
             lblOrderId.Text = selectedOrder.OrderId.ToString();
+            lblItemId.Text = selectedOrder.ItemId.ToString();
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -214,10 +215,11 @@ namespace OrderingSystemUI
 
         private void btnServed_Click(object sender, EventArgs e)
         {
-
             Table selectedItem = new Table();
             TableService tableService = new TableService();
             selectedItem.OrderId = int.Parse(lblOrderId.Text);
+            selectedItem.ItemId = int.Parse(lblItemId.Text);
+            tableService.Served(selectedItem);
             listViewTableOrder.Refresh();
             showPanel("TableView");
         }
@@ -236,6 +238,11 @@ namespace OrderingSystemUI
         private void TableView_Load(object sender, EventArgs e)
         {
             txtEmployeeName.Text = employeeName;
+        }
+
+        private void txtItemId_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
