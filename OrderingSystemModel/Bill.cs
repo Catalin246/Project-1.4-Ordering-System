@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemModel
 {
-    public enum PaymentType{ cash, creditCard, debitCard}
+    public enum PaymentType{ cash, creditCard, debitCard, mixedPayment}
     public class Bill
     {
 
