@@ -86,7 +86,7 @@ namespace OrderingSystemDAL
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);
                 command.Parameters.AddWithValue("@Order_Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 command.Parameters.AddWithValue("@Table_Id", order.TableId);
-                command.Parameters.AddWithValue("@Order_Status", "Preaparing");
+                command.Parameters.AddWithValue("@Order_Status", "Preparing");
 
                 int nrOfRowsAffected = command.ExecuteNonQuery();
             }
