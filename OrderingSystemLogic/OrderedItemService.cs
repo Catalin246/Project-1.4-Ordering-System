@@ -32,15 +32,28 @@ namespace OrderingSystemLogic
             orderedItemdb.UpdateAmount(orderedITem, orderId);
         }
 
-        //public List<OrderedItem> GetFoodOrders()
-        //{
-        //    //List<OrderedItem> orderedFoods = orderedItemdb.GetAllFoodOrders();
-        //    return orderedFoods;
-        //}
-
-        public void ChangeStatus(OrderedItem item)
+        public List<OrderedItem> GetPreparingFoodItemsFromDaoClass()
         {
-            //orderedItemdb.UpdateStatusToReady(orderedItem);
+            return orderedItemdb.GetPreparingFoodItemsFromDatabase();
+        }
+
+        public List<OrderedItem> GetFinishedFoodItemsFromDaoClass()
+        {
+            return orderedItemdb.GetFinishedFoodItemsFromDatabase();
+        }
+
+        public List<OrderedItem> GetPreparingDrinkItemsFromDaoClass()
+        {
+            return orderedItemdb.GetPreparingDrinkItemsFromDatabase();
+        }
+        public List<OrderedItem> GetFinishedDrinkItemsFromDaoClass()
+        {
+            return orderedItemdb.GetFinishedDrinkItemsFromDatabase();
+        }
+
+        public void ChangeOrderStatusToReady(int orderNo, int ItemNo)
+        {
+            orderedItemdb.ChangeFoodAndDrinkStatusToReady(orderNo, ItemNo);
         }
     }
 }
