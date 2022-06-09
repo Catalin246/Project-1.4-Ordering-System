@@ -14,10 +14,11 @@ namespace OrderingSystemUI
 {
     public partial class TableView : Form
     {
-        private int number;
-        List<TakeOrder> takeOrders = new List<TakeOrder>();
-        public TableView()
+        private List<TakeOrder> takeOrders = new List<TakeOrder>();
+        private string employeeName;
+        public TableView(string employeeName)
         {
+            this.employeeName = employeeName;
             InitializeComponent();
             ShowListView();
             for (int i = 0; i < 10; i++)
@@ -42,8 +43,7 @@ namespace OrderingSystemUI
         }
         public void ShowListView()
         {
-            TableService tableService = new TableService();            
-            DrinkService drinkService = new DrinkService();
+            TableService tableService = new TableService();
             List<Table> tables = tableService.GetTable();
 
             List<Table> tableStatus = tableService.GetTablesStatus();
@@ -53,7 +53,18 @@ namespace OrderingSystemUI
             {
                 if (table.TableStatus == "Close")
                 {
-                    ChangeColor(table.TableId, "Sit");
+                    ChangeColor(table.TableId, "ordered");
+                }
+                switch (table.TableStatus)
+                {
+                    case "Close":
+                        ChangeColor(table.TableId, "ordered");
+                        break;
+                    case "Sit":
+                        ChangeColor(table.TableId, "Sit");
+                        break;
+                    default:
+                        break;
                 }
             }
             foreach (Table table in tables)
@@ -62,8 +73,10 @@ namespace OrderingSystemUI
                 {
                     ListViewItem li = new ListViewItem(table.OrderStatus);
                     li.SubItems.Add(table.TableId.ToString());
+                    li.SubItems.Add((string)table.OrderStatus);
                     li.SubItems.Add(table.Time.ToString("H:m"));
                     li.SubItems.Add(table.OrderId.ToString());
+                    li.Tag = table;
                     listViewTableOrder.Items.Add(li);
                 }
             }
@@ -79,6 +92,9 @@ namespace OrderingSystemUI
                     switch (btnInput.ToLower())
                     {
                         case "sit":
+                            buttons[i].BackColor = Color.Orange;
+                            break;
+                        case "ordered":
                             buttons[i].BackColor = Color.Red;
                             break;
                         default:
@@ -177,7 +193,11 @@ namespace OrderingSystemUI
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (listViewTableOrder.SelectedItems.Count == 0)
+                return;
+            ListViewItem selectedItem = listViewTableOrder.SelectedItems[0];
+            Table selectedOrder = (Table)selectedItem.Tag;
+            lblOrderId.Text = selectedOrder.OrderId.ToString();
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -194,12 +214,10 @@ namespace OrderingSystemUI
 
         private void btnServed_Click(object sender, EventArgs e)
         {
-            if (listViewTableOrder.SelectedItems.Count == 0)
-                return;
+
             Table selectedItem = new Table();
             TableService tableService = new TableService();
-            selectedItem.OrderId = 
-            tableService.Served(selectedItem);
+            selectedItem.OrderId = int.Parse(lblOrderId.Text);
             listViewTableOrder.Refresh();
             showPanel("TableView");
         }
@@ -208,6 +226,16 @@ namespace OrderingSystemUI
         {
             Payment paymentView = new Payment();
             paymentView.Show();
+        }
+
+        private void txtBoxOrderId_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TableView_Load(object sender, EventArgs e)
+        {
+            txtEmployeeName.Text = employeeName;
         }
     }
 }

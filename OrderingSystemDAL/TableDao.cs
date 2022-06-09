@@ -55,9 +55,15 @@ namespace OrderingSystemDAL
             }
             return tables;
         }
-        public void Sit(int number)
+        public void Order(int number)
         {
             string query = $"UPDATE dbo.[Table] SET Table_Status = 'Close' WHERE Table_Id = {number}; ";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        public void Sit(int number)
+        {
+            string query = $"UPDATE dbo.[Table] SET Table_Status = 'Sit' WHERE Table_Id = {number}; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             ExecuteEditQuery(query, sqlParameters);
         }

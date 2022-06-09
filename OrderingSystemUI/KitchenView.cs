@@ -119,11 +119,12 @@ namespace OrderingSystemUI
                 foreach (ListViewItem item in listViewKitchen.SelectedItems)
                 {
                     orderedItemService.UpdateStatusReady((OrderedItem)item.Tag);
+                    //Table(item);
                 }
 
                 LoadListView();
             }
-
+            
         }
 
         private void listViewKitchen_SelectedIndexChanged(object sender, EventArgs e)

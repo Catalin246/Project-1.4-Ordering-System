@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,27 +32,46 @@ namespace OrderingSystemUI
                     lblwrongPasscode.Text = "Please enter your passcode";                
                 Username = txtBoxUsername.Text;
                 Passcode = txtBoxPasscode.Text;
-                if ((TryUserName(Username) && (TryPasscode(Passcode))))
+                List<Employee> list = new List<Employee>();
+                EmployeeService accountService = new EmployeeService();
+                list = accountService.GetAllEmployee();
+                foreach (Employee item in list)
                 {
-                    TableView tableView = new TableView();
-                    tableView.Show();
-                    this.Hide();
-                    //Login login = new Login();
-                    //login.Hide();
+                    //if (item.EmployeePassword == TryPasscode(Passcode, item.salt).Digest && TryUserName(Username, list))
+                    {
+                        EmployeeRole(item.EmployeeRole, item.EmployeeName);
+                    }
                 }
             }
             catch (Exception)
             {
 
-                throw;
             }
         }
-        private bool TryUserName(string username)
+
+        public void EmployeeRole(string employeeRole, string employeeName)
         {
-            List<Employee> list = new List<Employee>();
-            Employee employee = new Employee();
-            EmployeeService accountService = new EmployeeService();
-            list = accountService.GetEmployee();
+            switch (employeeRole)
+            {
+                case "Cook":
+                    KitchenView kitchenView = new KitchenView();
+                    kitchenView.Show();
+                    this.Hide();
+                    break;
+                case "Waiter":
+                    TableView tableView = new TableView(employeeName);
+                    tableView.Show();
+                    this.Hide();
+                    break;
+                case "Bartender":
+                    this.Hide();
+                    break;
+                default:
+                    break;
+            }
+        }
+        private bool TryUserName(string username, List<Employee> list)
+        {
             foreach (Employee em in list)
             {
                 if(username == em.EmployeeName)
@@ -59,18 +79,11 @@ namespace OrderingSystemUI
             }
             return false;
         }
-        private bool TryPasscode(string passcode)
+        private HashWithSaltResult TryPasscode(string passcode, string salt)
         {
-            List<Employee> list = new List<Employee>();
-            Employee employee = new Employee();
-            EmployeeService accountService = new EmployeeService();
-            list = accountService.GetEmployee();
-            foreach (Employee em in list)
-            {
-                if(passcode == em.EmployeePassword)
-                    return true;
-            }
-            return false;
+            PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
+            HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
+            return hashResultSha256;
         }
 
     }
