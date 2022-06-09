@@ -16,7 +16,6 @@ namespace OrderingSystemUI
     {
         private int number;
         List<TakeOrder> takeOrders = new List<TakeOrder>();
-
         public TableView()
         {
             InitializeComponent();
@@ -43,7 +42,8 @@ namespace OrderingSystemUI
         }
         public void ShowListView()
         {
-            TableService tableService = new TableService();            DrinkService drinkService = new DrinkService();
+            TableService tableService = new TableService();            
+            DrinkService drinkService = new DrinkService();
             List<Table> tables = tableService.GetTable();
 
             List<Table> tableStatus = tableService.GetTablesStatus();
@@ -196,9 +196,12 @@ namespace OrderingSystemUI
         {
             if (listViewTableOrder.SelectedItems.Count == 0)
                 return;
-            ListViewItem selectedItem = listViewTableOrder.SelectedItems[0];
-            Table table = new Table();
+            Table selectedItem = new Table();
             TableService tableService = new TableService();
+            selectedItem.OrderId = 
+            tableService.Served(selectedItem);
+            listViewTableOrder.Refresh();
+            showPanel("TableView");
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
