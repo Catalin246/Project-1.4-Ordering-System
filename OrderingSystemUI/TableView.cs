@@ -16,9 +16,11 @@ namespace OrderingSystemUI
     {
         private List<TakeOrder> takeOrders = new List<TakeOrder>();
         private string employeeName;
-        public TableView(string employeeName)
+        private string emplyeeRole;
+        public TableView(string employeeName,string emplyeeRole)
         {
             this.employeeName = employeeName;
+            this.emplyeeRole = emplyeeRole;            
             InitializeComponent();
             ShowListView();
             for (int i = 0; i < 10; i++)
@@ -38,14 +40,15 @@ namespace OrderingSystemUI
         {
             if (panelName == "TableView")
             {
-                pnlTableView.Show();
+                ShowListView();
             }
         }
         public void ShowListView()
         {
             TableService tableService = new TableService();
             List<Table> tables = tableService.GetTable();
-
+            List<Food> foods = tableService.GetFood();
+            List<Drink> drinks = tableService.GetDrink();
             List<Table> tableStatus = tableService.GetTablesStatus();
             //List<Drink> drinks = drinkService.GetDrinks();
             listViewTableOrder.Items.Clear();
@@ -67,13 +70,26 @@ namespace OrderingSystemUI
                         break;
                 }
             }
+            listViewTableOrder.Items.Clear();
             foreach (Table table in tables)
             {
                 if (table.OrderStatus == "Ready")
                 {
                     ListViewItem li = new ListViewItem(table.OrderStatus);
                     li.SubItems.Add(table.TableId.ToString());
-                    li.SubItems.Add((string)table.OrderStatus);
+                    foreach (Drink drink in drinks)
+                    {
+                        if (drink.DrinkId == table.ItemId)
+                        {
+                            li.SubItems.Add("Bar");
+                            break;
+                        }
+                        else
+                        { 
+                            li.SubItems.Add("Kitchen");
+                            break;
+                        }
+                    }
                     li.SubItems.Add(table.Time.ToString("H:m"));
                     li.SubItems.Add(table.OrderId.ToString());
                     li.Tag = table;
@@ -221,6 +237,8 @@ namespace OrderingSystemUI
             selectedItem.ItemId = int.Parse(lblItemId.Text);
             tableService.Served(selectedItem);
             listViewTableOrder.Refresh();
+            lblItemId.Text = "";
+            lblOrderId.Text = "";
             showPanel("TableView");
         }
 
@@ -237,12 +255,28 @@ namespace OrderingSystemUI
 
         private void TableView_Load(object sender, EventArgs e)
         {
-            txtEmployeeName.Text = employeeName;
+            btnProfile.Text = employeeName;
+            txtTime.Text = DateTime.Now.ToString("H:mm:ss"); 
+            Timer timer = new Timer();
+            timer.Interval = (10 * 1000); // 10 secs
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
         }
 
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            ShowListView();
+        }    
         private void txtItemId_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Option option = new Option(employeeName,emplyeeRole);
+            option.Show();
+            this.Hide();
         }
     }
 }

@@ -13,5 +13,6 @@ namespace OrderingSystemModel
     public class Food : Item
     {
         public FoodTypes FoodType { get; set; }
+        public int FoodId { get; set; }
     }
 }

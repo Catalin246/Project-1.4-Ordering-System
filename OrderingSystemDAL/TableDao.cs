@@ -83,5 +83,44 @@ namespace OrderingSystemDAL
             sqlParameters[1] = new SqlParameter("@ItemId", servedOrder.ItemId);
             ExecuteEditQuery(query, sqlParameters);
         }
+        public List<Food> GetFood()
+        {
+            string query = "SELECT I.ItemId FROM Item as I JOIN Food as f ON I.ItemId = f.FoodItemId";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadFood(ExecuteSelectQuery(query, sqlParameters));
+        }
+        private List<Food> ReadFood(DataTable dataTable)
+        {
+            List<Food> foods = new List<Food>();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Food food = new Food();
+                {
+                    food.FoodId = (int)dr["ItemId"];
+                };
+                foods.Add(food);
+            }
+            return foods;
+        }
+        public List<Drink> GetDrink()
+        {
+            string query = " SELECT I.ItemId FROM Item as I JOIN Drink as D ON I.ItemId = d.DrinkItemId;";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadDrink(ExecuteSelectQuery(query, sqlParameters));
+        }
+        private List<Drink> ReadDrink(DataTable dataTable)
+        {
+            List<Drink> drinks = new List<Drink>();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Drink drink = new Drink();
+                {
+                    drink.DrinkId = (int)dr["ItemId"];
+                };
+                drinks.Add(drink);
+            }
+            return drinks;
+        }
+
     }
 }

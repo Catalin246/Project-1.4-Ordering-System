@@ -77,11 +77,11 @@
             this.btnTable07 = new System.Windows.Forms.Button();
             this.btnServed = new System.Windows.Forms.Button();
             this.lblOrderId = new System.Windows.Forms.Label();
-            this.txtEmployee = new System.Windows.Forms.Label();
-            this.txtEmployeeName = new System.Windows.Forms.Label();
+            this.txtTime = new System.Windows.Forms.Label();
             this.lblItemId = new System.Windows.Forms.Label();
             this.LabelItemId = new System.Windows.Forms.Label();
             this.labelOrderId = new System.Windows.Forms.Label();
+            this.btnProfile = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -457,23 +457,14 @@
             this.lblOrderId.TabIndex = 14;
             this.lblOrderId.Text = "label1";
             // 
-            // txtEmployee
+            // txtTime
             // 
-            this.txtEmployee.AutoSize = true;
-            this.txtEmployee.Location = new System.Drawing.Point(612, 51);
-            this.txtEmployee.Name = "txtEmployee";
-            this.txtEmployee.Size = new System.Drawing.Size(65, 15);
-            this.txtEmployee.TabIndex = 15;
-            this.txtEmployee.Text = "Employee :";
-            // 
-            // txtEmployeeName
-            // 
-            this.txtEmployeeName.AutoSize = true;
-            this.txtEmployeeName.Location = new System.Drawing.Point(735, 51);
-            this.txtEmployeeName.Name = "txtEmployeeName";
-            this.txtEmployeeName.Size = new System.Drawing.Size(19, 15);
-            this.txtEmployeeName.TabIndex = 16;
-            this.txtEmployeeName.Text = "....";
+            this.txtTime.AutoSize = true;
+            this.txtTime.Location = new System.Drawing.Point(396, 36);
+            this.txtTime.Name = "txtTime";
+            this.txtTime.Size = new System.Drawing.Size(19, 15);
+            this.txtTime.TabIndex = 16;
+            this.txtTime.Text = "....";
             // 
             // lblItemId
             // 
@@ -503,14 +494,24 @@
             this.labelOrderId.TabIndex = 19;
             this.labelOrderId.Text = "Order Id :";
             // 
+            // btnProfile
+            // 
+            this.btnProfile.Location = new System.Drawing.Point(598, 47);
+            this.btnProfile.Name = "btnProfile";
+            this.btnProfile.Size = new System.Drawing.Size(89, 23);
+            this.btnProfile.TabIndex = 20;
+            this.btnProfile.Text = "...";
+            this.btnProfile.UseVisualStyleBackColor = true;
+            this.btnProfile.Click += new System.EventHandler(this.button1_Click);
+            // 
             // TableView
             // 
             this.ClientSize = new System.Drawing.Size(812, 456);
+            this.Controls.Add(this.btnProfile);
             this.Controls.Add(this.labelOrderId);
             this.Controls.Add(this.LabelItemId);
             this.Controls.Add(this.lblItemId);
-            this.Controls.Add(this.txtEmployeeName);
-            this.Controls.Add(this.txtEmployee);
+            this.Controls.Add(this.txtTime);
             this.Controls.Add(this.lblOrderId);
             this.Controls.Add(this.btnServed);
             this.Controls.Add(this.listViewTableOrder);
@@ -587,10 +588,10 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ColumnHeader OrderStatus;
         private System.Windows.Forms.Label lblOrderId;
-        private System.Windows.Forms.Label txtEmployee;
-        private System.Windows.Forms.Label txtEmployeeName;
+        private System.Windows.Forms.Label txtTime;
         private System.Windows.Forms.Label lblItemId;
         private System.Windows.Forms.Label LabelItemId;
         private System.Windows.Forms.Label labelOrderId;
+        private System.Windows.Forms.Button btnProfile;
     }
 }
