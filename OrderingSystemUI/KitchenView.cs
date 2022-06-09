@@ -133,7 +133,16 @@ namespace OrderingSystemUI
                 }
                 else
                 {
-                    btnReadyToServe.Enabled = true;
+                    OrderedItem selected = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+
+                    if (selected.Status != Status.Preparing)
+                    {
+                        btnReadyToServe.Enabled = false;
+                    }
+                    else
+                    {
+                        btnReadyToServe.Enabled = true;
+                    }
 
                     if (listViewKitchen.SelectedItems.Count > 1)
                     {
@@ -141,9 +150,9 @@ namespace OrderingSystemUI
                     }
                     else
                     {
-                        OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+                        //OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
 
-                        if (selectedItem.Note == "No")
+                        if ((selected.Note == "") || (selected.Note == "none"))
                         {
                             btnViewOrderNote.Enabled = false;
                         }
@@ -174,7 +183,7 @@ namespace OrderingSystemUI
 
         private string ShowNoteTextWithNotification(string noteInput)
         {
-            string output = "";
+            string output;
             if (noteInput == "" || noteInput == "none")
             {
                 output = "No";
@@ -240,15 +249,17 @@ namespace OrderingSystemUI
                     return;
                 }
 
-                ListView.SelectedListViewItemCollection selectedItems = listViewKitchen.SelectedItems;
-
-                foreach (ListViewItem item in selectedItems)
+                if (listViewKitchen.SelectedItems.Count > 0)
                 {
-                    OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
-                    int orderId = selectedItem.OrderId;
-                    string itemName = selectedItem.Name;
 
-                    orderedItemService.ChangeOrderStatusToReady(orderId, itemName);                    
+                    for (int i = 0; i < listViewKitchen.SelectedItems.Count; i++)
+                    {
+                        OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[i].Tag;
+                        int orderId = selectedItem.OrderId;
+                        string itemName = selectedItem.Name;
+
+                        orderedItemService.ChangeOrderStatusToReady(orderId, itemName);
+                    }
                 }
 
                 btnReadyToServe.Enabled = false;
