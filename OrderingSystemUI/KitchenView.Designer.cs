@@ -62,6 +62,7 @@
             this.colOrderNote,
             this.colStatus});
             this.listViewKitchen.FullRowSelect = true;
+            this.listViewKitchen.GridLines = true;
             this.listViewKitchen.HideSelection = false;
             this.listViewKitchen.Location = new System.Drawing.Point(3, 89);
             this.listViewKitchen.Name = "listViewKitchen";
