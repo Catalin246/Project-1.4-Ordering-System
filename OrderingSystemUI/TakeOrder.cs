@@ -190,7 +190,7 @@ namespace OrderingSystemUI
 
                 bool contains = false;
                 if (order == null)
-                    order = new Order(1);
+                    order = new Order(tableNumber);
 
                 if (listViewMenuItems.SelectedItems.Count == 0)
                     return;

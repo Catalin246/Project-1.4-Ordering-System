@@ -118,7 +118,7 @@ namespace OrderingSystemUI
             {
                 foreach (ListViewItem item in listViewKitchen.SelectedItems)
                 {
-                    orderedItemService.UpdateStatusReady((OrderedItem)item.Tag);
+                    //orderedItemService.UpdateStatusReady((OrderedItem)item.Tag);
                 }
 
                 LoadListView();
