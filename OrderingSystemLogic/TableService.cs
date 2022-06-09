@@ -42,5 +42,15 @@ namespace OrderingSystemLogic
         {
             tabledb.CancelSit(number);
         }
+        public List<Food> GetFood()
+        {
+            List<Food> foods= tabledb.GetFood();
+            return foods;
+        }
+        public List<Drink> GetDrink()
+        {
+            List<Drink> drinks= tabledb.GetDrink();
+            return drinks;
+        }
     }
 }

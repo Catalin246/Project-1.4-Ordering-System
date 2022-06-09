@@ -59,7 +59,7 @@ namespace OrderingSystemUI
                     this.Hide();
                     break;
                 case "Waiter":
-                    TableView tableView = new TableView(employeeName);
+                    TableView tableView = new TableView(employeeName,employeeRole);
                     tableView.Show();
                     this.Hide();
                     break;
