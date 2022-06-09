@@ -123,16 +123,16 @@ namespace OrderingSystemDAL
             return ReadDrinkTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        //public List<OrderedItem> GetPreparingFoods()
-        //{
-        //    string query = "SELECT I.ItemId, i.ItemName, i.ItemStock,I.ItemPrice, OI.Ordered_Item_Note, F.FoodType, OI.Ordered_Item_Amount " +
-        //        " FROM Item AS I " +
-        //        " JOIN FOOD AS F ON F.FoodItemId = I.ItemId " +
-        //        " JOIN OrderedItem AS OI ON OI.Item_Id = I.ItemId " +
-        //        " WHERE Ordered_Item_Status = 'Preparing'";
-        //    SqlParameter[] sqlParameters = new SqlParameter[0];
-        //    return ReadKitchenTables(ExecuteSelectQuery(query, sqlParameters));
-        //}
+        public List<OrderedItem> GetPreparingFoods()
+        {
+            string query = "SELECT I.ItemId, i.ItemName, i.ItemStock,I.ItemPrice, OI.Ordered_Item_Note, F.FoodType, OI.Ordered_Item_Amount " +
+                " FROM Item AS I " +
+                " JOIN FOOD AS F ON F.FoodItemId = I.ItemId " +
+                " JOIN OrderedItem AS OI ON OI.Item_Id = I.ItemId " +
+                " WHERE Ordered_Item_Status = 'Preparing'";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadKitchenTables(ExecuteSelectQuery(query, sqlParameters));
+        }
 
         public void UpdateStatusToReady(OrderedItem orderedITem)
         {
@@ -148,79 +148,78 @@ namespace OrderingSystemDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        //private List<OrderedItem> ReadKitchenTables(DataTable dataTable)
-        //{
-        //    List<OrderedItem> orderedItems = new List<OrderedItem>();
+        private List<OrderedItem> ReadKitchenTables(DataTable dataTable)
+        {
+            List<OrderedItem> orderedItems = new List<OrderedItem>();
 
-        //    foreach (DataRow dr in dataTable.Rows)
-        //    {
-        //        Food food = new Food()
-        //        {
-        //            ItemId = (int)dr["ItemId"],
-        //            ItemName = (string)dr["ItemName"],
-        //            ItemStock = (int)dr["ItemStock"],
-        //            ItemPrice = (double)dr["ItemPrice"],
-        //            FoodType = MakeFoodTypeEnum((string)dr["FoodType"])
-        //        };
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Food food = new Food()
+                {
+                    ItemId = (int)dr["ItemId"],
+                    ItemName = (string)dr["ItemName"],
+                    ItemStock = (int)dr["ItemStock"],
+                    ItemPrice = (double)dr["ItemPrice"],
+                    FoodType = MakeFoodTypeEnum((string)dr["FoodType"])
+                };
 
-        //        OrderedItem orderedItem = new OrderedItem(food)
-        //        {
-        //            Note = dr["Ordered_Item_Note"].ToString(),
-        //            Amount = (int)dr["Ordered_Item_Amount"],
-        //            OrderId = (int)dr["Order_Id"],
-        //            Status = MakeStatusEnum((string)dr["Ordered_Item_Status"].ToString()),
-        //            FoodCategory = MakeFoodTypeEnum(dr["FoodType"].ToString())
+                OrderedItem orderedItem = new OrderedItem(food)
+                {
+                    Note = dr["Ordered_Item_Note"].ToString(),
+                    Amount = (int)dr["Ordered_Item_Amount"],
+                    OrderId = (int)dr["Order_Id"],
+                    Status = MakeStatusEnum((string)dr["Ordered_Item_Status"].ToString())                    
 
-        //        };
-        //        orderedItems.Add(orderedItem);
-        //    }
-        //    return orderedItems;
-        //}
+                };
+                orderedItems.Add(orderedItem);
+            }
+            return orderedItems;
+        }
 
-        //private List<OrderedItem> ReadBarTables(DataTable dataTable)
-        //{
-        //    List<OrderedItem> orderedItems = new List<OrderedItem>();
+        private List<OrderedItem> ReadBarTables(DataTable dataTable)
+        {
+            List<OrderedItem> orderedItems = new List<OrderedItem>();
 
-        //    foreach (DataRow dr in dataTable.Rows)
-        //    {
-        //        string foodTypeString = (string)dr["FoodType"];
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                string foodTypeString = (string)dr["FoodType"];
 
-        //        Drink2 drink = new Drink2()
-        //        {
-        //            ItemId = (int)dr["ItemId"],
-        //            ItemName = (string)dr["ItemName"],
-        //            ItemStock = (int)dr["ItemStock"],
-        //            ItemPrice = (double)dr["ItemPrice"],
-        //            DrinkCategory = MakeDrinkCategoryEnum((string)dr["DrinkType"])
-        //        };
+                Drink2 drink = new Drink2()
+                {
+                    ItemId = (int)dr["ItemId"],
+                    ItemName = (string)dr["ItemName"],
+                    ItemStock = (int)dr["ItemStock"],
+                    ItemPrice = (double)dr["ItemPrice"],
+                    DrinkCategory = MakeDrinkCategoryEnum((string)dr["DrinkType"])
+                };
 
-        //        OrderedItem orderedItem = new OrderedItem(drink)
-        //        {
-        //            Note = (string)dr["Ordered_Item_Note"],
-        //            Amount = (int)dr["Ordered_Item_Amount"],
-        //            OrderId = (int)dr["Order_Id"],
-        //            Status = MakeStatusEnum((string)dr["Ordered_Item_Status"]),
-        //            DrinkCategory = MakeDrinkCategoryEnum((string)dr["DrinkType"])
-        //        };
-        //        orderedItems.Add(orderedItem);
-        //    }
-        //    return orderedItems;
-        //}
+                OrderedItem orderedItem = new OrderedItem(drink)
+                {
+                    Note = (string)dr["Ordered_Item_Note"],
+                    Amount = (int)dr["Ordered_Item_Amount"],
+                    OrderId = (int)dr["Order_Id"],
+                    Status = MakeStatusEnum((string)dr["Ordered_Item_Status"])
+                };
+                orderedItems.Add(orderedItem);
+            }
+            return orderedItems;
+        }
 
         private Status MakeStatusEnum(string notEnumStatus)
         {
             switch (notEnumStatus)
             {
-                case "BeingPrepared":
+                case "Preparing":
                     return Status.Preparing;
                 case "Ready":
                     return Status.Ready;
-                case "Delivered":
+                case "Served":
                     return Status.Served;
                 case "Paid":
                     return Status.Paid;
-            }
-            return Status.Paid; //the last status
+                default:
+                    return Status.Paid;
+            }            
         }
 
         private FoodTypes MakeFoodTypeEnum(string notEnumType)
@@ -293,22 +292,22 @@ namespace OrderingSystemDAL
             return drinkType;
         }
 
-        //public List<OrderedItem> GetFoodOrdersByOrderId(int orderId)
-        //{
-        //    string query = " SELECT i.ItemId, i.ItemName, i.ItemStock, i.ItemPrice, oi.Ordered_Item_Note, f.FoodType, oi.Ordered_Item_Amount, oi.Order_Id, oi.Ordered_Item_Status FROM dbo.[Item] AS i JOIN Food AS f ON i.ItemId = f.FoodItemId JOIN dbo.[OrderedItem] AS oi ON i.ItemId = oi.Item_Id " +
-        //        " WHERE oi.Order_Id = @orderId";
-        //    SqlParameter[] sqlParameters = new SqlParameter[1];
-        //    sqlParameters[0] = new SqlParameter("@orderId", orderId);
-        //    return ReadKitchenTables(ExecuteSelectQuery(query, sqlParameters));
-        //}
-        //public List<OrderedItem> GetDrinkOrdersByOrderId(int orderId)
-        //{
-        //    string query = "SELECT i.ItemId, i.ItemName, i.ItemStock, i.ItemPrice, oi.Ordered_Item_Note, d.DrinkType, oi.Ordered_Item_Amount, oi.Order_Id, oi.Ordered_Item_Status FROM dbo.[Item] AS i JOIN Drink AS d ON i.ItemId = d.DrinkItemId JOIN dbo.[OrderedItem] AS oi ON i.ItemId = oi.Item_Id " +
-        //        " WHERE oi.Order_Id = @orderId";
-        //    SqlParameter[] sqlParameters = new SqlParameter[1];
-        //    sqlParameters[0] = new SqlParameter("@orderId", orderId);
-        //    return ReadBarTables(ExecuteSelectQuery(query, sqlParameters));
-        //}
+        public List<OrderedItem> GetFoodOrdersByOrderId(int orderId)
+        {
+            string query = " SELECT i.ItemId, i.ItemName, i.ItemStock, i.ItemPrice, oi.Ordered_Item_Note, f.FoodType, oi.Ordered_Item_Amount, oi.Order_Id, oi.Ordered_Item_Status FROM dbo.[Item] AS i JOIN Food AS f ON i.ItemId = f.FoodItemId JOIN dbo.[OrderedItem] AS oi ON i.ItemId = oi.Item_Id " +
+                " WHERE oi.Order_Id = @orderId";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@orderId", orderId);
+            return ReadKitchenTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+        public List<OrderedItem> GetDrinkOrdersByOrderId(int orderId)
+        {
+            string query = "SELECT i.ItemId, i.ItemName, i.ItemStock, i.ItemPrice, oi.Ordered_Item_Note, d.DrinkType, oi.Ordered_Item_Amount, oi.Order_Id, oi.Ordered_Item_Status FROM dbo.[Item] AS i JOIN Drink AS d ON i.ItemId = d.DrinkItemId JOIN dbo.[OrderedItem] AS oi ON i.ItemId = oi.Item_Id " +
+                " WHERE oi.Order_Id = @orderId";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@orderId", orderId);
+            return ReadBarTables(ExecuteSelectQuery(query, sqlParameters));
+        }
 
         public void UpdateAmount(OrderedItem orderedITem, int orderId)
         {
@@ -333,31 +332,30 @@ namespace OrderingSystemDAL
 
         public List<OrderedItem> GetPreparingFoodItemsFromDatabase()
         {
-            string query = "select o.order_id, Table_Id, Order_Time, FoodType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join food as f on f.FoodItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'Preparing' order by o.Order_Id desc";
+            string query = "select o.order_id, Table_Id, Order_Time, f.FoodType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join food as f on f.FoodItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'Preparing' order by o.Order_Time desc";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderedFoodItemTable(ExecuteSelectQuery(query, sqlParameters));
         }
         public List<OrderedItem> GetFinishedFoodItemsFromDatabase()
         {
-            string query = "select o.order_id, Table_Id, Order_Time, DrinkType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join drink as d on d.DrinkItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id  where oi.Ordered_Item_Status = 'Preparing' AND Order_Time >= DATEADD(day, -1, GETDATE()) order by o.Order_Id desc";
+            string query = "select o.order_id, Table_Id, Order_Time, f.FoodType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join food as f on f.FoodItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id  where oi.Ordered_Item_Status != 'Preparing' AND Order_Time >= DATEADD(day, -1, GETDATE()) order by o.Order_Time desc";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderedFoodItemTable(ExecuteSelectQuery(query, sqlParameters));
         }       
 
         public List<OrderedItem> GetPreparingDrinkItemsFromDatabase()
         {
-            string query = "select o.order_id, Table_Id, Order_Time, DrinkType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join drink as d on d.DrinkItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'Preparing' order by o.Order_Id desc";
+            string query = "select o.order_id, Table_Id, Order_Time, d.DrinkType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join drink as d on d.DrinkItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'Preparing' order by o.Order_Time desc";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderedDrinkItemTable(ExecuteSelectQuery(query, sqlParameters));
         }
 
         public List<OrderedItem> GetFinishedDrinkItemsFromDatabase()
         {
-            string query = "select o.order_id, Table_Id, Order_Time, DrinkType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join drink as d on d.DrinkItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id  where oi.Ordered_Item_Status = 'Preparing' AND Order_Time >= DATEADD(day, -1, GETDATE()) order by o.Order_Id desc";
+            string query = "select o.order_id, Table_Id, Order_Time, d.DrinkType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join drink as d on d.DrinkItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id  where oi.Ordered_Item_Status != 'Preparing' AND Order_Time >= DATEADD(day, -1, GETDATE()) order by o.Order_Time desc";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderedDrinkItemTable(ExecuteSelectQuery(query, sqlParameters));
         }
-
 
         private List<OrderedItem> ReadOrderedFoodItemTable(DataTable dataTable)
         {
@@ -367,15 +365,14 @@ namespace OrderingSystemDAL
             {
                 OrderedItem item = new OrderedItem()
                 {
-                    OrderId = (int)dr["order_id]"],
+                    OrderId = (int)dr["order_id"],
                     TableId = (int)dr["Table_Id"],
                     OrderTime = (DateTime)dr["Order_Time"],
                     Category = (string)dr["FoodType"],
                     Amount = (int)dr["Ordered_Item_Amount"],
                     Name = (string)dr["ItemName"],
                     Note = (string)dr["Ordered_Item_Note"],
-                    Status = (Status)dr["Ordered_Item_Status"]
-                    
+                    Status = MakeStatusEnum((string)dr["Ordered_Item_Status"])
                 };
                 items.Add(item);
             }
@@ -390,14 +387,14 @@ namespace OrderingSystemDAL
             {
                 OrderedItem item = new OrderedItem()
                 {
-                    OrderId = (int)dr["order_id]"],
+                    OrderId = (int)dr["order_id"],
                     TableId = (int)dr["Table_Id"],
                     OrderTime = (DateTime)dr["Order_Time"],
                     Category = (string)dr["DrinkType"],
                     Amount = (int)dr["Ordered_Item_Amount"],
                     Name = (string)dr["ItemName"],
                     Note = (string)dr["Ordered_Item_Note"],
-                    Status = (Status)dr["Ordered_Item_Status"]
+                    Status = MakeStatusEnum((string)dr["Ordered_Item_Status"])
 
                 };
                 items.Add(item);

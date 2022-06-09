@@ -12,15 +12,19 @@ namespace OrderingSystemUI
         OrderService orderService;
         TableService tableService;
         ItemService itemService;
+        EmployeeService employeeService;
 
-        private bool runningOrFinished;
         public KitchenView()
         {
             InitializeComponent();
             orderedItemService = new OrderedItemService();
             orderService = new OrderService();
             tableService = new TableService();
-            ItemService itemService = new ItemService();
+            itemService = new ItemService();
+            employeeService = new EmployeeService();
+
+            Employee employee = new Employee();
+            //employee = employeeService.GetEmployee();
             
             LoadListView();
 
@@ -34,168 +38,220 @@ namespace OrderingSystemUI
             comboBoxShowOrders.Items.Add("Running Orders");
             comboBoxShowOrders.Items.Add("Finished Orders");
             comboBoxShowOrders.SelectedIndex = 0;
+
+            btnemployeeNme.Text = employee.EmployeeName;            
         }
 
         private void LoadListView()
         {
-            lblTime.Text = DateTime.Now.ToString("HH:mm");
+            try
+            {
+                lblTime.Text = DateTime.Now.ToString("HH:mm");
 
-            if (runningOrFinished == true)
-            {
-                LoadRunningOrders(orderService.GetAllFoodOrders());
+                if (comboBoxShowOrders.SelectedIndex == 0)
+                {
+                    LoadRunningOrders();
+                }
+                else
+                {
+                    LoadFinishedOrders();
+                }
             }
-            else
+            catch (Exception exc)
             {
-                LoadFinishedOrders(orderService.GetAllFinishedFoodOrders());
+                MessageBox.Show(exc.Message);
             }
         }
 
-        private void LoadRunningOrders(List<Order> orders)
+        private void LoadRunningOrders()
         {
-            listViewKitchen.Items.Clear();
+            try
+            {                
+                listViewKitchen.Items.Clear();
+                
+                List<OrderedItem> orderedItemList = orderedItemService.GetPreparingFoodItemsFromDaoClass();
 
-            foreach (Order order in orders)
-            {
-                if (order.OrderTime.Date == DateTime.Now.Date)
+                foreach (OrderedItem orderitem in orderedItemList)
                 {
-                    foreach (OrderedItem orderedItem in order.OrderedItems)
-                    {
-                        if (orderedItem.Status == Status.Preparing)
-                        {
-                            string[] listview = { order.OrderId.ToString(),
-                                order.TableId.ToString(),
-                                ShowTimePassed(order).ToString(),
-                                orderedItem.FoodCategory.ToString(),
-                                orderedItem.Amount.ToString(),
-                                orderedItem.Item.ItemName,
-                                ShowNoteText(orderedItem.Note).ToString(),
-                                orderedItem.Status.ToString()};
+                    ListViewItem list = new ListViewItem((orderitem.OrderId).ToString());
+                    list.SubItems.Add(orderitem.TableId.ToString());
+                    list.SubItems.Add(ShowTimePassed(orderitem.OrderTime));
+                    list.SubItems.Add(orderitem.Category.ToString());
+                    list.SubItems.Add(orderitem.Amount.ToString());
+                    list.SubItems.Add(orderitem.Name);
+                    list.SubItems.Add(ShowNoteTextWithNotification(orderitem.Note));
+                    list.SubItems.Add(orderitem.Status.ToString());
 
-                            ListViewItem li = new ListViewItem(listview);
-                            li.Tag = orderedItem;
-                            listViewKitchen.Items.Add(li);
-                        }
-                    }
-                }
+                    list.Tag = orderitem;
+                    listViewKitchen.Items.Add(list);
+                }                
             }
-
-        }
-
-        public void LoadFinishedOrders(List<Order> orders)
-        {
-            listViewKitchen.Items.Clear();
-
-            foreach (Order order in orders)
+            catch (Exception exc)
             {
-                if (order.OrderTime.Date == DateTime.Now.Date)
-                {
-                    foreach (OrderedItem orderedItem in order.OrderedItems)
-                    {
-                        if (orderedItem.Status != Status.Preparing)
-                        {
-                            string[] listview = { order.OrderId.ToString(),
-                                order.TableId.ToString(),
-                                $"{order.TimePassed.Minutes:00} min ago",
-                                orderedItem.FoodCategory.ToString(),
-                                orderedItem.Amount.ToString(),
-                                orderedItem.Item.ItemName,
-                                ShowNoteText(orderedItem.Note).ToString(),
-                                orderedItem.Status.ToString()};
-
-                            ListViewItem li = new ListViewItem(listview);
-                            li.Tag = orderedItem;
-                            listViewKitchen.Items.Add(li);
-                        }
-                    }
-                }
+                MessageBox.Show(exc.Message);
             }
         }
 
-
-
-        private void btnReadyToServe_Click(object sender, EventArgs e)
+        private void LoadFinishedOrders()
         {
+            try
             {
-                foreach (ListViewItem item in listViewKitchen.SelectedItems)
+                btnReadyToServe.Enabled = false;
+                listViewKitchen.Items.Clear();
+
+                List<OrderedItem> orderedItemList = orderedItemService.GetFinishedFoodItemsFromDaoClass();
+
+                foreach (OrderedItem orderitem in orderedItemList)
                 {
-                    //orderedItemService.UpdateStatusReady((OrderedItem)item.Tag);
+                    ListViewItem list = new ListViewItem((orderitem.OrderId).ToString());
+                    list.SubItems.Add(orderitem.TableId.ToString());
+                    list.SubItems.Add(((DateTime.Now.TimeOfDay - orderitem.OrderTime.TimeOfDay).Minutes).ToString() + " min ago");
+                    list.SubItems.Add(orderitem.Category.ToString());
+                    list.SubItems.Add(orderitem.Amount.ToString());
+                    list.SubItems.Add(orderitem.Name);
+                    list.SubItems.Add(ShowNoteTextWithNotification(orderitem.Note));
+                    list.SubItems.Add(orderitem.Status.ToString());
+
+                    list.Tag = orderitem;
+                    listViewKitchen.Items.Add(list);
                 }
-
-                LoadListView();
             }
-
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private void listViewKitchen_SelectedIndexChanged(object sender, EventArgs e)
-        {            
+        {
             try
-            {
+            {                
                 if (listViewKitchen.SelectedItems.Count == 0)
                 {
                     return;
                 }
+
+                ListView.SelectedListViewItemCollection selectedItems = this.listViewKitchen.SelectedItems;
+
                 btnReadyToServe.Enabled = true;
                 btnViewOrderNote.Enabled = true;
 
                 OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
-                if (selectedItem.Note == "")
-                {
-                    btnViewOrderNote.Enabled = false;
-                }
-                else if (listViewKitchen.SelectedItems.Count >= 1)
-                {
-                    btnViewOrderNote.Enabled = false;
-                }
+                //ListViewItem noteCol = listViewKitchen.Items[6];
+                //if (noteCol.Text == "No")
+                //{
+                //    btnViewOrderNote.Enabled = false;
+                //}
+                //else if (listViewKitchen.SelectedItems.Count >= 1)
+                //{
+                //    btnViewOrderNote.Enabled = false;
+                //}
+                //else
+                //{
+                //    btnViewOrderNote.Enabled = false;
+                //}
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            LoadListView();
+            try
+            {
+                LoadListView(); //refreshes the form in every 30 scs
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private string ShowNoteText(string noteInput)
+        private string ShowNoteTextWithNotification(string noteInput)
         {
             string output = "";
-            if (noteInput == null)
+            if (noteInput == "" || noteInput == "none")
             {
                 output = "No";
             }
             else
             {
-                output = "YES";
+                output = "!!! YES";
             }
             return output;
         }
+        
 
-        private string ShowTimePassed(Order order)
+        private string ShowTimePassed(DateTime time)
         {
-            string output = "";
-            if (order.TimePassed > new TimeSpan(10, 0, 0))
+            TimeSpan orderTimeinTimeSpan = (DateTime.Now.TimeOfDay - time.TimeOfDay);
+            TimeSpan tenMinLimit = new TimeSpan(0, 10, 0);
+
+            if (TimeSpan.Compare(orderTimeinTimeSpan, tenMinLimit) == 1) //compares both timespans. 
             {
-                output = $"!!! {order.TimePassed.Minutes:00} min ago";
+                //if the ordertime is longer than 10 mins, this will return 1
+                return $"!!! {orderTimeinTimeSpan.Minutes} min ago";
             }
             else
             {
-                output = $"{order.TimePassed.Minutes:00} min ago";
+                return $"{orderTimeinTimeSpan.Minutes} min ago";
+            }            
+        }
+
+        private string ShowTimePassedForFinishedOrders(DateTime time)
+        {
+            TimeSpan orderTimeinTimeSpan = (DateTime.Now.TimeOfDay - time.TimeOfDay);
+
+             return $"{orderTimeinTimeSpan.Minutes} min ago";
+            
+        }
+
+        private void btnViewOrderNote_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string output = "";
+
+                OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+                output = $"{selectedItem.OrderId}\n {selectedItem.Name} \n {selectedItem.Note}";
+                                
+                MessageBox.Show(output);               
+                
             }
-            return output;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnReadyToServe_Click(object sender, EventArgs e)
+        {
+            //try
+            //{
+            //    ListView.SelectedListViewItemCollection selectedItems = this.listViewKitchen.SelectedItems;
+
+            //    foreach (ListViewItem item in selectedItems)
+            //    {
+            //        OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+            //        int orderId = selectedItem.OrderId;
+            //        int tableId = selectedItem.TableId;
+
+            //        orderedItemService.ChangeOrderStatusToReady(orderId, tableId);
+
+            //        LoadListView();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void comboBoxShowOrders_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxShowOrders.SelectedIndex == 0)
-            {
-                runningOrFinished = false;
-            }
-            else
-            {
-                runningOrFinished = true;
-            }
+            LoadListView();
         }
     }
 }
