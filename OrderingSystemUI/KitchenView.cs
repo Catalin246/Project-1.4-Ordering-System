@@ -134,21 +134,23 @@ namespace OrderingSystemUI
                 }
 
                 btnReadyToServe.Enabled = true;
-                btnViewOrderNote.Enabled = true;
 
-                OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
-                ListViewItem noteCol = listViewKitchen.Items[6];
-                if (noteCol.Text == "No")
-                {
-                    btnViewOrderNote.Enabled = false;
-                }
-                else if (listViewKitchen.SelectedItems.Count >= 1)
+                if (listViewKitchen.SelectedItems.Count > 1)
                 {
                     btnViewOrderNote.Enabled = false;
                 }
                 else
                 {
-                    btnViewOrderNote.Enabled = false;
+                    OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+
+                    if (selectedItem.Note == "No")
+                    {
+                        btnViewOrderNote.Enabled = false;
+                    }
+                    else
+                    {
+                        btnViewOrderNote.Enabled = true;
+                    }
                 }
             }
             catch (Exception ex)
@@ -243,9 +245,9 @@ namespace OrderingSystemUI
                 {
                     OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
                     int orderId = selectedItem.OrderId;
-                    int tableId = selectedItem.TableId;
+                    string itemName = selectedItem.Name;
 
-                    orderedItemService.ChangeOrderStatusToReady(orderId, tableId);                    
+                    orderedItemService.ChangeOrderStatusToReady(orderId, itemName);                    
                 }
 
                 LoadListView();
