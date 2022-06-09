@@ -51,9 +51,9 @@ namespace OrderingSystemLogic
             return orderedItemdb.GetFinishedDrinkItemsFromDatabase();
         }
 
-        public void ChangeOrderStatusToReady(int orderNo, int ItemNo)
+        public void ChangeOrderStatusToReady(int orderNo, string ItemName)
         {
-            orderedItemdb.ChangeFoodAndDrinkStatusToReady(orderNo, ItemNo);
+            orderedItemdb.ChangeFoodAndDrinkStatusToReady(orderNo, ItemName);
         }
     }
 }

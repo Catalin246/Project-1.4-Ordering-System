@@ -28,11 +28,10 @@ namespace OrderingSystemUI
             
             LoadListView();
 
-            if (listViewKitchen.SelectedItems.Count < 1)
-            {
-                btnReadyToServe.Enabled = false;
-                btnViewOrderNote.Enabled = false;
-            }
+            
+            btnReadyToServe.Enabled = false;
+            btnViewOrderNote.Enabled = false;
+            
 
             comboBoxShowOrders.Items.Clear();
             comboBoxShowOrders.Items.Add("Running Orders");
@@ -66,7 +65,8 @@ namespace OrderingSystemUI
         private void LoadRunningOrders()
         {
             try
-            {                
+            {    
+                listViewKitchen.MultiSelect = true;
                 listViewKitchen.Items.Clear();
                 
                 List<OrderedItem> orderedItemList = orderedItemService.GetPreparingFoodItemsFromDaoClass();
@@ -96,6 +96,7 @@ namespace OrderingSystemUI
         {
             try
             {
+                listViewKitchen.MultiSelect = false;
                 btnReadyToServe.Enabled = false;
                 listViewKitchen.Items.Clear();
 
@@ -105,7 +106,7 @@ namespace OrderingSystemUI
                 {
                     ListViewItem list = new ListViewItem((orderitem.OrderId).ToString());
                     list.SubItems.Add(orderitem.TableId.ToString());
-                    list.SubItems.Add(((DateTime.Now.TimeOfDay - orderitem.OrderTime.TimeOfDay).Minutes).ToString() + " min ago");
+                    list.SubItems.Add(ShowTimePassedForFinishedOrders(orderitem.OrderTime));
                     list.SubItems.Add(orderitem.Category.ToString());
                     list.SubItems.Add(orderitem.Amount.ToString());
                     list.SubItems.Add(orderitem.Name);
@@ -125,31 +126,33 @@ namespace OrderingSystemUI
         private void listViewKitchen_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
-            {                
+            {   
                 if (listViewKitchen.SelectedItems.Count == 0)
                 {
                     return;
                 }
+                else
+                {
+                    btnReadyToServe.Enabled = true;
 
-                ListView.SelectedListViewItemCollection selectedItems = this.listViewKitchen.SelectedItems;
+                    if (listViewKitchen.SelectedItems.Count > 1)
+                    {
+                        btnViewOrderNote.Enabled = false;
+                    }
+                    else
+                    {
+                        OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
 
-                btnReadyToServe.Enabled = true;
-                btnViewOrderNote.Enabled = true;
-
-                OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
-                //ListViewItem noteCol = listViewKitchen.Items[6];
-                //if (noteCol.Text == "No")
-                //{
-                //    btnViewOrderNote.Enabled = false;
-                //}
-                //else if (listViewKitchen.SelectedItems.Count >= 1)
-                //{
-                //    btnViewOrderNote.Enabled = false;
-                //}
-                //else
-                //{
-                //    btnViewOrderNote.Enabled = false;
-                //}
+                        if (selectedItem.Note == "No")
+                        {
+                            btnViewOrderNote.Enabled = false;
+                        }
+                        else
+                        {
+                            btnViewOrderNote.Enabled = true;
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -184,27 +187,29 @@ namespace OrderingSystemUI
         }
         
 
-        private string ShowTimePassed(DateTime time)
-        {
-            TimeSpan orderTimeinTimeSpan = (DateTime.Now.TimeOfDay - time.TimeOfDay);
-            TimeSpan tenMinLimit = new TimeSpan(0, 10, 0);
+        private string ShowTimePassed(DateTime orderTime)
+        {            
+            DateTime now = DateTime.Now;
+            TimeSpan diff = now.Subtract(orderTime);
+            double minuteDiff = Convert.ToInt32(diff.TotalMinutes);                        
 
-            if (TimeSpan.Compare(orderTimeinTimeSpan, tenMinLimit) == 1) //compares both timespans. 
-            {
-                //if the ordertime is longer than 10 mins, this will return 1
-                return $"!!! {orderTimeinTimeSpan.Minutes} min ago";
+            if (10 < minuteDiff) 
+            {                
+                return $"!!! {minuteDiff} min ago";
             }
             else
             {
-                return $"{orderTimeinTimeSpan.Minutes} min ago";
+                return $"{minuteDiff} min ago";
             }            
         }
 
-        private string ShowTimePassedForFinishedOrders(DateTime time)
+        private string ShowTimePassedForFinishedOrders(DateTime orderTime)
         {
-            TimeSpan orderTimeinTimeSpan = (DateTime.Now.TimeOfDay - time.TimeOfDay);
-
-             return $"{orderTimeinTimeSpan.Minutes} min ago";
+            DateTime now = DateTime.Now;
+            TimeSpan diff = now.Subtract(orderTime);
+            double minuteDiff = Convert.ToInt32(diff.TotalMinutes);
+                        
+            return $"{minuteDiff} min ago";
             
         }
 
@@ -215,7 +220,7 @@ namespace OrderingSystemUI
                 string output = "";
 
                 OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
-                output = $"{selectedItem.OrderId}\n {selectedItem.Name} \n {selectedItem.Note}";
+                output = $"{selectedItem.OrderId}\n\n {selectedItem.Name} \n\n {selectedItem.Note}";
                                 
                 MessageBox.Show(output);               
                 
@@ -228,25 +233,32 @@ namespace OrderingSystemUI
 
         private void btnReadyToServe_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    ListView.SelectedListViewItemCollection selectedItems = this.listViewKitchen.SelectedItems;
+            try
+            {
+                if (listViewKitchen.SelectedItems[0] == null)
+                {
+                    return;
+                }
 
-            //    foreach (ListViewItem item in selectedItems)
-            //    {
-            //        OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
-            //        int orderId = selectedItem.OrderId;
-            //        int tableId = selectedItem.TableId;
+                ListView.SelectedListViewItemCollection selectedItems = listViewKitchen.SelectedItems;
 
-            //        orderedItemService.ChangeOrderStatusToReady(orderId, tableId);
+                foreach (ListViewItem item in selectedItems)
+                {
+                    OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+                    int orderId = selectedItem.OrderId;
+                    string itemName = selectedItem.Name;
 
-            //        LoadListView();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+                    orderedItemService.ChangeOrderStatusToReady(orderId, itemName);                    
+                }
+
+                btnReadyToServe.Enabled = false;
+
+                LoadListView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void comboBoxShowOrders_SelectedIndexChanged(object sender, EventArgs e)
