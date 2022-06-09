@@ -27,14 +27,14 @@ namespace OrderingSystemDAL
         }
         public List<Bill> GetAllBills()
         {
-            string query = "SELECT studentId, studentFirstName, studentLastName  FROM [Students]";
+            string query = "SELECT studentId, studentFirstName, studentLastName  FROM dbo.Bill";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
         public List<Bill> GetOpenBills(int tableID)
         {
-            string query = "SELECT BillID from [Bill] WHERE TableId = @tableID and ClosedBill = 0 ";
+            string query = "SELECT BillID from dbo.Bill WHERE TableId = @tableID and ClosedBill = 0 ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -56,9 +56,9 @@ namespace OrderingSystemDAL
             return bills;
         }
 
-        public void CloseBill(int billID)
+        public void CloseBill(Bill bill)
         {
-            string query = "UPDATE [ValidBill] SET ClosedBill = 1 WHERE BillId = @billID";
+            string query = "INSERT INTO dbo.Bill VALUES(@bill.PaymentType, @bill.BillFeedback, @bill.Tip, 1)";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             ExecuteSelectQuery(query, sqlParameters);
         }
