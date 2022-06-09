@@ -40,40 +40,40 @@ namespace OrderingSystemDAL
             return orders;
         }
 
-        private List<Order> ReadTables(DataTable dataTable)
-        {
-            List<Order> orders = new List<Order>();
+        //private List<Order> ReadTables(DataTable dataTable)
+        //{
+        //    List<Order> orders = new List<Order>();
 
-            foreach (DataRow dr in dataTable.Rows)
-            {
-                Order order = new Order()
-                {
-                    OrderId = (int)dr["Order_Id"],
-                    TableId = (int)dr["Table_Id"],
-                    OrderTime = (DateTime)dr["Order_Time"],
-                };
+        //    foreach (DataRow dr in dataTable.Rows)
+        //    {
+        //        Order order = new Order()
+        //        {
+        //            OrderId = (int)dr["Order_Id"],
+        //            TableId = (int)dr["Table_Id"],
+        //            OrderTime = (DateTime)dr["Order_Time"],
+        //        };
 
-                order.OrderedItems = new List<OrderedItem>();
+        //        order.OrderedItems = new List<OrderedItem>();
 
-                OrderedItemDao orderedItemsdb = new OrderedItemDao();
+        //        OrderedItemDao orderedItemsdb = new OrderedItemDao();
 
-                List<OrderedItem> orderedFoods = orderedItemsdb.GetFoodOrdersByOrderId(order.OrderId);
-                List<OrderedItem> orderedDrinks = orderedItemsdb.GetDrinkOrdersByOrderId(order.OrderId);
+        //        List<OrderedItem> orderedFoods = orderedItemsdb.GetFoodOrdersByOrderId(order.OrderId);
+        //        List<OrderedItem> orderedDrinks = orderedItemsdb.GetDrinkOrdersByOrderId(order.OrderId);
 
-                foreach (OrderedItem food in orderedFoods)
-                {
-                    order.OrderedItems.Add(food);
-                }
+        //        foreach (OrderedItem food in orderedFoods)
+        //        {
+        //            order.OrderedItems.Add(food);
+        //        }
 
-                foreach (OrderedItem drink in orderedDrinks)
-                {
-                    order.OrderedItems.Add(drink);
-                }
+        //        foreach (OrderedItem drink in orderedDrinks)
+        //        {
+        //            order.OrderedItems.Add(drink);
+        //        }
 
-                orders.Add(order);
-            }
-            return orders;
-        }
+        //        orders.Add(order);
+        //    }
+        //    return orders;
+        //}
 
         public void Add(Order order)
         {
