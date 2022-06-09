@@ -36,12 +36,15 @@ namespace OrderingSystemModel
         }
 
         public Item Item { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
         public int OrderId { get; set; }
-        public Status Status { get; set; }
-        public FoodTypes FoodCategory { get; set; }
-        public DrinkCategories DrinkCategory { get; set; }
+        public Status Status { get; set; }        
         public string Note { get; set; }
         public int Amount { get; set; }
+
+        public int TableId { get; set; }
+        public DateTime OrderTime { get; set; }
 
         public int ItemID { get; set; }
              
