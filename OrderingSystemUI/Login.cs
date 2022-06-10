@@ -37,10 +37,6 @@ namespace OrderingSystemUI
                 list = accountService.GetAllEmployee();
                 foreach (Employee item in list)
                 {
-                    //if(item.EmployeePassword == TryPasscode(Passcode, item.salt).Digest && TryUserName(Username, list))
-                    //{
-                    //    EmployeeRole(item.EmployeeRole, item.EmployeeName);
-                    //}
                     if (TryPasscode(username, item.EmployeeName) && TryUserName(passcode,item.EmployeePassword))
                     {
                         EmployeeRole(item.EmployeeRole, item.EmployeeName);
