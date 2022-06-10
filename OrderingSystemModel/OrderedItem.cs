@@ -19,13 +19,7 @@ namespace OrderingSystemModel
         {
             Amount = 1;
             Note = ""; 
-        }
-        public OrderedItem(Item item)
-        {
-            Item = item;
-            Amount = 1;
-            Note = ""; //or "none"
-        }
+        }       
 
         public OrderedItem(Item item, int amount, string note, int orderId)
         {

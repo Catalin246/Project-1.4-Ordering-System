@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KitchenView));
             this.listViewKitchen = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.colTableNo = new System.Windows.Forms.ColumnHeader();
@@ -41,17 +42,20 @@
             this.lblTime = new System.Windows.Forms.Label();
             this.btnReadyToServe = new System.Windows.Forms.Button();
             this.btnViewOrderNote = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxCourse = new System.Windows.Forms.ComboBox();
+            this.comboBoxTable = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnemployeeNme = new System.Windows.Forms.Button();
+            this.btnemployeeName = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.comboBoxShowOrders = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // listViewKitchen
             // 
+            this.listViewKitchen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.listViewKitchen.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.colTableNo,
@@ -129,7 +133,7 @@
             // btnReadyToServe
             // 
             this.btnReadyToServe.BackColor = System.Drawing.Color.Lime;
-            this.btnReadyToServe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnReadyToServe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnReadyToServe.Location = new System.Drawing.Point(640, 441);
             this.btnReadyToServe.Name = "btnReadyToServe";
             this.btnReadyToServe.Size = new System.Drawing.Size(205, 46);
@@ -141,7 +145,7 @@
             // btnViewOrderNote
             // 
             this.btnViewOrderNote.BackColor = System.Drawing.Color.Teal;
-            this.btnViewOrderNote.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnViewOrderNote.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnViewOrderNote.Location = new System.Drawing.Point(4, 441);
             this.btnViewOrderNote.Name = "btnViewOrderNote";
             this.btnViewOrderNote.Size = new System.Drawing.Size(205, 46);
@@ -150,39 +154,43 @@
             this.btnViewOrderNote.UseVisualStyleBackColor = false;
             this.btnViewOrderNote.Click += new System.EventHandler(this.btnViewOrderNote_Click);
             // 
-            // comboBox2
+            // comboBoxCourse
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(724, 57);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 23);
-            this.comboBox2.TabIndex = 23;
+            this.comboBoxCourse.FormattingEnabled = true;
+            this.comboBoxCourse.Location = new System.Drawing.Point(742, 57);
+            this.comboBoxCourse.Name = "comboBoxCourse";
+            this.comboBoxCourse.Size = new System.Drawing.Size(103, 23);
+            this.comboBoxCourse.TabIndex = 23;
+            this.comboBoxCourse.SelectedIndexChanged += new System.EventHandler(this.comboBoxCourse_SelectedIndexChanged_1);
             // 
-            // comboBox1
+            // comboBoxTable
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(597, 57);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 23);
-            this.comboBox1.TabIndex = 22;
+            this.comboBoxTable.FormattingEnabled = true;
+            this.comboBoxTable.Location = new System.Drawing.Point(640, 57);
+            this.comboBoxTable.Name = "comboBoxTable";
+            this.comboBoxTable.Size = new System.Drawing.Size(96, 23);
+            this.comboBoxTable.TabIndex = 22;
+            this.comboBoxTable.SelectedIndexChanged += new System.EventHandler(this.comboBoxTable_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(550, 60);
+            this.label3.Location = new System.Drawing.Point(593, 60);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 15);
             this.label3.TabIndex = 21;
             this.label3.Text = "Select:";
             // 
-            // btnemployeeNme
+            // btnemployeeName
             // 
-            this.btnemployeeNme.Location = new System.Drawing.Point(719, 6);
-            this.btnemployeeNme.Name = "btnemployeeNme";
-            this.btnemployeeNme.Size = new System.Drawing.Size(121, 23);
-            this.btnemployeeNme.TabIndex = 24;
-            this.btnemployeeNme.Text = "btnEmployeeName";
-            this.btnemployeeNme.UseVisualStyleBackColor = true;
+            this.btnemployeeName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnemployeeName.Location = new System.Drawing.Point(661, 6);
+            this.btnemployeeName.Name = "btnemployeeName";
+            this.btnemployeeName.Size = new System.Drawing.Size(179, 27);
+            this.btnemployeeName.TabIndex = 24;
+            this.btnemployeeName.Text = "btnEmployeeName";
+            this.btnemployeeName.UseVisualStyleBackColor = false;
+            this.btnemployeeName.Click += new System.EventHandler(this.btnemployeeName_Click);
             // 
             // timer1
             // 
@@ -192,6 +200,7 @@
             // 
             // comboBoxShowOrders
             // 
+            this.comboBoxShowOrders.BackColor = System.Drawing.Color.White;
             this.comboBoxShowOrders.FormattingEnabled = true;
             this.comboBoxShowOrders.Location = new System.Drawing.Point(166, 57);
             this.comboBoxShowOrders.Name = "comboBoxShowOrders";
@@ -208,16 +217,27 @@
             this.label1.TabIndex = 26;
             this.label1.Text = "View Orders:";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(8, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(73, 74);
+            this.pictureBox1.TabIndex = 27;
+            this.pictureBox1.TabStop = false;
+            // 
             // KitchenView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(849, 495);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxShowOrders);
-            this.Controls.Add(this.btnemployeeNme);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.btnemployeeName);
+            this.Controls.Add(this.comboBoxCourse);
+            this.Controls.Add(this.comboBoxTable);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.listViewKitchen);
             this.Controls.Add(this.lblTime);
@@ -225,6 +245,7 @@
             this.Controls.Add(this.btnViewOrderNote);
             this.Name = "KitchenView";
             this.Text = "KitchenView";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,13 +264,14 @@
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Button btnReadyToServe;
         private System.Windows.Forms.Button btnViewOrderNote;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxCourse;
+        private System.Windows.Forms.ComboBox comboBoxTable;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnemployeeNme;
+        private System.Windows.Forms.Button btnemployeeName;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ComboBox comboBoxShowOrders;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
