@@ -60,7 +60,6 @@
             this.MenuBar = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuKitchen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuBill = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlTakeOrder.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -281,9 +280,9 @@
             this.lblEmployeeName.Location = new System.Drawing.Point(854, 36);
             this.lblEmployeeName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEmployeeName.Name = "lblEmployeeName";
-            this.lblEmployeeName.Size = new System.Drawing.Size(288, 25);
+            this.lblEmployeeName.Size = new System.Drawing.Size(299, 25);
             this.lblEmployeeName.TabIndex = 0;
-            this.lblEmployeeName.Text = "Emplyee Name: Avornicesei Catalin";
+            this.lblEmployeeName.Text = "Employee Name: Avornicesei Catalin";
             this.lblEmployeeName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblEmployeeName_MouseClick);
             // 
             // miniToolStrip
@@ -374,8 +373,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuBar,
             this.MenuKitchen,
-            this.toolStripMenuItem4,
-            this.MenuBill});
+            this.toolStripMenuItem4});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1141, 33);
@@ -402,13 +400,6 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(108, 29);
             this.toolStripMenuItem4.Text = "Table view";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
-            // 
-            // MenuBill
-            // 
-            this.MenuBill.Enabled = false;
-            this.MenuBill.Name = "MenuBill";
-            this.MenuBill.Size = new System.Drawing.Size(90, 29);
-            this.MenuBill.Text = "Bill view";
             // 
             // TakeOrder
             // 
