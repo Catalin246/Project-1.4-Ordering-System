@@ -14,11 +14,13 @@ namespace OrderingSystemUI
     {
         private string employeeName;
         private string employeeRole;
-        public Option(string employeeName, string employeeRole)
+        private string formName;
+        public Option(string employeeName, string employeeRole, string formName)
         {
             InitializeComponent();
             this.employeeName = employeeName;
             this.employeeRole = employeeRole;
+            this.formName = formName;
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -30,8 +32,20 @@ namespace OrderingSystemUI
 
         private void Option_Load(object sender, EventArgs e)
         {
-            lblEmployeeName.Text = employeeName;
-            lblEmployeeRole.Text = employeeRole;
+            labelEmployeName.Text = employeeName;
+            labelEmployeRole.Text = employeeRole;
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            TableView tableView = new TableView(employeeName, employeeRole);
+            tableView.Show();
+            this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

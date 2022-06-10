@@ -90,7 +90,8 @@ namespace OrderingSystemUI
                             break;
                         }
                     }
-                    li.SubItems.Add(table.Time.ToString("H:m"));
+                    TimeSpan time = DateTime.Now - table.Time;
+                    li.SubItems.Add(time.ToString());
                     li.SubItems.Add(table.OrderId.ToString());
                     li.Tag = table;
                     listViewTableOrder.Items.Add(li);
@@ -257,7 +258,7 @@ namespace OrderingSystemUI
         private void TableView_Load(object sender, EventArgs e)
         {
             btnProfile.Text = employeeName;
-            txtTime.Text = DateTime.Now.ToString("H:mm:ss"); 
+            txtTime.Text = DateTime.Now.ToString("H:mm"); 
             Timer timer = new Timer();
             timer.Interval = (10 * 1000); // 10 secs
             timer.Tick += new EventHandler(timer_Tick);
@@ -281,9 +282,8 @@ namespace OrderingSystemUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Option option = new Option(employeeName,emplyeeRole);
+            Option option = new Option(employeeName,emplyeeRole,"TableVIew");
             option.Show();
-            this.Hide();
         }
     }
 }
