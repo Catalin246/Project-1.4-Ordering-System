@@ -265,7 +265,6 @@ namespace OrderingSystemUI
             timer.Start();
             if (emplyeeRole == "Waiter")
             {
-                MenuBill.Enabled = false;
                 MenuBar.Enabled = false;
                 MenuKitchen.Enabled = false;
             }
