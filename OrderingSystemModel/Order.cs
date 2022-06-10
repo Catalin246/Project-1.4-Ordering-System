@@ -28,15 +28,7 @@ namespace OrderingSystemModel
 
         public Boolean Status { get; set; }
         public List<OrderedItem> OrderedItems { get; set; }
-        public TimeSpan TimePassed 
-        { 
-            get 
-            { 
-                return (DateTime.Now.TimeOfDay - OrderTime.TimeOfDay); 
-            } 
-        }
-
-
+        
         public int determineBillID()
         {
             // List<Bill> = call get open bills getOpenBills(this.TableID)

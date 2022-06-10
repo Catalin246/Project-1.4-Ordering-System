@@ -15,7 +15,6 @@ namespace OrderingSystemModel
         public DateTime Time { get; set; }
         public int OrderId { get; set; }
         public string TableStatus { get; set; }
-        public int foodId { get; set; }
-        public int drinkId { get; set; }
+        
     }
 }
