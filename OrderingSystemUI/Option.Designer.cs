@@ -70,9 +70,10 @@
             // labelEmployeName
             // 
             this.labelEmployeName.AutoSize = true;
-            this.labelEmployeName.Location = new System.Drawing.Point(190, 125);
+            this.labelEmployeName.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelEmployeName.Location = new System.Drawing.Point(190, 114);
             this.labelEmployeName.Name = "labelEmployeName";
-            this.labelEmployeName.Size = new System.Drawing.Size(16, 15);
+            this.labelEmployeName.Size = new System.Drawing.Size(24, 28);
             this.labelEmployeName.TabIndex = 7;
             this.labelEmployeName.Text = "...";
             // 
@@ -89,9 +90,10 @@
             // labelEmployeRole
             // 
             this.labelEmployeRole.AutoSize = true;
-            this.labelEmployeRole.Location = new System.Drawing.Point(176, 204);
+            this.labelEmployeRole.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelEmployeRole.Location = new System.Drawing.Point(176, 193);
             this.labelEmployeRole.Name = "labelEmployeRole";
-            this.labelEmployeRole.Size = new System.Drawing.Size(16, 15);
+            this.labelEmployeRole.Size = new System.Drawing.Size(24, 28);
             this.labelEmployeRole.TabIndex = 9;
             this.labelEmployeRole.Text = "...";
             // 
