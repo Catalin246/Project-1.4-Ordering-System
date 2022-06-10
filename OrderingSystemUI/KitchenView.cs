@@ -53,10 +53,13 @@ namespace OrderingSystemUI
             comboBoxCourse.Items.Clear();
             comboBoxCourse.Items.Add("none");
             comboBoxCourse.SelectedIndex = 0;
-            comboBoxCourse.Items.Add("Starters");
-            comboBoxCourse.Items.Add("Mains");
-            comboBoxCourse.Items.Add("Entremets");
-            comboBoxCourse.Items.Add("Deserts");
+            comboBoxCourse.Items.Add("Lunch Starter");
+            comboBoxCourse.Items.Add("Lunch Main");            
+            comboBoxCourse.Items.Add("Lunch Desert");
+            comboBoxCourse.Items.Add("Diner Starter");
+            comboBoxCourse.Items.Add("Diner Entrement");
+            comboBoxCourse.Items.Add("Diner Main");
+            comboBoxCourse.Items.Add("Diner Desert");
         }
         public KitchenView(string employeeName) : base()
         {
@@ -64,10 +67,12 @@ namespace OrderingSystemUI
         }
 
         private void LoadListView()
-        {
-            btnemployeeNme.Text = EmployeeName;
+        {            
             try
             {
+                btnemployeeNme.Text = EmployeeName;
+                comboBoxCourse.Enabled = false;                
+
                 lblTime.Text = DateTime.Now.ToString("HH:mm");
 
                 if (comboBoxShowOrders.SelectedIndex == 0)
@@ -289,6 +294,7 @@ namespace OrderingSystemUI
                 btnReadyToServe.Enabled = false;
 
                 LoadListView();
+
             }
             catch (Exception ex)
             {
@@ -299,15 +305,6 @@ namespace OrderingSystemUI
         private void comboBoxShowOrders_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadListView();
-        }
-        private void comboBoxTable_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void comboBoxCourse_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
         }
 
         private void comboBoxTable_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -323,7 +320,7 @@ namespace OrderingSystemUI
 
             foreach (ListViewItem item in listViewKitchen.Items)
             {
-                OrderedItem orderedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+                OrderedItem orderedItem = (OrderedItem)item.Tag;
 
                 if (orderedItem.TableId == index)
                 {
@@ -335,19 +332,32 @@ namespace OrderingSystemUI
 
         private void comboBoxCourse_SelectedIndexChanged_1(object sender, EventArgs e)
         {
+            if (comboBoxTable.SelectedIndex == 0)
+            {
+                return;
+            }
+
+            string tableNo = comboBoxTable.SelectedIndex.ToString();
+            tableNo = tableNo.Replace("Table ", "");
+            int index = int.Parse(tableNo);
+
             if (comboBoxCourse.SelectedIndex == 0)
             {
                 return;
             }
-            string courseName = comboBoxTable.SelectedIndex.ToString();
+            string courseName = comboBoxCourse.SelectedIndex.ToString();
 
             foreach (ListViewItem item in listViewKitchen.Items)
             {
-                OrderedItem orderedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+                OrderedItem orderedItem = (OrderedItem)item.Tag;
 
-                if (orderedItem.Category == courseName)
+                if (orderedItem.Category == courseName && orderedItem.TableId ==index)
                 {
                     item.Selected = true;
+                }
+                else
+                {
+                    item.Selected = false;
                 }
             }
         }
