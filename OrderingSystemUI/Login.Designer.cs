@@ -40,9 +40,9 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(305, 311);
+            this.btnLogin.Location = new System.Drawing.Point(296, 293);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(140, 36);
+            this.btnLogin.Size = new System.Drawing.Size(180, 36);
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -51,9 +51,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(305, 93);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(203, 80);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(156, 15);
+            this.label1.Size = new System.Drawing.Size(354, 37);
             this.label1.TabIndex = 1;
             this.label1.Text = "Keep up with the good work";
             // 
@@ -69,7 +70,7 @@
             // lblPasscode
             // 
             this.lblPasscode.AutoSize = true;
-            this.lblPasscode.Location = new System.Drawing.Point(241, 235);
+            this.lblPasscode.Location = new System.Drawing.Point(245, 230);
             this.lblPasscode.Name = "lblPasscode";
             this.lblPasscode.Size = new System.Drawing.Size(56, 15);
             this.lblPasscode.TabIndex = 3;
