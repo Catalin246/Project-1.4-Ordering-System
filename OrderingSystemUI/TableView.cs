@@ -17,11 +17,13 @@ namespace OrderingSystemUI
         private List<TakeOrder> takeOrders = new List<TakeOrder>();
         private string employeeName;
         private string emplyeeRole;
+        Employee employee;
         private TableService tableService = new TableService();
         public TableView(string employeeName,string emplyeeRole)
         {
             this.employeeName = employeeName;
-            this.emplyeeRole = emplyeeRole;            
+            this.emplyeeRole = emplyeeRole;
+            employee = new Employee(employeeName, emplyeeRole);
             InitializeComponent();
             ShowListView();
             for (int i = 0; i < 10; i++)
@@ -132,70 +134,70 @@ namespace OrderingSystemUI
         private void btnTable01_Click(object sender, EventArgs e)
         {
             if (takeOrders[0] == null)
-                takeOrders[0] = new TakeOrder(1, employeeName);
+                takeOrders[0] = new TakeOrder(1, employee);
             CallPnlOptions(1, takeOrders[0]);
         }
 
         private void btnTable02_Click(object sender, EventArgs e)
         {
             if (takeOrders[1] == null)
-                takeOrders[1] = new TakeOrder(2, employeeName);
+                takeOrders[1] = new TakeOrder(2, employee);
             CallPnlOptions(2, takeOrders[1]);
         }
 
         private void btnTable03_Click(object sender, EventArgs e)
         {
             if (takeOrders[2] == null)
-                takeOrders[2] = new TakeOrder(3, employeeName);
+                takeOrders[2] = new TakeOrder(3, employee);
             CallPnlOptions(3, takeOrders[2]);
         }
 
         private void btnTable04_Click(object sender, EventArgs e)
         {
             if (takeOrders[3] == null)
-                takeOrders[3] = new TakeOrder(4, employeeName);
+                takeOrders[3] = new TakeOrder(4, employee);
             CallPnlOptions(4, takeOrders[3]);
         }
 
         private void btnTable05_Click(object sender, EventArgs e)
         {
             if (takeOrders[4] == null)
-                takeOrders[4] = new TakeOrder(5, employeeName);
+                takeOrders[4] = new TakeOrder(5, employee);
             CallPnlOptions(5, takeOrders[4]);
         }
 
         private void btnTable06_Click(object sender, EventArgs e)
         {
             if (takeOrders[5] == null)
-                takeOrders[5] = new TakeOrder(6, employeeName);
+                takeOrders[5] = new TakeOrder(6, employee);
             CallPnlOptions(6, takeOrders[5]);
         }
 
         private void btnTable07_Click(object sender, EventArgs e)
         {
             if (takeOrders[6] == null)
-                takeOrders[6] = new TakeOrder(7, employeeName);
+                takeOrders[6] = new TakeOrder(7, employee);
             CallPnlOptions(7, takeOrders[6]);
         }
 
         private void btnTable08_Click(object sender, EventArgs e)
         {
             if (takeOrders[7] == null)
-                takeOrders[7] = new TakeOrder(8, employeeName);
+                takeOrders[7] = new TakeOrder(8, employee);
             CallPnlOptions(8, takeOrders[7]);
         }
 
         private void btnTable09_Click(object sender, EventArgs e)
         {
             if (takeOrders[8] == null)
-                takeOrders[8] = new TakeOrder(9, employeeName);
+                takeOrders[8] = new TakeOrder(9, employee);
             CallPnlOptions(9, takeOrders[8]);
         }
 
         private void btnTable010_Click(object sender, EventArgs e)
         {
             if (takeOrders[9] == null)
-                takeOrders[9] = new TakeOrder(10, employeeName);
+                takeOrders[9] = new TakeOrder(10, employee);
             CallPnlOptions(10, takeOrders[9]);
         }
 
