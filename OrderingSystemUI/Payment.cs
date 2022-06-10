@@ -16,6 +16,7 @@ namespace OrderingSystemUI
     public partial class Payment : Form
     {
         public Bill bill;
+        public TableView tableView;
         public Payment()
         {
 
@@ -72,7 +73,7 @@ namespace OrderingSystemUI
 
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            showPanel("Table view");
+            
         }
 
         private void btnTable1_Click(object sender, EventArgs e)
@@ -196,7 +197,8 @@ namespace OrderingSystemUI
                 {
                     orderedItemService.ChangeOrderStatusToPaid(order.OrderId);
                 }
-
+                TableService tableService = new TableService();
+                tableService.OpenTable(bill.tableId);
                 this.cleanPaymentView();
                 // need to delete or close orders? 
                 // clear table and display/reset bill page
