@@ -54,11 +54,11 @@
             this.btnCancelSeatGuess = new System.Windows.Forms.Button();
             this.btnTakeOrder = new System.Windows.Forms.Button();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            //this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuBar = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuKitchen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuBill = new System.Windows.Forms.ToolStripMenuItem();
             this.listViewTableOrder = new System.Windows.Forms.ListView();
             this.OrderStatus = new System.Windows.Forms.ColumnHeader();
             this.tableOrderNumber = new System.Windows.Forms.ColumnHeader();
@@ -103,25 +103,25 @@
             // dashboardToolStripMenuItem
             // 
             this.dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
-            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
             this.dashboardToolStripMenuItem.Text = "Dashboard";
             // 
             // barViewToolStripMenuItem
             // 
             this.barViewToolStripMenuItem.Name = "barViewToolStripMenuItem";
-            this.barViewToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.barViewToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
             this.barViewToolStripMenuItem.Text = "Bar view";
             // 
             // kitchenViewToolStripMenuItem
             // 
             this.kitchenViewToolStripMenuItem.Name = "kitchenViewToolStripMenuItem";
-            this.kitchenViewToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
+            this.kitchenViewToolStripMenuItem.Size = new System.Drawing.Size(125, 20);
             this.kitchenViewToolStripMenuItem.Text = "Kitchen view";
             // 
             // tableViewToolStripMenuItem
             // 
             this.tableViewToolStripMenuItem.Name = "tableViewToolStripMenuItem";
-            this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
             this.tableViewToolStripMenuItem.Text = "Table view";
             this.tableViewToolStripMenuItem.Click += new System.EventHandler(this.tableViewToolStripMenuItem_Click);
             // 
@@ -250,35 +250,34 @@
             // 
             this.menuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3,
+            this.MenuBar,
+            this.MenuKitchen,
             this.toolStripMenuItem4,
-            this.toolStripMenuItem5});
+            this.MenuBill});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(812, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(812, 33);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(76, 20);
-            this.toolStripMenuItem1.Text = "Dashboard";
+            //this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            //this.toolStripMenuItem1.Size = new System.Drawing.Size(76, 20);
+            //this.toolStripMenuItem1.Text = "Dashboard";
             // 
-            // toolStripMenuItem2
+            // MenuBar
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(63, 20);
-            this.toolStripMenuItem2.Text = "Bar view";
+            this.MenuBar.Name = "MenuBar";
+            this.MenuBar.Size = new System.Drawing.Size(63, 20);
+            this.MenuBar.Text = "Bar view";
             // 
-            // toolStripMenuItem3
+            // MenuKitchen
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(86, 20);
-            this.toolStripMenuItem3.Text = "Kitchen view";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            this.MenuKitchen.Name = "MenuKitchen";
+            this.MenuKitchen.Size = new System.Drawing.Size(86, 20);
+            this.MenuKitchen.Text = "Kitchen view";
+            this.MenuKitchen.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
@@ -287,12 +286,12 @@
             this.toolStripMenuItem4.Text = "Table view";
           
             // 
-            // toolStripMenuItem5
+            // MenuBill
             // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(62, 20);
-            this.toolStripMenuItem5.Text = "Bill view";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            this.MenuBill.Name = "MenuBill";
+            this.MenuBill.Size = new System.Drawing.Size(62, 20);
+            this.MenuBill.Text = "Bill view";
+            this.MenuBill.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // listViewTableOrder
             // 
@@ -453,16 +452,18 @@
             this.lblOrderId.AutoSize = true;
             this.lblOrderId.Location = new System.Drawing.Point(448, 401);
             this.lblOrderId.Name = "lblOrderId";
-            this.lblOrderId.Size = new System.Drawing.Size(38, 15);
+
+            this.lblOrderId.Size = new System.Drawing.Size(16, 15);
+
             this.lblOrderId.TabIndex = 14;
-            this.lblOrderId.Text = "label1";
+            this.lblOrderId.Text = "...";
             // 
             // txtTime
             // 
             this.txtTime.AutoSize = true;
             this.txtTime.Location = new System.Drawing.Point(396, 36);
             this.txtTime.Name = "txtTime";
-            this.txtTime.Size = new System.Drawing.Size(19, 15);
+            this.txtTime.Size = new System.Drawing.Size(28, 25);
             this.txtTime.TabIndex = 16;
             this.txtTime.Text = "....";
             // 
@@ -471,9 +472,9 @@
             this.lblItemId.AutoSize = true;
             this.lblItemId.Location = new System.Drawing.Point(448, 432);
             this.lblItemId.Name = "lblItemId";
-            this.lblItemId.Size = new System.Drawing.Size(38, 15);
+            this.lblItemId.Size = new System.Drawing.Size(16, 15);
             this.lblItemId.TabIndex = 17;
-            this.lblItemId.Text = "label1";
+            this.lblItemId.Text = "...";
             this.lblItemId.Click += new System.EventHandler(this.txtItemId_Click);
             // 
             // LabelItemId
@@ -481,7 +482,7 @@
             this.LabelItemId.AutoSize = true;
             this.LabelItemId.Location = new System.Drawing.Point(365, 432);
             this.LabelItemId.Name = "LabelItemId";
-            this.LabelItemId.Size = new System.Drawing.Size(50, 15);
+            this.LabelItemId.Size = new System.Drawing.Size(78, 25);
             this.LabelItemId.TabIndex = 18;
             this.LabelItemId.Text = "Item Id :";
             // 
@@ -490,13 +491,13 @@
             this.labelOrderId.AutoSize = true;
             this.labelOrderId.Location = new System.Drawing.Point(365, 401);
             this.labelOrderId.Name = "labelOrderId";
-            this.labelOrderId.Size = new System.Drawing.Size(56, 15);
+            this.labelOrderId.Size = new System.Drawing.Size(88, 25);
             this.labelOrderId.TabIndex = 19;
             this.labelOrderId.Text = "Order Id :";
             // 
             // btnProfile
             // 
-            this.btnProfile.Location = new System.Drawing.Point(598, 47);
+            this.btnProfile.Location = new System.Drawing.Point(711, 51);
             this.btnProfile.Name = "btnProfile";
             this.btnProfile.Size = new System.Drawing.Size(89, 23);
             this.btnProfile.TabIndex = 20;
@@ -564,10 +565,6 @@
         private System.Windows.Forms.Panel pnlTableHadBeenPressed;
         private System.Windows.Forms.Button btnTakeOrder;
         private System.Windows.Forms.MenuStrip menuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.Button btnTable010;
         private System.Windows.Forms.Button btnTable09;
         private System.Windows.Forms.Button btnTable08;
@@ -585,7 +582,6 @@
         private System.Windows.Forms.ToolStripMenuItem billViewToolStripMenuItem;
         private System.Windows.Forms.Button btnServed;
         private System.Windows.Forms.ColumnHeader orderId;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ColumnHeader OrderStatus;
         private System.Windows.Forms.Label lblOrderId;
         private System.Windows.Forms.Label txtTime;
@@ -593,5 +589,9 @@
         private System.Windows.Forms.Label LabelItemId;
         private System.Windows.Forms.Label labelOrderId;
         private System.Windows.Forms.Button btnProfile;
+        private System.Windows.Forms.ToolStripMenuItem MenuBar;
+        private System.Windows.Forms.ToolStripMenuItem MenuKitchen;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem MenuBill;
     }
 }

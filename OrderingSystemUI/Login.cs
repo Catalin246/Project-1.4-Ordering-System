@@ -15,8 +15,8 @@ namespace OrderingSystemUI
 {
     public partial class Login : Form
     {
-        private string Username;
-        private string Passcode;
+        private string username;
+        private string passcode;
         public Login()
         {
             InitializeComponent();
@@ -30,22 +30,26 @@ namespace OrderingSystemUI
                     lblWrongUserName.Text = "Please enter your username";                
                 if (txtBoxPasscode.Text =="")
                     lblwrongPasscode.Text = "Please enter your passcode";                
-                Username = txtBoxUsername.Text;
-                Passcode = txtBoxPasscode.Text;
+                username = txtBoxUsername.Text;
+                passcode = txtBoxPasscode.Text;
                 List<Employee> list = new List<Employee>();
                 EmployeeService accountService = new EmployeeService();
                 list = accountService.GetAllEmployee();
                 foreach (Employee item in list)
                 {
-                    //if (item.EmployeePassword == TryPasscode(Passcode, item.salt).Digest && TryUserName(Username, list))
+                    //if(item.EmployeePassword == TryPasscode(Passcode, item.salt).Digest && TryUserName(Username, list))
+                    //{
+                    //    EmployeeRole(item.EmployeeRole, item.EmployeeName);
+                    //}
+                    if (TryPasscode(username, item.EmployeeName) && TryUserName(passcode,item.EmployeePassword))
                     {
                         EmployeeRole(item.EmployeeRole, item.EmployeeName);
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception )
             {
-
+                Console.WriteLine("Something wrong with the login");
             }
         }
 
@@ -54,8 +58,8 @@ namespace OrderingSystemUI
             switch (employeeRole)
             {
                 case "Cook":
-                    KitchenView kitchenView = new KitchenView();
-                    kitchenView.Show();
+                    KitchenView kitchenView = new KitchenView(employeeName, employeeRole);
+                    kitchenView.Show();                    
                     this.Hide();
                     break;
                 case "Waiter":
@@ -64,27 +68,28 @@ namespace OrderingSystemUI
                     this.Hide();
                     break;
                 case "Bartender":
+                    BarView barView = new BarView(employeeName,employeeRole);
+                    barView.Show();
                     this.Hide();
                     break;
                 default:
                     break;
             }
         }
-        private bool TryUserName(string username, List<Employee> list)
+        private bool TryPasscode(string passcode, string dataName)
         {
-            foreach (Employee em in list)
-            {
-                if(username == em.EmployeeName)
-                    return true;
-            }
-            return false;
+            return (passcode == dataName);
         }
-        private HashWithSaltResult TryPasscode(string passcode, string salt)
+        private bool TryUserName(string username, string dataName)
         {
-            PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-            HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
-            return hashResultSha256;
-        }
+            return (username == dataName);
+        } 
+        //private HashWithSaltResult TryPasscode(string passcode, string salt)
+        //{
+        //    PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
+        //    HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
+        //    return hashResultSha256;
+        //}
 
     }
 }

@@ -90,7 +90,8 @@ namespace OrderingSystemUI
                             break;
                         }
                     }
-                    li.SubItems.Add(table.Time.ToString("H:m"));
+                    TimeSpan time = DateTime.Now - table.Time;
+                    li.SubItems.Add(time.ToString());
                     li.SubItems.Add(table.OrderId.ToString());
                     li.Tag = table;
                     listViewTableOrder.Items.Add(li);
@@ -130,70 +131,70 @@ namespace OrderingSystemUI
         private void btnTable01_Click(object sender, EventArgs e)
         {
             if (takeOrders[0] == null)
-                takeOrders[0] = new TakeOrder(1);
+                takeOrders[0] = new TakeOrder(1, employeeName);
             CallPnlOptions(1, takeOrders[0]);
         }
 
         private void btnTable02_Click(object sender, EventArgs e)
         {
             if (takeOrders[1] == null)
-                takeOrders[1] = new TakeOrder(2);
+                takeOrders[1] = new TakeOrder(2, employeeName);
             CallPnlOptions(2, takeOrders[1]);
         }
 
         private void btnTable03_Click(object sender, EventArgs e)
         {
             if (takeOrders[2] == null)
-                takeOrders[2] = new TakeOrder(3);
+                takeOrders[2] = new TakeOrder(3, employeeName);
             CallPnlOptions(3, takeOrders[2]);
         }
 
         private void btnTable04_Click(object sender, EventArgs e)
         {
             if (takeOrders[3] == null)
-                takeOrders[3] = new TakeOrder(4);
+                takeOrders[3] = new TakeOrder(4, employeeName);
             CallPnlOptions(4, takeOrders[3]);
         }
 
         private void btnTable05_Click(object sender, EventArgs e)
         {
             if (takeOrders[4] == null)
-                takeOrders[4] = new TakeOrder(5);
+                takeOrders[4] = new TakeOrder(5, employeeName);
             CallPnlOptions(5, takeOrders[4]);
         }
 
         private void btnTable06_Click(object sender, EventArgs e)
         {
             if (takeOrders[5] == null)
-                takeOrders[5] = new TakeOrder(6);
+                takeOrders[5] = new TakeOrder(6, employeeName);
             CallPnlOptions(6, takeOrders[5]);
         }
 
         private void btnTable07_Click(object sender, EventArgs e)
         {
             if (takeOrders[6] == null)
-                takeOrders[6] = new TakeOrder(7);
+                takeOrders[6] = new TakeOrder(7, employeeName);
             CallPnlOptions(7, takeOrders[6]);
         }
 
         private void btnTable08_Click(object sender, EventArgs e)
         {
             if (takeOrders[7] == null)
-                takeOrders[7] = new TakeOrder(8);
+                takeOrders[7] = new TakeOrder(8, employeeName);
             CallPnlOptions(8, takeOrders[7]);
         }
 
         private void btnTable09_Click(object sender, EventArgs e)
         {
             if (takeOrders[8] == null)
-                takeOrders[8] = new TakeOrder(9);
+                takeOrders[8] = new TakeOrder(9, employeeName);
             CallPnlOptions(9, takeOrders[8]);
         }
 
         private void btnTable010_Click(object sender, EventArgs e)
         {
             if (takeOrders[9] == null)
-                takeOrders[9] = new TakeOrder(10);
+                takeOrders[9] = new TakeOrder(10, employeeName);
             CallPnlOptions(10, takeOrders[9]);
         }
 
@@ -202,6 +203,14 @@ namespace OrderingSystemUI
 
         }
 
+<<<<<<< HEAD
+=======
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            BarView barViewForm = new BarView(this.employeeName, this.emplyeeRole);
+            barViewForm.Show();
+        }
+>>>>>>> master
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -215,7 +224,7 @@ namespace OrderingSystemUI
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            KitchenView kitchenViewForm = new KitchenView();
+            KitchenView kitchenViewForm = new KitchenView(this.employeeName, this.emplyeeRole);
             kitchenViewForm.Show();
         }
 
@@ -242,6 +251,7 @@ namespace OrderingSystemUI
         {
             Payment paymentView = new Payment();
             paymentView.Show();
+
         }
 
         private void txtBoxOrderId_TextChanged(object sender, EventArgs e)
@@ -251,17 +261,24 @@ namespace OrderingSystemUI
 
         private void TableView_Load(object sender, EventArgs e)
         {
-            btnProfile.Text = employeeName;
-            txtTime.Text = DateTime.Now.ToString("H:mm:ss"); 
+            btnProfile.Text = employeeName;          
             Timer timer = new Timer();
-            timer.Interval = (10 * 1000); // 10 secs
+            timer.Interval = (10 * 10); // 10 secs
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
+            if (emplyeeRole == "Waiter")
+            {
+                MenuBill.Enabled = false;
+                MenuBar.Enabled = false;
+                MenuKitchen.Enabled = false;
+            }
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
             ShowListView();
+            DateTime dateTime = DateTime.Now;
+            txtTime.Text = dateTime.ToString("H:mm:s");
         }    
         private void txtItemId_Click(object sender, EventArgs e)
         {
@@ -270,9 +287,8 @@ namespace OrderingSystemUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Option option = new Option(employeeName,emplyeeRole);
+            Option option = new Option(employeeName,emplyeeRole,"TableVIew");
             option.Show();
-            this.Hide();
         }
     }
 }

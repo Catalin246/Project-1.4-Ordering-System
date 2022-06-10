@@ -51,11 +51,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(356, 58);
+            this.label1.Location = new System.Drawing.Point(305, 93);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.Size = new System.Drawing.Size(156, 15);
             this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.label1.Text = "Keep up with the good work";
             // 
             // lblUserName
             // 
@@ -86,8 +86,10 @@
             // 
             this.txtBoxPasscode.Location = new System.Drawing.Point(326, 227);
             this.txtBoxPasscode.Name = "txtBoxPasscode";
+            this.txtBoxPasscode.PasswordChar = '*';
             this.txtBoxPasscode.Size = new System.Drawing.Size(182, 23);
             this.txtBoxPasscode.TabIndex = 5;
+            this.txtBoxPasscode.UseSystemPasswordChar = true;
             // 
             // lblWrongUserName
             // 
