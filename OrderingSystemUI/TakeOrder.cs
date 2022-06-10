@@ -21,12 +21,14 @@ namespace OrderingSystemUI
         public TableView tableView;
         public AddNote addNote;
         public Order order;
-        public TakeOrder(int tableNumber, string employeeName)
+        Employee employee;
+        public TakeOrder(int tableNumber, Employee employee)
         {
+            this.employee = employee;
             this.tableNumber = tableNumber;
             InitializeComponent();
             lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
-            lblEmployeeName.Text = "Employee Name: " + employeeName.ToString();
+            lblEmployeeName.Text = "Employee Name: " + employee.EmployeeName.ToString();
         }
       
         //Display menu items
@@ -355,6 +357,7 @@ namespace OrderingSystemUI
                 btnPayment.Enabled = false;
                 this.Close();
                 Payment payment = new Payment(tableNumber);
+                payment.tableView = this.tableView;
                 payment.Show();
                 //if ordered item list != null then... DisplayOrderedItems(List<OrderedItem> orderedItems)
             }
@@ -389,8 +392,9 @@ namespace OrderingSystemUI
 
         private void lblEmployeeName_MouseClick(object sender, MouseEventArgs e)
         {
-            Login login = new Login();
-            login.Show();
+            Option option = new Option(employee.EmployeeName, employee.EmployeeRole);
+            option.Show();
+            this.Close();
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)

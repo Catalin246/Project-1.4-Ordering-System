@@ -52,5 +52,11 @@ namespace OrderingSystemLogic
             List<Drink> drinks= tabledb.GetDrink();
             return drinks;
         }
+
+        public void OpenTable(int number)
+        {
+            tabledb.MarkTableOpen(number);
+        }
+
     }
 }

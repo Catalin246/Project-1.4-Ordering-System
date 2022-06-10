@@ -25,6 +25,8 @@ namespace OrderingSystemUI
         {
             TableView tableView = new TableView(employeeName,employeeRole);
             BarView barView = new BarView(employeeName,employeeRole);
+            KitchenView kitchenView = new KitchenView(employeeName,employeeRole);
+            kitchenView.Close();
             barView.Close();
             tableView.Close();
             Login login = new Login();
