@@ -126,8 +126,8 @@ namespace OrderingSystemUI
                 listViewBar.MultiSelect = false;
                 btnReadyToServe.Enabled = false;
                 listViewBar.Items.Clear();
-                comboBoxCourse.Enabled = true;
-                comboBoxTable.Enabled = true;
+                comboBoxCourse.Enabled = false;
+                comboBoxTable.Enabled = false;
 
                 List<OrderedItem> orderedItemList = orderedItemService.GetFinishedDrinkItemsFromDaoClass();
 
