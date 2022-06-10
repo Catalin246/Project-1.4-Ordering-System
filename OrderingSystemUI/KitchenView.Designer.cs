@@ -44,7 +44,7 @@
             this.comboBoxCourse = new System.Windows.Forms.ComboBox();
             this.comboBoxTable = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnemployeeNme = new System.Windows.Forms.Button();
+            this.btnemployeeName = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.comboBoxShowOrders = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -129,7 +129,7 @@
             // btnReadyToServe
             // 
             this.btnReadyToServe.BackColor = System.Drawing.Color.Lime;
-            this.btnReadyToServe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnReadyToServe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnReadyToServe.Location = new System.Drawing.Point(640, 441);
             this.btnReadyToServe.Name = "btnReadyToServe";
             this.btnReadyToServe.Size = new System.Drawing.Size(205, 46);
@@ -141,7 +141,7 @@
             // btnViewOrderNote
             // 
             this.btnViewOrderNote.BackColor = System.Drawing.Color.Teal;
-            this.btnViewOrderNote.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnViewOrderNote.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnViewOrderNote.Location = new System.Drawing.Point(4, 441);
             this.btnViewOrderNote.Name = "btnViewOrderNote";
             this.btnViewOrderNote.Size = new System.Drawing.Size(205, 46);
@@ -177,14 +177,15 @@
             this.label3.TabIndex = 21;
             this.label3.Text = "Select:";
             // 
-            // btnemployeeNme
+            // btnemployeeName
             // 
-            this.btnemployeeNme.Location = new System.Drawing.Point(719, 6);
-            this.btnemployeeNme.Name = "btnemployeeNme";
-            this.btnemployeeNme.Size = new System.Drawing.Size(121, 23);
-            this.btnemployeeNme.TabIndex = 24;
-            this.btnemployeeNme.Text = "btnEmployeeName";
-            this.btnemployeeNme.UseVisualStyleBackColor = true;
+            this.btnemployeeName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnemployeeName.Location = new System.Drawing.Point(661, 6);
+            this.btnemployeeName.Name = "btnemployeeName";
+            this.btnemployeeName.Size = new System.Drawing.Size(179, 27);
+            this.btnemployeeName.TabIndex = 24;
+            this.btnemployeeName.Text = "btnEmployeeName";
+            this.btnemployeeName.UseVisualStyleBackColor = false;
             // 
             // timer1
             // 
@@ -217,7 +218,7 @@
             this.ClientSize = new System.Drawing.Size(849, 495);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxShowOrders);
-            this.Controls.Add(this.btnemployeeNme);
+            this.Controls.Add(this.btnemployeeName);
             this.Controls.Add(this.comboBoxCourse);
             this.Controls.Add(this.comboBoxTable);
             this.Controls.Add(this.label3);
@@ -248,7 +249,7 @@
         private System.Windows.Forms.ComboBox comboBoxCourse;
         private System.Windows.Forms.ComboBox comboBoxTable;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnemployeeNme;
+        private System.Windows.Forms.Button btnemployeeName;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ComboBox comboBoxShowOrders;

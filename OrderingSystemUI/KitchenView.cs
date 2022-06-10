@@ -22,12 +22,9 @@ namespace OrderingSystemUI
             tableService = new TableService();
             itemService = new ItemService();
             employeeService = new EmployeeService();
-                        
-
-            LoadListView();
 
             btnReadyToServe.Enabled = false;
-            btnViewOrderNote.Enabled = false;            
+            btnViewOrderNote.Enabled = false;
             comboBoxCourse.Enabled = false;
 
 
@@ -54,12 +51,14 @@ namespace OrderingSystemUI
             comboBoxCourse.Items.Add("none");
             comboBoxCourse.SelectedIndex = 0;
             comboBoxCourse.Items.Add("Lunch Starter");
-            comboBoxCourse.Items.Add("Lunch Main");            
+            comboBoxCourse.Items.Add("Lunch Main");
             comboBoxCourse.Items.Add("Lunch Desert");
             comboBoxCourse.Items.Add("Diner Starter");
             comboBoxCourse.Items.Add("Diner Entrement");
             comboBoxCourse.Items.Add("Diner Main");
             comboBoxCourse.Items.Add("Diner Desert");
+
+            LoadListView();
         }
         public KitchenView(string employeeName) : base()
         {
@@ -67,36 +66,53 @@ namespace OrderingSystemUI
         }
 
         private void LoadListView()
-        {            
-            try
-            {
-                btnemployeeNme.Text = EmployeeName;
-                comboBoxCourse.Enabled = false;                
+        {
+            btnemployeeName.Text = "Employee: " + EmployeeName;
+            comboBoxCourse.SelectedItem = 0;
+            comboBoxTable.SelectedItem = 0;
+            comboBoxCourse.Enabled = false;
 
-                lblTime.Text = DateTime.Now.ToString("HH:mm");
+            lblTime.Text = DateTime.Now.ToString("HH:mm");
 
-                if (comboBoxShowOrders.SelectedIndex == 0)
-                {
-                    LoadRunningOrders();
-                }
-                else
-                {
-                    LoadFinishedOrders();
-                }
-            }
-            catch (Exception exc)
+            if (comboBoxShowOrders.SelectedIndex == 0)
             {
-                MessageBox.Show(exc.Message);
+                LoadRunningOrders();
             }
+            else
+            {
+                LoadFinishedOrders();
+            }
+            //try
+            //{
+            //    btnemployeeNme.Text = "Employee: " + EmployeeName;
+            //    comboBoxCourse.SelectedIndex = 0;
+            //    comboBoxTable.SelectedIndex = 0;
+            //    comboBoxCourse.Enabled = false;
+
+            //    lblTime.Text = DateTime.Now.ToString("HH:mm");
+
+            //    if (comboBoxShowOrders.SelectedIndex == 0)
+            //    {
+            //        LoadRunningOrders();
+            //    }
+            //    else
+            //    {
+            //        LoadFinishedOrders();
+            //    }
+            //}
+            //catch (Exception exc)
+            //{
+            //    MessageBox.Show(exc.Message);
+            //}
         }
 
         private void LoadRunningOrders()
         {
             try
-            {    
+            {
                 listViewKitchen.MultiSelect = true;
                 listViewKitchen.Items.Clear();
-                
+
                 List<OrderedItem> orderedItemList = orderedItemService.GetPreparingFoodItemsFromDaoClass();
 
                 foreach (OrderedItem orderitem in orderedItemList)
@@ -112,7 +128,7 @@ namespace OrderingSystemUI
 
                     list.Tag = orderitem;
                     listViewKitchen.Items.Add(list);
-                }                
+                }
             }
             catch (Exception exc)
             {
@@ -127,6 +143,8 @@ namespace OrderingSystemUI
                 listViewKitchen.MultiSelect = false;
                 btnReadyToServe.Enabled = false;
                 listViewKitchen.Items.Clear();
+                comboBoxCourse.Enabled = true;
+                comboBoxTable.Enabled = true;
 
                 List<OrderedItem> orderedItemList = orderedItemService.GetFinishedFoodItemsFromDaoClass();
 
@@ -155,7 +173,7 @@ namespace OrderingSystemUI
         private void listViewKitchen_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
-            {   
+            {
                 if (listViewKitchen.SelectedItems.Count == 0)
                 {
                     return;
@@ -223,22 +241,22 @@ namespace OrderingSystemUI
             }
             return output;
         }
-        
+
 
         private string ShowTimePassed(DateTime orderTime)
-        {            
+        {
             DateTime now = DateTime.Now;
             TimeSpan diff = now.Subtract(orderTime);
-            double minuteDiff = Convert.ToInt32(diff.TotalMinutes);                        
+            double minuteDiff = Convert.ToInt32(diff.TotalMinutes);
 
-            if (10 < minuteDiff) 
-            {                
+            if (10 < minuteDiff)
+            {
                 return $"!!! {minuteDiff} min ago";
             }
             else
             {
                 return $"{minuteDiff} min ago";
-            }            
+            }
         }
 
         private string ShowTimePassedForFinishedOrders(DateTime orderTime)
@@ -246,9 +264,9 @@ namespace OrderingSystemUI
             DateTime now = DateTime.Now;
             TimeSpan diff = now.Subtract(orderTime);
             double minuteDiff = Convert.ToInt32(diff.TotalMinutes);
-                        
+
             return $"{minuteDiff} min ago";
-            
+
         }
 
         private void btnViewOrderNote_Click(object sender, EventArgs e)
@@ -259,9 +277,9 @@ namespace OrderingSystemUI
 
                 OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
                 output = $"{selectedItem.OrderId}\n\n {selectedItem.Name} \n\n {selectedItem.Note}";
-                                
-                MessageBox.Show(output);               
-                
+
+                MessageBox.Show(output);
+
             }
             catch (Exception ex)
             {
@@ -309,57 +327,73 @@ namespace OrderingSystemUI
 
         private void comboBoxTable_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            if (comboBoxTable.SelectedIndex == 0)
+            try
             {
-                return;
-            }
-
-            string tableNo = comboBoxTable.SelectedIndex.ToString();
-            tableNo = tableNo.Replace("Table ", "");
-            int index = int.Parse(tableNo);
-
-            foreach (ListViewItem item in listViewKitchen.Items)
-            {
-                OrderedItem orderedItem = (OrderedItem)item.Tag;
-
-                if (orderedItem.TableId == index)
+                if (comboBoxTable.SelectedIndex == 0)
                 {
-                    item.Selected = true;
+                    return;
                 }
+
+                string tableNo = comboBoxTable.SelectedItem.ToString();
+                tableNo = tableNo.Replace("Table ", "");
+                int index = int.Parse(tableNo);
+
+                foreach (ListViewItem item in listViewKitchen.Items)
+                {
+                    OrderedItem orderedItem = (OrderedItem)item.Tag;
+
+                    if (orderedItem.TableId == index)
+                    {
+                        item.Selected = true;
+                    }
+                }
+                comboBoxCourse.Enabled = true;
             }
-            comboBoxCourse.Enabled = true;
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void comboBoxCourse_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            if (comboBoxTable.SelectedIndex == 0)
+            try
             {
-                return;
-            }
-
-            string tableNo = comboBoxTable.SelectedIndex.ToString();
-            tableNo = tableNo.Replace("Table ", "");
-            int index = int.Parse(tableNo);
-
-            if (comboBoxCourse.SelectedIndex == 0)
-            {
-                return;
-            }
-            string courseName = comboBoxCourse.SelectedIndex.ToString();
-
-            foreach (ListViewItem item in listViewKitchen.Items)
-            {
-                OrderedItem orderedItem = (OrderedItem)item.Tag;
-
-                if (orderedItem.Category == courseName && orderedItem.TableId ==index)
+                if (comboBoxTable.SelectedIndex == 0)
                 {
-                    item.Selected = true;
+                    return;
                 }
-                else
+                else if (comboBoxCourse.SelectedIndex == 0)
                 {
-                    item.Selected = false;
+                    return;
                 }
+
+                string tableNo = comboBoxTable.SelectedIndex.ToString();
+                tableNo = tableNo.Replace("Table ", "");
+                int index = int.Parse(tableNo);
+
+                string courseName = comboBoxCourse.SelectedItem.ToString();
+
+                foreach (ListViewItem item in listViewKitchen.Items)
+                {
+                    OrderedItem orderedItem = (OrderedItem)item.Tag;
+
+                    if (orderedItem.Category == courseName && orderedItem.TableId == index)
+                    {
+                        item.Selected = true;
+                    }
+                    else
+                    {
+                        item.Selected = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
 }
+
