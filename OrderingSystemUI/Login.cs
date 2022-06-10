@@ -47,9 +47,9 @@ namespace OrderingSystemUI
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception )
             {
-
+                Console.WriteLine("Something wrong with the login");
             }
         }
 

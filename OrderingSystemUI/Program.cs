@@ -21,9 +21,9 @@ namespace OrderingSystemUI
             //Application.Run(new TableView());
             //Application.Run(new TableView(" Steven","cheff"));
             //Application.Run(new Login());
-            Application.Run(new TakeOrder(1, "Catalin"));
+            //Application.Run(new TakeOrder(1, "Catalin"));
             //Application.Run(new KitchenView("Beril",));
-            //Application.Run(new BarView("Betül", ));
+            //Application.Run(new BarView("BetÃ¼l", ));
         }
     }
 }
