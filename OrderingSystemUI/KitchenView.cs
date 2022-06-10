@@ -6,23 +6,18 @@ using OrderingSystemLogic;
 
 namespace OrderingSystemUI
 {
+    //NOTE: Kitchenview and barview both uses almost similar code (one uses food verions, other uses drink versions) 
+    //i added comments on bar view which are explaining the code so if you want to see the comments, they are in BarView.cs
+    //the same comments apply to this code (because they are 99% same).
     public partial class KitchenView : Form
     {
         OrderedItemService orderedItemService;
-        OrderService orderService;
-        TableService tableService;
-        ItemService itemService;
-        EmployeeService employeeService;
         private string EmployeeName { get; set; }
 
         public KitchenView(string employeeName)
         {
             InitializeComponent();
             orderedItemService = new OrderedItemService();
-            orderService = new OrderService();
-            tableService = new TableService();
-            itemService = new ItemService();
-            employeeService = new EmployeeService();
 
             this.EmployeeName = employeeName;
             btnReadyToServe.Enabled = false;
@@ -179,8 +174,7 @@ namespace OrderingSystemUI
                     }
                     else
                     {
-                        //OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
-
+                        
                         if ((selected.Note == "") || (selected.Note == "none"))
                         {
                             btnViewOrderNote.Enabled = false;
@@ -258,7 +252,7 @@ namespace OrderingSystemUI
                 string output = "";
 
                 OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
-                output = $"{selectedItem.OrderId}\n\n {selectedItem.Name} \n\n {selectedItem.Note}";
+                output = $"{selectedItem.OrderId}\n\n {selectedItem.Name} \n\n NOTE: \n\n {selectedItem.Note}";
 
                 MessageBox.Show(output);
 
