@@ -37,7 +37,11 @@ namespace OrderingSystemUI
                 list = accountService.GetAllEmployee();
                 foreach (Employee item in list)
                 {
-                    //if (item.EmployeePassword == TryPasscode(Passcode, item.salt).Digest && TryUserName(Username, list))
+                    //if(item.EmployeePassword == TryPasscode(Passcode, item.salt).Digest && TryUserName(Username, list))
+                    //{
+                    //    EmployeeRole(item.EmployeeRole, item.EmployeeName);
+                    //}
+                    if (TryPasscode(txtBoxPasscode.Text) && TryUserName(txtBoxUsername.Text))
                     {
                         EmployeeRole(item.EmployeeRole, item.EmployeeName);
                     }
@@ -70,21 +74,26 @@ namespace OrderingSystemUI
                     break;
             }
         }
-        private bool TryUserName(string username, List<Employee> list)
+        private bool TryPasscode(string passcode)
         {
-            foreach (Employee em in list)
-            {
-                if(username == em.EmployeeName)
-                    return true;
-            }
+            if (this.Passcode == passcode)
+                return true;
+
             return false;
         }
-        private HashWithSaltResult TryPasscode(string passcode, string salt)
+        private bool TryUserName(string username)
         {
-            PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-            HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
-            return hashResultSha256;
+            if(this.Username == username)
+                    return true;
+            
+            return false;
         }
+        //private HashWithSaltResult TryPasscode(string passcode, string salt)
+        //{
+        //    PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
+        //    HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
+        //    return hashResultSha256;
+        //}
 
     }
 }

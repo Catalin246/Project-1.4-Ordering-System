@@ -86,8 +86,10 @@
             // 
             this.txtBoxPasscode.Location = new System.Drawing.Point(326, 227);
             this.txtBoxPasscode.Name = "txtBoxPasscode";
+            this.txtBoxPasscode.PasswordChar = '*';
             this.txtBoxPasscode.Size = new System.Drawing.Size(182, 23);
             this.txtBoxPasscode.TabIndex = 5;
+            this.txtBoxPasscode.UseSystemPasswordChar = true;
             // 
             // lblWrongUserName
             // 
