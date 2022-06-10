@@ -55,6 +55,7 @@
             // 
             // listViewKitchen
             // 
+            this.listViewKitchen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.listViewKitchen.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.colTableNo,
