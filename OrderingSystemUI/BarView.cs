@@ -10,12 +10,14 @@ namespace OrderingSystemUI
     {
         OrderedItemService orderedItemService;
         private string EmployeeName { get; set; }
-        public BarView(string employeeName)
+        private string EmployeeRole { get; set; }
+        public BarView(string employeeName, string role)
         {
             InitializeComponent();
             orderedItemService = new OrderedItemService();
 
             this.EmployeeName = employeeName;
+            this.EmployeeRole = role;
 
             //making all buttons disabled first.
             //these will be enabled when some actions are done.
@@ -65,8 +67,8 @@ namespace OrderingSystemUI
             {
                 //setting things that should load everytime the listview refreshes itself.
                 btnemployeeName.Text = "Employee: " + EmployeeName;
-                comboBoxCourse.SelectedItem = 0;
-                comboBoxTable.SelectedItem = 0; //default combobox options.
+                comboBoxCourse.SelectedItem = "none";
+                comboBoxTable.SelectedItem = "none"; //default combobox options.
                 comboBoxCourse.Enabled = false; //this cannot be enabled unless table is selected.
 
                 lblTime.Text = DateTime.Now.ToString("HH:mm"); //in every refresh, time is updating. 
@@ -234,7 +236,7 @@ namespace OrderingSystemUI
 
             if (10 < minuteDiff)
             {
-                //if the order time is more than 10 mins ago, the bartender/chef must be hurry. so this is an notification..
+                //if the order time is more than 10 mins ago, the bartender/chef must be hurry. so this is a notification..
                 return $"!!! {minuteDiff} min ago";
             }
             else
@@ -245,7 +247,7 @@ namespace OrderingSystemUI
 
         private string ShowTimePassedForFinishedOrders(DateTime orderTime)
         {
-            //finished orders doesnt need any notification. so they recieve normal time.
+            //finished orders dont need any notification. so they recieve normal time.
             DateTime now = DateTime.Now;
             TimeSpan diff = now.Subtract(orderTime);
             double minuteDiff = Convert.ToInt32(diff.TotalMinutes);
@@ -375,7 +377,7 @@ namespace OrderingSystemUI
 
                     if (orderedItem.Category == courseName && orderedItem.TableId == index)
                     {
-                        //if both category names (from combobox) and table ids(from combobox) same, this istem should be selected automatically.
+                        //if both category names (from combobox) and table ids(from combobox) same, this item should be selected automatically.
                         item.Selected = true;
                     }
                     else
@@ -388,6 +390,13 @@ namespace OrderingSystemUI
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnemployeeName_Click(object sender, EventArgs e)
+        {
+            Option optionForm = new Option(EmployeeName, EmployeeRole);
+            optionForm.Show();
+            this.Close();
         }
     }
 }

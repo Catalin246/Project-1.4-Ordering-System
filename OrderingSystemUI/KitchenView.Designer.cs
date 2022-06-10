@@ -190,6 +190,7 @@
             this.btnemployeeName.TabIndex = 24;
             this.btnemployeeName.Text = "btnEmployeeName";
             this.btnemployeeName.UseVisualStyleBackColor = false;
+            this.btnemployeeName.Click += new System.EventHandler(this.btnemployeeName_Click);
             // 
             // timer1
             // 
