@@ -247,6 +247,8 @@ namespace OrderingSystemUI
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
             Payment paymentView = new Payment();
+            paymentView.tableView = this;
+            this.Hide();
             paymentView.Show();
 
         }

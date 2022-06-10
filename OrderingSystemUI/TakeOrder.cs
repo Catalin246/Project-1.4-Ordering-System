@@ -355,6 +355,7 @@ namespace OrderingSystemUI
                 btnPayment.Enabled = false;
                 this.Close();
                 Payment payment = new Payment(tableNumber);
+                payment.tableView = this.tableView;
                 payment.Show();
                 //if ordered item list != null then... DisplayOrderedItems(List<OrderedItem> orderedItems)
             }
