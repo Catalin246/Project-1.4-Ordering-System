@@ -14,7 +14,6 @@ namespace OrderingSystemUI
     {
         private string employeeName;
         private string employeeRole;
-        private TableView tableView;
         public Option(string employeeName, string employeeRole)
         {
             InitializeComponent();
@@ -25,7 +24,9 @@ namespace OrderingSystemUI
         private void btnLogout_Click(object sender, EventArgs e)
         {
             TableView tableView = new TableView(employeeName,employeeRole);
-            tableView.Hide();
+            BarView barView = new BarView(employeeName,employeeRole);
+            barView.Close();
+            tableView.Close();
             Login login = new Login();
             login.Show();
             this.Close();
@@ -44,9 +45,11 @@ namespace OrderingSystemUI
             this.Hide();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//btn back
         {
+            TableView tableView = new TableView(employeeName, employeeRole);
             this.Hide();
+            tableView.Show();
         }
     }
 }

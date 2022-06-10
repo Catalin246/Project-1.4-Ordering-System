@@ -17,6 +17,7 @@ namespace OrderingSystemUI
         private List<TakeOrder> takeOrders = new List<TakeOrder>();
         private string employeeName;
         private string emplyeeRole;
+        private TableService tableService = new TableService();
         public TableView(string employeeName,string emplyeeRole)
         {
             this.employeeName = employeeName;
@@ -43,15 +44,9 @@ namespace OrderingSystemUI
                 ShowListView();
             }
         }
-        public void ShowListView()
+        public void CheckTable()
         {
-            TableService tableService = new TableService();
-            List<Table> tables = tableService.GetTable();
-            List<Food> foods = tableService.GetFood();
-            List<Drink> drinks = tableService.GetDrink();
             List<Table> tableStatus = tableService.GetTablesStatus();
-            //List<Drink> drinks = drinkService.GetDrinks();
-            listViewTableOrder.Items.Clear();
             foreach (Table table in tableStatus)
             {
                 if (table.TableStatus == "Close")
@@ -70,6 +65,12 @@ namespace OrderingSystemUI
                         break;
                 }
             }
+        }
+        public void ShowListView()
+        {
+            CheckTable();
+            List<Table> tables = tableService.GetTable();
+            List<Drink> drinks = tableService.GetDrink();
             listViewTableOrder.Items.Clear();
             foreach (Table table in tables)
             {
@@ -85,7 +86,7 @@ namespace OrderingSystemUI
                             break;
                         }
                         else
-                        { 
+                        {
                             li.SubItems.Add("Kitchen");
                             break;
                         }
@@ -259,7 +260,7 @@ namespace OrderingSystemUI
         {
             btnProfile.Text = employeeName;          
             Timer timer = new Timer();
-            timer.Interval = (10 * 10); // 10 secs
+            timer.Interval = (10 * 1000); // 10 secs
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
             if (emplyeeRole == "Waiter")
@@ -284,6 +285,7 @@ namespace OrderingSystemUI
         private void button1_Click(object sender, EventArgs e)
         {
             Option option = new Option(employeeName,emplyeeRole);
+            this.Hide();
             option.Show();
         }
     }
