@@ -14,7 +14,8 @@ namespace OrderingSystemUI
         ItemService itemService;
         EmployeeService employeeService;
         private string EmployeeName { get; set; }
-        public KitchenView()
+
+        public KitchenView(string employeeName)
         {
             InitializeComponent();
             orderedItemService = new OrderedItemService();
@@ -23,10 +24,10 @@ namespace OrderingSystemUI
             itemService = new ItemService();
             employeeService = new EmployeeService();
 
+            this.EmployeeName = employeeName;
             btnReadyToServe.Enabled = false;
             btnViewOrderNote.Enabled = false;
             comboBoxCourse.Enabled = false;
-
 
             comboBoxShowOrders.Items.Clear();
             comboBoxShowOrders.Items.Add("Running Orders");
@@ -60,50 +61,31 @@ namespace OrderingSystemUI
 
             LoadListView();
         }
-        public KitchenView(string employeeName) : base()
-        {
-            this.EmployeeName = employeeName;
-        }
 
         private void LoadListView()
         {
-            btnemployeeName.Text = "Employee: " + EmployeeName;
-            comboBoxCourse.SelectedItem = 0;
-            comboBoxTable.SelectedItem = 0;
-            comboBoxCourse.Enabled = false;
-
-            lblTime.Text = DateTime.Now.ToString("HH:mm");
-
-            if (comboBoxShowOrders.SelectedIndex == 0)
+            try
             {
-                LoadRunningOrders();
+                btnemployeeName.Text = "Employee: " + EmployeeName;
+                comboBoxCourse.SelectedItem = 0;
+                comboBoxTable.SelectedItem = 0;
+                comboBoxCourse.Enabled = false;                
+
+                lblTime.Text = DateTime.Now.ToString("HH:mm");
+
+                if (comboBoxShowOrders.SelectedIndex == 0)
+                {
+                    LoadRunningOrders();
+                }
+                else
+                {
+                    LoadFinishedOrders();
+                }
             }
-            else
+            catch (Exception exc)
             {
-                LoadFinishedOrders();
+                MessageBox.Show(exc.Message);
             }
-            //try
-            //{
-            //    btnemployeeNme.Text = "Employee: " + EmployeeName;
-            //    comboBoxCourse.SelectedIndex = 0;
-            //    comboBoxTable.SelectedIndex = 0;
-            //    comboBoxCourse.Enabled = false;
-
-            //    lblTime.Text = DateTime.Now.ToString("HH:mm");
-
-            //    if (comboBoxShowOrders.SelectedIndex == 0)
-            //    {
-            //        LoadRunningOrders();
-            //    }
-            //    else
-            //    {
-            //        LoadFinishedOrders();
-            //    }
-            //}
-            //catch (Exception exc)
-            //{
-            //    MessageBox.Show(exc.Message);
-            //}
         }
 
         private void LoadRunningOrders()
@@ -322,10 +304,17 @@ namespace OrderingSystemUI
 
         private void comboBoxShowOrders_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadListView();
+            try
+            {
+                LoadListView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private void comboBoxTable_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void comboBoxTable_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
