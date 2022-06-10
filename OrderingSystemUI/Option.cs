@@ -14,17 +14,18 @@ namespace OrderingSystemUI
     {
         private string employeeName;
         private string employeeRole;
-        private string formName;
-        public Option(string employeeName, string employeeRole, string formName)
+        private TableView tableView;
+        public Option(string employeeName, string employeeRole)
         {
             InitializeComponent();
             this.employeeName = employeeName;
             this.employeeRole = employeeRole;
-            this.formName = formName;
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
+            TableView tableView = new TableView(employeeName,employeeRole);
+            tableView.Hide();
             Login login = new Login();
             login.Show();
             this.Close();
