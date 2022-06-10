@@ -15,8 +15,8 @@ namespace OrderingSystemUI
 {
     public partial class Login : Form
     {
-        private string Username;
-        private string Passcode;
+        private string username;
+        private string passcode;
         public Login()
         {
             InitializeComponent();
@@ -30,8 +30,8 @@ namespace OrderingSystemUI
                     lblWrongUserName.Text = "Please enter your username";                
                 if (txtBoxPasscode.Text =="")
                     lblwrongPasscode.Text = "Please enter your passcode";                
-                Username = txtBoxUsername.Text;
-                Passcode = txtBoxPasscode.Text;
+                username = txtBoxUsername.Text;
+                passcode = txtBoxPasscode.Text;
                 List<Employee> list = new List<Employee>();
                 EmployeeService accountService = new EmployeeService();
                 list = accountService.GetAllEmployee();
@@ -41,7 +41,7 @@ namespace OrderingSystemUI
                     //{
                     //    EmployeeRole(item.EmployeeRole, item.EmployeeName);
                     //}
-                    if (TryPasscode(txtBoxPasscode.Text) && TryUserName(txtBoxUsername.Text))
+                    if (TryPasscode(username, item.EmployeeName) && TryUserName(passcode,item.EmployeePassword))
                     {
                         EmployeeRole(item.EmployeeRole, item.EmployeeName);
                     }
@@ -74,20 +74,14 @@ namespace OrderingSystemUI
                     break;
             }
         }
-        private bool TryPasscode(string passcode)
+        private bool TryPasscode(string passcode, string dataName)
         {
-            if (this.Passcode == passcode)
-                return true;
-
-            return false;
+            return (passcode == dataName);
         }
-        private bool TryUserName(string username)
+        private bool TryUserName(string username, string dataName)
         {
-            if(this.Username == username)
-                    return true;
-            
-            return false;
-        }
+            return (username == dataName);
+        } 
         //private HashWithSaltResult TryPasscode(string passcode, string salt)
         //{
         //    PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
