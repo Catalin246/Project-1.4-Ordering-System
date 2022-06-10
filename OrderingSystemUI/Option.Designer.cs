@@ -91,34 +91,37 @@
             // lblEmployeeName
             // 
             this.lblEmployeeName.AutoSize = true;
-            this.lblEmployeeName.Location = new System.Drawing.Point(69, 114);
+            this.lblEmployeeName.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEmployeeName.Location = new System.Drawing.Point(29, 114);
             this.lblEmployeeName.Name = "lblEmployeeName";
-            this.lblEmployeeName.Size = new System.Drawing.Size(94, 15);
+            this.lblEmployeeName.Size = new System.Drawing.Size(155, 28);
             this.lblEmployeeName.TabIndex = 3;
             this.lblEmployeeName.Text = "Employee Name";
             // 
             // lblEmployeeRole
             // 
             this.lblEmployeeRole.AutoSize = true;
-            this.lblEmployeeRole.Location = new System.Drawing.Point(69, 193);
+            this.lblEmployeeRole.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEmployeeRole.Location = new System.Drawing.Point(29, 193);
             this.lblEmployeeRole.Name = "lblEmployeeRole";
-            this.lblEmployeeRole.Size = new System.Drawing.Size(85, 15);
+            this.lblEmployeeRole.Size = new System.Drawing.Size(141, 28);
             this.lblEmployeeRole.TabIndex = 5;
             this.lblEmployeeRole.Text = "Employee Role";
             // 
             // lblText1
             // 
             this.lblText1.AutoSize = true;
-            this.lblText1.Location = new System.Drawing.Point(435, 148);
+            this.lblText1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblText1.Location = new System.Drawing.Point(368, 150);
             this.lblText1.Name = "lblText1";
-            this.lblText1.Size = new System.Drawing.Size(185, 15);
+            this.lblText1.Size = new System.Drawing.Size(308, 28);
             this.lblText1.TabIndex = 6;
             this.lblText1.Text = "Are you sure you want to logout ?";
             // 
             // labelEmployeName
             // 
             this.labelEmployeName.AutoSize = true;
-            this.labelEmployeName.Location = new System.Drawing.Point(210, 114);
+            this.labelEmployeName.Location = new System.Drawing.Point(190, 125);
             this.labelEmployeName.Name = "labelEmployeName";
             this.labelEmployeName.Size = new System.Drawing.Size(16, 15);
             this.labelEmployeName.TabIndex = 7;
@@ -126,9 +129,9 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(435, 215);
+            this.btnLogout.Location = new System.Drawing.Point(407, 204);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(159, 27);
+            this.btnLogout.Size = new System.Drawing.Size(213, 63);
             this.btnLogout.TabIndex = 8;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
@@ -137,7 +140,7 @@
             // labelEmployeRole
             // 
             this.labelEmployeRole.AutoSize = true;
-            this.labelEmployeRole.Location = new System.Drawing.Point(210, 193);
+            this.labelEmployeRole.Location = new System.Drawing.Point(176, 204);
             this.labelEmployeRole.Name = "labelEmployeRole";
             this.labelEmployeRole.Size = new System.Drawing.Size(16, 15);
             this.labelEmployeRole.TabIndex = 9;
