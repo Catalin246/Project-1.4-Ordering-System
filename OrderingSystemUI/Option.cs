@@ -49,9 +49,7 @@ namespace OrderingSystemUI
 
         private void button1_Click(object sender, EventArgs e)//btn back
         {
-            TableView tableView = new TableView(employeeName, employeeRole);
-            this.Hide();
-            tableView.Show();
+            this.Close();
         }
     }
 }
