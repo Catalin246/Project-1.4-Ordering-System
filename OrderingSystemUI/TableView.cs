@@ -204,7 +204,7 @@ namespace OrderingSystemUI
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
@@ -246,6 +246,7 @@ namespace OrderingSystemUI
         {
             Payment paymentView = new Payment();
             paymentView.Show();
+
         }
 
         private void txtBoxOrderId_TextChanged(object sender, EventArgs e)
@@ -261,6 +262,12 @@ namespace OrderingSystemUI
             timer.Interval = (10 * 1000); // 10 secs
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
+            if (emplyeeRole == "Waiter")
+            {
+                MenuBill.Enabled = false;
+                MenuBar.Enabled = false;
+                MenuKitchen.Enabled = false;
+            }
         }
 
         private void timer_Tick(object sender, EventArgs e)
