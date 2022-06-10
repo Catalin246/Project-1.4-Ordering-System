@@ -26,10 +26,10 @@ namespace OrderingSystemUI
         {
             try
             {
-                if (txtBoxUsername.Text =="")
-                    lblWrongUserName.Text = "Please enter your username";                
-                if (txtBoxPasscode.Text =="")
-                    lblwrongPasscode.Text = "Please enter your passcode";                
+                if (txtBoxUsername.Text == "")
+                    lblWrongUserName.Text = "Please enter your username";
+                if (txtBoxPasscode.Text == "")
+                    lblwrongPasscode.Text = "Please enter your passcode";
                 username = txtBoxUsername.Text;
                 passcode = txtBoxPasscode.Text;
                 List<Employee> list = new List<Employee>();
@@ -37,13 +37,18 @@ namespace OrderingSystemUI
                 list = accountService.GetAllEmployee();
                 foreach (Employee item in list)
                 {
-                    if (TryPasscode(username, item.EmployeeName) && TryUserName(passcode,item.EmployeePassword))
+                    if (TryPasscode(username, item.EmployeeName))
                     {
-                        EmployeeRole(item.EmployeeRole, item.EmployeeName);
+                        if (TryUserName(username, item.EmployeeName))
+                            EmployeeRole(item.EmployeeRole, item.EmployeeName);
+                        else
+                            lblwrongPasscode.Text = "your passcode is incorrect please try again";
                     }
+                    else
+                        lblWrongUserName.Text = "your username is incorrect please try again";
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
                 Console.WriteLine("Something wrong with the login");
             }

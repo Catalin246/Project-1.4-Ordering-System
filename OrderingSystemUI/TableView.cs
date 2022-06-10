@@ -16,14 +16,13 @@ namespace OrderingSystemUI
     {
         private List<TakeOrder> takeOrders = new List<TakeOrder>();
         private string employeeName;
-        private string emplyeeRole;
-        Employee employee;
+        private string employeeRole;
+
         private TableService tableService = new TableService();
         public TableView(string employeeName,string emplyeeRole)
         {
             this.employeeName = employeeName;
-            this.emplyeeRole = emplyeeRole;
-            employee = new Employee(employeeName, emplyeeRole);
+            this.employeeRole = emplyeeRole;            
             InitializeComponent();
             ShowListView();
             for (int i = 0; i < 10; i++)
@@ -207,7 +206,7 @@ namespace OrderingSystemUI
         }
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            BarView barViewForm = new BarView(this.employeeName, this.emplyeeRole);
+            BarView barViewForm = new BarView(this.employeeName, this.employeeRole);
             barViewForm.Show();
         }
 
@@ -223,7 +222,7 @@ namespace OrderingSystemUI
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            KitchenView kitchenViewForm = new KitchenView(this.employeeName, this.emplyeeRole);
+            KitchenView kitchenViewForm = new KitchenView(this.employeeName, this.employeeRole);
             kitchenViewForm.Show();
         }
 
@@ -267,7 +266,7 @@ namespace OrderingSystemUI
             timer.Interval = (10 * 1000); // 10 secs
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
-            if (emplyeeRole == "Waiter")
+            if (employeeRole == "Waiter")
             {
                 MenuBar.Enabled = false;
                 MenuKitchen.Enabled = false;
@@ -287,8 +286,9 @@ namespace OrderingSystemUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Option option = new Option(employeeName,emplyeeRole);
-            option.Show();
+            Option optionForm = new Option(employeeName, employeeRole);
+            optionForm.Show();
+            this.Close();
         }
     }
 }
