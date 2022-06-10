@@ -12,7 +12,7 @@ namespace OrderingSystemUI
 {
     public partial class BarView : Form
     {
-        public BarView()
+        public BarView(string name) : base()
         {
             InitializeComponent();
         }

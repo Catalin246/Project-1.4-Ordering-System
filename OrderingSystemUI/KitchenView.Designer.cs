@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KitchenView));
             this.listViewKitchen = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.colTableNo = new System.Windows.Forms.ColumnHeader();
@@ -48,6 +49,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.comboBoxShowOrders = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // listViewKitchen
@@ -166,7 +169,7 @@
             this.comboBoxTable.Name = "comboBoxTable";
             this.comboBoxTable.Size = new System.Drawing.Size(96, 23);
             this.comboBoxTable.TabIndex = 22;
-            this.comboBoxTable.SelectedIndexChanged += new System.EventHandler(this.comboBoxTable_SelectedIndexChanged_1);
+            this.comboBoxTable.SelectedIndexChanged += new System.EventHandler(this.comboBoxTable_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -195,6 +198,7 @@
             // 
             // comboBoxShowOrders
             // 
+            this.comboBoxShowOrders.BackColor = System.Drawing.Color.White;
             this.comboBoxShowOrders.FormattingEnabled = true;
             this.comboBoxShowOrders.Location = new System.Drawing.Point(166, 57);
             this.comboBoxShowOrders.Name = "comboBoxShowOrders";
@@ -211,11 +215,22 @@
             this.label1.TabIndex = 26;
             this.label1.Text = "View Orders:";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(8, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(73, 74);
+            this.pictureBox1.TabIndex = 27;
+            this.pictureBox1.TabStop = false;
+            // 
             // KitchenView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(849, 495);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxShowOrders);
             this.Controls.Add(this.btnemployeeName);
@@ -228,6 +243,7 @@
             this.Controls.Add(this.btnViewOrderNote);
             this.Name = "KitchenView";
             this.Text = "KitchenView";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,5 +270,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ComboBox comboBoxShowOrders;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

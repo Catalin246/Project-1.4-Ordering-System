@@ -204,7 +204,8 @@ namespace OrderingSystemUI
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            
+            BarView barViewForm = new BarView(this.employeeName);
+            barViewForm.Show();
         }
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
@@ -219,7 +220,7 @@ namespace OrderingSystemUI
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            KitchenView kitchenViewForm = new KitchenView();
+            KitchenView kitchenViewForm = new KitchenView(this.employeeName);
             kitchenViewForm.Show();
         }
 
