@@ -6,11 +6,42 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace OrderingSystemDAL
 {
     public class TableDao : BaseDao
     {
+
+        private readonly SqlConnection dbConnection;//my sql connection object
+
+        public TableDao()
+        {
+            string connString = ConfigurationManager
+                .ConnectionStrings["2122chapeau.database.windows.net"]
+                .ConnectionString;
+
+            dbConnection = new SqlConnection(connString);//passing my database to my sql object
+        }
+
+
+        public void MarkTableOpen(int tableID)
+        {
+            dbConnection.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("Update dbo.[Table] SET [Table_Status] = 'Open' WHERE [Table_Id] = @tableId;", dbConnection);
+
+                command.Parameters.AddWithValue("@tableID", tableID);
+
+                int nrOfRowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Failed to open Table! " + e.Message);
+            }
+            dbConnection.Close();
+        }
         public List<Table> GetAllTable()
         {
             string query = "SELECT t.[Table_Id], O.Order_Time, i.Ordered_Item_Status, O.Order_Id,t.Table_Status,I.Item_Id FROM dbo.[Table] as T join dbo.[Order] as O on T.Table_Id = O.Table_Id join dbo.[OrderedItem] as I on i.Order_Id = o.Order_Id;";
@@ -122,23 +153,6 @@ namespace OrderingSystemDAL
             return drinks;
         }
 
-        public void MarkTableOpen(int tableID)
-        {
-            
-            try
-            {
-                //SqlCommand command = new SqlCommand("Update dbo.[Order] SET [Order_Status] = 'Paid' WHERE [Table_Id] = @tableId;", conn);
-
-                //command.Parameters.AddWithValue("@tableID", tableID);
-
-                //int nrOfRowsAffected = command.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Marking Order Paid failed! " + e.Message);
-            }
-            
-        }
 
     }
 }
