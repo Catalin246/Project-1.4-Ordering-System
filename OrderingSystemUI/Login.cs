@@ -26,10 +26,10 @@ namespace OrderingSystemUI
         {
             try
             {
-                if (txtBoxUsername.Text =="")
-                    lblWrongUserName.Text = "Please enter your username";                
-                if (txtBoxPasscode.Text =="")
-                    lblwrongPasscode.Text = "Please enter your passcode";                
+                if (txtBoxUsername.Text == "")
+                    lblWrongUserName.Text = "Please enter your username";
+                if (txtBoxPasscode.Text == "")
+                    lblwrongPasscode.Text = "Please enter your passcode";
                 username = txtBoxUsername.Text;
                 passcode = txtBoxPasscode.Text;
                 List<Employee> list = new List<Employee>();
@@ -48,7 +48,7 @@ namespace OrderingSystemUI
                         lblWrongUserName.Text = "your username is incorrect please try again";
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
                 Console.WriteLine("Something wrong with the login");
             }
