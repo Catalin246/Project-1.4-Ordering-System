@@ -17,10 +17,13 @@ namespace OrderingSystemUI
         private List<TakeOrder> takeOrders = new List<TakeOrder>();
         private string employeeName;
         private string employeeRole;
+        Employee employee;
 
         private TableService tableService = new TableService();
         public TableView(string employeeName,string emplyeeRole)
         {
+            employee.EmployeeName = employeeName;
+            employee.EmployeeRole = employeeRole;
             this.employeeName = employeeName;
             this.employeeRole = emplyeeRole;            
             InitializeComponent();

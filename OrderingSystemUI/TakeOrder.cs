@@ -402,6 +402,11 @@ namespace OrderingSystemUI
             this.Hide();
             tableView.Show();
         }
+
+        private void pnlTakeOrder_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
     
