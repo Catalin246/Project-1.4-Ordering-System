@@ -21,18 +21,14 @@ namespace OrderingSystemUI
         public TableView tableView;
         public AddNote addNote;
         public Order order;
-        public TakeOrder(int tableNumber)
+        public TakeOrder(int tableNumber, string employeeName)
         {
             this.tableNumber = tableNumber;
             InitializeComponent();
             lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
+            lblEmployeeName.Text = "Employee Name: " + employeeName.ToString();
         }
-        public TakeOrder()
-        {
-            InitializeComponent();
-            lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
-        }
-       
+      
         //Display menu items
         public void DisplayItems(List<Item> items)
         {
@@ -119,6 +115,114 @@ namespace OrderingSystemUI
                 MessageBox.Show("Something went wrong : " + exp.Message);
             }
         }
+       
+        private void btnDrinks_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                ItemService itemService = new ItemService();
+                List<Item> items = itemService.GetDrinks();
+                DisplayItems(items);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong : " + exp.Message);
+            }
+        }
+      
+        private void btnStarters_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                ItemService itemService = new ItemService();
+                List<Item> items = itemService.GetStarters(CheckDinerTime());
+                DisplayItems(items);                               
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong : " + exp.Message);
+            }
+        }
+
+        private void btnMains_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                ItemService itemService = new ItemService();
+                List<Item> items = itemService.GetMains(CheckDinerTime());
+                DisplayItems(items);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong : " + exp.Message);
+            }
+        }
+
+        private void btnDesserts_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                ItemService itemService = new ItemService();
+                List<Item> items = itemService.GetDeserts(CheckDinerTime());
+                DisplayItems(items);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong : " + exp.Message);
+            }
+        }
+        private bool CheckDinerTime()
+        {
+            bool dinerTime = false;
+            TimeSpan timeNow = DateTime.Now.TimeOfDay;
+            TimeSpan startTimeForDinner = new TimeSpan(18, 00, 00);
+            if (timeNow > startTimeForDinner)
+                dinerTime = true;
+            return dinerTime;
+        }
+
+        private void btnTake_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                btnTake.Enabled = false;
+                btnPayment.Enabled = true;
+                btnCancel.Enabled = false;
+                btnAdd.Enabled = false;
+                btnMinus.Enabled = false;   
+                btnModify.Enabled = true;
+
+                List<Order> orders = new List<Order>();
+                OrderService orderService = new OrderService();
+                OrderedItemService orderedItemService = new OrderedItemService();
+                orders = orderService.GetOrders();
+                if (btnModify.Enabled == true)
+                {
+                    order.OrderId = orders[orders.Count - 1].OrderId + 1;
+                    orderService.AddOrder(order);
+                }
+
+                foreach (OrderedItem item in order.OrderedItems)
+                {
+                    if (item.ItemAddedInDatabase == false)
+                    {
+                        orderedItemService.AddOrderesItem(item, order);
+                        item.ItemAddedInDatabase = true;
+                    }
+                    else
+                    {
+                        orderedItemService.UpdateAmount(item, order.OrderId);
+                    }
+                }
+                btnModify.Enabled = true;
+                MessageBox.Show("Order was taken successfully");
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong : " + exp.Message);
+            }
+        }
+
         private void btnCancel_Click_1(object sender, EventArgs e)
         {
             try
@@ -185,7 +289,6 @@ namespace OrderingSystemUI
                 ItemService itemService = new ItemService();
 
                 btnCancel.Enabled = true;
-                btnPayment.Enabled = true;
                 btnTake.Enabled = true;
 
                 bool contains = false;
@@ -227,127 +330,6 @@ namespace OrderingSystemUI
             }
         }
 
-        private void btnDrinks_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                ItemService itemService = new ItemService();
-                List<Item> items = itemService.GetDrinks();
-                DisplayItems(items);
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show("Something went wrong : " + exp.Message);
-            }
-        }
-
-        private bool CheckDinerTime()
-        {
-            bool dinerTime = false;
-            TimeSpan timeNow = DateTime.Now.TimeOfDay;
-            TimeSpan startTimeForDinner = new TimeSpan(18, 00, 00);
-            if (timeNow > startTimeForDinner)
-                dinerTime = true;
-            return dinerTime;
-        }
-
-        private void btnStarters_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                ItemService itemService = new ItemService();
-                List<Item> items = itemService.GetStarters(CheckDinerTime());
-                DisplayItems(items);                               
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show("Something went wrong : " + exp.Message);
-            }
-        }
-
-        private void btnMains_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                ItemService itemService = new ItemService();
-                List<Item> items = itemService.GetMains(CheckDinerTime());
-                DisplayItems(items);
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show("Something went wrong : " + exp.Message);
-            }
-        }
-
-        private void btnDesserts_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                ItemService itemService = new ItemService();
-                List<Item> items = itemService.GetDeserts(CheckDinerTime());
-                DisplayItems(items);
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show("Something went wrong : " + exp.Message);
-            }
-        }
-
-        private void btnTake_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                btnTake.Enabled = false;
-                btnCancel.Enabled = false;
-                btnAdd.Enabled = false;
-                btnMinus.Enabled = false;   
-
-                List<Order> orders = new List<Order>();
-                OrderService orderService = new OrderService();
-                OrderedItemService orderedItemService = new OrderedItemService();
-                orders = orderService.GetOrders();
-                if (btnModify.Enabled == true)
-                {
-                    order.OrderId = orders[orders.Count - 1].OrderId + 1;
-                    orderService.AddOrder(order);
-                }
-
-                foreach (OrderedItem item in order.OrderedItems)
-                {
-                    if (item.ItemAddedInDatabase == false)
-                    {
-                        orderedItemService.AddOrderesItem(item, order);
-                        item.ItemAddedInDatabase = true;
-                    }
-                    else
-                    {
-                        orderedItemService.UpdateAmount(item, order.OrderId);
-                    }
-                }
-                btnModify.Enabled = true;
-                MessageBox.Show("Order was taken successfully");
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show("Something went wrong : " + exp.Message);
-            }
-        }
-
-        //Add note for an item
-        private void listViewOrderItems_DoubleClick(object sender, EventArgs e)
-        {
-            try
-            {
-                ListViewItem selectedItem = listViewOrderItems.SelectedItems[0];
-
-                addNote = new AddNote(this, selectedItem);
-                addNote.Show();
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show("Something went wrong : " + exp.Message);
-            }
-        }
         private void btnModify_Click(object sender, EventArgs e)
         {
             try
@@ -357,6 +339,7 @@ namespace OrderingSystemUI
                 btnMinus.Enabled = true;
                 btnTake.Enabled = true;
                 btnCancel.Enabled = true;
+                btnPayment.Enabled = false;
             }
             catch (Exception exp)
             {
@@ -381,26 +364,40 @@ namespace OrderingSystemUI
             }
         }
 
-        private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
+        //Add note for an item
+        private void listViewOrderItems_DoubleClick(object sender, EventArgs e)
         {
-            this.Hide();
-            tableView.Show();
-        }
+            try
+            {
+                if(btnModify.Enabled == false)
+                {
+                    ListViewItem selectedItem = listViewOrderItems.SelectedItems[0];
 
-        private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            tableView.Close();
+                    addNote = new AddNote(this, selectedItem);
+                    addNote.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Please press button 'Modify Order' if you want to add a comment!");
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Something went wrong : " + exp.Message);
+            }
         }
 
         private void lblEmployeeName_MouseClick(object sender, MouseEventArgs e)
         {
             Login login = new Login();
-            //MessageBox.Show("Are you sure you want to log out?");
-            //this.Hide();
             login.Show();
         }
 
-       
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            tableView.Show();
+        }
     }
 }
     
