@@ -11,13 +11,19 @@ namespace OrderingSystemModel
     {
 
         private List<OrderedItem> orderedItems; // to get to the list of ordered items in the order class
+
+        private List<Order> orders; 
         public int BillId { get; set; }
-        public PaymentType PaymentType { get { return this.PaymentType; } set { PaymentType = value; } }
+        private PaymentType paymentType;
+        public PaymentType PaymentType { get { return paymentType; } set { paymentType = value; } }
         public string BillFeedback { get; set; }
         public float Tip { get { return tip; } set { tip = value; } }
         public int tableId;
         private float tip;
         public List<OrderedItem> OrderedItems { get { return this.orderedItems; } set { this.orderedItems = value; } }
+
+        public List<Order> Orders { get { return this.orders; } set { this.orders = value; } }
+
 
         public float BillTotalWithoutTip
         {
@@ -37,7 +43,8 @@ namespace OrderingSystemModel
         // public List<OrderedItem> orderedItem;
         public Bill()
         {
-
+            this.BillFeedback = "";
+            this.Tip = 0;
         }
         public  Bill(int tableId)
         {

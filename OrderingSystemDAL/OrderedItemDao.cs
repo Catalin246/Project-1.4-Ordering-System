@@ -103,6 +103,23 @@ namespace OrderingSystemDAL
             return orderedItems;
         }
 
+        public void MarkOrderedItemsPaid(int orderID)
+        {
+            conn.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("Update dbo.[OrderedItem] SET [Ordered_Item_Status] = 'Paid' WHERE [Order_Id] = @orderID;", conn);
+
+                command.Parameters.AddWithValue("@orderID", orderID);
+
+                int nrOfRowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Marking Ordered Items Paid failed! " + e.Message);
+            }
+            conn.Close();
+        }
         //public List<Food> GetAllOrderedFoods()
         //{
         //    string query = "SELECT I.ItemId, I.Item_Name, I.ItemStock, I.ItemPrice, F.FoodType " +

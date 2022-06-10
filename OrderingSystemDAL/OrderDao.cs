@@ -97,13 +97,31 @@ namespace OrderingSystemDAL
             conn.Close();
         }
 
+        public void MarkOrderPaid(int tableID)
+        {
+            conn.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("Update dbo.[Order] SET [Order_Status] = 'Paid' WHERE [Table_Id] = @tableId;", conn);
+
+                command.Parameters.AddWithValue("@tableID", tableID);
+
+                int nrOfRowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Marking Order Paid failed! " + e.Message);
+            }
+            conn.Close();
+        }
         // Gets list of Order IDs with associated Table ID
         public List<Order> GetOrderIDsByTable(int tableID)
         {
             // string query = "SELECT Order_Id FROM dbo.[Order] WHERE Table_Id=@tableID; ";
-            string query = "SELECT * FROM dbo.[Order] WHERE [Table_id]=@tableID";
-            SqlParameter[] sqlParameters = new SqlParameter[1];
+            string query = "SELECT * FROM dbo.[Order] WHERE [Table_id]=@tableID AND [Order_Status] != @statusPaid";
+            SqlParameter[] sqlParameters = new SqlParameter[2];
             sqlParameters[0] = new SqlParameter("@tableID", tableID);
+            sqlParameters[1] = new SqlParameter("@statusPaid", "Paid");
             return ReadTableOnlyOrderID(ExecuteSelectQuery(query, sqlParameters));
         }
 

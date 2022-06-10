@@ -285,7 +285,7 @@
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(73, 20);
             this.toolStripMenuItem4.Text = "Table view";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+          
             // 
             // toolStripMenuItem5
             // 

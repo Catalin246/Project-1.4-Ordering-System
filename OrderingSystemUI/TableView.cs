@@ -202,10 +202,6 @@ namespace OrderingSystemUI
 
         }
 
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {

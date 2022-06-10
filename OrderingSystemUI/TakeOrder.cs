@@ -367,13 +367,14 @@ namespace OrderingSystemUI
         //Open payment form
         private void btnPayment_Click(object sender, EventArgs e)
         {
-
+           
             try
             {
                 btnPayment.Enabled = false;
                 this.Close();
-                Payment payment = new Payment();
+                Payment payment = new Payment(tableNumber);
                 payment.Show();
+                //if ordered item list != null then... DisplayOrderedItems(List<OrderedItem> orderedItems)
             }
             catch (Exception exp)
             {

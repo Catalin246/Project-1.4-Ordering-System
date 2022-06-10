@@ -55,5 +55,10 @@ namespace OrderingSystemLogic
         {
             orderedItemdb.ChangeFoodAndDrinkStatusToReady(orderNo, ItemName);
         }
+
+        public void ChangeOrderStatusToPaid(int orderID)
+        {
+            orderedItemdb.MarkOrderedItemsPaid(orderID);
+        }
     }
 }
