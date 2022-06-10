@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,8 +15,8 @@ namespace OrderingSystemUI
 {
     public partial class Login : Form
     {
-        private string Username;
-        private string Passcode;
+        private string username;
+        private string passcode;
         public Login()
         {
             InitializeComponent();
@@ -29,49 +30,66 @@ namespace OrderingSystemUI
                     lblWrongUserName.Text = "Please enter your username";                
                 if (txtBoxPasscode.Text =="")
                     lblwrongPasscode.Text = "Please enter your passcode";                
-                Username = txtBoxUsername.Text;
-                Passcode = txtBoxPasscode.Text;
-                if ((TryUserName(Username) && (TryPasscode(Passcode))))
+                username = txtBoxUsername.Text;
+                passcode = txtBoxPasscode.Text;
+                List<Employee> list = new List<Employee>();
+                EmployeeService accountService = new EmployeeService();
+                list = accountService.GetAllEmployee();
+                foreach (Employee item in list)
                 {
-                    TableView tableView = new TableView();
-                    tableView.Show();
-                    this.Hide();
-                    //Login login = new Login();
-                    //login.Hide();
+                    //if(item.EmployeePassword == TryPasscode(Passcode, item.salt).Digest && TryUserName(Username, list))
+                    //{
+                    //    EmployeeRole(item.EmployeeRole, item.EmployeeName);
+                    //}
+                    if (TryPasscode(username, item.EmployeeName) && TryUserName(passcode,item.EmployeePassword))
+                    {
+                        EmployeeRole(item.EmployeeRole, item.EmployeeName);
+                    }
                 }
             }
             catch (Exception)
             {
 
-                throw;
             }
         }
-        private bool TryUserName(string username)
+
+        public void EmployeeRole(string employeeRole, string employeeName)
         {
-            List<Employee> list = new List<Employee>();
-            Employee employee = new Employee();
-            EmployeeService accountService = new EmployeeService();
-            list = accountService.GetEmployee();
-            foreach (Employee em in list)
+            switch (employeeRole)
             {
-                if(username == em.EmployeeName)
-                    return true;
+                case "Cook":
+                    KitchenView kitchenView = new KitchenView(employeeName, employeeRole);
+                    kitchenView.Show();                    
+                    this.Hide();
+                    break;
+                case "Waiter":
+                    TableView tableView = new TableView(employeeName,employeeRole);
+                    tableView.Show();
+                    this.Hide();
+                    break;
+                case "Bartender":
+                    BarView barView = new BarView(employeeName,employeeRole);
+                    barView.Show();
+                    this.Hide();
+                    break;
+                default:
+                    break;
             }
-            return false;
         }
-        private bool TryPasscode(string passcode)
+        private bool TryPasscode(string passcode, string dataName)
         {
-            List<Employee> list = new List<Employee>();
-            Employee employee = new Employee();
-            EmployeeService accountService = new EmployeeService();
-            list = accountService.GetEmployee();
-            foreach (Employee em in list)
-            {
-                if(passcode == em.EmployeePassword)
-                    return true;
-            }
-            return false;
+            return (passcode == dataName);
         }
+        private bool TryUserName(string username, string dataName)
+        {
+            return (username == dataName);
+        } 
+        //private HashWithSaltResult TryPasscode(string passcode, string salt)
+        //{
+        //    PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
+        //    HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
+        //    return hashResultSha256;
+        //}
 
     }
 }

@@ -18,10 +18,12 @@ namespace OrderingSystemUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new OrderingSystem());
-            Application.Run(new TableView(new TakeOrder()));
             //Application.Run(new TableView());
-            //Application.Run(new Login());
+            Application.Run(new TableView(" Steven","cheff"));
+            Application.Run(new Login());
             //Application.Run(new TakeOrder());
+            //Application.Run(new KitchenView("Beril",));
+            //Application.Run(new BarView("Betül", ));
         }
     }
 }

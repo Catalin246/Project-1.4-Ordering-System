@@ -19,13 +19,7 @@ namespace OrderingSystemModel
         {
             Amount = 1;
             Note = ""; 
-        }
-        public OrderedItem(Item item)
-        {
-            Item = item;
-            Amount = 1;
-            Note = ""; //or "none"
-        }
+        }       
 
         public OrderedItem(Item item, int amount, string note, int orderId)
         {
@@ -36,18 +30,21 @@ namespace OrderingSystemModel
         }
 
         public Item Item { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
         public int OrderId { get; set; }
-        public Status Status { get; set; }
-        public FoodTypes FoodCategory { get; set; }
-        public DrinkCategories DrinkCategory { get; set; }
+        public Status Status { get; set; }        
         public string Note { get; set; }
         public int Amount { get; set; }
 
+        public int TableId { get; set; }
+        public DateTime OrderTime { get; set; }
+
         public int ItemID { get; set; }
              
-        private float totalPriceItem;       
+        // private float totalPriceItem;       
 
-        private float vatAmount;
+        // private float vatAmount;
 
         public bool ItemAddedInDatabase = false;   
 
@@ -55,22 +52,21 @@ namespace OrderingSystemModel
         public float TotalPriceItem
         {
 
-            get { return totalPriceItem; }
-            set { totalPriceItem = (float)(Amount * Item.ItemPrice); }
+            get {
+                return (float)(Amount * Item.ItemPrice); 
+            }
         }
 
         public float VatAmount
         {
-            get { return vatAmount; }
-            set
-            {
-                if (Item.ItemType.ToLower() == "alcoholic")
+            get { 
+                /*if (Item.ItemType.ToLower() == "alcoholic")
                 {
-                    vatAmount = totalPriceItem * AlcoholicVAT;
+                    return this.TotalPriceItem * AlcoholicVAT;
                 } else
-                {
-                    vatAmount = totalPriceItem * NonAlcoholicVAT;
-                }
+                {*/
+                    return this.TotalPriceItem * NonAlcoholicVAT;
+                
             }
         }
         

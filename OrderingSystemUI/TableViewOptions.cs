@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OrderingSystemUI;
+using OrderingSystemLogic;
+using OrderingSystemModel;
 
 namespace OrderingSystemUI
 {
@@ -26,30 +28,34 @@ namespace OrderingSystemUI
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            //showPanel("Take Order");
             //Show take order form (catalin;)))  
-            ACustomerIsSitting(number, "sit");
+            ACustomerIsSitting(number, "order");
+            TableService tableService = new TableService();
+            tableService.Order(number);
             tableView.Hide();
             this.Hide();
-            //TakeOrder takeOrder = new TakeOrder(number);
             takeOrder.tableView = tableView;
             takeOrder.Show();
-            // tableView.Hide();
         }
 
         private void btnSeatingACustomer_Click(object sender, EventArgs e)
         {
-            ACustomerIsSitting(number, "sit");
+            ACustomerIsSitting(number, "sit"); 
+            TableService tableService = new TableService();
+            tableService.Sit(number);
         }
 
         private void btnCanselSeating_Click(object sender, EventArgs e)
         {
             tableView.ChangeColor(number, "Cancel");
+            TableService tableService = new TableService();
+            tableService.CancelSit(number);
         }
-        private void ACustomerIsSitting(int number, string sit)
+        private void ACustomerIsSitting(int number, string input)
         {
-
-            tableView.ChangeColor(number, "Sit");
+            tableView.ChangeColor(number, input); 
+            TableService tableService = new TableService();
+            tableService.Sit(number);
         }
     }
 }

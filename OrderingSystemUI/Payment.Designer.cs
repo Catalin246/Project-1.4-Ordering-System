@@ -36,6 +36,9 @@ namespace OrderingSystemUI
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.billViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlPayment = new System.Windows.Forms.Panel();
+            this.checkBoxSplitBill = new System.Windows.Forms.CheckBox();
+            this.comboBoxSplitBill = new System.Windows.Forms.ComboBox();
+            this.comboBoxPaymentType = new System.Windows.Forms.ComboBox();
             this.txtBoxFeedBack = new System.Windows.Forms.RichTextBox();
             this.btnSearchTable = new System.Windows.Forms.Button();
             this.bttAddFeedBack = new System.Windows.Forms.Button();
@@ -45,7 +48,7 @@ namespace OrderingSystemUI
             this.labelDisplayTotalWithTip = new System.Windows.Forms.Label();
             this.btnSaveTotal = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.buttCash = new System.Windows.Forms.Button();
+            this.buttFinalizePayment = new System.Windows.Forms.Button();
             this.buttDebit = new System.Windows.Forms.Button();
             this.buttCredit = new System.Windows.Forms.Button();
             this.txtBoxTotal = new System.Windows.Forms.TextBox();
@@ -116,6 +119,9 @@ namespace OrderingSystemUI
             // 
             // pnlPayment
             // 
+            this.pnlPayment.Controls.Add(this.checkBoxSplitBill);
+            this.pnlPayment.Controls.Add(this.comboBoxSplitBill);
+            this.pnlPayment.Controls.Add(this.comboBoxPaymentType);
             this.pnlPayment.Controls.Add(this.txtBoxFeedBack);
             this.pnlPayment.Controls.Add(this.btnSearchTable);
             this.pnlPayment.Controls.Add(this.bttAddFeedBack);
@@ -125,7 +131,7 @@ namespace OrderingSystemUI
             this.pnlPayment.Controls.Add(this.labelDisplayTotalWithTip);
             this.pnlPayment.Controls.Add(this.btnSaveTotal);
             this.pnlPayment.Controls.Add(this.label6);
-            this.pnlPayment.Controls.Add(this.buttCash);
+            this.pnlPayment.Controls.Add(this.buttFinalizePayment);
             this.pnlPayment.Controls.Add(this.buttDebit);
             this.pnlPayment.Controls.Add(this.buttCredit);
             this.pnlPayment.Controls.Add(this.txtBoxTotal);
@@ -137,6 +143,43 @@ namespace OrderingSystemUI
             this.pnlPayment.Name = "pnlPayment";
             this.pnlPayment.Size = new System.Drawing.Size(884, 545);
             this.pnlPayment.TabIndex = 29;
+            // 
+            // checkBoxSplitBill
+            // 
+            this.checkBoxSplitBill.AutoSize = true;
+            this.checkBoxSplitBill.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.checkBoxSplitBill.Location = new System.Drawing.Point(541, 359);
+            this.checkBoxSplitBill.Name = "checkBoxSplitBill";
+            this.checkBoxSplitBill.Size = new System.Drawing.Size(103, 29);
+            this.checkBoxSplitBill.TabIndex = 37;
+            this.checkBoxSplitBill.Text = "Split bill";
+            this.checkBoxSplitBill.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxSplitBill
+            // 
+            this.comboBoxSplitBill.FormattingEnabled = true;
+            this.comboBoxSplitBill.Items.AddRange(new object[] {
+            "Number of people",
+            "2",
+            "3",
+            "4"});
+            this.comboBoxSplitBill.Location = new System.Drawing.Point(716, 359);
+            this.comboBoxSplitBill.Name = "comboBoxSplitBill";
+            this.comboBoxSplitBill.Size = new System.Drawing.Size(151, 28);
+            this.comboBoxSplitBill.TabIndex = 36;
+            // 
+            // comboBoxPaymentType
+            // 
+            this.comboBoxPaymentType.FormattingEnabled = true;
+            this.comboBoxPaymentType.Items.AddRange(new object[] {
+            "Credit Card",
+            "Debit Card",
+            "Cash",
+            "Mixed Payment"});
+            this.comboBoxPaymentType.Location = new System.Drawing.Point(716, 307);
+            this.comboBoxPaymentType.Name = "comboBoxPaymentType";
+            this.comboBoxPaymentType.Size = new System.Drawing.Size(151, 28);
+            this.comboBoxPaymentType.TabIndex = 4;
             // 
             // txtBoxFeedBack
             // 
@@ -217,32 +260,32 @@ namespace OrderingSystemUI
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(604, 293);
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(537, 308);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(199, 25);
+            this.label6.Size = new System.Drawing.Size(173, 23);
             this.label6.TabIndex = 27;
             this.label6.Text = "Select Payment Type:";
             // 
-            // buttCash
+            // buttFinalizePayment
             // 
-            this.buttCash.BackColor = System.Drawing.Color.Teal;
-            this.buttCash.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttCash.ForeColor = System.Drawing.Color.White;
-            this.buttCash.Location = new System.Drawing.Point(778, 354);
-            this.buttCash.Name = "buttCash";
-            this.buttCash.Size = new System.Drawing.Size(94, 29);
-            this.buttCash.TabIndex = 26;
-            this.buttCash.Text = "CASH";
-            this.buttCash.UseVisualStyleBackColor = false;
-            this.buttCash.Click += new System.EventHandler(this.buttCash_Click);
+            this.buttFinalizePayment.BackColor = System.Drawing.Color.Teal;
+            this.buttFinalizePayment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttFinalizePayment.ForeColor = System.Drawing.Color.White;
+            this.buttFinalizePayment.Location = new System.Drawing.Point(537, 419);
+            this.buttFinalizePayment.Name = "buttFinalizePayment";
+            this.buttFinalizePayment.Size = new System.Drawing.Size(330, 44);
+            this.buttFinalizePayment.TabIndex = 26;
+            this.buttFinalizePayment.Text = "Finalize Payment";
+            this.buttFinalizePayment.UseVisualStyleBackColor = false;
+            this.buttFinalizePayment.Click += new System.EventHandler(this.buttFinalizePayment_Click);
             // 
             // buttDebit
             // 
             this.buttDebit.BackColor = System.Drawing.Color.Teal;
             this.buttDebit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttDebit.ForeColor = System.Drawing.Color.White;
-            this.buttDebit.Location = new System.Drawing.Point(661, 354);
+            this.buttDebit.Location = new System.Drawing.Point(653, 247);
             this.buttDebit.Name = "buttDebit";
             this.buttDebit.Size = new System.Drawing.Size(94, 29);
             this.buttDebit.TabIndex = 25;
@@ -255,7 +298,7 @@ namespace OrderingSystemUI
             this.buttCredit.BackColor = System.Drawing.Color.Teal;
             this.buttCredit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttCredit.ForeColor = System.Drawing.Color.White;
-            this.buttCredit.Location = new System.Drawing.Point(537, 354);
+            this.buttCredit.Location = new System.Drawing.Point(537, 247);
             this.buttCredit.Name = "buttCredit";
             this.buttCredit.Size = new System.Drawing.Size(94, 29);
             this.buttCredit.TabIndex = 24;
@@ -318,7 +361,6 @@ namespace OrderingSystemUI
             this.listViewDisplaybillItems.TabIndex = 7;
             this.listViewDisplaybillItems.UseCompatibleStateImageBehavior = false;
             this.listViewDisplaybillItems.View = System.Windows.Forms.View.Details;
-            // this.listViewDisplaybillItems.SelectedIndexChanged += new System.EventHandler(this.listViewDisplaybillItems_SelectedIndexChanged);
             // 
             // ItemsName
             // 
@@ -393,7 +435,7 @@ namespace OrderingSystemUI
         private System.Windows.Forms.Label labelDisplayTotalWithTip;
         private System.Windows.Forms.Button btnSaveTotal;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button buttCash;
+        private System.Windows.Forms.Button buttFinalizePayment;
         private System.Windows.Forms.Button buttDebit;
         private System.Windows.Forms.Button buttCredit;
         private System.Windows.Forms.TextBox txtBoxTotal;
@@ -408,6 +450,9 @@ namespace OrderingSystemUI
         private System.Windows.Forms.ColumnHeader TotalWithVAT;
         private System.Windows.Forms.Panel pnlTakeOrder;
         private System.Windows.Forms.RichTextBox txtBoxFeedBack;
+        private System.Windows.Forms.ComboBox comboBoxPaymentType;
+        private System.Windows.Forms.CheckBox checkBoxSplitBill;
+        private System.Windows.Forms.ComboBox comboBoxSplitBill;
     }
 }
 

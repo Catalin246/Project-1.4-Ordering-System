@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemModel
 {
-    public enum PaymentType{ cash, creditCard, debitCard}
+    public enum PaymentType{ cash, creditCard, debitCard, mixedPayment}
     public class Bill
     {
 
@@ -14,9 +14,9 @@ namespace OrderingSystemModel
         public int BillId { get; set; }
         public PaymentType PaymentType { get { return this.PaymentType; } set { PaymentType = value; } }
         public string BillFeedback { get; set; }
-        public float Tip { get { return this.Tip; } set { this.Tip = value; } }
+        public float Tip { get { return tip; } set { tip = value; } }
         public int tableId;
-
+        private float tip;
         public List<OrderedItem> OrderedItems { get { return this.orderedItems; } set { this.orderedItems = value; } }
 
         public float BillTotalWithoutTip

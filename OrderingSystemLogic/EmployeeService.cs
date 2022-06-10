@@ -16,7 +16,7 @@ namespace OrderingSystemLogic
             employeedb = new EmployeeDao();
         }
 
-        public List<Employee> GetEmployee()
+        public List<Employee> GetAllEmployee()
         {
             List<Employee> employees = employeedb.GetAllEmployee();
             return employees;

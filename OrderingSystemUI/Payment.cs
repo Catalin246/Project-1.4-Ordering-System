@@ -20,6 +20,8 @@ namespace OrderingSystemUI
         {
 
             InitializeComponent();
+            comboBoxPaymentType.SelectedIndex = 0;
+            comboBoxSplitBill.SelectedIndex = 0;
         }
 
         private void OrderingSystem_Load(object sender, EventArgs e)
@@ -126,10 +128,13 @@ namespace OrderingSystemUI
 
                 List<Order> orders = orderService.GetOrdersByTable(tableID);
                 List<OrderedItem> orderedItems = new List<OrderedItem>(); // use this list
+                // combine all the ordered items from various orders
                 foreach (Order order in orders)
                 {
-                    orderedItems.Concat(orderedItemService.GetOrderedItemsByOrder(order.OrderId));
+                    orderedItems.AddRange(orderedItemService.GetOrderedItemsByOrder(order.OrderId));
                 }
+                // NICE TO DO, create query to select all associated ordered items in one call
+                // get all the open ordered items (non closed) 
                 foreach(OrderedItem orderedItem in orderedItems)
                 {
                     orderedItem.Item = itemService.GetItem(orderedItem.ItemID);
@@ -206,12 +211,29 @@ namespace OrderingSystemUI
             }
         }
 
-        private void buttCash_Click(object sender, EventArgs e)
+        private void buttFinalizePayment_Click(object sender, EventArgs e)
         {
             if (bill != null)
             {
-                bill.PaymentType = PaymentType.cash;
-                MessageBox.Show("Cash payment option approved.");
+                setPaymentType();
+                if (checkBoxSplitBill.Enabled && comboBoxSplitBill.SelectedIndex == 0)
+                {
+                    MessageBox.Show("Please select a valid number from the dropdown.");
+                    return;
+                }
+                BillService billService = new BillService();
+                if (checkBoxSplitBill.Enabled)
+                {
+                    float splitAmong = float.Parse(comboBoxSplitBill.GetItemText(comboBoxSplitBill.SelectedItem));
+                    // billService.CloseBill(this.bill, splitAmong);
+                }
+                else
+                {
+                    // billService.CloseBill(this.bill);
+                }
+                MessageBox.Show($"{comboBoxPaymentType.GetItemText(comboBoxPaymentType.SelectedItem)} was successful! Thank you!");
+                // need to delete or close orders? 
+                // clear table and display/reset bill page
             }
             else
             {
@@ -220,7 +242,26 @@ namespace OrderingSystemUI
         }
 
     
-
+        private void setPaymentType()
+        {
+            String paymentOption = comboBoxPaymentType.GetItemText(comboBoxPaymentType.SelectedItem);
+            switch (paymentOption)
+            {
+                case "Credit Card":
+                    bill.PaymentType = PaymentType.creditCard;
+                    break;
+                case "Debit Card":
+                    bill.PaymentType = PaymentType.debitCard;
+                    break;
+                case "Cash":
+                    bill.PaymentType = PaymentType.cash;
+                    break;
+                case "Mixed Payment":
+                    bill.PaymentType = PaymentType.mixedPayment;
+                    break;
+            }
+                
+        }
     
 
         private void bttAddFeedBack_Click(object sender, EventArgs e)
@@ -242,6 +283,5 @@ namespace OrderingSystemUI
             }
         }
 
-     
     }
 }

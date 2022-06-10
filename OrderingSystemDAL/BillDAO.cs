@@ -27,14 +27,14 @@ namespace OrderingSystemDAL
         }
         public List<Bill> GetAllBills()
         {
-            string query = "SELECT studentId, studentFirstName, studentLastName  FROM [Students]";
+            string query = "SELECT studentId, studentFirstName, studentLastName  FROM dbo.Bill";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
         public List<Bill> GetOpenBills(int tableID)
         {
-            string query = "SELECT BillID from [Bill] WHERE TableId = @tableID and ClosedBill = 0 ";
+            string query = "SELECT BillID from dbo.Bill WHERE TableId = @tableID and ClosedBill = 0 ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -56,10 +56,15 @@ namespace OrderingSystemDAL
             return bills;
         }
 
-        public void CloseBill(int billID)
+        public void CloseBill(Bill bill, float splitAmong = 1)
         {
-            string query = "UPDATE [ValidBill] SET ClosedBill = 1 WHERE BillId = @billID";
+            string query = "INSERT INTO dbo.Bill VALUES(@PaymentType, @BillFeedback, @BillTotal, @Tip, @TableID, 1)";
             SqlParameter[] sqlParameters = new SqlParameter[0];
+            sqlParameters[0] = new SqlParameter("@PaymentType", bill.PaymentType.ToString());
+            sqlParameters[1] = new SqlParameter("@BillFeedback", bill.BillFeedback);
+            sqlParameters[2] = new SqlParameter("@BillTotal", Decimal.Round((decimal)(bill.BillTotalWithoutTip / splitAmong), 2));
+            sqlParameters[3] = new SqlParameter("@Tip", Decimal.Round((decimal)(bill.Tip / splitAmong), 2));
+            sqlParameters[4] = new SqlParameter("@TableID", bill.tableId);
             ExecuteSelectQuery(query, sqlParameters);
         }
 
