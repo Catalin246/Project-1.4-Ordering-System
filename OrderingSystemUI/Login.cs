@@ -37,15 +37,21 @@ namespace OrderingSystemUI
                 list = accountService.GetAllEmployee();
                 foreach (Employee item in list)
                 {
-                    if (TryPasscode(username, item.EmployeeName))
+                    if (TryPasscode(username, item.EmployeeName) && (TryUserName(username, item.EmployeeName)))
                     {
-                        if (TryUserName(username, item.EmployeeName))
-                            EmployeeRole(item.EmployeeRole, item.EmployeeName);
-                        else
-                            lblwrongPasscode.Text = "your passcode is incorrect please try again";
+                        EmployeeRole(item.EmployeeRole, item.EmployeeName);
                     }
                     else
-                        lblWrongUserName.Text = "your username is incorrect please try again";
+                    {
+                        if (!TryUserName(username, item.EmployeeName))
+                        {
+                            lblWrongUserName.Text = "Username is wrong please enter the right one";
+                        }
+                        if (!TryPasscode(username, item.EmployeeName))
+                        {
+                            lblwrongPasscode.Text = "Passcode is wrong please enter again";
+                        }
+                    }
                 }
             }
             catch (Exception)
