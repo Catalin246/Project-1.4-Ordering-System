@@ -28,10 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.dashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTableNumber = new System.Windows.Forms.Label();
             this.listViewOrderItems = new System.Windows.Forms.ListView();
             this.Name_Item = new System.Windows.Forms.ColumnHeader();
@@ -60,45 +56,15 @@
             this.pnlTakeOrder = new System.Windows.Forms.Panel();
             this.btnModify = new System.Windows.Forms.Button();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.MenuBar = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuKitchen = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuBill = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlTakeOrder.SuspendLayout();
             this.menuStrip2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dashboardToolStripMenuItem,
-            this.tableViewToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(14, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1141, 33);
-            this.menuStrip1.TabIndex = 5;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // dashboardToolStripMenuItem
-            // 
-            this.dashboardToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
-            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(116, 29);
-            this.dashboardToolStripMenuItem.Text = "Dashboard";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
-            // 
-            // tableViewToolStripMenuItem
-            // 
-            this.tableViewToolStripMenuItem.Name = "tableViewToolStripMenuItem";
-            this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(108, 29);
-            this.tableViewToolStripMenuItem.Text = "Table view";
-            this.tableViewToolStripMenuItem.Click += new System.EventHandler(this.tableViewToolStripMenuItem_Click);
             // 
             // lblTableNumber
             // 
@@ -312,7 +278,7 @@
             // lblEmployeeName
             // 
             this.lblEmployeeName.AutoSize = true;
-            this.lblEmployeeName.Location = new System.Drawing.Point(786, 32);
+            this.lblEmployeeName.Location = new System.Drawing.Point(854, 36);
             this.lblEmployeeName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEmployeeName.Name = "lblEmployeeName";
             this.lblEmployeeName.Size = new System.Drawing.Size(288, 25);
@@ -378,6 +344,7 @@
             // btnModify
             // 
             this.btnModify.BackColor = System.Drawing.Color.Teal;
+            this.btnModify.Enabled = false;
             this.btnModify.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnModify.Location = new System.Drawing.Point(301, 525);
             this.btnModify.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -401,6 +368,48 @@
             this.menuStrip2.TabIndex = 32;
             this.menuStrip2.Text = "menuStrip2";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuBar,
+            this.MenuKitchen,
+            this.toolStripMenuItem4,
+            this.MenuBill});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1141, 33);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // MenuBar
+            // 
+            this.MenuBar.Enabled = false;
+            this.MenuBar.Name = "MenuBar";
+            this.MenuBar.Size = new System.Drawing.Size(93, 29);
+            this.MenuBar.Text = "Bar view";
+            // 
+            // MenuKitchen
+            // 
+            this.MenuKitchen.Enabled = false;
+            this.MenuKitchen.Name = "MenuKitchen";
+            this.MenuKitchen.Size = new System.Drawing.Size(125, 29);
+            this.MenuKitchen.Text = "Kitchen view";
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(108, 29);
+            this.toolStripMenuItem4.Text = "Table view";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            // 
+            // MenuBill
+            // 
+            this.MenuBill.Enabled = false;
+            this.MenuBill.Name = "MenuBill";
+            this.MenuBill.Size = new System.Drawing.Size(90, 29);
+            this.MenuBill.Text = "Bill view";
+            // 
             // TakeOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -410,21 +419,18 @@
             this.Controls.Add(this.pnlTakeOrder);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TakeOrder";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.pnlTakeOrder.ResumeLayout(false);
             this.pnlTakeOrder.PerformLayout();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem dashboardToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tableViewToolStripMenuItem;
         private System.Windows.Forms.Label lblTableNumber;
         private System.Windows.Forms.ListView listViewOrderItems;
         private System.Windows.Forms.ColumnHeader Name_Item;
@@ -451,8 +457,12 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.Panel pnlTakeOrder;
         private System.Windows.Forms.MenuStrip menuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader Type;
         private System.Windows.Forms.Button btnModify;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem MenuBar;
+        private System.Windows.Forms.ToolStripMenuItem MenuKitchen;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem MenuBill;
     }
 }

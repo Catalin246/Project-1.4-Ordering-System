@@ -19,9 +19,9 @@ namespace OrderingSystemUI
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new OrderingSystem());
             //Application.Run(new TableView());
-            Application.Run(new TableView(" Steven","cheff"));
-            Application.Run(new Login());
-            //Application.Run(new TakeOrder());
+            //Application.Run(new TableView(" Steven","cheff"));
+            //Application.Run(new Login());
+            Application.Run(new TakeOrder(1, "Catalin"));
             //Application.Run(new KitchenView("Beril",));
             //Application.Run(new BarView("Betül", ));
         }
