@@ -30,11 +30,7 @@ namespace OrderingSystemUI
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.dashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.barViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kitchenViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.billViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlPayment = new System.Windows.Forms.Panel();
             this.lblTotalWithVatValue = new System.Windows.Forms.Label();
             this.lblTotalWithVat = new System.Windows.Forms.Label();
@@ -71,11 +67,7 @@ namespace OrderingSystemUI
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dashboardToolStripMenuItem,
-            this.barViewToolStripMenuItem,
-            this.kitchenViewToolStripMenuItem,
-            this.tableViewToolStripMenuItem,
-            this.billViewToolStripMenuItem});
+            this.tableViewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
@@ -83,39 +75,12 @@ namespace OrderingSystemUI
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // dashboardToolStripMenuItem
-            // 
-            this.dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
-            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(96, 24);
-            this.dashboardToolStripMenuItem.Text = "Dashboard";
-            this.dashboardToolStripMenuItem.Click += new System.EventHandler(this.dashboardToolStripMenuItem_Click);
-            // 
-            // barViewToolStripMenuItem
-            // 
-            this.barViewToolStripMenuItem.Name = "barViewToolStripMenuItem";
-            this.barViewToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
-            this.barViewToolStripMenuItem.Text = "Bar view";
-            this.barViewToolStripMenuItem.Click += new System.EventHandler(this.barViewToolStripMenuItem_Click);
-            // 
-            // kitchenViewToolStripMenuItem
-            // 
-            this.kitchenViewToolStripMenuItem.Name = "kitchenViewToolStripMenuItem";
-            this.kitchenViewToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
-            this.kitchenViewToolStripMenuItem.Text = "Kitchen view";
-            this.kitchenViewToolStripMenuItem.Click += new System.EventHandler(this.kitchenViewToolStripMenuItem_Click);
-            // 
             // tableViewToolStripMenuItem
             // 
             this.tableViewToolStripMenuItem.Name = "tableViewToolStripMenuItem";
             this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(92, 24);
             this.tableViewToolStripMenuItem.Text = "Table view";
             this.tableViewToolStripMenuItem.Click += new System.EventHandler(this.tableViewToolStripMenuItem_Click);
-            // 
-            // billViewToolStripMenuItem
-            // 
-            this.billViewToolStripMenuItem.Name = "billViewToolStripMenuItem";
-            this.billViewToolStripMenuItem.Size = new System.Drawing.Size(78, 24);
-            this.billViewToolStripMenuItem.Text = "Bill view";
             // 
             // pnlPayment
             // 
@@ -426,11 +391,7 @@ namespace OrderingSystemUI
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem dashboardToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem barViewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem kitchenViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tableViewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem billViewToolStripMenuItem;
         private System.Windows.Forms.Panel pnlPayment;
         private System.Windows.Forms.Button btnSearchTable;
         private System.Windows.Forms.Button bttAddFeedBack;

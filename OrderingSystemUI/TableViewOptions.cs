@@ -32,7 +32,7 @@ namespace OrderingSystemUI
             ACustomerIsSitting(number, "order");
             TableService tableService = new TableService();
             tableService.Order(number);
-            //tableView.Hide();
+            tableView.Hide();
             this.Hide();
             takeOrder.tableView = tableView;
             takeOrder.Show();

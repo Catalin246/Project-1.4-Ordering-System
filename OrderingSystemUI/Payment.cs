@@ -73,7 +73,8 @@ namespace OrderingSystemUI
 
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            this.Hide();
+            tableView.Show();
         }
 
         private void btnTable1_Click(object sender, EventArgs e)
@@ -131,7 +132,7 @@ namespace OrderingSystemUI
         {
             if (txtBoxTableNumber.Text != null)
             {
-                this.cleanPaymentView();
+                //this.cleanPaymentView();
                 
                 this.setBillByTable(int.Parse(txtBoxTableNumber.Text));
             }
@@ -199,6 +200,7 @@ namespace OrderingSystemUI
                 }
                 TableService tableService = new TableService();
                 tableService.OpenTable(bill.tableId);
+                tableView.ChangeColor(bill.tableId, "");
                 this.cleanPaymentView();
                 // need to delete or close orders? 
                 // clear table and display/reset bill page
