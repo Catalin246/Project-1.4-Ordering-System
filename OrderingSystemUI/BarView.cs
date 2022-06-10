@@ -49,14 +49,13 @@ namespace OrderingSystemUI
             //adding options to course combo.
             comboBoxCourse.Items.Clear();
             comboBoxCourse.Items.Add("none");
-            comboBoxCourse.SelectedIndex = 0; //change here
-            comboBoxCourse.Items.Add("Lunch Starter");
-            comboBoxCourse.Items.Add("Lunch Main");
-            comboBoxCourse.Items.Add("Lunch Desert");
-            comboBoxCourse.Items.Add("Diner Starter");
-            comboBoxCourse.Items.Add("Diner Entrement");
-            comboBoxCourse.Items.Add("Diner Main");
-            comboBoxCourse.Items.Add("Diner Desert");
+            comboBoxCourse.SelectedIndex = 0; 
+            comboBoxCourse.Items.Add("Beer");
+            comboBoxCourse.Items.Add("Soft");
+            comboBoxCourse.Items.Add("Coffee");
+            comboBoxCourse.Items.Add("Tea");
+            comboBoxCourse.Items.Add("Spirit Drink");
+            comboBoxCourse.Items.Add("Wine");           
 
             LoadListView();
         }
