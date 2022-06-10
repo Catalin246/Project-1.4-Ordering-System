@@ -283,8 +283,9 @@ namespace OrderingSystemUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Option option = new Option(employeeName,emplyeeRole);
-            option.Show();
+            Option optionForm = new Option(employeeName, emplyeeRole);
+            optionForm.Show();
+            this.Close();
         }
     }
 }
