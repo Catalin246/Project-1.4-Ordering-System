@@ -59,7 +59,7 @@ namespace OrderingSystemUI
             {
                 case "Cook":
                     KitchenView kitchenView = new KitchenView(employeeName);
-                    kitchenView.Show();
+                    kitchenView.Show();                    
                     this.Hide();
                     break;
                 case "Waiter":
