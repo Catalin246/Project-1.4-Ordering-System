@@ -257,10 +257,9 @@ namespace OrderingSystemUI
 
         private void TableView_Load(object sender, EventArgs e)
         {
-            btnProfile.Text = employeeName;
-            txtTime.Text = DateTime.Now.ToString("H:mm"); 
+            btnProfile.Text = employeeName;          
             Timer timer = new Timer();
-            timer.Interval = (10 * 1000); // 10 secs
+            timer.Interval = (10 * 10); // 10 secs
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
             if (emplyeeRole == "Waiter")
@@ -274,6 +273,8 @@ namespace OrderingSystemUI
         private void timer_Tick(object sender, EventArgs e)
         {
             ShowListView();
+            DateTime dateTime = DateTime.Now;
+            txtTime.Text = dateTime.ToString("H:mm:s");
         }    
         private void txtItemId_Click(object sender, EventArgs e)
         {
