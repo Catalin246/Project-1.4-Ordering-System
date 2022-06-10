@@ -13,7 +13,7 @@ namespace OrderingSystemUI
         TableService tableService;
         ItemService itemService;
         EmployeeService employeeService;
-
+        private string EmployeeName { get; set; }
         public KitchenView()
         {
             InitializeComponent();
@@ -22,27 +22,50 @@ namespace OrderingSystemUI
             tableService = new TableService();
             itemService = new ItemService();
             employeeService = new EmployeeService();
+                        
 
-            Employee employee = new Employee();
-            //employee = employeeService.GetEmployee();
-            
             LoadListView();
 
-            
             btnReadyToServe.Enabled = false;
-            btnViewOrderNote.Enabled = false;
-            
+            btnViewOrderNote.Enabled = false;            
+            comboBoxCourse.Enabled = false;
+
 
             comboBoxShowOrders.Items.Clear();
             comboBoxShowOrders.Items.Add("Running Orders");
             comboBoxShowOrders.Items.Add("Finished Orders");
             comboBoxShowOrders.SelectedIndex = 0;
 
-            btnemployeeNme.Text = employee.EmployeeName;            
+            comboBoxTable.Items.Clear();
+            comboBoxTable.Items.Add("none");
+            comboBoxTable.SelectedIndex = 0;
+            comboBoxTable.Items.Add("Table 1");
+            comboBoxTable.Items.Add("Table 2");
+            comboBoxTable.Items.Add("Table 3");
+            comboBoxTable.Items.Add("Table 4");
+            comboBoxTable.Items.Add("Table 5");
+            comboBoxTable.Items.Add("Table 6");
+            comboBoxTable.Items.Add("Table 7");
+            comboBoxTable.Items.Add("Table 8");
+            comboBoxTable.Items.Add("Table 9");
+            comboBoxTable.Items.Add("Table 10");
+
+            comboBoxCourse.Items.Clear();
+            comboBoxCourse.Items.Add("none");
+            comboBoxCourse.SelectedIndex = 0;
+            comboBoxCourse.Items.Add("Starters");
+            comboBoxCourse.Items.Add("Mains");
+            comboBoxCourse.Items.Add("Entremets");
+            comboBoxCourse.Items.Add("Deserts");
+        }
+        public KitchenView(string employeeName) : base()
+        {
+            this.EmployeeName = employeeName;
         }
 
         private void LoadListView()
         {
+            btnemployeeNme.Text = EmployeeName;
             try
             {
                 lblTime.Text = DateTime.Now.ToString("HH:mm");
@@ -276,6 +299,57 @@ namespace OrderingSystemUI
         private void comboBoxShowOrders_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadListView();
+        }
+        private void comboBoxTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void comboBoxCourse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void comboBoxTable_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (comboBoxTable.SelectedIndex == 0)
+            {
+                return;
+            }
+
+            string tableNo = comboBoxTable.SelectedIndex.ToString();
+            tableNo = tableNo.Replace("Table ", "");
+            int index = int.Parse(tableNo);
+
+            foreach (ListViewItem item in listViewKitchen.Items)
+            {
+                OrderedItem orderedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+
+                if (orderedItem.TableId == index)
+                {
+                    item.Selected = true;
+                }
+            }
+            comboBoxCourse.Enabled = true;
+        }
+
+        private void comboBoxCourse_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (comboBoxCourse.SelectedIndex == 0)
+            {
+                return;
+            }
+            string courseName = comboBoxTable.SelectedIndex.ToString();
+
+            foreach (ListViewItem item in listViewKitchen.Items)
+            {
+                OrderedItem orderedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+
+                if (orderedItem.Category == courseName)
+                {
+                    item.Selected = true;
+                }
+            }
         }
     }
 }
