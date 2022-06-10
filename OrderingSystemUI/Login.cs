@@ -86,6 +86,5 @@ namespace OrderingSystemUI
         //    HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
         //    return hashResultSha256;
         //}
-
     }
 }
