@@ -32,5 +32,10 @@ namespace OrderingSystemLogic
         {
             return orderdb.GetOrderIDsByTable(TableID);
         }
+
+        public int GetOrderId()
+        {
+            return orderdb.GetOrderId();
+        }
     }
 }

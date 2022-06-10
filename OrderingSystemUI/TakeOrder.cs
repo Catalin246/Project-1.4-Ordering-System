@@ -195,10 +195,9 @@ namespace OrderingSystemUI
                 List<Order> orders = new List<Order>();
                 OrderService orderService = new OrderService();
                 OrderedItemService orderedItemService = new OrderedItemService();
-                orders = orderService.GetOrders();
                 if (btnModify.Enabled == true)
                 {
-                    order.OrderId = orders[orders.Count - 1].OrderId + 1;
+                    order.OrderId = orderService.GetOrderId();
                     orderService.AddOrder(order);
                 }
 
