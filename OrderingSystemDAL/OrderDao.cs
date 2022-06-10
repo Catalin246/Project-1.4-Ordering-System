@@ -40,13 +40,22 @@ namespace OrderingSystemDAL
             return orders;
         }
 
+
+        public int GetOrderId()
+        {
+            conn.Open();
+            SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM dbo.[Order]", conn);
+            Int32 count = (Int32)command.ExecuteScalar();
+            conn.Close();
+            return (int)count;
+        }
         public void Add(Order order)
         {
             conn.Open();
             try
             {
                 SqlCommand command = new SqlCommand(" INSERT INTO dbo.[Order] " +
-                        " VALUES(@Order_Id, @Order_Time, @Table_Id, @Order_Status);", conn);
+                        " VALUES(@Order_Id, @Order_Time, @Table_Id, @Order_Status);", conn);              
 
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);
                 command.Parameters.AddWithValue("@Order_Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
@@ -61,7 +70,7 @@ namespace OrderingSystemDAL
             }
             conn.Close();
         }
-
+       
         // Gets list of Order IDs with associated Table ID
         public List<Order> GetOrderIDsByTable(int tableID)
         {
