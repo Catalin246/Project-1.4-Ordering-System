@@ -122,5 +122,23 @@ namespace OrderingSystemDAL
             return drinks;
         }
 
+        public void MarkTableOpen(int tableID)
+        {
+            
+            try
+            {
+                //SqlCommand command = new SqlCommand("Update dbo.[Order] SET [Order_Status] = 'Paid' WHERE [Table_Id] = @tableId;", conn);
+
+                //command.Parameters.AddWithValue("@tableID", tableID);
+
+                //int nrOfRowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Marking Order Paid failed! " + e.Message);
+            }
+            
+        }
+
     }
 }

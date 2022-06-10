@@ -203,11 +203,14 @@ namespace OrderingSystemUI
 
         }
 
+<<<<<<< HEAD
+=======
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
             BarView barViewForm = new BarView(this.employeeName, this.emplyeeRole);
             barViewForm.Show();
         }
+>>>>>>> master
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {

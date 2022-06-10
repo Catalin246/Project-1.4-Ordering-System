@@ -57,16 +57,31 @@ namespace OrderingSystemModel
             }
         }
 
+        private bool UseAlcoholicVat
+        {
+            get
+            {
+                if (Item.ItemType == "Beer" || Item.ItemType == "Wine" || Item.ItemType == "Spirit drink")
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+        }
+
         public float VatAmount
         {
-            get { 
-                /*if (Item.ItemType.ToLower() == "alcoholic")
+            get {
+                if (UseAlcoholicVat)
                 {
                     return this.TotalPriceItem * AlcoholicVAT;
-                } else
-                {*/
+                }
+                else
+                {
                     return this.TotalPriceItem * NonAlcoholicVAT;
-                
+                }
             }
         }
         

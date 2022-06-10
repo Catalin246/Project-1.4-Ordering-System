@@ -56,16 +56,24 @@ namespace OrderingSystemDAL
             return bills;
         }
 
-        public void CloseBill(Bill bill, float splitAmong = 1)
+        public void CloseBill(Bill bill, float splitAmong)
         {
-            string query = "INSERT INTO dbo.Bill VALUES(@PaymentType, @BillFeedback, @BillTotal, @Tip, @TableID, 1)";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            sqlParameters[0] = new SqlParameter("@PaymentType", bill.PaymentType.ToString());
-            sqlParameters[1] = new SqlParameter("@BillFeedback", bill.BillFeedback);
-            sqlParameters[2] = new SqlParameter("@BillTotal", Decimal.Round((decimal)(bill.BillTotalWithoutTip / splitAmong), 2));
-            sqlParameters[3] = new SqlParameter("@Tip", Decimal.Round((decimal)(bill.Tip / splitAmong), 2));
-            sqlParameters[4] = new SqlParameter("@TableID", bill.tableId);
-            ExecuteSelectQuery(query, sqlParameters);
+            dbConnection.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("INSERT INTO dbo.Bill" + " VALUES(@PaymentType, @BillFeedback, @BillTotal, @Tip, 1, @TableID);", dbConnection);
+                command.Parameters.AddWithValue("@PaymentType", bill.PaymentType.ToString());
+                command.Parameters.AddWithValue("@BillFeedback", bill.BillFeedback);
+                command.Parameters.AddWithValue("@BillTotal", Decimal.Round((decimal)(bill.BillTotalWithoutTip / splitAmong), 2));
+                command.Parameters.AddWithValue("@Tip", Decimal.Round((decimal)(bill.Tip / splitAmong), 2));
+                command.Parameters.AddWithValue("@TableID", bill.tableId);
+                int numOfRowsAdded = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Failed to save bill!" + e.Message);
+            }
+            dbConnection.Close();
         }
 
         /*public Bill GetBillByTable(int tableId)

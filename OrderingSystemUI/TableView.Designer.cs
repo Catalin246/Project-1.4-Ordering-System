@@ -54,7 +54,7 @@
             this.btnCancelSeatGuess = new System.Windows.Forms.Button();
             this.btnTakeOrder = new System.Windows.Forms.Button();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            //this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuBar = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuKitchen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
@@ -262,9 +262,9 @@
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(76, 20);
-            this.toolStripMenuItem1.Text = "Dashboard";
+            //this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            //this.toolStripMenuItem1.Size = new System.Drawing.Size(76, 20);
+            //this.toolStripMenuItem1.Text = "Dashboard";
             // 
             // MenuBar
             // 
@@ -284,7 +284,7 @@
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(73, 20);
             this.toolStripMenuItem4.Text = "Table view";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+          
             // 
             // MenuBill
             // 
