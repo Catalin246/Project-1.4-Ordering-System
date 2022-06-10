@@ -93,6 +93,7 @@ namespace OrderingSystemUI
             {
                 listViewBar.MultiSelect = true;
                 listViewBar.Items.Clear();
+                comboBoxTable.Enabled = true;
 
                 List<OrderedItem> orderedItemList = orderedItemService.GetPreparingDrinkItemsFromDaoClass();
 
