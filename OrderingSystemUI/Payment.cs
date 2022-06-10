@@ -16,12 +16,24 @@ namespace OrderingSystemUI
     public partial class Payment : Form
     {
         public Bill bill;
+        public TableView tableView;
         public Payment()
         {
 
             InitializeComponent();
             comboBoxPaymentType.SelectedIndex = 0;
             comboBoxSplitBill.SelectedIndex = 0;
+            lblTotalWithVat.Hide();
+            lblTotalWithVatValue.Hide();
+        }
+
+        public Payment (int tableID)
+        {
+            InitializeComponent();
+            comboBoxPaymentType.SelectedIndex = 0;
+            comboBoxSplitBill.SelectedIndex = 0;
+            this.setBillByTable(tableID);
+ 
         }
 
         private void OrderingSystem_Load(object sender, EventArgs e)
@@ -51,17 +63,18 @@ namespace OrderingSystemUI
 
         private void barViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            showPanel("Bar view");
         }
 
         private void kitchenViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            showPanel("Kitchen view");
         }
 
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            showPanel("Table view");
+            this.Hide();
+            tableView.Show();
         }
 
         private void btnTable1_Click(object sender, EventArgs e)
@@ -73,8 +86,7 @@ namespace OrderingSystemUI
 
         private void btnPayment_Click(object sender, EventArgs e)
         {
-            // pnlDashboard.Hide();
-            // pnlTableView.Hide();
+          
             pnlTakeOrder.Show();
             pnlPayment.Show();
         }
@@ -102,9 +114,9 @@ namespace OrderingSystemUI
                     float updatedTip = desiredTotal - bill.BillTotalWithoutTip;
                     bill.Tip = updatedTip;
                     // display  tip amount
-                    labelDisplayTip.Text = updatedTip.ToString();
+                    labelDisplayTip.Text = updatedTip.ToString("0.00");
                     // display total with tip 
-                    labelDisplayTotalWithTip.Text = desiredTotal.ToString();
+                    labelDisplayTotalWithTip.Text = desiredTotal.ToString("0.00");
                 } else
                 {
                     MessageBox.Show("Please enter a desired amount greater than the Bill total without Tip :)");
@@ -120,29 +132,9 @@ namespace OrderingSystemUI
         {
             if (txtBoxTableNumber.Text != null)
             {
-                bill = new Bill();
-                int tableID = int.Parse(txtBoxTableNumber.Text);
-                OrderService orderService = new OrderService();
-                OrderedItemService orderedItemService = new OrderedItemService();
-                ItemService itemService = new ItemService();
-
-                List<Order> orders = orderService.GetOrdersByTable(tableID);
-                List<OrderedItem> orderedItems = new List<OrderedItem>(); // use this list
-                // combine all the ordered items from various orders
-                foreach (Order order in orders)
-                {
-                    orderedItems.AddRange(orderedItemService.GetOrderedItemsByOrder(order.OrderId));
-                }
-                // NICE TO DO, create query to select all associated ordered items in one call
-                // get all the open ordered items (non closed) 
-                foreach(OrderedItem orderedItem in orderedItems)
-                {
-                    orderedItem.Item = itemService.GetItem(orderedItem.ItemID);
-                }
-                bill.OrderedItems = orderedItems;
-                // Display the ordered items associated with the bill 
-                DisplayOrderedItems(orderedItems);
-
+                //this.cleanPaymentView();
+                
+                this.setBillByTable(int.Parse(txtBoxTableNumber.Text));
             }
         }
 
@@ -157,13 +149,14 @@ namespace OrderingSystemUI
                     ListViewItem li = new ListViewItem(orderedItem.Item.ItemName);
                     li.SubItems.Add(orderedItem.Amount.ToString());
                     li.SubItems.Add(orderedItem.TotalPriceItem.ToString());
-                    li.SubItems.Add(orderedItem.VatAmount.ToString());
+                    li.SubItems.Add(orderedItem.VatAmount.ToString("0.00"));
                     li.SubItems.Add((orderedItem.TotalPriceItem + orderedItem.VatAmount).ToString());
 
                     li.Tag = orderedItem;
 
                     listViewDisplaybillItems.Items.Add(li);
                 }
+
             }
             catch (Exception exp)
             {
@@ -171,67 +164,44 @@ namespace OrderingSystemUI
             }
         }
 
-        private void buttCredit_Click(object sender, EventArgs e)
-        {
-            if (bill != null)
-            {
-                DialogResult res = MessageBox.Show("Are you sure you want to Finalize Payment?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (res == DialogResult.Yes)
-                {
-                    //call function to delete all orders and all ordered itemsn from the table
-                    bill.PaymentType = PaymentType.creditCard;
-                    MessageBox.Show("Credit card payment option approved.");
-                    //Some task…
-
-                }
-                if (res == DialogResult.No)
-                {
-                    MessageBox.Show("Just in time to change your mind...");
-                    //Some task…
-                }
-            
-            }
-            else
-            {
-                MessageBox.Show("Please search for a bill first!");
-            }
-            
-        }
-
-        private void buttDebit_Click(object sender, EventArgs e)
-        {
-            if (bill != null)
-            {
-                bill.PaymentType = PaymentType.debitCard;
-                MessageBox.Show("Debit card payment option approved.");
-            }
-            else
-            {
-                MessageBox.Show("Please search for a bill first!");
-            }
-        }
 
         private void buttFinalizePayment_Click(object sender, EventArgs e)
         {
             if (bill != null)
             {
                 setPaymentType();
-                if (checkBoxSplitBill.Enabled && comboBoxSplitBill.SelectedIndex == 0)
+                if (checkBoxSplitBill.Checked && comboBoxSplitBill.SelectedIndex == 0)
                 {
                     MessageBox.Show("Please select a valid number from the dropdown.");
                     return;
                 }
                 BillService billService = new BillService();
-                if (checkBoxSplitBill.Enabled)
+                if (checkBoxSplitBill.Checked)
                 {
                     float splitAmong = float.Parse(comboBoxSplitBill.GetItemText(comboBoxSplitBill.SelectedItem));
-                    // billService.CloseBill(this.bill, splitAmong);
+                    for (int i = 0; i < splitAmong; i++)
+                    {
+                        billService.CloseBill(this.bill, splitAmong);
+                    }
+                    
                 }
                 else
                 {
-                    // billService.CloseBill(this.bill);
+                    billService.CloseBill(this.bill, 1);
                 }
                 MessageBox.Show($"{comboBoxPaymentType.GetItemText(comboBoxPaymentType.SelectedItem)} was successful! Thank you!");
+                OrderService orderService = new OrderService();
+                OrderedItemService orderedItemService = new OrderedItemService();
+
+                orderService.MarkOrdersPaid(bill.tableId);
+                foreach (Order order in bill.Orders)
+                {
+                    orderedItemService.ChangeOrderStatusToPaid(order.OrderId);
+                }
+                TableService tableService = new TableService();
+                tableService.OpenTable(bill.tableId);
+                tableView.ChangeColor(bill.tableId, "");
+                this.cleanPaymentView();
                 // need to delete or close orders? 
                 // clear table and display/reset bill page
             }
@@ -271,6 +241,7 @@ namespace OrderingSystemUI
                 if (txtBoxFeedBack.Text != null)
                 {
                     bill.BillFeedback = txtBoxFeedBack.Text;
+                    MessageBox.Show($"Feedback has been added. Thanks!");
                 }
                 else
                 {
@@ -283,5 +254,94 @@ namespace OrderingSystemUI
             }
         }
 
+        private void txtBoxFeedBack_TextChanged(object sender, EventArgs e)
+        {
+            if(txtBoxFeedBack.Text != null)
+            {
+                bttAddFeedBack.Enabled = true;
+            }
+        }
+
+        private void checkBoxSplitBill_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxSplitBill.Checked)
+            {
+                comboBoxSplitBill.Enabled = true;
+            } else
+            {
+                comboBoxSplitBill.Enabled = false;
+            }
+        }
+
+        private void setBillByTable(int tableID)
+        {
+            bill = new Bill();
+            bill.tableId = tableID;
+            OrderService orderService = new OrderService();
+            OrderedItemService orderedItemService = new OrderedItemService();
+            ItemService itemService = new ItemService();
+            List<Item> allDrinks = itemService.GetDrinks();
+
+            bill.Orders = orderService.GetOrdersByTable(tableID);
+ 
+            List<OrderedItem> orderedItems = new List<OrderedItem>(); // use this list
+                                                                      // combine all the ordered items from various orders
+            foreach (Order order in bill.Orders )
+            {
+                orderedItems.AddRange(orderedItemService.GetOrderedItemsByOrder(order.OrderId));
+            }
+            // NICE TO DO, create query to select all associated ordered items in one call
+            // get all the open ordered items (non closed) 
+            bool isDrink = false;
+            /* Checks each item to see if it is a drink
+             * If it is, we set the item of the ordered item to the drink
+             * If it is not a drink, we query the database for the food item
+             */
+            foreach (OrderedItem orderedItem in orderedItems)
+            {
+                foreach (Item drink in allDrinks)
+                {
+                    if (drink.ItemId == orderedItem.ItemID)
+                    {
+                        orderedItem.Item = drink;
+                        isDrink = true;
+                        break;
+                    }
+                }
+                if (!isDrink)
+                {
+                    orderedItem.Item = itemService.GetItem(orderedItem.ItemID);
+                }
+                isDrink = false;
+            }
+            bill.OrderedItems = orderedItems;
+            // Display the ordered items associated with the bill 
+            DisplayOrderedItems(orderedItems);
+            lblTotalWithVat.Visible = true;
+            lblTotalWithVatValue.Text = bill.BillTotalWithoutTip.ToString("0.00");
+            lblTotalWithVatValue.Visible = true;
+            labelDisplayTotalWithTip.Text = bill.BillTotalWithoutTip.ToString("0.00");
+            checkBoxSplitBill.Enabled = true;
+            comboBoxPaymentType.Enabled = true;
+            btnSaveTotal.Enabled = true;
+            buttFinalizePayment.Enabled = true;
+        }
+
+
+        private void cleanPaymentView()
+        {
+            listViewDisplaybillItems.Clear();
+            checkBoxSplitBill.Checked = false;
+            comboBoxSplitBill.Enabled = false;
+            comboBoxPaymentType.SelectedIndex = 0;
+            btnSaveTotal.Enabled = true;
+            buttFinalizePayment.Enabled = true;
+            labelDisplayTotalWithTip.Text = "";
+            labelDisplayTip.Text = "0,00";
+            txtBoxTotal.Text = "";
+            lblTotalWithVatValue.Text = "";
+            lblTotalWithVatValue.Visible = false;
+            lblTotalWithVat.Visible = false;
+        }
     }
 }

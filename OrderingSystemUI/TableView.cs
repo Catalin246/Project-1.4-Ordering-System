@@ -46,15 +46,9 @@ namespace OrderingSystemUI
                 ShowListView();
             }
         }
-        public void ShowListView()
+        public void CheckTable()
         {
-            TableService tableService = new TableService();
-            List<Table> tables = tableService.GetTable();
-            List<Food> foods = tableService.GetFood();
-            List<Drink> drinks = tableService.GetDrink();
             List<Table> tableStatus = tableService.GetTablesStatus();
-            //List<Drink> drinks = drinkService.GetDrinks();
-            listViewTableOrder.Items.Clear();
             foreach (Table table in tableStatus)
             {
                 if (table.TableStatus == "Close")
@@ -73,6 +67,12 @@ namespace OrderingSystemUI
                         break;
                 }
             }
+        }
+        public void ShowListView()
+        {
+            CheckTable();
+            List<Table> tables = tableService.GetTable();
+            List<Drink> drinks = tableService.GetDrink();
             listViewTableOrder.Items.Clear();
             foreach (Table table in tables)
             {
@@ -88,12 +88,13 @@ namespace OrderingSystemUI
                             break;
                         }
                         else
-                        { 
+                        {
                             li.SubItems.Add("Kitchen");
                             break;
                         }
                     }
-                    li.SubItems.Add(table.Time.ToString("H:m"));
+                    TimeSpan time = DateTime.Now - table.Time;
+                    li.SubItems.Add(time.ToString());
                     li.SubItems.Add(table.OrderId.ToString());
                     li.Tag = table;
                     listViewTableOrder.Items.Add(li);
@@ -204,7 +205,6 @@ namespace OrderingSystemUI
         {
 
         }
-
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
             BarView barViewForm = new BarView(this.employeeName, this.emplyeeRole);
@@ -249,6 +249,8 @@ namespace OrderingSystemUI
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
             Payment paymentView = new Payment();
+            paymentView.tableView = this;
+            this.Hide();
             paymentView.Show();
 
         }
@@ -260,15 +262,13 @@ namespace OrderingSystemUI
 
         private void TableView_Load(object sender, EventArgs e)
         {
-            btnProfile.Text = employeeName;
-            txtTime.Text = DateTime.Now.ToString("H:mm:ss"); 
+            btnProfile.Text = employeeName;          
             Timer timer = new Timer();
             timer.Interval = (10 * 1000); // 10 secs
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
             if (emplyeeRole == "Waiter")
             {
-                MenuBill.Enabled = false;
                 MenuBar.Enabled = false;
                 MenuKitchen.Enabled = false;
             }
@@ -277,6 +277,8 @@ namespace OrderingSystemUI
         private void timer_Tick(object sender, EventArgs e)
         {
             ShowListView();
+            DateTime dateTime = DateTime.Now;
+            txtTime.Text = dateTime.ToString("H:mm:s");
         }    
         private void txtItemId_Click(object sender, EventArgs e)
         {
@@ -287,7 +289,6 @@ namespace OrderingSystemUI
         {
             Option option = new Option(employeeName,emplyeeRole);
             option.Show();
-            this.Hide();
         }
     }
 }

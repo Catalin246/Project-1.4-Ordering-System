@@ -37,19 +37,15 @@ namespace OrderingSystemUI
                 list = accountService.GetAllEmployee();
                 foreach (Employee item in list)
                 {
-                    //if(item.EmployeePassword == TryPasscode(Passcode, item.salt).Digest && TryUserName(Username, list))
-                    //{
-                    //    EmployeeRole(item.EmployeeRole, item.EmployeeName);
-                    //}
                     if (TryPasscode(username, item.EmployeeName) && TryUserName(passcode,item.EmployeePassword))
                     {
                         EmployeeRole(item.EmployeeRole, item.EmployeeName);
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception )
             {
-
+                Console.WriteLine("Something wrong with the login");
             }
         }
 
@@ -90,6 +86,5 @@ namespace OrderingSystemUI
         //    HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
         //    return hashResultSha256;
         //}
-
     }
 }

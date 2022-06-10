@@ -54,6 +54,7 @@
             this.btnCancelSeatGuess = new System.Windows.Forms.Button();
             this.btnTakeOrder = new System.Windows.Forms.Button();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            //this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuBar = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuKitchen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
@@ -259,30 +260,36 @@
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
+            // toolStripMenuItem1
+            // 
+            //this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            //this.toolStripMenuItem1.Size = new System.Drawing.Size(76, 20);
+            //this.toolStripMenuItem1.Text = "Dashboard";
+            // 
             // MenuBar
             // 
             this.MenuBar.Name = "MenuBar";
-            this.MenuBar.Size = new System.Drawing.Size(93, 29);
+            this.MenuBar.Size = new System.Drawing.Size(63, 20);
             this.MenuBar.Text = "Bar view";
             // 
             // MenuKitchen
             // 
             this.MenuKitchen.Name = "MenuKitchen";
-            this.MenuKitchen.Size = new System.Drawing.Size(125, 29);
+            this.MenuKitchen.Size = new System.Drawing.Size(86, 20);
             this.MenuKitchen.Text = "Kitchen view";
             this.MenuKitchen.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(108, 29);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(73, 20);
             this.toolStripMenuItem4.Text = "Table view";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+          
             // 
             // MenuBill
             // 
             this.MenuBill.Name = "MenuBill";
-            this.MenuBill.Size = new System.Drawing.Size(90, 29);
+            this.MenuBill.Size = new System.Drawing.Size(62, 20);
             this.MenuBill.Text = "Bill view";
             this.MenuBill.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
@@ -445,9 +452,11 @@
             this.lblOrderId.AutoSize = true;
             this.lblOrderId.Location = new System.Drawing.Point(448, 401);
             this.lblOrderId.Name = "lblOrderId";
-            this.lblOrderId.Size = new System.Drawing.Size(59, 25);
+
+            this.lblOrderId.Size = new System.Drawing.Size(16, 15);
+
             this.lblOrderId.TabIndex = 14;
-            this.lblOrderId.Text = "label1";
+            this.lblOrderId.Text = "...";
             // 
             // txtTime
             // 
@@ -463,9 +472,9 @@
             this.lblItemId.AutoSize = true;
             this.lblItemId.Location = new System.Drawing.Point(448, 432);
             this.lblItemId.Name = "lblItemId";
-            this.lblItemId.Size = new System.Drawing.Size(59, 25);
+            this.lblItemId.Size = new System.Drawing.Size(16, 15);
             this.lblItemId.TabIndex = 17;
-            this.lblItemId.Text = "label1";
+            this.lblItemId.Text = "...";
             this.lblItemId.Click += new System.EventHandler(this.txtItemId_Click);
             // 
             // LabelItemId
@@ -488,7 +497,7 @@
             // 
             // btnProfile
             // 
-            this.btnProfile.Location = new System.Drawing.Point(598, 47);
+            this.btnProfile.Location = new System.Drawing.Point(711, 51);
             this.btnProfile.Name = "btnProfile";
             this.btnProfile.Size = new System.Drawing.Size(89, 23);
             this.btnProfile.TabIndex = 20;

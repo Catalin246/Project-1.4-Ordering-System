@@ -23,6 +23,12 @@ namespace OrderingSystemUI
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
+            TableView tableView = new TableView(employeeName,employeeRole);
+            BarView barView = new BarView(employeeName,employeeRole);
+            KitchenView kitchenView = new KitchenView(employeeName,employeeRole);
+            kitchenView.Close();
+            barView.Close();
+            tableView.Close();
             Login login = new Login();
             login.Show();
             this.Close();
@@ -30,8 +36,20 @@ namespace OrderingSystemUI
 
         private void Option_Load(object sender, EventArgs e)
         {
-            lblEmployeeName.Text = employeeName;
-            lblEmployeeRole.Text = employeeRole;
+            labelEmployeName.Text = employeeName;
+            labelEmployeRole.Text = employeeRole;
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            TableView tableView = new TableView(employeeName, employeeRole);
+            tableView.Show();
+            this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)//btn back
+        {
+            this.Close();
         }
     }
 }

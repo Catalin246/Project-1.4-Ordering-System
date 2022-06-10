@@ -63,7 +63,27 @@ namespace OrderingSystemDAL
                 orderedItems.Add(orderedItem);
             }
             return orderedItems;
-        }  
+        }
+
+        public void MarkOrderedItemsPaid(int orderID)
+        {
+            conn.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("Update dbo.[OrderedItem] SET [Ordered_Item_Status] = 'Paid' WHERE [Order_Id] = @orderID;", conn);
+
+                command.Parameters.AddWithValue("@orderID", orderID);
+
+                int nrOfRowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Marking Ordered Items Paid failed! " + e.Message);
+            }
+            conn.Close();
+        }
+
+
         private Status MakeStatusEnum(string notEnumStatus)
         {
             switch (notEnumStatus)
@@ -98,10 +118,6 @@ namespace OrderingSystemDAL
         }
 
         
-        /// 
-        /// //
-        /// 
-
         public List<OrderedItem> GetPreparingFoodItemsFromDatabase()
         {
             string query = "select o.order_id, Table_Id, Order_Time, f.FoodType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join food as f on f.FoodItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'Preparing' order by o.Order_Time desc";
