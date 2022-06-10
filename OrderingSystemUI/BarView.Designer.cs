@@ -96,6 +96,7 @@
             this.btnemployeeName.TabIndex = 35;
             this.btnemployeeName.Text = "btnEmployeeName";
             this.btnemployeeName.UseVisualStyleBackColor = false;
+            this.btnemployeeName.Click += new System.EventHandler(this.btnemployeeName_Click);
             // 
             // comboBoxCourse
             // 

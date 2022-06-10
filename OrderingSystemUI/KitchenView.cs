@@ -6,20 +6,23 @@ using OrderingSystemLogic;
 
 namespace OrderingSystemUI
 {
-    //NOTE: Kitchenview and barview both uses almost similar code (one uses food verions, other uses drink versions) 
+    //NOTE: Kitchenview and barview both uses almost similar code (one uses food versions, other uses drink versions) 
     //i added comments on bar view which are explaining the code so if you want to see the comments, they are in BarView.cs
     //the same comments apply to this code (because they are 99% same).
     public partial class KitchenView : Form
     {
         OrderedItemService orderedItemService;
         private string EmployeeName { get; set; }
+        private string EmployeeRole { get; set; }
 
-        public KitchenView(string employeeName)
+        public KitchenView(string employeeName, string role)
         {
             InitializeComponent();
             orderedItemService = new OrderedItemService();
 
             this.EmployeeName = employeeName;
+            this.EmployeeRole = role;
+
             btnReadyToServe.Enabled = false;
             btnViewOrderNote.Enabled = false;
             comboBoxCourse.Enabled = false;
@@ -62,8 +65,8 @@ namespace OrderingSystemUI
             try
             {
                 btnemployeeName.Text = "Employee: " + EmployeeName;
-                comboBoxCourse.SelectedItem = 0;
-                comboBoxTable.SelectedItem = 0;
+                comboBoxCourse.SelectedItem = "none";
+                comboBoxTable.SelectedItem = "none";
                 comboBoxCourse.Enabled = false;                
 
                 lblTime.Text = DateTime.Now.ToString("HH:mm");
@@ -376,6 +379,13 @@ namespace OrderingSystemUI
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnemployeeName_Click(object sender, EventArgs e)
+        {
+            Option optionForm = new Option(EmployeeName, EmployeeRole);
+            optionForm.Show();
+            this.Close();
         }
     }
 }

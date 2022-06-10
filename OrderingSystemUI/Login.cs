@@ -58,7 +58,7 @@ namespace OrderingSystemUI
             switch (employeeRole)
             {
                 case "Cook":
-                    KitchenView kitchenView = new KitchenView(employeeName);
+                    KitchenView kitchenView = new KitchenView(employeeName, employeeRole);
                     kitchenView.Show();                    
                     this.Hide();
                     break;
@@ -68,6 +68,8 @@ namespace OrderingSystemUI
                     this.Hide();
                     break;
                 case "Bartender":
+                    BarView barView = new BarView(employeeName,employeeRole);
+                    barView.Show();
                     this.Hide();
                     break;
                 default:
