@@ -92,6 +92,7 @@ namespace OrderingSystemUI
             {
                 listViewKitchen.MultiSelect = true;
                 listViewKitchen.Items.Clear();
+                comboBoxTable.Enabled = true;
 
                 List<OrderedItem> orderedItemList = orderedItemService.GetPreparingFoodItemsFromDaoClass();
 
@@ -123,8 +124,8 @@ namespace OrderingSystemUI
                 listViewKitchen.MultiSelect = false;
                 btnReadyToServe.Enabled = false;
                 listViewKitchen.Items.Clear();
-                comboBoxCourse.Enabled = true;
-                comboBoxTable.Enabled = true;
+                comboBoxCourse.Enabled = false;
+                comboBoxTable.Enabled = false;
 
                 List<OrderedItem> orderedItemList = orderedItemService.GetFinishedFoodItemsFromDaoClass();
 

@@ -25,12 +25,6 @@ namespace OrderingSystemDAL
 
             dbConnection = new SqlConnection(connString);//passing my database to my sql object
         }
-        public List<Bill> GetAllBills()
-        {
-            string query = "SELECT studentId, studentFirstName, studentLastName  FROM dbo.Bill";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        }
 
         public List<Bill> GetOpenBills(int tableID)
         {
@@ -56,7 +50,7 @@ namespace OrderingSystemDAL
             return bills;
         }
 
-        public void CloseBill(Bill bill, float splitAmong)
+        public void CloseBill(Bill bill, float splitAmong) //stores bill in the database
         {
             dbConnection.Open();
             try
@@ -75,22 +69,6 @@ namespace OrderingSystemDAL
             }
             dbConnection.Close();
         }
-
-        /*public Bill GetBillByTable(int tableId)
-        {
-            
-            SqlCommand command = new SqlCommand("SELECT * FROM Table WHERE TableId = @tableId");
-            command.Parameters.AddWithValue("@TableId", tableId);//@Id is a sql parameter that will be filled with your customerId variable
-            SqlDataReader reader = command.ExecuteReader();
-
-            if (reader.Read())
-            {
-                order = ReadTable(reader);//
-            }
-            reader.Close();
-            dbConnection.Close();
-            return order;
-        }*/
 
     }
 }

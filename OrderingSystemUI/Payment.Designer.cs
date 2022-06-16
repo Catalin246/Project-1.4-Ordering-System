@@ -44,7 +44,7 @@ namespace OrderingSystemUI
             this.label7 = new System.Windows.Forms.Label();
             this.labelDisplayTip = new System.Windows.Forms.Label();
             this.labelDisplayTotalWithTip = new System.Windows.Forms.Label();
-            this.btnSaveTotal = new System.Windows.Forms.Button();
+            this.BttUpdateTotal = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.buttFinalizePayment = new System.Windows.Forms.Button();
             this.txtBoxTotal = new System.Windows.Forms.TextBox();
@@ -96,7 +96,7 @@ namespace OrderingSystemUI
             this.pnlPayment.Controls.Add(this.label7);
             this.pnlPayment.Controls.Add(this.labelDisplayTip);
             this.pnlPayment.Controls.Add(this.labelDisplayTotalWithTip);
-            this.pnlPayment.Controls.Add(this.btnSaveTotal);
+            this.pnlPayment.Controls.Add(this.BttUpdateTotal);
             this.pnlPayment.Controls.Add(this.label6);
             this.pnlPayment.Controls.Add(this.buttFinalizePayment);
             this.pnlPayment.Controls.Add(this.txtBoxTotal);
@@ -239,16 +239,16 @@ namespace OrderingSystemUI
             this.labelDisplayTotalWithTip.TabIndex = 28;
             this.labelDisplayTotalWithTip.Text = "0,00";
             // 
-            // btnSaveTotal
+            // BttUpdateTotal
             // 
-            this.btnSaveTotal.Enabled = false;
-            this.btnSaveTotal.Location = new System.Drawing.Point(778, 79);
-            this.btnSaveTotal.Name = "btnSaveTotal";
-            this.btnSaveTotal.Size = new System.Drawing.Size(94, 29);
-            this.btnSaveTotal.TabIndex = 4;
-            this.btnSaveTotal.Text = "Update";
-            this.btnSaveTotal.UseVisualStyleBackColor = true;
-            this.btnSaveTotal.Click += new System.EventHandler(this.btnSaveTotal_Click);
+            this.BttUpdateTotal.Enabled = false;
+            this.BttUpdateTotal.Location = new System.Drawing.Point(778, 79);
+            this.BttUpdateTotal.Name = "BttUpdateTotal";
+            this.BttUpdateTotal.Size = new System.Drawing.Size(94, 29);
+            this.BttUpdateTotal.TabIndex = 4;
+            this.BttUpdateTotal.Text = "Update";
+            this.BttUpdateTotal.UseVisualStyleBackColor = true;
+            this.BttUpdateTotal.Click += new System.EventHandler(this.BttUpdateTotal_Click_1);
             // 
             // label6
             // 
@@ -283,7 +283,7 @@ namespace OrderingSystemUI
             this.txtBoxTotal.Size = new System.Drawing.Size(93, 27);
             this.txtBoxTotal.TabIndex = 23;
             this.txtBoxTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtBoxTotal.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtBoxTotal.TextChanged += new System.EventHandler(this.txtBoxTotal_TextChanged_1);
             // 
             // label5
             // 
@@ -399,7 +399,7 @@ namespace OrderingSystemUI
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelDisplayTip;
         private System.Windows.Forms.Label labelDisplayTotalWithTip;
-        private System.Windows.Forms.Button btnSaveTotal;
+        private System.Windows.Forms.Button BttUpdateTotal;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttFinalizePayment;
         private System.Windows.Forms.TextBox txtBoxTotal;

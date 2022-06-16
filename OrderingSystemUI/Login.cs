@@ -80,12 +80,6 @@ namespace OrderingSystemUI
         {
             return (username == dataName);
         } 
-        //private HashWithSaltResult TryPasscode(string passcode, string salt)
-        //{
-        //    PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-        //    HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
-        //    return hashResultSha256;
-        //}
 
     }
 }
