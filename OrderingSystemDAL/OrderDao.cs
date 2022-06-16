@@ -12,12 +12,6 @@ namespace OrderingSystemDAL
 {
     public class OrderDao : BaseDao
     {
-        private SqlConnection conn;
-        public OrderDao()
-        {
-            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
-        }
-
         public List<Order> GetAllOrders()
         {
             string query = " SELECT Order_Id FROM dbo.[Order] ";
@@ -43,24 +37,26 @@ namespace OrderingSystemDAL
 
         public int GetOrderId()
         {
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
             conn.Open();
-            SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM dbo.[Order]", conn);
+            SqlCommand command = new SqlCommand("SELECT Max([Order_Id]) FROM dbo.[Order]", conn);
             Int32 count = (Int32)command.ExecuteScalar();
             conn.Close();
             return (int)count;
         }
         public void Add(Order order)
         {
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
             conn.Open();
             try
             {
                 SqlCommand command = new SqlCommand(" INSERT INTO dbo.[Order] " +
-                        " VALUES(@Order_Id, @Order_Time, @Table_Id, @Order_Status);", conn);              
+                        " VALUES(@Order_Time, @Table_Id, @Order_Status);", conn);              
 
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);
                 command.Parameters.AddWithValue("@Order_Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 command.Parameters.AddWithValue("@Table_Id", order.TableId);
-                command.Parameters.AddWithValue("@Order_Status", "Preparing");
+                command.Parameters.AddWithValue("@Order_Status", "ordered");
 
                 int nrOfRowsAffected = command.ExecuteNonQuery();
             }
@@ -74,6 +70,7 @@ namespace OrderingSystemDAL
 
         public void MarkOrderPaid(int tableID)
         {
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
             conn.Open();
             try
             {

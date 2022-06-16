@@ -17,7 +17,7 @@ namespace OrderingSystemDAL
         {
             conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
         }
-        public List<Item> GetAllDrinks()
+        public List<Item> GetDrinks()
         {
             string query = "SELECT * FROM dbo.Item as I join dbo.Drink as D on I.ItemId = D.DrinkItemId";
             SqlParameter[] sqlParameters = new SqlParameter[0];

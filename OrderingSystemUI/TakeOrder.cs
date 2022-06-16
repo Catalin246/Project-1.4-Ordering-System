@@ -199,8 +199,8 @@ namespace OrderingSystemUI
                 OrderedItemService orderedItemService = new OrderedItemService();
                 if (btnModify.Enabled == true)
                 {
-                    order.OrderId = orderService.GetOrderId();
                     orderService.AddOrder(order);
+                    order.OrderId = orderService.GetOrderId();
                 }
 
                 foreach (OrderedItem item in order.OrderedItems)
@@ -401,11 +401,6 @@ namespace OrderingSystemUI
         {
             this.Hide();
             tableView.Show();
-        }
-
-        private void pnlTakeOrder_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

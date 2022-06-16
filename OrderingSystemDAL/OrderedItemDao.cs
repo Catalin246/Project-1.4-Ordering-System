@@ -10,14 +10,10 @@ namespace OrderingSystemDAL
     public class OrderedItemDao : BaseDao
     {
 
-        private SqlConnection conn;
-        public OrderedItemDao()
-        {
-            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
-        }                
-
         public void Add(OrderedItem orderedItem, Order order)
         {
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
+
             conn.Open();
             try
             {
@@ -29,7 +25,7 @@ namespace OrderingSystemDAL
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);
                 command.Parameters.AddWithValue("@Ordered_Item_Note", orderedItem.Note);
                 command.Parameters.AddWithValue("@Ordered_Item_Amount", orderedItem.Amount);
-                command.Parameters.AddWithValue("@Ordered_Item_Status", "Preparing");
+                command.Parameters.AddWithValue("@Ordered_Item_Status", "ordered");
 
                 int nrOfRowsAffected = command.ExecuteNonQuery();
             }
@@ -67,6 +63,8 @@ namespace OrderingSystemDAL
 
         public void MarkOrderedItemsPaid(int orderID)
         {
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
+
             conn.Open();
             try
             {
