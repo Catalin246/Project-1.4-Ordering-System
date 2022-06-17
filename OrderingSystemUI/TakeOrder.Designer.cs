@@ -356,9 +356,9 @@
             // 
             // comboBoxCourse
             // 
-            this.comboBoxCourse.DisplayMember = "Beer";
             this.comboBoxCourse.FormattingEnabled = true;
             this.comboBoxCourse.Items.AddRange(new object[] {
+            "none",
             "Beer",
             "Soft",
             "Coffee",
@@ -370,7 +370,7 @@
             this.comboBoxCourse.Name = "comboBoxCourse";
             this.comboBoxCourse.Size = new System.Drawing.Size(145, 33);
             this.comboBoxCourse.TabIndex = 32;
-            this.comboBoxCourse.ValueMember = "0";
+            this.comboBoxCourse.SelectedIndexChanged += new System.EventHandler(this.comboBoxCourse_SelectedIndexChanged);
             // 
             // btnModify
             // 
