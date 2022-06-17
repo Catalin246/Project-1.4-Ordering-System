@@ -402,6 +402,42 @@ namespace OrderingSystemUI
             this.Hide();
             tableView.Show();
         }
+
+        private void comboBoxCourse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (comboBoxCourse.SelectedIndex == 0)
+                {
+                    return;
+                }
+                else if (comboBoxCourse.SelectedIndex == 0)
+                {
+                    return;
+                }
+
+                string courseName = comboBoxCourse.SelectedItem.ToString();
+
+                foreach (ListViewItem item in listViewMenuItems.Items)
+                {
+                    Item orderedItem = (Item)item.Tag;
+
+                    if (orderedItem.ItemType == courseName)
+                    {
+                        item.Selected = true;
+                        listViewMenuItems.EnsureVisible(listViewMenuItems.Items.IndexOf(listViewMenuItems.SelectedItems[0]));
+                    }
+                    else
+                    {
+                        item.Selected = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
     
