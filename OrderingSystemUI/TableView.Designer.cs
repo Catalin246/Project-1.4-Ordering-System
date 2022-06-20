@@ -64,16 +64,6 @@
             this.whereToPickUpOrder = new System.Windows.Forms.ColumnHeader();
             this.time = new System.Windows.Forms.ColumnHeader();
             this.orderId = new System.Windows.Forms.ColumnHeader();
-            this.btnTable010 = new System.Windows.Forms.Button();
-            this.btnTable01 = new System.Windows.Forms.Button();
-            this.btnTable05 = new System.Windows.Forms.Button();
-            this.btnTable09 = new System.Windows.Forms.Button();
-            this.btnTable04 = new System.Windows.Forms.Button();
-            this.btnTable06 = new System.Windows.Forms.Button();
-            this.btnTable08 = new System.Windows.Forms.Button();
-            this.btnTable03 = new System.Windows.Forms.Button();
-            this.btnTable02 = new System.Windows.Forms.Button();
-            this.btnTable07 = new System.Windows.Forms.Button();
             this.btnServed = new System.Windows.Forms.Button();
             this.lblOrderId = new System.Windows.Forms.Label();
             this.txtTime = new System.Windows.Forms.Label();
@@ -328,107 +318,6 @@
             this.orderId.Text = "Order Id";
             this.orderId.Width = 70;
             // 
-            // btnTable010
-            // 
-            this.btnTable010.Location = new System.Drawing.Point(192, 339);
-            this.btnTable010.Name = "btnTable010";
-            this.btnTable010.Size = new System.Drawing.Size(84, 66);
-            this.btnTable010.TabIndex = 9;
-            this.btnTable010.Text = "Table 10";
-            this.btnTable010.UseVisualStyleBackColor = true;
-            this.btnTable010.Click += new System.EventHandler(this.btnTable010_Click);
-            // 
-            // btnTable01
-            // 
-            this.btnTable01.BackColor = System.Drawing.Color.Transparent;
-            this.btnTable01.Location = new System.Drawing.Point(26, 51);
-            this.btnTable01.Name = "btnTable01";
-            this.btnTable01.Size = new System.Drawing.Size(84, 66);
-            this.btnTable01.TabIndex = 0;
-            this.btnTable01.Text = "Table 1";
-            this.btnTable01.UseVisualStyleBackColor = false;
-            this.btnTable01.Click += new System.EventHandler(this.btnTable01_Click);
-            // 
-            // btnTable05
-            // 
-            this.btnTable05.Location = new System.Drawing.Point(26, 195);
-            this.btnTable05.Name = "btnTable05";
-            this.btnTable05.Size = new System.Drawing.Size(84, 66);
-            this.btnTable05.TabIndex = 4;
-            this.btnTable05.Text = "Table 5";
-            this.btnTable05.UseVisualStyleBackColor = true;
-            this.btnTable05.Click += new System.EventHandler(this.btnTable05_Click);
-            // 
-            // btnTable09
-            // 
-            this.btnTable09.Location = new System.Drawing.Point(26, 339);
-            this.btnTable09.Name = "btnTable09";
-            this.btnTable09.Size = new System.Drawing.Size(84, 66);
-            this.btnTable09.TabIndex = 8;
-            this.btnTable09.Text = "Table 9";
-            this.btnTable09.UseVisualStyleBackColor = true;
-            this.btnTable09.Click += new System.EventHandler(this.btnTable09_Click);
-            // 
-            // btnTable04
-            // 
-            this.btnTable04.Location = new System.Drawing.Point(192, 123);
-            this.btnTable04.Name = "btnTable04";
-            this.btnTable04.Size = new System.Drawing.Size(84, 66);
-            this.btnTable04.TabIndex = 3;
-            this.btnTable04.Text = "Table 4";
-            this.btnTable04.UseVisualStyleBackColor = true;
-            this.btnTable04.Click += new System.EventHandler(this.btnTable04_Click);
-            // 
-            // btnTable06
-            // 
-            this.btnTable06.Location = new System.Drawing.Point(192, 195);
-            this.btnTable06.Name = "btnTable06";
-            this.btnTable06.Size = new System.Drawing.Size(84, 66);
-            this.btnTable06.TabIndex = 5;
-            this.btnTable06.Text = "Table 6";
-            this.btnTable06.UseVisualStyleBackColor = true;
-            this.btnTable06.Click += new System.EventHandler(this.btnTable06_Click);
-            // 
-            // btnTable08
-            // 
-            this.btnTable08.Location = new System.Drawing.Point(192, 267);
-            this.btnTable08.Name = "btnTable08";
-            this.btnTable08.Size = new System.Drawing.Size(84, 66);
-            this.btnTable08.TabIndex = 7;
-            this.btnTable08.Text = "Table 8";
-            this.btnTable08.UseVisualStyleBackColor = true;
-            this.btnTable08.Click += new System.EventHandler(this.btnTable08_Click);
-            // 
-            // btnTable03
-            // 
-            this.btnTable03.Location = new System.Drawing.Point(26, 123);
-            this.btnTable03.Name = "btnTable03";
-            this.btnTable03.Size = new System.Drawing.Size(84, 66);
-            this.btnTable03.TabIndex = 2;
-            this.btnTable03.Text = "Table 3";
-            this.btnTable03.UseVisualStyleBackColor = true;
-            this.btnTable03.Click += new System.EventHandler(this.btnTable03_Click);
-            // 
-            // btnTable02
-            // 
-            this.btnTable02.Location = new System.Drawing.Point(192, 51);
-            this.btnTable02.Name = "btnTable02";
-            this.btnTable02.Size = new System.Drawing.Size(84, 66);
-            this.btnTable02.TabIndex = 1;
-            this.btnTable02.Text = "Table 2";
-            this.btnTable02.UseVisualStyleBackColor = true;
-            this.btnTable02.Click += new System.EventHandler(this.btnTable02_Click);
-            // 
-            // btnTable07
-            // 
-            this.btnTable07.Location = new System.Drawing.Point(26, 267);
-            this.btnTable07.Name = "btnTable07";
-            this.btnTable07.Size = new System.Drawing.Size(84, 66);
-            this.btnTable07.TabIndex = 6;
-            this.btnTable07.Text = "Table 7";
-            this.btnTable07.UseVisualStyleBackColor = true;
-            this.btnTable07.Click += new System.EventHandler(this.btnTable07_Click);
-            // 
             // btnServed
             // 
             this.btnServed.Location = new System.Drawing.Point(660, 401);
@@ -506,17 +395,7 @@
             this.Controls.Add(this.lblOrderId);
             this.Controls.Add(this.btnServed);
             this.Controls.Add(this.listViewTableOrder);
-            this.Controls.Add(this.btnTable010);
             this.Controls.Add(this.menuStrip2);
-            this.Controls.Add(this.btnTable01);
-            this.Controls.Add(this.btnTable05);
-            this.Controls.Add(this.btnTable07);
-            this.Controls.Add(this.btnTable09);
-            this.Controls.Add(this.btnTable02);
-            this.Controls.Add(this.btnTable04);
-            this.Controls.Add(this.btnTable03);
-            this.Controls.Add(this.btnTable06);
-            this.Controls.Add(this.btnTable08);
             this.Name = "TableView";
             this.Load += new System.EventHandler(this.TableView_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -555,16 +434,6 @@
         private System.Windows.Forms.Panel pnlTableHadBeenPressed;
         private System.Windows.Forms.Button btnTakeOrder;
         private System.Windows.Forms.MenuStrip menuStrip2;
-        private System.Windows.Forms.Button btnTable010;
-        private System.Windows.Forms.Button btnTable09;
-        private System.Windows.Forms.Button btnTable08;
-        private System.Windows.Forms.Button btnTable07;
-        private System.Windows.Forms.Button btnTable06;
-        private System.Windows.Forms.Button btnTable05;
-        private System.Windows.Forms.Button btnTable04;
-        private System.Windows.Forms.Button btnTable03;
-        private System.Windows.Forms.Button btnTable02;
-        private System.Windows.Forms.Button btnTable01;
         private System.Windows.Forms.ListView listViewTableOrder;
         private System.Windows.Forms.ColumnHeader tableOrderNumber;
         private System.Windows.Forms.ColumnHeader whereToPickUpOrder;

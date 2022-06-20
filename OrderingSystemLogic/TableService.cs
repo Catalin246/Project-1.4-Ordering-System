@@ -21,6 +21,11 @@ namespace OrderingSystemLogic
             List<Table> tables = tabledb.GetAllTable();
             return tables;
         }
+        public List<Table> GetTablesId()
+        {
+            List<Table> tablesId = tabledb.GetTablesId();
+            return tablesId;
+        }
         public List<Table> GetTablesStatus()
         {
             List<Table> tables = tabledb.GetTableStatus();

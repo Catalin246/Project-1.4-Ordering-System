@@ -90,7 +90,12 @@ namespace OrderingSystemUI
         private bool TryUserName(string username, string dataName)
         {
             return (username.ToLower() == dataName);
-        } 
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
         //private HashWithSaltResult TryPasscode(string passcode, string salt)
         //{
         //    PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
