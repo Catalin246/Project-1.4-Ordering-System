@@ -199,8 +199,8 @@ namespace OrderingSystemUI
                 OrderedItemService orderedItemService = new OrderedItemService();
                 if (btnModify.Enabled == true)
                 {
-                    order.OrderId = orderService.GetOrderId();
                     orderService.AddOrder(order);
+                    order.OrderId = orderService.GetOrderId();
                 }
 
                 foreach (OrderedItem item in order.OrderedItems)
@@ -403,9 +403,40 @@ namespace OrderingSystemUI
             tableView.Show();
         }
 
-        private void pnlTakeOrder_Paint(object sender, PaintEventArgs e)
+        private void comboBoxCourse_SelectedIndexChanged(object sender, EventArgs e)
         {
+            try
+            {
+                if (comboBoxCourse.SelectedIndex == 0)
+                {
+                    return;
+                }
+                else if (comboBoxCourse.SelectedIndex == 0)
+                {
+                    return;
+                }
 
+                string courseName = comboBoxCourse.SelectedItem.ToString();
+
+                foreach (ListViewItem item in listViewMenuItems.Items)
+                {
+                    Item orderedItem = (Item)item.Tag;
+
+                    if (orderedItem.ItemType == courseName)
+                    {
+                        item.Selected = true;
+                        listViewMenuItems.EnsureVisible(listViewMenuItems.Items.IndexOf(listViewMenuItems.SelectedItems[0]));
+                    }
+                    else
+                    {
+                        item.Selected = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

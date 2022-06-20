@@ -38,7 +38,6 @@ namespace OrderingSystemUI
                 foreach (Employee item in list)
                 {
                     if (TryPasscode(username, item.EmployeeName)&& (TryUserName(username, item.EmployeeName)))
-                    {
                         EmployeeRole(item.EmployeeRole, item.EmployeeName);
                     }
                     else
