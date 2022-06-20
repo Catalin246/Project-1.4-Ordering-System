@@ -37,8 +37,7 @@ namespace OrderingSystemUI
                 list = accountService.GetAllEmployee();
                 foreach (Employee item in list)
                 {
-                    if (TryPasscode(username, item.EmployeeName) && (TryUserName(username, item.EmployeeName)))
-                    {
+                    if (TryPasscode(username, item.EmployeeName)&& (TryUserName(username, item.EmployeeName)))
                         EmployeeRole(item.EmployeeRole, item.EmployeeName);
                     }
                     else
@@ -85,12 +84,17 @@ namespace OrderingSystemUI
         }
         private bool TryPasscode(string passcode, string dataName)
         {
-            return (passcode == dataName);
+            return (passcode.ToLower() == dataName);
         }
         private bool TryUserName(string username, string dataName)
         {
-            return (username == dataName);
-        } 
+            return (username.ToLower() == dataName);
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
         //private HashWithSaltResult TryPasscode(string passcode, string salt)
         //{
         //    PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();

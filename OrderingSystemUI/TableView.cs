@@ -18,7 +18,7 @@ namespace OrderingSystemUI
         private string employeeName;
         private string employeeRole;
         Employee employee = new Employee();
-
+        List<Button> buttonList { get; set; }
         private TableService tableService = new TableService();
         public TableView(string employeeName,string employeeRole)
         {
@@ -105,26 +105,31 @@ namespace OrderingSystemUI
         }
         public void ChangeColor(int number, string btnInput)
         {
+            this.buttonList = new List<Button>();
             string name = $"Table {number.ToString()}";
-            List<Button> buttons = this.Controls.OfType<Button>().ToList();
-            for (int i = 0; i < buttons.Count; i++)
+            //List<Button> buttons = this.Controls.OfType<Button>().ToList();
+            foreach (Button buttons in buttonList)
             {
-                if (buttons[i].Text == name)
-                {
-                    switch (btnInput.ToLower())
-                    {
-                        case "sit":
-                            buttons[i].BackColor = Color.Orange;
-                            break;
-                        case "ordered":
-                            buttons[i].BackColor = Color.Red;
-                            break;
-                        default:
-                            buttons[i].BackColor = Color.Transparent;
-                            break;
-                    }
-                }
+                txtTime.Text = "Ada" + this.Controls.OfType<Button>().ToList().Count;
             }
+            //for (int i = 0; i < buttons.Count; i++)
+            //{
+            //    if (buttons[i].Name == name)
+            //    {
+            //        switch (btnInput.ToLower())
+            //        {
+            //            case "sit":
+            //                buttons[i].BackColor = Color.Orange;
+            //                break;
+            //            case "ordered":
+            //                buttons[i].BackColor = Color.Red;
+            //                break;
+            //            default:
+            //                buttons[i].BackColor = Color.Transparent;
+            //                break;
+            //        }
+            //    }
+            //}
         }
         private void CallPnlOptions(int number, TakeOrder takeOrder)
         {
@@ -264,6 +269,10 @@ namespace OrderingSystemUI
 
         private void TableView_Load(object sender, EventArgs e)
         {
+            int x = 20;
+            int y = -40;
+            int z = 1;
+            List<Table> tablesId = tableService.GetTablesId();
             btnProfile.Text = employeeName;          
             Timer timer = new Timer();
             timer.Interval = (10 * 1000); // 10 secs
@@ -274,6 +283,27 @@ namespace OrderingSystemUI
                 MenuBar.Enabled = false;
                 MenuKitchen.Enabled = false;
             }
+            buttonList = GetButtons(tablesId);
+        }
+        private List<Button> GetButtons(List<Table> tablesId)
+        {
+            int x = 20;
+            int y = -40;
+            int z = 1;
+            buttonList = new List<Button>();
+            foreach (Table table in tablesId)
+            {
+                if (z % 2 == 0)
+                    x = 200;
+                else
+                {
+                    x = 20;
+                    y += 80;
+                }
+                buttonList.Add(GenerateButtons(x, y, table.TableId, this));
+                z++;
+            }
+            return buttonList;
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -292,6 +322,34 @@ namespace OrderingSystemUI
             Option optionForm = new Option(employeeName, employeeRole);
             optionForm.Show();
             this.Close();
+        }
+        public Button GenerateButtons(int x, int y, int tableNumber, Form form)
+        {
+            try
+            {
+                Button button = new Button();
+                button.Text = "table " + tableNumber;
+                button.Name = "table " + tableNumber;
+                button.Width = 84;
+                button.Height = 66;
+                button.Location = new Point(x, y);
+                form.Controls.Add(button);
+                button.BringToFront();
+                button.Click += button_Click;
+                this.Controls.Add(button);
+                buttonList.Add(button);
+                return button;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        private void button_Click(object sender, EventArgs e)
+        {
+            Button selected = sender as Button;
+            MessageBox.Show(selected.Name);
         }
     }
 }
