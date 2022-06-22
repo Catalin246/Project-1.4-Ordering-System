@@ -9,17 +9,14 @@ namespace OrderingSystemDAL
 {
     public class OrderedItemDao : BaseDao
     {
-
-        public void Add(OrderedItem orderedItem, Order order)
+        public void AddOrderesItem(OrderedItem orderedItem, Order order)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
-
-            conn.Open();
+            OpenConnection();
             try
             {
                 SqlCommand command = new SqlCommand("INSERT INTO dbo.[OrderedItem] " +
 
-                        " VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount, @Ordered_Item_Status);", conn);
+                        " VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount, @Ordered_Item_Status);", OpenConnection());
 
                 command.Parameters.AddWithValue("@Item_Id", orderedItem.Item.ItemId);
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);
@@ -33,7 +30,7 @@ namespace OrderingSystemDAL
             {
                 throw new Exception("Take order failed! " + e.Message);
             }
-            conn.Close();
+            CloseConnection();
         }
 
         public List<OrderedItem> GetOrderedItemsByOrder(int orderID)
@@ -63,12 +60,10 @@ namespace OrderingSystemDAL
 
         public void MarkOrderedItemsPaid(int orderID)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
-
-            conn.Open();
+            OpenConnection();
             try
             {
-                SqlCommand command = new SqlCommand("Update dbo.[OrderedItem] SET [Ordered_Item_Status] = 'Paid' WHERE [Order_Id] = @orderID;", conn);
+                SqlCommand command = new SqlCommand("Update dbo.[OrderedItem] SET [Ordered_Item_Status] = 'Paid' WHERE [Order_Id] = @orderID;", OpenConnection());
 
                 command.Parameters.AddWithValue("@orderID", orderID);
 
@@ -78,7 +73,7 @@ namespace OrderingSystemDAL
             {
                 throw new Exception("Marking Ordered Items Paid failed! " + e.Message);
             }
-            conn.Close();
+            CloseConnection();
         }
 
 

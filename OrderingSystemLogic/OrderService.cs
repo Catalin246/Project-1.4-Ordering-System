@@ -25,7 +25,7 @@ namespace OrderingSystemLogic
 
         public void AddOrder(Order order)
         {
-            orderdb.Add(order);
+            orderdb.AddOrder(order);
         }
 
         public List<Order> GetOrdersByTable(int TableID)

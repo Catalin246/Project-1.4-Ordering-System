@@ -12,11 +12,6 @@ namespace OrderingSystemDAL
 {
     public class ItemDao : BaseDao
     {
-        private SqlConnection conn;
-        public ItemDao()
-        {
-            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
-        }
         public List<Item> GetDrinks() //uses a sub-selection to get all drinks including the type of drink
                                       //(which is stored in the Item table) 
         {
@@ -100,11 +95,11 @@ namespace OrderingSystemDAL
 
         public void Update(OrderedItem orderedItem)
         {
-            conn.Open();
+            OpenConnection();
             try
             {
                 SqlCommand command = new SqlCommand("Update dbo.[Item] " +
-                        "SET ItemStock = @ItemStock WHERE ItemId = @ItemId;", conn);
+                        "SET ItemStock = @ItemStock WHERE ItemId = @ItemId;", OpenConnection());
 
                 command.Parameters.AddWithValue("@ItemStock", orderedItem.Item.ItemStock);
                 command.Parameters.AddWithValue("@ItemId", orderedItem.Item.ItemId);
@@ -117,7 +112,7 @@ namespace OrderingSystemDAL
             {
                 throw new Exception("Update amount failed! " + e.Message);
             }
-            conn.Close();
+            CloseConnection();
         }
 
         
