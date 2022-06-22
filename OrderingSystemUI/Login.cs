@@ -37,18 +37,17 @@ namespace OrderingSystemUI
                 list = accountService.GetAllEmployee();
                 foreach (Employee item in list)
                 {
-                    if (TryPasscode(username, item.EmployeeName) && TryUserName(username, item.EmployeeName)) 
+                    if ((passcode == item.EmployeePassword) && (username == item.EmployeeName)) 
                     {
-
                         EmployeeRole(item.EmployeeRole, item.EmployeeName);
                     }
                     else
                     {
-                        if (!TryUserName(username, item.EmployeeName))
+                        if (username != item.EmployeeName)
                         {
                             lblWrongUserName.Text = "Username is wrong please enter the right one";
                         }
-                        if (!TryPasscode(username, item.EmployeeName))
+                        if (passcode != item.EmployeePassword)
                         {
                             lblwrongPasscode.Text = "Passcode is wrong please enter again";
                         }
@@ -84,26 +83,16 @@ namespace OrderingSystemUI
                     break;
             }
         }
-
-        private bool TryPasscode(string passcode, string dataName)
-        {
-            return (passcode.ToLower() == dataName);
-        }
-        private bool TryUserName(string username, string dataName)
-        {
-            return (username.ToLower() == dataName);
-        }
-
         private void Login_Load(object sender, EventArgs e)
         {
 
         }
-        //private HashWithSaltResult TryPasscode(string passcode, string salt)
-        //{
-        //    PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-        //    HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
-        //    return hashResultSha256;
-        //}
+        private HashWithSaltResult TryPasscode(string passcode, string salt)
+        {
+            PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
+            HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
+            return hashResultSha256;
+        }
 
     }
 }
