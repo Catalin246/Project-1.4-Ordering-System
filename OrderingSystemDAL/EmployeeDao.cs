@@ -33,5 +33,28 @@ namespace OrderingSystemDAL
             }
             return account;
         }
+        public Employee GetEmployeeNameAndPassc(string employeeName,string employeePasscode)
+        {
+            string query = $"SELECT Employee_Name,Employee_Password, Employee_Role FROM Employee WHERE Employee_Name = @employeeName and Employee_Password = @employeePasscode";
+            SqlParameter[] sqlParameters = new SqlParameter[2];
+            sqlParameters[0] = new SqlParameter("@employeeName", employeeName);
+            sqlParameters[1] = new SqlParameter("@employeePasscode", employeePasscode);
+            return GetEmployeeName(ExecuteSelectQuery(query, sqlParameters));
+        }
+        public Employee GetEmployeeName(DataTable dataTable)
+        {
+         List<Employee> employeeName = new List<Employee>();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Employee accounts = new Employee()
+                {
+                    EmployeeName = (string)dr["Employee_Name"],
+                    EmployeePassword = (string)dr["Employee_Password"],
+                    EmployeeRole = (string)dr["Employee_Role"]
+                };
+                employeeName.Add(accounts);
+            }
+            return employeeName[0];
+        }
     }
 }

@@ -32,27 +32,10 @@ namespace OrderingSystemUI
                     lblwrongPasscode.Text = "Please enter your passcode";
                 username = txtBoxUsername.Text;
                 passcode = txtBoxPasscode.Text;
-                List<Employee> list = new List<Employee>();
                 EmployeeService accountService = new EmployeeService();
-                list = accountService.GetAllEmployee();
-                foreach (Employee item in list)
-                {
-                    if ((passcode == item.EmployeePassword) && (username == item.EmployeeName)) 
-                    {
-                        EmployeeRole(item.EmployeeRole, item.EmployeeName);
-                    }
-                    else
-                    {
-                        if (username != item.EmployeeName)
-                        {
-                            lblWrongUserName.Text = "Username is wrong please enter the right one";
-                        }
-                        if (passcode != item.EmployeePassword)
-                        {
-                            lblwrongPasscode.Text = "Passcode is wrong please enter again";
-                        }
-                    }
-                }
+                Employee employee = accountService.GetUserNameAndPasscode(username, passcode);
+                if (accountService.PasswordIscorrect(passcode, employee))
+                    EmployeeRole(employee.EmployeeRole, employee.EmployeeName);
             }
             catch (Exception)
             {
@@ -87,12 +70,5 @@ namespace OrderingSystemUI
         {
 
         }
-        private HashWithSaltResult TryPasscode(string passcode, string salt)
-        {
-            PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-            HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
-            return hashResultSha256;
-        }
-
     }
 }
