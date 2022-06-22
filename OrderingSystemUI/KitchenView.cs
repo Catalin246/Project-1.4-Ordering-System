@@ -163,7 +163,7 @@ namespace OrderingSystemUI
                 {
                     OrderedItem selected = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
 
-                    if (selected.Status != Status.Preparing)
+                    if (selected.Status != Status.Ordered)
                     {
                         btnReadyToServe.Enabled = false;
                     }
@@ -283,9 +283,9 @@ namespace OrderingSystemUI
                     {
                         OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[i].Tag;
                         int orderId = selectedItem.OrderId;
-                        string itemName = selectedItem.Name;
+                        int itemid = selectedItem.ItemID;
 
-                        orderedItemService.ChangeOrderStatusToReady(orderId, itemName);
+                        orderedItemService.ChangeOrderStatusToReady(orderId, itemid);
                     }
                 }
 

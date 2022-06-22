@@ -9,17 +9,14 @@ namespace OrderingSystemDAL
 {
     public class OrderedItemDao : BaseDao
     {
-
-        public void Add(OrderedItem orderedItem, Order order)
+        public void AddOrderesItem(OrderedItem orderedItem, Order order)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
-
-            conn.Open();
+            OpenConnection();
             try
             {
                 SqlCommand command = new SqlCommand("INSERT INTO dbo.[OrderedItem] " +
 
-                        " VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount, @Ordered_Item_Status);", conn);
+                        " VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount, @Ordered_Item_Status);", OpenConnection());
 
                 command.Parameters.AddWithValue("@Item_Id", orderedItem.Item.ItemId);
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);
@@ -33,7 +30,7 @@ namespace OrderingSystemDAL
             {
                 throw new Exception("Take order failed! " + e.Message);
             }
-            conn.Close();
+            CloseConnection();
         }
 
         public List<OrderedItem> GetOrderedItemsByOrder(int orderID)
@@ -63,12 +60,10 @@ namespace OrderingSystemDAL
 
         public void MarkOrderedItemsPaid(int orderID)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
-
-            conn.Open();
+            OpenConnection();
             try
             {
-                SqlCommand command = new SqlCommand("Update dbo.[OrderedItem] SET [Ordered_Item_Status] = 'Paid' WHERE [Order_Id] = @orderID;", conn);
+                SqlCommand command = new SqlCommand("Update dbo.[OrderedItem] SET [Ordered_Item_Status] = 'Paid' WHERE [Order_Id] = @orderID;", OpenConnection());
 
                 command.Parameters.AddWithValue("@orderID", orderID);
 
@@ -78,7 +73,7 @@ namespace OrderingSystemDAL
             {
                 throw new Exception("Marking Ordered Items Paid failed! " + e.Message);
             }
-            conn.Close();
+            CloseConnection();
         }
 
 
@@ -86,8 +81,8 @@ namespace OrderingSystemDAL
         {
             switch (notEnumStatus)
             {
-                case "Preparing":
-                    return Status.Preparing;
+                case "Ordered":
+                    return Status.Ordered;
                 case "Ready":
                     return Status.Ready;
                 case "Served":
@@ -95,7 +90,7 @@ namespace OrderingSystemDAL
                 case "Paid":
                     return Status.Paid;
                 default:
-                    return Status.Paid;
+                    return Status.Ordered;
             }            
         }
 
@@ -118,20 +113,20 @@ namespace OrderingSystemDAL
         
         public List<OrderedItem> GetPreparingFoodItemsFromDatabase()
         {
-            string query = "select o.order_id, Table_Id, Order_Time, f.FoodType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join food as f on f.FoodItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'Preparing' order by o.Order_Time desc";
+            string query = "select i.ItemId, o.order_id, Table_Id, Order_Time, f.FoodType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join food as f on f.FoodItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'ordered' order by o.Order_Time desc";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderedFoodItemTable(ExecuteSelectQuery(query, sqlParameters));
         }
         public List<OrderedItem> GetFinishedFoodItemsFromDatabase()
         {
-            string query = "select o.order_id, Table_Id, Order_Time, f.FoodType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join food as f on f.FoodItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id  where oi.Ordered_Item_Status != 'Preparing' AND Order_Time >= DATEADD(day, -1, GETDATE()) order by o.Order_Time desc";
+            string query = "select i.ItemId, o.order_id, Table_Id, Order_Time, f.FoodType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join food as f on f.FoodItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id  where (oi.Ordered_Item_Status = 'Ready' OR oi.Ordered_Item_Status = 'Served' OR oi.Ordered_Item_Status = 'Paid') AND Order_Time >= DATEADD(day, -1, GETDATE()) order by o.Order_Time desc";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderedFoodItemTable(ExecuteSelectQuery(query, sqlParameters));
         }       
 
         public List<OrderedItem> GetPreparingDrinkItemsFromDatabase()
         {
-            string query = "select o.order_id, Table_Id, Order_Time, d.DrinkType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join drink as d on d.DrinkItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'Preparing' order by o.Order_Time desc";
+            string query = "select i.ItemId, o.order_id, Table_Id, Order_Time, d.DrinkType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join drink as d on d.DrinkItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'Ordered' order by o.Order_Time desc";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderedDrinkItemTable(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -151,6 +146,7 @@ namespace OrderingSystemDAL
             {
                 OrderedItem item = new OrderedItem()
                 {
+                    ItemID = (int)dr["ItemId"],
                     OrderId = (int)dr["order_id"],
                     TableId = (int)dr["Table_Id"],
                     OrderTime = (DateTime)dr["Order_Time"],
@@ -173,6 +169,7 @@ namespace OrderingSystemDAL
             {
                 OrderedItem item = new OrderedItem()
                 {
+                    ItemID = (int)dr["ItemId"],
                     OrderId = (int)dr["order_id"],
                     TableId = (int)dr["Table_Id"],
                     OrderTime = (DateTime)dr["Order_Time"],
@@ -188,13 +185,13 @@ namespace OrderingSystemDAL
             return items;
         }
 
-        public void ChangeFoodAndDrinkStatusToReady(int orderNo, string itemName)
+        public void ChangeFoodAndDrinkStatusToReady(int orderNo, int itemId)
         {
-            string query = "UPDATE OrderedItem  SET Ordered_Item_Status = 'Ready' from OrderedItem as oi join item as i on oi.Item_Id = i.ItemId WHERE ItemName = @itemName AND Order_Id = @orderId";
+            string query = "UPDATE OrderedItem  SET Ordered_Item_Status = 'Ready' from OrderedItem as oi join item as i on oi.Item_Id = i.ItemId WHERE ItemId = @itemId AND Order_Id = @orderId";
 
             SqlParameter[] sqlParameters =
             {
-                new SqlParameter("@itemName", itemName),
+                new SqlParameter("@ItemId", itemId),
                 new SqlParameter("@orderId", orderNo)
             };
             ExecuteEditQuery(query, sqlParameters);
