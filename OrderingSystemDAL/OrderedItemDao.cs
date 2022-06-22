@@ -113,7 +113,7 @@ namespace OrderingSystemDAL
         
         public List<OrderedItem> GetPreparingFoodItemsFromDatabase()
         {
-            string query = "select i.ItemId, o.order_id, Table_Id, Order_Time, f.FoodType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join food as f on f.FoodItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'ordered' order by o.Order_Time desc";
+            string query = "select i.ItemId, o.order_id, Table_Id, Order_Time, f.FoodType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join food as f on f.FoodItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'Ordered' order by o.Order_Time desc";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadOrderedFoodItemTable(ExecuteSelectQuery(query, sqlParameters));
         }
