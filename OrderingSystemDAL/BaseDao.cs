@@ -37,7 +37,7 @@ namespace OrderingSystemDAL
             return conn;
         }
 
-        private void CloseConnection()
+        protected void CloseConnection()
         {
             conn.Close();
         }
