@@ -15,16 +15,8 @@ namespace OrderingSystemDAL
     public class BillDAO : BaseDao
     {
         public Order order;
-        private readonly SqlConnection dbConnection;//my sql connection object
+        private SqlConnection conn;
 
-        public BillDAO()
-        {
-            string connString = ConfigurationManager
-                .ConnectionStrings["2122chapeau.database.windows.net"]
-                .ConnectionString;
-
-            dbConnection = new SqlConnection(connString);//passing my database to my sql object
-        }
 
         public List<Bill> GetOpenBills(int tableID)
         {
@@ -52,10 +44,10 @@ namespace OrderingSystemDAL
 
         public void CloseBill(Bill bill, float splitAmong) //stores bill in the database
         {
-            dbConnection.Open();
+            conn = this.OpenConnection();
             try
             {
-                SqlCommand command = new SqlCommand("INSERT INTO dbo.Bill" + " VALUES(@PaymentType, @BillFeedback, @BillTotal, @Tip, 1, @TableID);", dbConnection);
+                SqlCommand command = new SqlCommand("INSERT INTO dbo.Bill" + " VALUES(@PaymentType, @BillFeedback, @BillTotal, @Tip, 1, @TableID);", conn);
                 command.Parameters.AddWithValue("@PaymentType", bill.PaymentType.ToString());
                 command.Parameters.AddWithValue("@BillFeedback", bill.BillFeedback);
                 command.Parameters.AddWithValue("@BillTotal", Decimal.Round((decimal)(bill.BillTotalWithoutTip / splitAmong), 2));
@@ -67,7 +59,7 @@ namespace OrderingSystemDAL
             {
                 throw new Exception("Failed to save bill!" + e.Message);
             }
-            dbConnection.Close();
+            this.CloseConnection();
         }
 
     }

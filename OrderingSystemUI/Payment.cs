@@ -102,9 +102,10 @@ namespace OrderingSystemUI
                 {
                     if (int.TryParse(txtBoxTableNumber.Text, out parsedValue))
                     {
+                        this.cleanPaymentView();
                         this.setBillByTable(parsedValue); //returns a list of all ordered items related to that table }
                     }
-                    else { MessageBox.Show("Please insert a number"); }
+                    else { MessageBox.Show("Please insert a valid table numnber"); }
                 }
             }
             catch (Exception exc)
@@ -309,6 +310,7 @@ namespace OrderingSystemUI
             listViewDisplaybillItems.Clear();
             checkBoxSplitBill.Checked = false;
             comboBoxSplitBill.Enabled = false;
+            comboBoxSplitBill.SelectedIndex = 0;
             comboBoxPaymentType.SelectedIndex = 0;
             BttUpdateTotal.Enabled = true;
             buttFinalizePayment.Enabled = true;
@@ -320,6 +322,7 @@ namespace OrderingSystemUI
             lblTotalWithVat.Visible = false;
             txtBoxTableNumber.Text = "";
             txtBoxFeedBack.Text = "";
+            labelDisplayTip.Text = "";
         }
 
         private void BttUpdateTotal_Click_1(object sender, EventArgs e)

@@ -13,20 +13,11 @@ namespace OrderingSystemDAL
     public class TableDao : BaseDao
     {
 
-        private readonly SqlConnection dbConnection;//my sql connection object
-
-        public TableDao()
-        {
-            string connString = ConfigurationManager
-                .ConnectionStrings["2122chapeau.database.windows.net"]
-                .ConnectionString;
-
-            dbConnection = new SqlConnection(connString);//passing my database to my sql object
-        }
+        private  SqlConnection dbConnection;//my sql connection object
 
         public void MarkTableOpen(int tableID)
         {
-            dbConnection.Open();
+            dbConnection = this.OpenConnection();
             try
             {
                 SqlCommand command = new SqlCommand("Update dbo.[Table] SET [Table_Status] = 'Open' WHERE [Table_Id] = @tableId;", dbConnection);
@@ -39,7 +30,7 @@ namespace OrderingSystemDAL
             {
                 throw new Exception("Failed to open Table! " + e.Message);
             }
-            dbConnection.Close();
+            this.CloseConnection();
         }
 
         public List<Table> GetAllTable()
