@@ -177,11 +177,8 @@
             // 
             // colFoodName
             // 
-<<<<<<< HEAD
-            this.colFoodName.Text = "Item Name";
-=======
+
             this.colFoodName.Text = "Drink Name";
->>>>>>> master
             this.colFoodName.Width = 280;
             // 
             // colOrderNote

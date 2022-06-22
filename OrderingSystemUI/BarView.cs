@@ -54,13 +54,9 @@ namespace OrderingSystemUI
             comboBoxCourse.Items.Add("Soft");
             comboBoxCourse.Items.Add("Coffee");
             comboBoxCourse.Items.Add("Tea");
-<<<<<<< HEAD
-            comboBoxCourse.Items.Add("Spirit drink");
-            comboBoxCourse.Items.Add("Wine");            
-=======
             comboBoxCourse.Items.Add("Spirit Drink");
             comboBoxCourse.Items.Add("Wine");           
->>>>>>> master
+
 
             LoadListView();
         }
