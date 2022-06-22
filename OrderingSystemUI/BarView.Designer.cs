@@ -177,6 +177,7 @@
             // 
             // colFoodName
             // 
+
             this.colFoodName.Text = "Drink Name";
             this.colFoodName.Width = 280;
             // 

@@ -37,7 +37,9 @@ namespace OrderingSystemUI
                 list = accountService.GetAllEmployee();
                 foreach (Employee item in list)
                 {
-                    if (TryPasscode(username, item.EmployeeName)&& (TryUserName(username, item.EmployeeName)))
+                    if (TryPasscode(username, item.EmployeeName) && TryUserName(username, item.EmployeeName)) 
+                    {
+
                         EmployeeRole(item.EmployeeRole, item.EmployeeName);
                     }
                     else
@@ -82,6 +84,7 @@ namespace OrderingSystemUI
                     break;
             }
         }
+
         private bool TryPasscode(string passcode, string dataName)
         {
             return (passcode.ToLower() == dataName);
@@ -101,5 +104,6 @@ namespace OrderingSystemUI
         //    HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
         //    return hashResultSha256;
         //}
+
     }
 }

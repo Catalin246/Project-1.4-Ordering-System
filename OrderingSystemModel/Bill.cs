@@ -11,8 +11,10 @@ namespace OrderingSystemModel
     {
 
         private List<OrderedItem> orderedItems; // to get to the list of ordered items in the order class
+        public List<OrderedItem> OrderedItems { get { return this.orderedItems; } set { this.orderedItems = value; } }
 
-        private List<Order> orders; 
+        private List<Order> orders;
+        public List<Order> Orders { get { return this.orders; } set { this.orders = value; } }
         public int BillId { get; set; }
         private PaymentType paymentType;
         public PaymentType PaymentType { get { return paymentType; } set { paymentType = value; } }
@@ -20,12 +22,8 @@ namespace OrderingSystemModel
         public float Tip { get { return tip; } set { tip = value; } }
         public int tableId;
         private float tip;
-        public List<OrderedItem> OrderedItems { get { return this.orderedItems; } set { this.orderedItems = value; } }
 
-        public List<Order> Orders { get { return this.orders; } set { this.orders = value; } }
-
-
-        public float BillTotalWithoutTip
+        public float BillTotalWithoutTip // returns total with vat
         {
             get
             {
@@ -41,7 +39,7 @@ namespace OrderingSystemModel
       
 
         // public List<OrderedItem> orderedItem;
-        public Bill()
+        public Bill() //to be able to save the bill on the data base even if the user dont enter a feedback or tip
         {
             this.BillFeedback = "";
             this.Tip = 0;

@@ -17,7 +17,8 @@ namespace OrderingSystemDAL
         {
             conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
         }
-        public List<Item> GetDrinks()
+        public List<Item> GetDrinks() //uses a sub-selection to get all drinks including the type of drink
+                                      //(which is stored in the Item table) 
         {
             string query = "SELECT * FROM dbo.Item as I join dbo.Drink as D on I.ItemId = D.DrinkItemId";
             SqlParameter[] sqlParameters = new SqlParameter[0];
@@ -60,7 +61,7 @@ namespace OrderingSystemDAL
             return ReadTables(ExecuteSelectQuery(query, sqlParameters), "FoodType");
         }
 
-        private List<Item> ReadTables(DataTable dataTable,string type)
+        private List<Item> ReadTables(DataTable dataTable,string type) 
         {
             List<Item> items = new List<Item>();
 

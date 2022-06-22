@@ -57,6 +57,7 @@ namespace OrderingSystemUI
             comboBoxCourse.Items.Add("Spirit Drink");
             comboBoxCourse.Items.Add("Wine");           
 
+
             LoadListView();
         }
 

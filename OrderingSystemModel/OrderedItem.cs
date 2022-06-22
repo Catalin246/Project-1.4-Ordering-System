@@ -41,10 +41,6 @@ namespace OrderingSystemModel
         public DateTime OrderTime { get; set; }
 
         public int ItemID { get; set; }
-             
-        // private float totalPriceItem;       
-
-        // private float vatAmount;
 
         public bool ItemAddedInDatabase = false;   
 

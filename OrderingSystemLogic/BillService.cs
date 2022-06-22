@@ -14,13 +14,6 @@ namespace OrderingSystemLogic
         {
             billDb = new BillDAO();
         }
-        
-        public List<Bill> GetBills()
-        {
-            List<Bill> bills = billDb.GetAllBills();
-            return bills;
-        }
-
         public List<Bill> GetOpenBills(int tableID)
         {
             List<Bill> bills = billDb.GetOpenBills(tableID);
