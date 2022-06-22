@@ -59,5 +59,45 @@ namespace OrderingSystemUI.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1_TF0vCt1RbzXakC4aM5vuyg {
+            get {
+                object obj = ResourceManager.GetObject("1_TF0vCt1RbzXakC4aM5vuyg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1_TF0vCt1RbzXakC4aM5vuyg1 {
+            get {
+                object obj = ResourceManager.GetObject("1_TF0vCt1RbzXakC4aM5vuyg1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Basic_Elements__2836_29 {
+            get {
+                object obj = ResourceManager.GetObject("Basic_Elements__2836_29", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap chapeauLog {
+            get {
+                object obj = ResourceManager.GetObject("chapeauLog", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

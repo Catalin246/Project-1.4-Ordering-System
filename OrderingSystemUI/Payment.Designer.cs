@@ -210,6 +210,7 @@ namespace OrderingSystemUI
             this.txtBoxTableNumber.Name = "txtBoxTableNumber";
             this.txtBoxTableNumber.Size = new System.Drawing.Size(145, 27);
             this.txtBoxTableNumber.TabIndex = 30;
+           
             // 
             // label7
             // 

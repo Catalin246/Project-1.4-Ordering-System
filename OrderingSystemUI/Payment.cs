@@ -95,11 +95,16 @@ namespace OrderingSystemUI
 
         private void btnSearchTable_Click(object sender, EventArgs e)
         {
+            int parsedValue;
             try
             {
                 if (txtBoxTableNumber.Text != null)
                 {
-                    this.setBillByTable(int.Parse(txtBoxTableNumber.Text)); //returns a list of all ordered items related to that table
+                    if (int.TryParse(txtBoxTableNumber.Text, out parsedValue))
+                    {
+                        this.setBillByTable(parsedValue); //returns a list of all ordered items related to that table }
+                    }
+                    else { MessageBox.Show("Please insert a number"); }
                 }
             }
             catch (Exception exc)
@@ -109,6 +114,7 @@ namespace OrderingSystemUI
 
         }
 
+       
         public void DisplayOrderedItems(List<OrderedItem> orderedItems)
         {
             try
@@ -319,26 +325,32 @@ namespace OrderingSystemUI
         private void BttUpdateTotal_Click_1(object sender, EventArgs e)
         {
             // determine if valid update
-            if (bill != null)
+            float desiredTotal;
+            if (float.TryParse(txtBoxTotal.Text, out desiredTotal))
             {
-                float desiredTotal = float.Parse(txtBoxTotal.Text);
-                if (desiredTotal > bill.BillTotalWithoutTip)
+                if (bill != null)
                 {
-                    float updatedTip = desiredTotal - bill.BillTotalWithoutTip;
-                    bill.Tip = updatedTip;
-                    // display  tip amount
-                    labelDisplayTip.Text = updatedTip.ToString("0.00");
-                    // display total with tip 
-                    labelDisplayTotalWithTip.Text = desiredTotal.ToString("0.00");
+                    if (desiredTotal > bill.BillTotalWithoutTip)
+                    {
+                        float updatedTip = desiredTotal - bill.BillTotalWithoutTip;
+                        bill.Tip = updatedTip;
+                        // display  tip amount
+                        labelDisplayTip.Text = updatedTip.ToString("0.00");
+                        // display total with tip 
+                        labelDisplayTotalWithTip.Text = desiredTotal.ToString("0.00");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter a desired amount greater than the Bill total without Tip :)");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Please enter a desired amount greater than the Bill total without Tip :)");
+                    MessageBox.Show("Please search for a bill first!");
                 }
-            }
-            else
+            } else
             {
-                MessageBox.Show("Please search for a bill first!");
+                MessageBox.Show("Please enter a valid total amount.");
             }
 
         }
