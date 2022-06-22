@@ -21,6 +21,8 @@ namespace OrderingSystemUI
         BillService billService = new BillService();
         public Bill bill;
         public TableView tableView;
+        public SplitBill splitBill;
+       public Feedback addFeedback;
         public Payment()
         {
 
@@ -128,8 +130,6 @@ namespace OrderingSystemUI
                     li.SubItems.Add(orderedItem.Amount.ToString());
                     li.SubItems.Add(orderedItem.TotalPriceItem.ToString());
                     li.SubItems.Add(orderedItem.VatAmount.ToString("0.00"));
-                    li.SubItems.Add((orderedItem.TotalPriceItem + orderedItem.VatAmount).ToString());
-
                     li.Tag = orderedItem;
 
                     listViewDisplaybillItems.Items.Add(li);
@@ -147,7 +147,6 @@ namespace OrderingSystemUI
         {
             if (bill != null)
             {
-                setPaymentType();
                 if (checkBoxSplitBill.Checked && comboBoxSplitBill.SelectedIndex == 0)
                 {
                     MessageBox.Show("Please select a valid number from the dropdown.");
@@ -156,18 +155,27 @@ namespace OrderingSystemUI
            
                 if (checkBoxSplitBill.Checked)
                 {
+                    float remainingTotal = bill.BillTotalWithoutTip;
                     float splitAmong = float.Parse(comboBoxSplitBill.GetItemText(comboBoxSplitBill.SelectedItem));
+                    bool lastCustomer = false;
                     for (int i = 0; i < splitAmong; i++) //creates different bill for each of them
                     {
-                        billService.CloseBill(this.bill, splitAmong);
+                        Bill tempBill = bill;
+                        if (i + 1 == splitAmong)
+                            lastCustomer = true;
+                        splitBill = new SplitBill(tempBill, remainingTotal, lastCustomer, i+1);
+                        splitBill.ShowDialog();
+                        remainingTotal -= bill.SplitTotal;
+                        billService.CloseSplitBill(this.bill, splitAmong);
                     }
                     
                 }
                 else
                 {
-                    billService.CloseBill(this.bill, 1); //closes the bill and stores all the items in the database in that specific bill
+                    bill.SetPaymentType(comboBoxPaymentType.GetItemText(comboBoxPaymentType.SelectedItem));
+                    billService.CloseBill(this.bill); //closes the bill and stores all the items in the database in that specific bill
                 }
-                MessageBox.Show($"{comboBoxPaymentType.GetItemText(comboBoxPaymentType.SelectedItem)} was successful! Thank you!");
+                MessageBox.Show($"Payment was successful! Thank you!");
 
                 orderService.MarkOrdersPaid(bill.tableId); //updates all orders related to that table to paid in the database
                 foreach (Order order in bill.Orders)
@@ -190,41 +198,14 @@ namespace OrderingSystemUI
         }
 
     
-        private void setPaymentType()
-        {
-            String paymentOption = comboBoxPaymentType.GetItemText(comboBoxPaymentType.SelectedItem);
-            switch (paymentOption)
-            {
-                case "Credit Card":
-                    bill.PaymentType = PaymentType.creditCard;
-                    break;
-                case "Debit Card":
-                    bill.PaymentType = PaymentType.debitCard;
-                    break;
-                case "Cash":
-                    bill.PaymentType = PaymentType.cash;
-                    break;
-                case "Mixed Payment":
-                    bill.PaymentType = PaymentType.mixedPayment;
-                    break;
-            }
-                
-        }
     
 
         private void bttAddFeedBack_Click(object sender, EventArgs e)
         {
             if (bill != null)
             {
-                if (txtBoxFeedBack.Text != null)
-                {
-                    bill.BillFeedback = txtBoxFeedBack.Text;
-                    MessageBox.Show($"Feedback has been added. Thanks!");
-                }
-                else
-                {
-                    MessageBox.Show("Please enter feedback first.");
-                }
+                addFeedback = new Feedback(this.bill);
+                addFeedback.Show();
             }
             else
             {
@@ -232,22 +213,17 @@ namespace OrderingSystemUI
             }
         }
 
-        private void txtBoxFeedBack_TextChanged(object sender, EventArgs e)
-        {
-            if(txtBoxFeedBack.Text != null)
-            {
-                bttAddFeedBack.Enabled = true;
-            }
-        }
 
         private void checkBoxSplitBill_CheckedChanged(object sender, EventArgs e)
         {
             if(checkBoxSplitBill.Checked)
             {
                 comboBoxSplitBill.Enabled = true;
+                comboBoxPaymentType.Enabled = false;
             } else
             {
                 comboBoxSplitBill.Enabled = false;
+                comboBoxPaymentType.Enabled = true;
             }
         }
 
@@ -298,16 +274,18 @@ namespace OrderingSystemUI
             lblTotalWithVatValue.Text = bill.BillTotalWithoutTip.ToString("0.00");
             lblTotalWithVatValue.Visible = true;
             labelDisplayTotalWithTip.Text = bill.BillTotalWithoutTip.ToString("0.00");
+            labelDisplayTotalVAT.Text = bill.TotalVatAmount.ToString("0.00");
             checkBoxSplitBill.Enabled = true;
             comboBoxPaymentType.Enabled = true;
             BttUpdateTotal.Enabled = true;
             buttFinalizePayment.Enabled = true;
+            bttAddFeedBack.Enabled = true;
         }
 
 
         private void cleanPaymentView() 
         {
-            listViewDisplaybillItems.Clear();
+            listViewDisplaybillItems.Items.Clear();
             checkBoxSplitBill.Checked = false;
             comboBoxSplitBill.Enabled = false;
             comboBoxSplitBill.SelectedIndex = 0;
@@ -321,8 +299,8 @@ namespace OrderingSystemUI
             lblTotalWithVatValue.Visible = false;
             lblTotalWithVat.Visible = false;
             txtBoxTableNumber.Text = "";
-            txtBoxFeedBack.Text = "";
             labelDisplayTip.Text = "";
+            bttAddFeedBack.Enabled = false;
         }
 
         private void BttUpdateTotal_Click_1(object sender, EventArgs e)
@@ -333,7 +311,7 @@ namespace OrderingSystemUI
             {
                 if (bill != null)
                 {
-                    if (desiredTotal > bill.BillTotalWithoutTip)
+                    if (desiredTotal >= bill.BillTotalWithoutTip)
                     {
                         float updatedTip = desiredTotal - bill.BillTotalWithoutTip;
                         bill.Tip = updatedTip;

@@ -20,9 +20,14 @@ namespace OrderingSystemLogic
             return bills;
         }
 
-        public void CloseBill(Bill bill, float splitAmong)
+        public void CloseBill(Bill bill)
         {
-            billDb.CloseBill(bill, splitAmong);
+            billDb.CloseBill(bill);
+        }
+
+        public void CloseSplitBill(Bill bill, float splitAmong)
+        {
+            billDb.CloseSplitBill(bill, splitAmong);
         }
 
     }

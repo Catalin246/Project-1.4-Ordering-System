@@ -32,12 +32,13 @@ namespace OrderingSystemUI
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlPayment = new System.Windows.Forms.Panel();
+            this.labelDisplayTotalVAT = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.lblTotalWithVatValue = new System.Windows.Forms.Label();
             this.lblTotalWithVat = new System.Windows.Forms.Label();
             this.checkBoxSplitBill = new System.Windows.Forms.CheckBox();
             this.comboBoxSplitBill = new System.Windows.Forms.ComboBox();
             this.comboBoxPaymentType = new System.Windows.Forms.ComboBox();
-            this.txtBoxFeedBack = new System.Windows.Forms.RichTextBox();
             this.btnSearchTable = new System.Windows.Forms.Button();
             this.bttAddFeedBack = new System.Windows.Forms.Button();
             this.txtBoxTableNumber = new System.Windows.Forms.TextBox();
@@ -56,7 +57,6 @@ namespace OrderingSystemUI
             this.Quantity = new System.Windows.Forms.ColumnHeader();
             this.ItemsPrice = new System.Windows.Forms.ColumnHeader();
             this.Vat = new System.Windows.Forms.ColumnHeader();
-            this.TotalWithVAT = new System.Windows.Forms.ColumnHeader();
             this.pnlTakeOrder = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.pnlPayment.SuspendLayout();
@@ -84,12 +84,13 @@ namespace OrderingSystemUI
             // 
             // pnlPayment
             // 
+            this.pnlPayment.Controls.Add(this.labelDisplayTotalVAT);
+            this.pnlPayment.Controls.Add(this.label1);
             this.pnlPayment.Controls.Add(this.lblTotalWithVatValue);
             this.pnlPayment.Controls.Add(this.lblTotalWithVat);
             this.pnlPayment.Controls.Add(this.checkBoxSplitBill);
             this.pnlPayment.Controls.Add(this.comboBoxSplitBill);
             this.pnlPayment.Controls.Add(this.comboBoxPaymentType);
-            this.pnlPayment.Controls.Add(this.txtBoxFeedBack);
             this.pnlPayment.Controls.Add(this.btnSearchTable);
             this.pnlPayment.Controls.Add(this.bttAddFeedBack);
             this.pnlPayment.Controls.Add(this.txtBoxTableNumber);
@@ -109,11 +110,29 @@ namespace OrderingSystemUI
             this.pnlPayment.Size = new System.Drawing.Size(884, 545);
             this.pnlPayment.TabIndex = 29;
             // 
+            // labelDisplayTotalVAT
+            // 
+            this.labelDisplayTotalVAT.AutoSize = true;
+            this.labelDisplayTotalVAT.Location = new System.Drawing.Point(695, 34);
+            this.labelDisplayTotalVAT.Name = "labelDisplayTotalVAT";
+            this.labelDisplayTotalVAT.Size = new System.Drawing.Size(0, 20);
+            this.labelDisplayTotalVAT.TabIndex = 41;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(541, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 28);
+            this.label1.TabIndex = 40;
+            this.label1.Text = "Total VAT";
+            // 
             // lblTotalWithVatValue
             // 
             this.lblTotalWithVatValue.AutoSize = true;
             this.lblTotalWithVatValue.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTotalWithVatValue.Location = new System.Drawing.Point(735, 15);
+            this.lblTotalWithVatValue.Location = new System.Drawing.Point(740, 97);
             this.lblTotalWithVatValue.Name = "lblTotalWithVatValue";
             this.lblTotalWithVatValue.Size = new System.Drawing.Size(0, 31);
             this.lblTotalWithVatValue.TabIndex = 39;
@@ -122,7 +141,7 @@ namespace OrderingSystemUI
             // 
             this.lblTotalWithVat.AutoSize = true;
             this.lblTotalWithVat.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTotalWithVat.Location = new System.Drawing.Point(541, 15);
+            this.lblTotalWithVat.Location = new System.Drawing.Point(542, 100);
             this.lblTotalWithVat.Name = "lblTotalWithVat";
             this.lblTotalWithVat.Size = new System.Drawing.Size(140, 28);
             this.lblTotalWithVat.TabIndex = 38;
@@ -133,7 +152,7 @@ namespace OrderingSystemUI
             this.checkBoxSplitBill.AutoSize = true;
             this.checkBoxSplitBill.Enabled = false;
             this.checkBoxSplitBill.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.checkBoxSplitBill.Location = new System.Drawing.Point(541, 288);
+            this.checkBoxSplitBill.Location = new System.Drawing.Point(541, 249);
             this.checkBoxSplitBill.Name = "checkBoxSplitBill";
             this.checkBoxSplitBill.Size = new System.Drawing.Size(103, 29);
             this.checkBoxSplitBill.TabIndex = 37;
@@ -150,7 +169,7 @@ namespace OrderingSystemUI
             "2",
             "3",
             "4"});
-            this.comboBoxSplitBill.Location = new System.Drawing.Point(716, 290);
+            this.comboBoxSplitBill.Location = new System.Drawing.Point(713, 251);
             this.comboBoxSplitBill.Name = "comboBoxSplitBill";
             this.comboBoxSplitBill.Size = new System.Drawing.Size(151, 28);
             this.comboBoxSplitBill.TabIndex = 36;
@@ -164,20 +183,10 @@ namespace OrderingSystemUI
             "Debit Card",
             "Cash",
             "Mixed Payment"});
-            this.comboBoxPaymentType.Location = new System.Drawing.Point(716, 237);
+            this.comboBoxPaymentType.Location = new System.Drawing.Point(713, 308);
             this.comboBoxPaymentType.Name = "comboBoxPaymentType";
             this.comboBoxPaymentType.Size = new System.Drawing.Size(151, 28);
             this.comboBoxPaymentType.TabIndex = 4;
-            // 
-            // txtBoxFeedBack
-            // 
-            this.txtBoxFeedBack.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtBoxFeedBack.Location = new System.Drawing.Point(14, 409);
-            this.txtBoxFeedBack.Name = "txtBoxFeedBack";
-            this.txtBoxFeedBack.Size = new System.Drawing.Size(273, 74);
-            this.txtBoxFeedBack.TabIndex = 34;
-            this.txtBoxFeedBack.Text = "";
-            this.txtBoxFeedBack.TextChanged += new System.EventHandler(this.txtBoxFeedBack_TextChanged);
             // 
             // btnSearchTable
             // 
@@ -196,9 +205,9 @@ namespace OrderingSystemUI
             this.bttAddFeedBack.Enabled = false;
             this.bttAddFeedBack.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.bttAddFeedBack.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.bttAddFeedBack.Location = new System.Drawing.Point(310, 428);
+            this.bttAddFeedBack.Location = new System.Drawing.Point(15, 428);
             this.bttAddFeedBack.Name = "bttAddFeedBack";
-            this.bttAddFeedBack.Size = new System.Drawing.Size(191, 55);
+            this.bttAddFeedBack.Size = new System.Drawing.Size(501, 55);
             this.bttAddFeedBack.TabIndex = 31;
             this.bttAddFeedBack.Text = "Add FeedBack";
             this.bttAddFeedBack.UseVisualStyleBackColor = false;
@@ -210,7 +219,6 @@ namespace OrderingSystemUI
             this.txtBoxTableNumber.Name = "txtBoxTableNumber";
             this.txtBoxTableNumber.Size = new System.Drawing.Size(145, 27);
             this.txtBoxTableNumber.TabIndex = 30;
-           
             // 
             // label7
             // 
@@ -225,7 +233,7 @@ namespace OrderingSystemUI
             // labelDisplayTip
             // 
             this.labelDisplayTip.AutoSize = true;
-            this.labelDisplayTip.Location = new System.Drawing.Point(730, 138);
+            this.labelDisplayTip.Location = new System.Drawing.Point(619, 205);
             this.labelDisplayTip.Name = "labelDisplayTip";
             this.labelDisplayTip.Size = new System.Drawing.Size(36, 20);
             this.labelDisplayTip.TabIndex = 28;
@@ -234,7 +242,7 @@ namespace OrderingSystemUI
             // labelDisplayTotalWithTip
             // 
             this.labelDisplayTotalWithTip.AutoSize = true;
-            this.labelDisplayTotalWithTip.Location = new System.Drawing.Point(730, 181);
+            this.labelDisplayTotalWithTip.Location = new System.Drawing.Point(828, 206);
             this.labelDisplayTotalWithTip.Name = "labelDisplayTotalWithTip";
             this.labelDisplayTotalWithTip.Size = new System.Drawing.Size(36, 20);
             this.labelDisplayTotalWithTip.TabIndex = 28;
@@ -243,7 +251,7 @@ namespace OrderingSystemUI
             // BttUpdateTotal
             // 
             this.BttUpdateTotal.Enabled = false;
-            this.BttUpdateTotal.Location = new System.Drawing.Point(778, 79);
+            this.BttUpdateTotal.Location = new System.Drawing.Point(770, 141);
             this.BttUpdateTotal.Name = "BttUpdateTotal";
             this.BttUpdateTotal.Size = new System.Drawing.Size(94, 29);
             this.BttUpdateTotal.TabIndex = 4;
@@ -254,10 +262,10 @@ namespace OrderingSystemUI
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(537, 237);
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(537, 313);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(173, 23);
+            this.label6.Size = new System.Drawing.Size(170, 23);
             this.label6.TabIndex = 27;
             this.label6.Text = "Select Payment Type:";
             // 
@@ -268,7 +276,7 @@ namespace OrderingSystemUI
             this.buttFinalizePayment.Enabled = false;
             this.buttFinalizePayment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttFinalizePayment.ForeColor = System.Drawing.Color.White;
-            this.buttFinalizePayment.Location = new System.Drawing.Point(537, 339);
+            this.buttFinalizePayment.Location = new System.Drawing.Point(537, 361);
             this.buttFinalizePayment.Name = "buttFinalizePayment";
             this.buttFinalizePayment.Size = new System.Drawing.Size(330, 44);
             this.buttFinalizePayment.TabIndex = 26;
@@ -279,7 +287,7 @@ namespace OrderingSystemUI
             // txtBoxTotal
             // 
             this.txtBoxTotal.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.txtBoxTotal.Location = new System.Drawing.Point(673, 79);
+            this.txtBoxTotal.Location = new System.Drawing.Point(647, 143);
             this.txtBoxTotal.Name = "txtBoxTotal";
             this.txtBoxTotal.Size = new System.Drawing.Size(93, 27);
             this.txtBoxTotal.TabIndex = 23;
@@ -289,30 +297,30 @@ namespace OrderingSystemUI
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(537, 78);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(541, 147);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(135, 25);
+            this.label5.Size = new System.Drawing.Size(100, 23);
             this.label5.TabIndex = 22;
-            this.label5.Text = "SET TOTAL TO: ";
+            this.label5.Text = "Set total to ";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(541, 131);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(541, 201);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 28);
+            this.label4.Size = new System.Drawing.Size(45, 25);
             this.label4.TabIndex = 21;
             this.label4.Text = "TIP: ";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(537, 173);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(674, 201);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(140, 28);
+            this.label3.Size = new System.Drawing.Size(120, 25);
             this.label3.TabIndex = 20;
             this.label3.Text = "Total with TIP:";
             // 
@@ -322,13 +330,12 @@ namespace OrderingSystemUI
             this.ItemsName,
             this.Quantity,
             this.ItemsPrice,
-            this.Vat,
-            this.TotalWithVAT});
+            this.Vat});
             this.listViewDisplaybillItems.HideSelection = false;
             this.listViewDisplaybillItems.Location = new System.Drawing.Point(14, 79);
             this.listViewDisplaybillItems.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listViewDisplaybillItems.Name = "listViewDisplaybillItems";
-            this.listViewDisplaybillItems.Size = new System.Drawing.Size(502, 304);
+            this.listViewDisplaybillItems.Size = new System.Drawing.Size(502, 326);
             this.listViewDisplaybillItems.TabIndex = 7;
             this.listViewDisplaybillItems.UseCompatibleStateImageBehavior = false;
             this.listViewDisplaybillItems.View = System.Windows.Forms.View.Details;
@@ -336,7 +343,7 @@ namespace OrderingSystemUI
             // ItemsName
             // 
             this.ItemsName.Text = "ItemsName";
-            this.ItemsName.Width = 200;
+            this.ItemsName.Width = 260;
             // 
             // Quantity
             // 
@@ -352,11 +359,6 @@ namespace OrderingSystemUI
             // 
             this.Vat.Text = "VAT";
             this.Vat.Width = 80;
-            // 
-            // TotalWithVAT
-            // 
-            this.TotalWithVAT.Text = "Total With VAT";
-            this.TotalWithVAT.Width = 150;
             // 
             // pnlTakeOrder
             // 
@@ -412,15 +414,15 @@ namespace OrderingSystemUI
         private System.Windows.Forms.ColumnHeader Quantity;
         private System.Windows.Forms.ColumnHeader ItemsPrice;
         private System.Windows.Forms.ColumnHeader Vat;
-        private System.Windows.Forms.ColumnHeader TotalWithVAT;
         private System.Windows.Forms.Panel pnlTakeOrder;
         private System.Windows.Forms.RichTextBox txtBoxFeedBacka;
         private System.Windows.Forms.ComboBox comboBoxPaymentType;
         private System.Windows.Forms.CheckBox checkBoxSplitBill;
         private System.Windows.Forms.ComboBox comboBoxSplitBill;
-        private System.Windows.Forms.RichTextBox txtBoxFeedBack;
         private System.Windows.Forms.Label lblTotalWithVat;
         private System.Windows.Forms.Label lblTotalWithVatValue;
+        private System.Windows.Forms.Label labelDisplayTotalVAT;
+        private System.Windows.Forms.Label label1;
     }
 }
 

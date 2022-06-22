@@ -42,7 +42,7 @@ namespace OrderingSystemDAL
             return bills;
         }
 
-        public void CloseBill(Bill bill, float splitAmong) //stores bill in the database
+        public void CloseBill(Bill bill) //stores bill in the database
         {
             conn = this.OpenConnection();
             try
@@ -50,7 +50,27 @@ namespace OrderingSystemDAL
                 SqlCommand command = new SqlCommand("INSERT INTO dbo.Bill" + " VALUES(@PaymentType, @BillFeedback, @BillTotal, @Tip, 1, @TableID);", conn);
                 command.Parameters.AddWithValue("@PaymentType", bill.PaymentType.ToString());
                 command.Parameters.AddWithValue("@BillFeedback", bill.BillFeedback);
-                command.Parameters.AddWithValue("@BillTotal", Decimal.Round((decimal)(bill.BillTotalWithoutTip / splitAmong), 2));
+                command.Parameters.AddWithValue("@BillTotal", Decimal.Round((decimal)(bill.BillTotalWithoutTip), 2));
+                command.Parameters.AddWithValue("@Tip", Decimal.Round((decimal)(bill.Tip), 2));
+                command.Parameters.AddWithValue("@TableID", bill.tableId);
+                int numOfRowsAdded = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Failed to save bill!" + e.Message);
+            }
+            this.CloseConnection();
+        }
+
+        public void CloseSplitBill(Bill bill, float splitAmong) //stores bill in the database
+        {
+            conn = this.OpenConnection();
+            try
+            {
+                SqlCommand command = new SqlCommand("INSERT INTO dbo.Bill" + " VALUES(@PaymentType, @BillFeedback, @BillTotal, @Tip, 1, @TableID);", conn);
+                command.Parameters.AddWithValue("@PaymentType", bill.PaymentType.ToString());
+                command.Parameters.AddWithValue("@BillFeedback", bill.BillFeedback);
+                command.Parameters.AddWithValue("@BillTotal", Decimal.Round((decimal)(bill.SplitTotal), 2));
                 command.Parameters.AddWithValue("@Tip", Decimal.Round((decimal)(bill.Tip / splitAmong), 2));
                 command.Parameters.AddWithValue("@TableID", bill.tableId);
                 int numOfRowsAdded = command.ExecuteNonQuery();
