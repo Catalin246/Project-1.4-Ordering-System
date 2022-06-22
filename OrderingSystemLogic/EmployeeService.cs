@@ -21,5 +21,14 @@ namespace OrderingSystemLogic
             List<Employee> employees = employeedb.GetAllEmployee();
             return employees;
         }
+        public Employee GetUserNameAndPasscode(string name,string passcode)
+        {
+            Employee employeeLogin = employeedb.GetEmployeeNameAndPassc(name, PasswordHasher.Base64Encode(passcode));
+            return employeeLogin;
+        }
+        public bool PasswordIscorrect(string password,Employee employee)
+        {
+            return (PasswordHasher.Base64Encode(password) == employee.EmployeePassword);
+        }        
     }
 }
