@@ -21,12 +21,14 @@ namespace OrderingSystemUI
         public TableView tableView;
         public AddNote addNote;
         public Order order;
-        public TakeOrder(int tableNumber, string employeeName)
+        Employee employee;
+        public TakeOrder(int tableNumber, Employee employee)
         {
+            this.employee = employee;
             this.tableNumber = tableNumber;
             InitializeComponent();
             lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
-            lblEmployeeName.Text = "Employee Name: " + employeeName.ToString();
+            lblEmployeeName.Text = "Employee Name: " + employee.EmployeeName.ToString();
         }
       
         //Display menu items
@@ -197,8 +199,8 @@ namespace OrderingSystemUI
                 OrderedItemService orderedItemService = new OrderedItemService();
                 if (btnModify.Enabled == true)
                 {
-                    order.OrderId = orderService.GetOrderId();
                     orderService.AddOrder(order);
+                    order.OrderId = orderService.GetOrderId();
                 }
 
                 foreach (OrderedItem item in order.OrderedItems)
@@ -390,14 +392,51 @@ namespace OrderingSystemUI
 
         private void lblEmployeeName_MouseClick(object sender, MouseEventArgs e)
         {
-            Login login = new Login();
-            login.Show();
+            Option option = new Option(employee.EmployeeName, employee.EmployeeRole);
+            option.Show();
+            this.Close();
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
             this.Hide();
             tableView.Show();
+        }
+
+        private void comboBoxCourse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (comboBoxCourse.SelectedIndex == 0)
+                {
+                    return;
+                }
+                else if (comboBoxCourse.SelectedIndex == 0)
+                {
+                    return;
+                }
+
+                string courseName = comboBoxCourse.SelectedItem.ToString();
+
+                foreach (ListViewItem item in listViewMenuItems.Items)
+                {
+                    Item orderedItem = (Item)item.Tag;
+
+                    if (orderedItem.ItemType == courseName)
+                    {
+                        item.Selected = true;
+                        listViewMenuItems.EnsureVisible(listViewMenuItems.Items.IndexOf(listViewMenuItems.SelectedItems[0]));
+                    }
+                    else
+                    {
+                        item.Selected = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

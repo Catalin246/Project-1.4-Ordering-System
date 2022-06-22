@@ -16,12 +16,16 @@ namespace OrderingSystemUI
     {
         private List<TakeOrder> takeOrders = new List<TakeOrder>();
         private string employeeName;
-        private string emplyeeRole;
+        private string employeeRole;
+        Employee employee = new Employee();
+        List<Button> buttonList { get; set; }
         private TableService tableService = new TableService();
-        public TableView(string employeeName,string emplyeeRole)
+        public TableView(string employeeName,string employeeRole)
         {
+            employee.EmployeeName = employeeName;
+            employee.EmployeeRole = employeeRole;
             this.employeeName = employeeName;
-            this.emplyeeRole = emplyeeRole;            
+            this.employeeRole = employeeRole;            
             InitializeComponent();
             ShowListView();
             for (int i = 0; i < 10; i++)
@@ -101,26 +105,31 @@ namespace OrderingSystemUI
         }
         public void ChangeColor(int number, string btnInput)
         {
+            this.buttonList = new List<Button>();
             string name = $"Table {number.ToString()}";
-            List<Button> buttons = this.Controls.OfType<Button>().ToList();
-            for (int i = 0; i < buttons.Count; i++)
+            //List<Button> buttons = this.Controls.OfType<Button>().ToList();
+            foreach (Button buttons in buttonList)
             {
-                if (buttons[i].Text == name)
-                {
-                    switch (btnInput.ToLower())
-                    {
-                        case "sit":
-                            buttons[i].BackColor = Color.Orange;
-                            break;
-                        case "ordered":
-                            buttons[i].BackColor = Color.Red;
-                            break;
-                        default:
-                            buttons[i].BackColor = Color.Transparent;
-                            break;
-                    }
-                }
+                txtTime.Text = "Ada" + this.Controls.OfType<Button>().ToList().Count;
             }
+            //for (int i = 0; i < buttons.Count; i++)
+            //{
+            //    if (buttons[i].Name == name)
+            //    {
+            //        switch (btnInput.ToLower())
+            //        {
+            //            case "sit":
+            //                buttons[i].BackColor = Color.Orange;
+            //                break;
+            //            case "ordered":
+            //                buttons[i].BackColor = Color.Red;
+            //                break;
+            //            default:
+            //                buttons[i].BackColor = Color.Transparent;
+            //                break;
+            //        }
+            //    }
+            //}
         }
         private void CallPnlOptions(int number, TakeOrder takeOrder)
         {
@@ -132,70 +141,70 @@ namespace OrderingSystemUI
         private void btnTable01_Click(object sender, EventArgs e)
         {
             if (takeOrders[0] == null)
-                takeOrders[0] = new TakeOrder(1, employeeName);
+                takeOrders[0] = new TakeOrder(1, employee);
             CallPnlOptions(1, takeOrders[0]);
         }
 
         private void btnTable02_Click(object sender, EventArgs e)
         {
             if (takeOrders[1] == null)
-                takeOrders[1] = new TakeOrder(2, employeeName);
+                takeOrders[1] = new TakeOrder(2, employee);
             CallPnlOptions(2, takeOrders[1]);
         }
 
         private void btnTable03_Click(object sender, EventArgs e)
         {
             if (takeOrders[2] == null)
-                takeOrders[2] = new TakeOrder(3, employeeName);
+                takeOrders[2] = new TakeOrder(3, employee);
             CallPnlOptions(3, takeOrders[2]);
         }
 
         private void btnTable04_Click(object sender, EventArgs e)
         {
             if (takeOrders[3] == null)
-                takeOrders[3] = new TakeOrder(4, employeeName);
+                takeOrders[3] = new TakeOrder(4, employee);
             CallPnlOptions(4, takeOrders[3]);
         }
 
         private void btnTable05_Click(object sender, EventArgs e)
         {
             if (takeOrders[4] == null)
-                takeOrders[4] = new TakeOrder(5, employeeName);
+                takeOrders[4] = new TakeOrder(5, employee);
             CallPnlOptions(5, takeOrders[4]);
         }
 
         private void btnTable06_Click(object sender, EventArgs e)
         {
             if (takeOrders[5] == null)
-                takeOrders[5] = new TakeOrder(6, employeeName);
+                takeOrders[5] = new TakeOrder(6, employee);
             CallPnlOptions(6, takeOrders[5]);
         }
 
         private void btnTable07_Click(object sender, EventArgs e)
         {
             if (takeOrders[6] == null)
-                takeOrders[6] = new TakeOrder(7, employeeName);
+                takeOrders[6] = new TakeOrder(7, employee);
             CallPnlOptions(7, takeOrders[6]);
         }
 
         private void btnTable08_Click(object sender, EventArgs e)
         {
             if (takeOrders[7] == null)
-                takeOrders[7] = new TakeOrder(8, employeeName);
+                takeOrders[7] = new TakeOrder(8, employee);
             CallPnlOptions(8, takeOrders[7]);
         }
 
         private void btnTable09_Click(object sender, EventArgs e)
         {
             if (takeOrders[8] == null)
-                takeOrders[8] = new TakeOrder(9, employeeName);
+                takeOrders[8] = new TakeOrder(9, employee);
             CallPnlOptions(9, takeOrders[8]);
         }
 
         private void btnTable010_Click(object sender, EventArgs e)
         {
             if (takeOrders[9] == null)
-                takeOrders[9] = new TakeOrder(10, employeeName);
+                takeOrders[9] = new TakeOrder(10, employee);
             CallPnlOptions(10, takeOrders[9]);
         }
 
@@ -205,7 +214,7 @@ namespace OrderingSystemUI
         }
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            BarView barViewForm = new BarView(this.employeeName, this.emplyeeRole);
+            BarView barViewForm = new BarView(this.employeeName, this.employeeRole);
             barViewForm.Show();
         }
 
@@ -221,7 +230,7 @@ namespace OrderingSystemUI
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            KitchenView kitchenViewForm = new KitchenView(this.employeeName, this.emplyeeRole);
+            KitchenView kitchenViewForm = new KitchenView(this.employeeName, this.employeeRole);
             kitchenViewForm.Show();
         }
 
@@ -260,16 +269,41 @@ namespace OrderingSystemUI
 
         private void TableView_Load(object sender, EventArgs e)
         {
+            int x = 20;
+            int y = -40;
+            int z = 1;
+            List<Table> tablesId = tableService.GetTablesId();
             btnProfile.Text = employeeName;          
             Timer timer = new Timer();
             timer.Interval = (10 * 1000); // 10 secs
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
-            if (emplyeeRole == "Waiter")
+            if (employeeRole == "Waiter")
             {
                 MenuBar.Enabled = false;
                 MenuKitchen.Enabled = false;
             }
+            buttonList = GetButtons(tablesId);
+        }
+        private List<Button> GetButtons(List<Table> tablesId)
+        {
+            int x = 20;
+            int y = -40;
+            int z = 1;
+            buttonList = new List<Button>();
+            foreach (Table table in tablesId)
+            {
+                if (z % 2 == 0)
+                    x = 200;
+                else
+                {
+                    x = 20;
+                    y += 80;
+                }
+                buttonList.Add(GenerateButtons(x, y, table.TableId, this));
+                z++;
+            }
+            return buttonList;
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -285,9 +319,37 @@ namespace OrderingSystemUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Option option = new Option(employeeName,emplyeeRole);
-            this.Hide();
-            option.Show();
+            Option optionForm = new Option(employeeName, employeeRole);
+            optionForm.Show();
+            this.Close();
+        }
+        public Button GenerateButtons(int x, int y, int tableNumber, Form form)
+        {
+            try
+            {
+                Button button = new Button();
+                button.Text = "table " + tableNumber;
+                button.Name = "table " + tableNumber;
+                button.Width = 84;
+                button.Height = 66;
+                button.Location = new Point(x, y);
+                form.Controls.Add(button);
+                button.BringToFront();
+                button.Click += button_Click;
+                this.Controls.Add(button);
+                buttonList.Add(button);
+                return button;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        private void button_Click(object sender, EventArgs e)
+        {
+            Button selected = sender as Button;
+            MessageBox.Show(selected.Name);
         }
     }
 }

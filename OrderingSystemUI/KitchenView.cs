@@ -386,7 +386,7 @@ namespace OrderingSystemUI
         {
             Option optionForm = new Option(EmployeeName, EmployeeRole);
             optionForm.Show();
-            this.Close();
+            
         }
     }
 }

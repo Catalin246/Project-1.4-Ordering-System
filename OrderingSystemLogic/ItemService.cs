@@ -19,7 +19,7 @@ namespace OrderingSystemLogic
 
         public List<Item> GetDrinks()
         {
-            List<Item> items = itemdb.GetAllDrinks();
+            List<Item> items = itemdb.GetDrinks();
             return items;
         }
         public List<Item> GetStarters(bool var)

@@ -12,6 +12,7 @@ namespace OrderingSystemModel
         {
             OrderedItems = new List<OrderedItem>();
             this.TableId = tableID;
+
         }
 
         public Order()

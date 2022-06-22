@@ -24,7 +24,6 @@ namespace OrderingSystemDAL
             dbConnection = new SqlConnection(connString);//passing my database to my sql object
         }
 
-
         public void MarkTableOpen(int tableID)
         {
             dbConnection.Open();
@@ -42,6 +41,7 @@ namespace OrderingSystemDAL
             }
             dbConnection.Close();
         }
+
         public List<Table> GetAllTable()
         {
             string query = "SELECT t.[Table_Id], O.Order_Time, i.Ordered_Item_Status, O.Order_Id,t.Table_Status,I.Item_Id FROM dbo.[Table] as T join dbo.[Order] as O on T.Table_Id = O.Table_Id join dbo.[OrderedItem] as I on i.Order_Id = o.Order_Id;";
@@ -49,6 +49,25 @@ namespace OrderingSystemDAL
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
+        public List<Table> GetTablesId()
+        {
+            string query = "SELECT [table_Id] FROM [Table] ";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return readTablesId(ExecuteSelectQuery(query, sqlParameters));
+        }
+        private List<Table> readTablesId(DataTable dataTable)
+        {
+            List<Table> tablesId = new List<Table>();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Table table = new Table();
+                {
+                    table.TableId = (int)dr["Table_Id"];
+                };
+                tablesId.Add(table);
+            }
+            return tablesId;
+        }
         private List<Table> ReadTables(DataTable dataTable)
         {
             List<Table> tables = new List<Table>();

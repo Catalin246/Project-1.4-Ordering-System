@@ -25,6 +25,8 @@ namespace OrderingSystemUI
         {
             TableView tableView = new TableView(employeeName,employeeRole);
             BarView barView = new BarView(employeeName,employeeRole);
+            KitchenView kitchenView = new KitchenView(employeeName,employeeRole);
+            kitchenView.Close();
             barView.Close();
             tableView.Close();
             Login login = new Login();
@@ -35,7 +37,24 @@ namespace OrderingSystemUI
         private void Option_Load(object sender, EventArgs e)
         {
             labelEmployeName.Text = employeeName;
-            labelEmployeRole.Text = employeeRole;
+            labelEmployeRole.Text = employeeRole; 
+            switch (employeeRole.ToLower())
+            {
+                case "waiter":
+                    MenuBar.Enabled = false;
+                    MenuKitchen.Enabled = false;
+                    break;
+                case "cook":
+                    MenuBar.Enabled = false;
+                    MenuKitchen.Enabled = false;
+                    break;
+                case "bartender":
+                    MenuKitchen.Enabled = false;
+                    MenuKitchen.Enabled = false;
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
@@ -47,9 +66,36 @@ namespace OrderingSystemUI
 
         private void button1_Click(object sender, EventArgs e)//btn back
         {
+            this.Close();
+        }
+
+        private void MenuBill_Click(object sender, EventArgs e)
+        {
+            Payment payment = new Payment();
+            payment.Show();
+        }
+
+        private void menuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem4_Click_1(object sender, EventArgs e)
+        {
             TableView tableView = new TableView(employeeName, employeeRole);
-            this.Hide();
             tableView.Show();
+        }
+
+        private void MenuKitchen_Click(object sender, EventArgs e)
+        {
+            KitchenView kitchenView = new KitchenView(employeeName,employeeRole);
+            kitchenView.Show();
+        }
+
+        private void MenuBar_Click(object sender, EventArgs e)
+        {
+            BarView barView = new BarView(employeeName,employeeRole);
+            barView.Show();
         }
     }
 }

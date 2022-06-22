@@ -26,10 +26,10 @@ namespace OrderingSystemUI
         {
             try
             {
-                if (txtBoxUsername.Text =="")
-                    lblWrongUserName.Text = "Please enter your username";                
-                if (txtBoxPasscode.Text =="")
-                    lblwrongPasscode.Text = "Please enter your passcode";                
+                if (txtBoxUsername.Text == "")
+                    lblWrongUserName.Text = "Please enter your username";
+                if (txtBoxPasscode.Text == "")
+                    lblwrongPasscode.Text = "Please enter your passcode";
                 username = txtBoxUsername.Text;
                 passcode = txtBoxPasscode.Text;
                 List<Employee> list = new List<Employee>();
@@ -37,13 +37,23 @@ namespace OrderingSystemUI
                 list = accountService.GetAllEmployee();
                 foreach (Employee item in list)
                 {
-                    if (TryPasscode(username, item.EmployeeName) && TryUserName(passcode,item.EmployeePassword))
-                    {
+                    if (TryPasscode(username, item.EmployeeName)&& (TryUserName(username, item.EmployeeName)))
                         EmployeeRole(item.EmployeeRole, item.EmployeeName);
+                    }
+                    else
+                    {
+                        if (!TryUserName(username, item.EmployeeName))
+                        {
+                            lblWrongUserName.Text = "Username is wrong please enter the right one";
+                        }
+                        if (!TryPasscode(username, item.EmployeeName))
+                        {
+                            lblwrongPasscode.Text = "Passcode is wrong please enter again";
+                        }
                     }
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
                 Console.WriteLine("Something wrong with the login");
             }
@@ -74,12 +84,28 @@ namespace OrderingSystemUI
         }
         private bool TryPasscode(string passcode, string dataName)
         {
-            return (passcode == dataName);
+            return (passcode.ToLower() == dataName);
         }
         private bool TryUserName(string username, string dataName)
         {
+<<<<<<< HEAD
             return (username == dataName);
         } 
 
+=======
+            return (username.ToLower() == dataName);
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+        //private HashWithSaltResult TryPasscode(string passcode, string salt)
+        //{
+        //    PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
+        //    HashWithSaltResult hashResultSha256 = pwHasher.Hash(passcode, SHA256.Create(), salt);
+        //    return hashResultSha256;
+        //}
+>>>>>>> master
     }
 }

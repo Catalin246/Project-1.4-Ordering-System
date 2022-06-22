@@ -8,7 +8,7 @@ namespace OrderingSystemModel
 {
     public enum Status
     {
-        Preparing, Ready, Served, Paid
+       Ordred, Preparing, Ready, Served, Paid
     }
 
     public class OrderedItem
