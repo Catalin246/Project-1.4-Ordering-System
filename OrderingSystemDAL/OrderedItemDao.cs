@@ -11,12 +11,12 @@ namespace OrderingSystemDAL
     {
         public void AddOrderesItem(OrderedItem orderedItem, Order order)
         {
-            OpenConnection();
+            SqlConnection conn = this.OpenConnection();
             try
             {
                 SqlCommand command = new SqlCommand("INSERT INTO dbo.[OrderedItem] " +
 
-                        " VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount, @Ordered_Item_Status);", OpenConnection());
+                        " VALUES(@Item_Id, @Order_Id, @Ordered_Item_Note, @Ordered_Item_Amount, @Ordered_Item_Status);", conn);
 
                 command.Parameters.AddWithValue("@Item_Id", orderedItem.Item.ItemId);
                 command.Parameters.AddWithValue("@Order_Id", order.OrderId);
@@ -30,7 +30,7 @@ namespace OrderingSystemDAL
             {
                 throw new Exception("Take order failed! " + e.Message);
             }
-            CloseConnection();
+            this.CloseConnection();
         }
 
         public List<OrderedItem> GetOrderedItemsByOrder(int orderID)
