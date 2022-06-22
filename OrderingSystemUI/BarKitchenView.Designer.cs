@@ -177,7 +177,6 @@
             // 
             // colFoodName
             // 
-
             this.colFoodName.Text = "Drink Name";
             this.colFoodName.Width = 280;
             // 
@@ -227,7 +226,7 @@
             this.lblTime.TabIndex = 31;
             this.lblTime.Text = "label1";
             // 
-            // BarView
+            // BarKitchenView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -244,8 +243,8 @@
             this.Controls.Add(this.btnReadyToServe);
             this.Controls.Add(this.btnViewOrderNote);
             this.Controls.Add(this.lblTime);
-            this.Name = "BarView";
-            this.Text = "BarView";
+            this.Name = "BarKitchenView";
+            this.Text = "BarKitchenView";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

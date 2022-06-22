@@ -160,8 +160,8 @@ namespace OrderingSystemUI
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            KitchenView kitchenViewForm = new KitchenView(this.employeeName, this.employeeRole);
-            kitchenViewForm.Show();
+            BarKitchenView barKitchenView = new BarKitchenView(this.employeeName, this.employeeRole);
+            barKitchenView.Show();
         }
 
         private void billViewToolStripMenuItem_Click(object sender, EventArgs e)
