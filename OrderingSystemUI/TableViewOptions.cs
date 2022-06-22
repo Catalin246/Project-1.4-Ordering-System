@@ -17,11 +17,11 @@ namespace OrderingSystemUI
     {
         private TableView tableView;
         private TakeOrder takeOrder;
-        private int number;
-        public TableViewOptions(int number, TableView tableView,TakeOrder takeOrder)
+        private int tableNumber;
+        public TableViewOptions(int tableNumber, TableView tableView,TakeOrder takeOrder)
         {
             this.takeOrder = takeOrder; 
-            this.number = number;
+            this.tableNumber = tableNumber;
             this.tableView = tableView;
             InitializeComponent();
         }
@@ -29,33 +29,32 @@ namespace OrderingSystemUI
         private void btnOrder_Click(object sender, EventArgs e)
         {
             //Show take order form (catalin;)))  
-            ACustomerIsSitting(number, "order");
+            ACustomerIsSitting(tableNumber, "ordered");
             TableService tableService = new TableService();
-            tableService.Order(number);
             tableView.Hide();
-            this.Hide();
             takeOrder.tableView = tableView;
             takeOrder.Show();
         }
 
         private void btnSeatingACustomer_Click(object sender, EventArgs e)
         {
-            ACustomerIsSitting(number, "sit"); 
+            ACustomerIsSitting(tableNumber, "sit"); 
             TableService tableService = new TableService();
-            tableService.Sit(number);
         }
 
         private void btnCanselSeating_Click(object sender, EventArgs e)
         {
-            tableView.ChangeColor(number, "Cancel");
+            tableView.ChangeColor(tableNumber, "Cancel");
             TableService tableService = new TableService();
-            tableService.CancelSit(number);
+            this.Hide();
+            tableService.CancelSit(tableNumber);
         }
-        private void ACustomerIsSitting(int number, string input)
+        private void ACustomerIsSitting(int tableNumber, string input)
         {
-            tableView.ChangeColor(number, input); 
+            tableView.ChangeColor(tableNumber, input); 
             TableService tableService = new TableService();
-            tableService.Sit(number);
+            this.Hide();
+            tableService.Sit(tableNumber);
         }
     }
 }
