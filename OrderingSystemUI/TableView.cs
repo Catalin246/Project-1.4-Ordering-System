@@ -53,10 +53,6 @@ namespace OrderingSystemUI
             List<Table> tableStatus = tableService.GetTablesStatus();
             foreach (Table table in tableStatus)
             {
-                if (table.TableStatus == "Close")
-                {
-                    ChangeColor(table.TableId, "ordered");
-                }
                 switch (table.TableStatus)
                 {
                     case "Close":
@@ -72,142 +68,76 @@ namespace OrderingSystemUI
         }
         public void ShowListView()
         {
-            CheckTable();
-            List<Table> tables = tableService.GetTable();
-            List<Drink> drinks = tableService.GetDrink();
-            listViewTableOrder.Items.Clear();
-            foreach (Table table in tables)
+            try
             {
-                if (table.OrderStatus == "Ready")
+                List<Table> tables = tableService.GetTable();
+                List<Drink> drinks = tableService.GetDrink();
+                listViewTableOrder.Items.Clear();
+                foreach (Table table in tables)
                 {
-                    ListViewItem li = new ListViewItem(table.OrderStatus);
-                    li.SubItems.Add(table.TableId.ToString());
-                    foreach (Drink drink in drinks)
+                    if (table.OrderStatus == "Ready")
                     {
-                        if (drink.DrinkId == table.ItemId)
+                        ListViewItem li = new ListViewItem(table.OrderStatus);
+                        li.SubItems.Add(table.TableId.ToString());
+                        foreach (Drink drink in drinks)
                         {
-                            li.SubItems.Add("Bar");
-                            break;
+                            if (drink.DrinkId == table.ItemId)
+                            {
+                                li.SubItems.Add("Bar");
+                                break;
+                            }
+                            else
+                            {
+                                li.SubItems.Add("Kitchen");
+                                break;
+                            }
                         }
-                        else
-                        {
-                            li.SubItems.Add("Kitchen");
-                            break;
-                        }
+                        TimeSpan time = DateTime.Now - table.Time;
+                        li.SubItems.Add(time.ToString());
+                        li.SubItems.Add(table.OrderId.ToString());
+                        li.Tag = table;
+                        listViewTableOrder.Items.Add(li);
                     }
-                    TimeSpan time = DateTime.Now - table.Time;
-                    li.SubItems.Add(time.ToString());
-                    li.SubItems.Add(table.OrderId.ToString());
-                    li.Tag = table;
-                    listViewTableOrder.Items.Add(li);
                 }
+                List<Table> tablesId = tableService.GetTablesId();
+                this.buttonList = GetButtons(tablesId);
+                CheckTable();
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
         public void ChangeColor(int number, string btnInput)
         {
-            this.buttonList = new List<Button>();
             string name = $"Table {number.ToString()}";
-            //List<Button> buttons = this.Controls.OfType<Button>().ToList();
-            foreach (Button buttons in buttonList)
+            List<Button> buttons = buttonList;
+            for (int i = 0; i < buttons.Count; i++)
             {
-                txtTime.Text = "Ada" + this.Controls.OfType<Button>().ToList().Count;
+                if (buttons[i].Name == name.ToLower())
+                {
+                    switch (btnInput.ToLower())
+                    {
+                        case "sit":
+                            buttons[i].BackColor = Color.Orange;
+                            break;
+                        case "ordered":
+                            buttons[i].BackColor = Color.Red;
+                            break;
+                        default:
+                            buttons[i].BackColor = Color.Transparent;
+                            break;
+                    }
+                }
             }
-            //for (int i = 0; i < buttons.Count; i++)
-            //{
-            //    if (buttons[i].Name == name)
-            //    {
-            //        switch (btnInput.ToLower())
-            //        {
-            //            case "sit":
-            //                buttons[i].BackColor = Color.Orange;
-            //                break;
-            //            case "ordered":
-            //                buttons[i].BackColor = Color.Red;
-            //                break;
-            //            default:
-            //                buttons[i].BackColor = Color.Transparent;
-            //                break;
-            //        }
-            //    }
-            //}
         }
         private void CallPnlOptions(int number, TakeOrder takeOrder)
         {
-
             TableViewOptions options = new TableViewOptions(number, this, takeOrder);
             options.Show();
         }
-
-        private void btnTable01_Click(object sender, EventArgs e)
-        {
-            if (takeOrders[0] == null)
-                takeOrders[0] = new TakeOrder(1, employee);
-            CallPnlOptions(1, takeOrders[0]);
-        }
-
-        private void btnTable02_Click(object sender, EventArgs e)
-        {
-            if (takeOrders[1] == null)
-                takeOrders[1] = new TakeOrder(2, employee);
-            CallPnlOptions(2, takeOrders[1]);
-        }
-
-        private void btnTable03_Click(object sender, EventArgs e)
-        {
-            if (takeOrders[2] == null)
-                takeOrders[2] = new TakeOrder(3, employee);
-            CallPnlOptions(3, takeOrders[2]);
-        }
-
-        private void btnTable04_Click(object sender, EventArgs e)
-        {
-            if (takeOrders[3] == null)
-                takeOrders[3] = new TakeOrder(4, employee);
-            CallPnlOptions(4, takeOrders[3]);
-        }
-
-        private void btnTable05_Click(object sender, EventArgs e)
-        {
-            if (takeOrders[4] == null)
-                takeOrders[4] = new TakeOrder(5, employee);
-            CallPnlOptions(5, takeOrders[4]);
-        }
-
-        private void btnTable06_Click(object sender, EventArgs e)
-        {
-            if (takeOrders[5] == null)
-                takeOrders[5] = new TakeOrder(6, employee);
-            CallPnlOptions(6, takeOrders[5]);
-        }
-
-        private void btnTable07_Click(object sender, EventArgs e)
-        {
-            if (takeOrders[6] == null)
-                takeOrders[6] = new TakeOrder(7, employee);
-            CallPnlOptions(7, takeOrders[6]);
-        }
-
-        private void btnTable08_Click(object sender, EventArgs e)
-        {
-            if (takeOrders[7] == null)
-                takeOrders[7] = new TakeOrder(8, employee);
-            CallPnlOptions(8, takeOrders[7]);
-        }
-
-        private void btnTable09_Click(object sender, EventArgs e)
-        {
-            if (takeOrders[8] == null)
-                takeOrders[8] = new TakeOrder(9, employee);
-            CallPnlOptions(9, takeOrders[8]);
-        }
-
-        private void btnTable010_Click(object sender, EventArgs e)
-        {
-            if (takeOrders[9] == null)
-                takeOrders[9] = new TakeOrder(10, employee);
-            CallPnlOptions(10, takeOrders[9]);
-        }
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -242,15 +172,24 @@ namespace OrderingSystemUI
 
         private void btnServed_Click(object sender, EventArgs e)
         {
-            Table selectedItem = new Table();
-            TableService tableService = new TableService();
-            selectedItem.OrderId = int.Parse(lblOrderId.Text);
-            selectedItem.ItemId = int.Parse(lblItemId.Text);
-            tableService.Served(selectedItem);
-            listViewTableOrder.Refresh();
-            lblItemId.Text = "";
-            lblOrderId.Text = "";
-            showPanel("TableView");
+            try
+            {
+                if (listViewTableOrder.SelectedItems.Count == 0)
+                    return;
+                Table selectedItem = new Table();
+                TableService tableService = new TableService();
+                selectedItem.OrderId = int.Parse(lblOrderId.Text);
+                selectedItem.ItemId = int.Parse(lblItemId.Text);
+                tableService.Served(selectedItem);
+                listViewTableOrder.Refresh();
+                lblItemId.Text = "";
+                lblOrderId.Text = "";
+                showPanel("TableView");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("please select your ordered menu" +ex);
+            }
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
@@ -261,18 +200,11 @@ namespace OrderingSystemUI
             paymentView.Show();
 
         }
-
-        private void txtBoxOrderId_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void TableView_Load(object sender, EventArgs e)
         {
             int x = 20;
             int y = -40;
             int z = 1;
-            List<Table> tablesId = tableService.GetTablesId();
             btnProfile.Text = employeeName;          
             Timer timer = new Timer();
             timer.Interval = (10 * 1000); // 10 secs
@@ -283,7 +215,7 @@ namespace OrderingSystemUI
                 MenuBar.Enabled = false;
                 MenuKitchen.Enabled = false;
             }
-            buttonList = GetButtons(tablesId);
+            
         }
         private List<Button> GetButtons(List<Table> tablesId)
         {
@@ -337,7 +269,6 @@ namespace OrderingSystemUI
                 button.BringToFront();
                 button.Click += button_Click;
                 this.Controls.Add(button);
-                buttonList.Add(button);
                 return button;
             }
             catch (Exception)
@@ -349,7 +280,11 @@ namespace OrderingSystemUI
         private void button_Click(object sender, EventArgs e)
         {
             Button selected = sender as Button;
-            MessageBox.Show(selected.Name);
+            var splitedName = selected.Name.Split(' ').Skip(1).FirstOrDefault();
+            int tableNumber = int.Parse(splitedName);
+            if (takeOrders[tableNumber-1] == null)
+                takeOrders[tableNumber-1] = new TakeOrder(tableNumber, employee);
+            CallPnlOptions(tableNumber, takeOrders[tableNumber - 1]);
         }
     }
 }
