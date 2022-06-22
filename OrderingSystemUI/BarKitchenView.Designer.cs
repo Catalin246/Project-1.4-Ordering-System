@@ -1,6 +1,6 @@
 ﻿namespace OrderingSystemUI
 {
-    partial class BarView
+    partial class BarKitchenView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BarView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BarKitchenView));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.comboBoxShowOrders = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -177,7 +177,6 @@
             // 
             // colFoodName
             // 
-
             this.colFoodName.Text = "Drink Name";
             this.colFoodName.Width = 280;
             // 
@@ -227,7 +226,7 @@
             this.lblTime.TabIndex = 31;
             this.lblTime.Text = "label1";
             // 
-            // BarView
+            // BarKitchenView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -244,8 +243,8 @@
             this.Controls.Add(this.btnReadyToServe);
             this.Controls.Add(this.btnViewOrderNote);
             this.Controls.Add(this.lblTime);
-            this.Name = "BarView";
-            this.Text = "BarView";
+            this.Name = "BarKitchenView";
+            this.Text = "BarKitchenView";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

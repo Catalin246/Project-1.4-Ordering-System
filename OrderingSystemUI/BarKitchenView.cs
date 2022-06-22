@@ -6,12 +6,12 @@ using System.Windows.Forms;
 
 namespace OrderingSystemUI
 {
-    public partial class BarView : Form
+    public partial class BarKitchenView : Form
     {
         OrderedItemService orderedItemService;
         private string EmployeeName { get; set; }
         private string EmployeeRole { get; set; }
-        public BarView(string employeeName, string role)
+        public BarKitchenView(string employeeName, string role)
         {
             InitializeComponent();
             orderedItemService = new OrderedItemService();

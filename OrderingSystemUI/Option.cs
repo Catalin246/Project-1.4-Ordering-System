@@ -24,10 +24,9 @@ namespace OrderingSystemUI
         private void btnLogout_Click(object sender, EventArgs e)
         {
             TableView tableView = new TableView(employeeName,employeeRole);
-            BarView barView = new BarView(employeeName,employeeRole);
-            KitchenView kitchenView = new KitchenView(employeeName,employeeRole);
-            kitchenView.Close();
-            barView.Close();
+            BarKitchenView barkitchenView = new BarKitchenView(employeeName,employeeRole);           
+            
+            barkitchenView.Close();
             tableView.Close();
             Login login = new Login();
             login.Show();
@@ -88,14 +87,14 @@ namespace OrderingSystemUI
 
         private void MenuKitchen_Click(object sender, EventArgs e)
         {
-            KitchenView kitchenView = new KitchenView(employeeName,employeeRole);
-            kitchenView.Show();
+            BarKitchenView barKitchenView = new BarKitchenView(employeeName, employeeRole);
+            barKitchenView.Show();
         }
 
         private void MenuBar_Click(object sender, EventArgs e)
         {
-            BarView barView = new BarView(employeeName,employeeRole);
-            barView.Show();
+            BarKitchenView barKitchenView = new BarKitchenView(employeeName,employeeRole);
+            barKitchenView.Show();
         }
     }
 }
