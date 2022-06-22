@@ -19,7 +19,7 @@ namespace OrderingSystemLogic
 
         public void AddOrderesItem(OrderedItem orderedItem, Order order)
         {
-            orderedItemdb.Add(orderedItem,order);
+            orderedItemdb.AddOrderesItem(orderedItem,order);
         }
 
         public List<OrderedItem> GetOrderedItemsByOrder(int orderID)

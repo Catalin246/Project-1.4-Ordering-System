@@ -354,6 +354,7 @@
             // 
             // comboBoxCourse
             // 
+            this.comboBoxCourse.Enabled = false;
             this.comboBoxCourse.FormattingEnabled = true;
             this.comboBoxCourse.Items.AddRange(new object[] {
             "none",

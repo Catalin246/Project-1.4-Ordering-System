@@ -19,6 +19,7 @@ namespace OrderingSystemUI
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Login());
             Application.Run(new TableView("Steven","Waiter"));
+            //Application.Run(new TakeOrder());
         }
     }
 }
