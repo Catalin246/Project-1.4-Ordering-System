@@ -144,7 +144,7 @@ namespace OrderingSystemUI
         }
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            BarView barViewForm = new BarView(this.employeeName, this.employeeRole);
+            BarKitchenView barViewForm = new BarKitchenView(this.employeeName, this.employeeRole);
             barViewForm.Show();
         }
 

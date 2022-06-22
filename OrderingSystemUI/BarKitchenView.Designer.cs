@@ -1,6 +1,6 @@
 ﻿namespace OrderingSystemUI
 {
-    partial class BarView
+    partial class BarKitchenView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BarView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BarKitchenView));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.comboBoxShowOrders = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
