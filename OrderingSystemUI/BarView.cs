@@ -17,13 +17,7 @@ namespace OrderingSystemUI
             orderedItemService = new OrderedItemService();
 
             this.EmployeeName = employeeName;
-            this.EmployeeRole = role;
-
-            //making all buttons disabled first.
-            //these will be enabled when some actions are done.
-            btnReadyToServe.Enabled = false;
-            btnViewOrderNote.Enabled = false;
-            comboBoxCourse.Enabled = false;
+            this.EmployeeRole = role;           
 
             //adding 2 options (running & finished) order to the view order combo.
             comboBoxShowOrders.Items.Clear();
@@ -35,44 +29,93 @@ namespace OrderingSystemUI
             comboBoxTable.Items.Clear();
             comboBoxTable.Items.Add("none");
             comboBoxTable.SelectedIndex = 0;
-            comboBoxTable.Items.Add("Table 1");
-            comboBoxTable.Items.Add("Table 2");
-            comboBoxTable.Items.Add("Table 3");
-            comboBoxTable.Items.Add("Table 4");
-            comboBoxTable.Items.Add("Table 5");
-            comboBoxTable.Items.Add("Table 6");
-            comboBoxTable.Items.Add("Table 7");
-            comboBoxTable.Items.Add("Table 8");
-            comboBoxTable.Items.Add("Table 9");
-            comboBoxTable.Items.Add("Table 10");
 
-            //adding options to course combo.
-            comboBoxCourse.Items.Clear();
-            comboBoxCourse.Items.Add("none");
-            comboBoxCourse.SelectedIndex = 0; 
-            comboBoxCourse.Items.Add("Beer");
-            comboBoxCourse.Items.Add("Soft");
-            comboBoxCourse.Items.Add("Coffee");
-            comboBoxCourse.Items.Add("Tea");
-            comboBoxCourse.Items.Add("Spirit Drink");
-            comboBoxCourse.Items.Add("Wine");           
+            for (int i = 1; i < 11; i++)
+            {
+                comboBoxTable.Items.Add("Table " + i);
+            }           
+            
+            CheckEmployeeRole();
+        }
 
+        public void CheckEmployeeRole()
+        {
+            try
+            {
+                if (this.EmployeeRole == "Bartender")
+                {      
+                    //adding options to course combo.
+                    comboBoxCourse.Items.Clear();
+                    comboBoxCourse.Items.Add("none");
+                    comboBoxCourse.SelectedIndex = 0;
+                    comboBoxCourse.Items.Add("Beer");
+                    comboBoxCourse.Items.Add("Soft");
+                    comboBoxCourse.Items.Add("Coffee");
+                    comboBoxCourse.Items.Add("Tea");
+                    comboBoxCourse.Items.Add("Spirit Drink");
+                    comboBoxCourse.Items.Add("Wine");
 
-            LoadListView();
+                    LoadForm();
+                }
+                else if (this.EmployeeRole == "Cook")
+                {         
+                    comboBoxCourse.Items.Clear();
+                    comboBoxCourse.Items.Add("none");
+                    comboBoxCourse.SelectedIndex = 0;
+                    comboBoxCourse.Items.Add("Lunch Starter");
+                    comboBoxCourse.Items.Add("Lunch Main");
+                    comboBoxCourse.Items.Add("Lunch Desert");
+                    comboBoxCourse.Items.Add("Diner Starter");
+                    comboBoxCourse.Items.Add("Diner Entrement");
+                    comboBoxCourse.Items.Add("Diner Main");
+                    comboBoxCourse.Items.Add("Diner Desert");
+
+                    LoadForm();
+                }
+                else
+                {
+                    MessageBox.Show("You do not have permission to load this form.");
+                }
+
+                LoadForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public void LoadForm()
+        {
+            try
+            {
+                //making all buttons disabled first.
+                //these will be enabled when some actions are done.
+                btnReadyToServe.Enabled = false;
+                btnViewOrderNote.Enabled = false;
+                comboBoxCourse.Enabled = false;
+
+                //setting things that should load everytime the listview refreshes itself.
+                btnemployeeName.Text = "Employee: " + EmployeeName;
+                comboBoxCourse.SelectedItem = "none";
+                comboBoxTable.SelectedItem = "none"; //default combobox options.                
+
+                lblTime.Text = DateTime.Now.ToString("HH:mm"); //in every refresh, time is updating. 
+
+                LoadListView();
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void LoadListView()
         {
             try
             {
-                //setting things that should load everytime the listview refreshes itself.
-                btnemployeeName.Text = "Employee: " + EmployeeName;
-                comboBoxCourse.SelectedItem = "none";
-                comboBoxTable.SelectedItem = "none"; //default combobox options.
-                comboBoxCourse.Enabled = false; //this cannot be enabled unless table is selected.
-
-                lblTime.Text = DateTime.Now.ToString("HH:mm"); //in every refresh, time is updating. 
-
                 if (comboBoxShowOrders.SelectedIndex == 0) //if running orders is selected
                 {
                     LoadRunningOrders();
@@ -96,7 +139,7 @@ namespace OrderingSystemUI
                 listViewBar.Items.Clear();
                 comboBoxTable.Enabled = true;
 
-                List<OrderedItem> orderedItemList = orderedItemService.GetPreparingDrinkItemsFromDaoClass();
+                List<OrderedItem> orderedItemList = GetOrderedRunningItems();
 
                 foreach (OrderedItem orderitem in orderedItemList)
                 {
@@ -131,7 +174,7 @@ namespace OrderingSystemUI
                 comboBoxCourse.Enabled = false;
                 comboBoxTable.Enabled = false;
 
-                List<OrderedItem> orderedItemList = orderedItemService.GetFinishedDrinkItemsFromDaoClass();
+                List<OrderedItem> orderedItemList = GetFinishedItems();
 
                 foreach (OrderedItem orderitem in orderedItemList)
                 {
@@ -167,7 +210,7 @@ namespace OrderingSystemUI
                 {
                     OrderedItem selected = (OrderedItem)listViewBar.SelectedItems[0].Tag;
 
-                    if (selected.Status != Status.Preparing)
+                    if (selected.Status != Status.Ordered)
                     {
                         btnReadyToServe.Enabled = false;
                     }
@@ -206,7 +249,7 @@ namespace OrderingSystemUI
         {
             try
             {
-                LoadListView(); //refreshes the form in every 30 scs
+                LoadForm(); //refreshes the form in every 30 scs
             }
             catch (Exception ex)
             {
@@ -233,7 +276,7 @@ namespace OrderingSystemUI
         {
             DateTime now = DateTime.Now;
             TimeSpan diff = now.Subtract(orderTime);
-            double minuteDiff = Convert.ToInt32(diff.TotalMinutes);
+            int minuteDiff = Convert.ToInt32(diff.TotalMinutes);
 
             if (10 < minuteDiff)
             {
@@ -292,15 +335,15 @@ namespace OrderingSystemUI
                     {
                         OrderedItem selectedItem = (OrderedItem)listViewBar.SelectedItems[i].Tag;
                         int orderId = selectedItem.OrderId;
-                        string itemName = selectedItem.Name;
+                        int itemId = selectedItem.ItemID;
 
-                        orderedItemService.ChangeOrderStatusToReady(orderId, itemName);
+                        orderedItemService.ChangeOrderStatusToReady(orderId, itemId);
                     }
                 }
 
                 btnReadyToServe.Enabled = false;
 
-                LoadListView();
+                LoadForm();
 
             }
             catch (Exception ex)
@@ -314,7 +357,7 @@ namespace OrderingSystemUI
             try
             {
                 //everytime showing mode changes, listview must renew itself.
-                LoadListView();
+                LoadForm();
             }
             catch (Exception ex)
             {
@@ -398,6 +441,37 @@ namespace OrderingSystemUI
             Option optionForm = new Option(EmployeeName, EmployeeRole);
             optionForm.Show();
             
+        }
+
+        private List<OrderedItem> GetOrderedRunningItems()
+        {
+            List<OrderedItem> orderedItemList = new List<OrderedItem>();
+
+            if (this.EmployeeRole == "Bartender")
+            {
+                orderedItemList = orderedItemService.GetPreparingDrinkItemsFromDaoClass();
+            }
+            else if (this.EmployeeRole == "Cook")
+            {
+                orderedItemList = orderedItemService.GetPreparingFoodItemsFromDaoClass();
+            }
+
+            return orderedItemList;
+        }
+
+        private List<OrderedItem> GetFinishedItems()
+        {
+            List<OrderedItem> orderedItemList = new List<OrderedItem>();
+
+            if (this.EmployeeRole == "Bartender")
+            {
+                orderedItemList = orderedItemService.GetFinishedDrinkItemsFromDaoClass();
+            }
+            else if (this.EmployeeRole == "Cook")
+            {
+                orderedItemList = orderedItemService.GetFinishedFoodItemsFromDaoClass();
+            }
+            return orderedItemList;
         }
     }
 }
