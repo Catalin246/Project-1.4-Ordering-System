@@ -19,7 +19,7 @@ namespace OrderingSystemLogic
 
         public void AddOrderesItem(OrderedItem orderedItem, Order order)
         {
-            orderedItemdb.Add(orderedItem,order);
+            orderedItemdb.AddOrderesItem(orderedItem,order);
         }
 
         public List<OrderedItem> GetOrderedItemsByOrder(int orderID)
@@ -51,9 +51,9 @@ namespace OrderingSystemLogic
             return orderedItemdb.GetFinishedDrinkItemsFromDatabase();
         }
 
-        public void ChangeOrderStatusToReady(int orderNo, string ItemName)
+        public void ChangeOrderStatusToReady(int orderNo, int itemId)
         {
-            orderedItemdb.ChangeFoodAndDrinkStatusToReady(orderNo, ItemName);
+            orderedItemdb.ChangeFoodAndDrinkStatusToReady(orderNo, itemId);
         }
 
         public void ChangeOrderStatusToPaid(int orderID)

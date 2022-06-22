@@ -30,7 +30,15 @@ namespace OrderingSystemUI
             lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
             lblEmployeeName.Text = "Employee Name: " + employee.EmployeeName.ToString();
         }
-      
+        public TakeOrder()
+        {
+            //this.employee = employee;
+            //this.tableNumber = tableNumber;
+            InitializeComponent();
+            //lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
+            //lblEmployeeName.Text = "Employee Name: " + employee.EmployeeName.ToString();
+        }
+
         //Display menu items
         public void DisplayItems(List<Item> items)
         {
@@ -122,6 +130,8 @@ namespace OrderingSystemUI
         {
             try
             {
+                comboBoxCourse.Text = "none";
+                comboBoxCourse.Enabled = true;
                 ItemService itemService = new ItemService();
                 List<Item> items = itemService.GetDrinks();
                 DisplayItems(items);
@@ -136,6 +146,8 @@ namespace OrderingSystemUI
         {
             try
             {
+                comboBoxCourse.Text = "none";
+                comboBoxCourse.Enabled = false;
                 ItemService itemService = new ItemService();
                 List<Item> items = itemService.GetStarters(CheckDinerTime());
                 DisplayItems(items);                               
@@ -150,6 +162,8 @@ namespace OrderingSystemUI
         {
             try
             {
+                comboBoxCourse.Text = "none";
+                comboBoxCourse.Enabled = false;
                 ItemService itemService = new ItemService();
                 List<Item> items = itemService.GetMains(CheckDinerTime());
                 DisplayItems(items);
@@ -164,6 +178,8 @@ namespace OrderingSystemUI
         {
             try
             {
+                comboBoxCourse.Text = "none";
+                comboBoxCourse.Enabled = false;
                 ItemService itemService = new ItemService();
                 List<Item> items = itemService.GetDeserts(CheckDinerTime());
                 DisplayItems(items);
@@ -199,8 +215,8 @@ namespace OrderingSystemUI
                 OrderedItemService orderedItemService = new OrderedItemService();
                 if (btnModify.Enabled == true)
                 {
-                    orderService.AddOrder(order);
-                    order.OrderId = orderService.GetOrderId();
+                    orderService.AddOrder(order);//add order with an auto generated id in database
+                    order.OrderId = orderService.GetOrderId();//get the auto genarated id from database
                 }
 
                 foreach (OrderedItem item in order.OrderedItems)
@@ -407,17 +423,8 @@ namespace OrderingSystemUI
         {
             try
             {
-                if (comboBoxCourse.SelectedIndex == 0)
-                {
-                    return;
-                }
-                else if (comboBoxCourse.SelectedIndex == 0)
-                {
-                    return;
-                }
-
                 string courseName = comboBoxCourse.SelectedItem.ToString();
-
+                int numberOfItemsSelected = 0;
                 foreach (ListViewItem item in listViewMenuItems.Items)
                 {
                     Item orderedItem = (Item)item.Tag;
@@ -425,7 +432,9 @@ namespace OrderingSystemUI
                     if (orderedItem.ItemType == courseName)
                     {
                         item.Selected = true;
-                        listViewMenuItems.EnsureVisible(listViewMenuItems.Items.IndexOf(listViewMenuItems.SelectedItems[0]));
+                        listViewMenuItems.EnsureVisible(listViewMenuItems.Items.IndexOf(listViewMenuItems.SelectedItems[0]) + numberOfItemsSelected);
+                        
+                        numberOfItemsSelected++;
                     }
                     else
                     {

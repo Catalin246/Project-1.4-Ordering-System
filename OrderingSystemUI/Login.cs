@@ -65,8 +65,8 @@ namespace OrderingSystemUI
             switch (employeeRole)
             {
                 case "Cook":
-                    KitchenView kitchenView = new KitchenView(employeeName, employeeRole);
-                    kitchenView.Show();                    
+                    BarView barView1 = new BarView(employeeName, employeeRole);
+                    barView1.Show();                    
                     this.Hide();
                     break;
                 case "Waiter":

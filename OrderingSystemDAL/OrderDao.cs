@@ -37,26 +37,23 @@ namespace OrderingSystemDAL
 
         public int GetOrderId()
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
-            conn.Open();
-            SqlCommand command = new SqlCommand("SELECT Max([Order_Id]) FROM dbo.[Order]", conn);
+            OpenConnection();
+            SqlCommand command = new SqlCommand("SELECT Max([Order_Id]) FROM dbo.[Order]", OpenConnection());
             Int32 count = (Int32)command.ExecuteScalar();
-            conn.Close();
+            CloseConnection();
             return (int)count;
         }
-        public void Add(Order order)
+        public void AddOrder(Order order)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
-            conn.Open();
+            OpenConnection();
             try
             {
                 SqlCommand command = new SqlCommand(" INSERT INTO dbo.[Order] " +
-                        " VALUES(@Order_Time, @Table_Id, @Order_Status);", conn);              
+                        " VALUES(@Order_Time, @Table_Id, @Order_Status);", OpenConnection());              
 
-                command.Parameters.AddWithValue("@Order_Id", order.OrderId);
                 command.Parameters.AddWithValue("@Order_Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 command.Parameters.AddWithValue("@Table_Id", order.TableId);
-                command.Parameters.AddWithValue("@Order_Status", "ordered");
+                command.Parameters.AddWithValue("@Order_Status", "Ordered");
 
                 int nrOfRowsAffected = command.ExecuteNonQuery();
             }
@@ -64,17 +61,16 @@ namespace OrderingSystemDAL
             {
                 throw new Exception("Take order failed! " + e.Message);
             }
-            conn.Close();
+            CloseConnection(); 
         }
 
 
         public void MarkOrderPaid(int tableID)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["2122chapeau.database.windows.net"].ConnectionString);
-            conn.Open();
+            OpenConnection();
             try
             {
-                SqlCommand command = new SqlCommand("Update dbo.[Order] SET [Order_Status] = 'Paid' WHERE [Table_Id] = @tableId;", conn);
+                SqlCommand command = new SqlCommand("Update dbo.[Order] SET [Order_Status] = 'Paid' WHERE [Table_Id] = @tableId;", OpenConnection());
 
                 command.Parameters.AddWithValue("@tableID", tableID);
 
@@ -84,7 +80,7 @@ namespace OrderingSystemDAL
             {
                 throw new Exception("Marking Order Paid failed! " + e.Message);
             }
-            conn.Close();
+            CloseConnection();
         }
 
         // Gets list of Order IDs with associated Table ID
