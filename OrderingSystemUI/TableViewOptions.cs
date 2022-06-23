@@ -31,6 +31,7 @@ namespace OrderingSystemUI
             //Show take order form (catalin;)))  
             ACustomerIsSitting(tableNumber, "ordered");
             TableService tableService = new TableService();
+            tableService.Order(tableNumber);
             tableView.Hide();
             takeOrder.tableView = tableView;
             takeOrder.Show();
