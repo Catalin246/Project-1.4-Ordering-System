@@ -1,83 +1,128 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using OrderingSystemModel;
 using OrderingSystemLogic;
+using System.Windows.Forms;
 
 namespace OrderingSystemUI
 {
-    //NOTE: Kitchenview and barview both uses almost similar code (one uses food versions, other uses drink versions) 
-    //i added comments on bar view which are explaining the code so if you want to see the comments, they are in BarView.cs
-    //the same comments apply to this code (because they are 99% same).
-    public partial class KitchenView : Form
+    public partial class BarKitchenView : Form
     {
         OrderedItemService orderedItemService;
         private string EmployeeName { get; set; }
         private string EmployeeRole { get; set; }
-
-        public KitchenView(string employeeName, string role)
+        public BarKitchenView(string employeeName, string role)
         {
             InitializeComponent();
             orderedItemService = new OrderedItemService();
 
             this.EmployeeName = employeeName;
-            this.EmployeeRole = role;
+            this.EmployeeRole = role;           
 
-            btnReadyToServe.Enabled = false;
-            btnViewOrderNote.Enabled = false;
-            comboBoxCourse.Enabled = false;
-
+            //adding 2 options (running & finished) order to the view order combo.
             comboBoxShowOrders.Items.Clear();
             comboBoxShowOrders.Items.Add("Running Orders");
             comboBoxShowOrders.Items.Add("Finished Orders");
             comboBoxShowOrders.SelectedIndex = 0;
 
+            //adding options to table filter combo.
             comboBoxTable.Items.Clear();
             comboBoxTable.Items.Add("none");
             comboBoxTable.SelectedIndex = 0;
-            comboBoxTable.Items.Add("Table 1");
-            comboBoxTable.Items.Add("Table 2");
-            comboBoxTable.Items.Add("Table 3");
-            comboBoxTable.Items.Add("Table 4");
-            comboBoxTable.Items.Add("Table 5");
-            comboBoxTable.Items.Add("Table 6");
-            comboBoxTable.Items.Add("Table 7");
-            comboBoxTable.Items.Add("Table 8");
-            comboBoxTable.Items.Add("Table 9");
-            comboBoxTable.Items.Add("Table 10");
 
-            comboBoxCourse.Items.Clear();
-            comboBoxCourse.Items.Add("none");
-            comboBoxCourse.SelectedIndex = 0;
-            comboBoxCourse.Items.Add("Lunch Starter");
-            comboBoxCourse.Items.Add("Lunch Main");
-            comboBoxCourse.Items.Add("Lunch Desert");
-            comboBoxCourse.Items.Add("Diner Starter");
-            comboBoxCourse.Items.Add("Diner Entrement");
-            comboBoxCourse.Items.Add("Diner Main");
-            comboBoxCourse.Items.Add("Diner Desert");
+            for (int i = 1; i < 11; i++)
+            {
+                comboBoxTable.Items.Add("Table " + i);
+            }           
+            
+            CheckEmployeeRole();
+        }
 
-            LoadListView();
+        public void CheckEmployeeRole()
+        {
+            try
+            {
+                if (this.EmployeeRole == "Bartender")
+                {      
+                    //adding options to course combo.
+                    comboBoxCourse.Items.Clear();
+                    comboBoxCourse.Items.Add("none");
+                    comboBoxCourse.SelectedIndex = 0;
+                    comboBoxCourse.Items.Add("Beer");
+                    comboBoxCourse.Items.Add("Soft");
+                    comboBoxCourse.Items.Add("Coffee");
+                    comboBoxCourse.Items.Add("Tea");
+                    comboBoxCourse.Items.Add("Spirit Drink");
+                    comboBoxCourse.Items.Add("Wine");
+
+                    LoadForm();
+                }
+                else if (this.EmployeeRole == "Cook")
+                {         
+                    comboBoxCourse.Items.Clear();
+                    comboBoxCourse.Items.Add("none");
+                    comboBoxCourse.SelectedIndex = 0;
+                    comboBoxCourse.Items.Add("Lunch Starter");
+                    comboBoxCourse.Items.Add("Lunch Main");
+                    comboBoxCourse.Items.Add("Lunch Desert");
+                    comboBoxCourse.Items.Add("Diner Starter");
+                    comboBoxCourse.Items.Add("Diner Entrement");
+                    comboBoxCourse.Items.Add("Diner Main");
+                    comboBoxCourse.Items.Add("Diner Desert");
+
+                    LoadForm();
+                }
+                else
+                {
+                    MessageBox.Show("You do not have permission to load this form.");
+                }
+
+                LoadForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public void LoadForm()
+        {
+            try
+            {
+                //making all buttons disabled first.
+                //these will be enabled when some actions are done.
+                btnReadyToServe.Enabled = false;
+                btnViewOrderNote.Enabled = false;
+                comboBoxCourse.Enabled = false;
+
+                //setting things that should load everytime the listview refreshes itself.
+                btnemployeeName.Text = "Employee: " + EmployeeName;
+                comboBoxCourse.SelectedItem = "none";
+                comboBoxTable.SelectedItem = "none"; //default combobox options.                
+
+                lblTime.Text = DateTime.Now.ToString("HH:mm"); //in every refresh, time is updating. 
+
+                LoadListView();
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void LoadListView()
         {
             try
             {
-                btnemployeeName.Text = "Employee: " + EmployeeName;
-                comboBoxCourse.SelectedItem = "none";
-                comboBoxTable.SelectedItem = "none";
-                comboBoxCourse.Enabled = false;                
-
-                lblTime.Text = DateTime.Now.ToString("HH:mm");
-
-                if (comboBoxShowOrders.SelectedIndex == 0)
+                if (comboBoxShowOrders.SelectedIndex == 0) //if running orders is selected
                 {
                     LoadRunningOrders();
                 }
                 else
                 {
-                    LoadFinishedOrders();
+                    LoadFinishedOrders(); //if "finished orders" is selected.
                 }
             }
             catch (Exception exc)
@@ -90,11 +135,11 @@ namespace OrderingSystemUI
         {
             try
             {
-                listViewKitchen.MultiSelect = true;
-                listViewKitchen.Items.Clear();
+                listViewBar.MultiSelect = true;
+                listViewBar.Items.Clear();
                 comboBoxTable.Enabled = true;
 
-                List<OrderedItem> orderedItemList = orderedItemService.GetPreparingFoodItemsFromDaoClass();
+                List<OrderedItem> orderedItemList = GetOrderedRunningItems();
 
                 foreach (OrderedItem orderitem in orderedItemList)
                 {
@@ -108,7 +153,7 @@ namespace OrderingSystemUI
                     list.SubItems.Add(orderitem.Status.ToString());
 
                     list.Tag = orderitem;
-                    listViewKitchen.Items.Add(list);
+                    listViewBar.Items.Add(list);
                 }
             }
             catch (Exception exc)
@@ -121,13 +166,15 @@ namespace OrderingSystemUI
         {
             try
             {
-                listViewKitchen.MultiSelect = false;
+                //when listview shows the finished orders, REadyToServe button should be disabled. 
+                // because these orders already "finished" so they are already "Ready Be Serve"
+                listViewBar.MultiSelect = false;
                 btnReadyToServe.Enabled = false;
-                listViewKitchen.Items.Clear();
+                listViewBar.Items.Clear();
                 comboBoxCourse.Enabled = false;
                 comboBoxTable.Enabled = false;
 
-                List<OrderedItem> orderedItemList = orderedItemService.GetFinishedFoodItemsFromDaoClass();
+                List<OrderedItem> orderedItemList = GetFinishedItems();
 
                 foreach (OrderedItem orderitem in orderedItemList)
                 {
@@ -142,7 +189,7 @@ namespace OrderingSystemUI
 
 
                     list.Tag = orderitem;
-                    listViewKitchen.Items.Add(list);
+                    listViewBar.Items.Add(list);
                 }
             }
             catch (Exception exc)
@@ -151,19 +198,19 @@ namespace OrderingSystemUI
             }
         }
 
-        private void listViewKitchen_SelectedIndexChanged(object sender, EventArgs e)
+        private void listViewBar_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                if (listViewKitchen.SelectedItems.Count == 0)
+                if (listViewBar.SelectedItems.Count == 0)
                 {
                     return;
                 }
                 else
                 {
-                    OrderedItem selected = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+                    OrderedItem selected = (OrderedItem)listViewBar.SelectedItems[0].Tag;
 
-                    if (selected.Status != Status.Preparing)
+                    if (selected.Status != Status.Ordered)
                     {
                         btnReadyToServe.Enabled = false;
                     }
@@ -172,13 +219,15 @@ namespace OrderingSystemUI
                         btnReadyToServe.Enabled = true;
                     }
 
-                    if (listViewKitchen.SelectedItems.Count > 1)
+                    if (listViewBar.SelectedItems.Count > 1)
                     {
+                        //disabling the ViewOrderNote button if more than 1 items are selected.
                         btnViewOrderNote.Enabled = false;
                     }
                     else
                     {
-                        
+                        //disabling the ViewOrderNote button if order note is "none" or null. So these won't
+                        //be seen as note in the system.
                         if ((selected.Note == "") || (selected.Note == "none"))
                         {
                             btnViewOrderNote.Enabled = false;
@@ -200,7 +249,7 @@ namespace OrderingSystemUI
         {
             try
             {
-                LoadListView(); //refreshes the form in every 30 scs
+                LoadForm(); //refreshes the form in every 30 scs
             }
             catch (Exception ex)
             {
@@ -217,20 +266,21 @@ namespace OrderingSystemUI
             }
             else
             {
+                //putting !!! to make note more visible.
                 output = "!!! YES";
             }
             return output;
         }
 
-
         private string ShowTimePassed(DateTime orderTime)
         {
             DateTime now = DateTime.Now;
             TimeSpan diff = now.Subtract(orderTime);
-            double minuteDiff = Convert.ToInt32(diff.TotalMinutes);
+            int minuteDiff = Convert.ToInt32(diff.TotalMinutes);
 
             if (10 < minuteDiff)
             {
+                //if the order time is more than 10 mins ago, the bartender/chef must be hurry. so this is a notification..
                 return $"!!! {minuteDiff} min ago";
             }
             else
@@ -241,9 +291,10 @@ namespace OrderingSystemUI
 
         private string ShowTimePassedForFinishedOrders(DateTime orderTime)
         {
+            //finished orders dont need any notification. so they recieve normal time.
             DateTime now = DateTime.Now;
             TimeSpan diff = now.Subtract(orderTime);
-            double minuteDiff = Convert.ToInt32(diff.TotalMinutes);
+            int minuteDiff = Convert.ToInt32(diff.TotalMinutes);
 
             return $"{minuteDiff} min ago";
 
@@ -253,9 +304,10 @@ namespace OrderingSystemUI
         {
             try
             {
+                //this is showing note:
                 string output = "";
 
-                OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[0].Tag;
+                OrderedItem selectedItem = (OrderedItem)listViewBar.SelectedItems[0].Tag;
                 output = $"{selectedItem.OrderId}\n\n {selectedItem.Name} \n\n NOTE: \n\n {selectedItem.Note}";
 
                 MessageBox.Show(output);
@@ -271,27 +323,27 @@ namespace OrderingSystemUI
         {
             try
             {
-                if (listViewKitchen.SelectedItems[0] == null)
+                if (listViewBar.SelectedItems[0] == null)
                 {
                     return;
                 }
 
-                if (listViewKitchen.SelectedItems.Count > 0)
+                if (listViewBar.SelectedItems.Count > 0)
                 {
-
-                    for (int i = 0; i < listViewKitchen.SelectedItems.Count; i++)
+                    //for every item selected in listview, this updates the data.
+                    for (int i = 0; i < listViewBar.SelectedItems.Count; i++)
                     {
-                        OrderedItem selectedItem = (OrderedItem)listViewKitchen.SelectedItems[i].Tag;
+                        OrderedItem selectedItem = (OrderedItem)listViewBar.SelectedItems[i].Tag;
                         int orderId = selectedItem.OrderId;
-                        string itemName = selectedItem.Name;
+                        int itemId = selectedItem.ItemID;
 
-                        orderedItemService.ChangeOrderStatusToReady(orderId, itemName);
+                        orderedItemService.ChangeOrderStatusToReady(orderId, itemId);
                     }
                 }
 
                 btnReadyToServe.Enabled = false;
 
-                LoadListView();
+                LoadForm();
 
             }
             catch (Exception ex)
@@ -304,7 +356,8 @@ namespace OrderingSystemUI
         {
             try
             {
-                LoadListView();
+                //everytime showing mode changes, listview must renew itself.
+                LoadForm();
             }
             catch (Exception ex)
             {
@@ -322,19 +375,19 @@ namespace OrderingSystemUI
                 }
 
                 string tableNo = comboBoxTable.SelectedItem.ToString();
-                tableNo = tableNo.Replace("Table ", "");
+                tableNo = tableNo.Replace("Table ", ""); //getting only the number from the combobox.
                 int index = int.Parse(tableNo);
 
-                foreach (ListViewItem item in listViewKitchen.Items)
+                foreach (ListViewItem item in listViewBar.Items)
                 {
                     OrderedItem orderedItem = (OrderedItem)item.Tag;
 
-                    if (orderedItem.TableId == index)
+                    if (orderedItem.TableId == index) //if order's table id is same with the item in listview
                     {
                         item.Selected = true;
                     }
                 }
-                comboBoxCourse.Enabled = true;
+                comboBoxCourse.Enabled = true; //after combobox table is selected, course combobox is also enabled.
             }
             catch (Exception ex)
             {
@@ -343,7 +396,7 @@ namespace OrderingSystemUI
             }
         }
 
-        private void comboBoxCourse_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void comboBoxCourse_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -362,12 +415,13 @@ namespace OrderingSystemUI
 
                 string courseName = comboBoxCourse.SelectedItem.ToString();
 
-                foreach (ListViewItem item in listViewKitchen.Items)
+                foreach (ListViewItem item in listViewBar.Items)
                 {
                     OrderedItem orderedItem = (OrderedItem)item.Tag;
 
                     if (orderedItem.Category == courseName && orderedItem.TableId == index)
                     {
+                        //if both category names (from combobox) and table ids(from combobox) same, this item should be selected automatically.
                         item.Selected = true;
                     }
                     else
@@ -385,9 +439,40 @@ namespace OrderingSystemUI
         private void btnemployeeName_Click(object sender, EventArgs e)
         {
             Option optionForm = new Option(EmployeeName, EmployeeRole);
+            this.Close();
             optionForm.Show();
             
         }
+
+        private List<OrderedItem> GetOrderedRunningItems()
+        {
+            List<OrderedItem> orderedItemList = new List<OrderedItem>();
+
+            if (this.EmployeeRole == "Bartender")
+            {
+                orderedItemList = orderedItemService.GetPreparingDrinkItemsFromDaoClass();
+            }
+            else if (this.EmployeeRole == "Cook")
+            {
+                orderedItemList = orderedItemService.GetPreparingFoodItemsFromDaoClass();
+            }
+
+            return orderedItemList;
+        }
+
+        private List<OrderedItem> GetFinishedItems()
+        {
+            List<OrderedItem> orderedItemList = new List<OrderedItem>();
+
+            if (this.EmployeeRole == "Bartender")
+            {
+                orderedItemList = orderedItemService.GetFinishedDrinkItemsFromDaoClass();
+            }
+            else if (this.EmployeeRole == "Cook")
+            {
+                orderedItemList = orderedItemService.GetFinishedFoodItemsFromDaoClass();
+            }
+            return orderedItemList;
+        }
     }
 }
-

@@ -24,6 +24,29 @@ namespace OrderingSystemModel
         public int tableId;
         private float tip;
 
+        private float splitTotal;
+        public float SplitTotal { get { return splitTotal; } set { splitTotal = value; } }
+
+        public void SetPaymentType(String paymentOption)
+        {
+            switch (paymentOption)
+            {
+                case "Credit Card":
+                    this.PaymentType = PaymentType.creditCard;
+                    break;
+                case "Debit Card":
+                    this.PaymentType = PaymentType.debitCard;
+                    break;
+                case "Cash":
+                    this.PaymentType = PaymentType.cash;
+                    break;
+                case "Mixed Payment":
+                    this.PaymentType = PaymentType.mixedPayment;
+                    break;
+            }
+
+        }
+
         public float BillTotalWithoutTip // returns total with vat
         {
             get
@@ -31,11 +54,24 @@ namespace OrderingSystemModel
                 float total = 0;
                 foreach (OrderedItem orderedItem in this.orderedItems)
                 {
-                    total += orderedItem.TotalPriceItem + orderedItem.VatAmount;
+                    total += orderedItem.TotalPriceItem;
                 }
                 return total;
             }
             
+        }
+
+        public float TotalVatAmount
+        {
+            get
+            {
+                float total = 0;
+                foreach (OrderedItem orderedItem in this.orderedItems)
+                {
+                    total += orderedItem.VatAmount;
+                }
+                return total;
+            }
         }
       
 
