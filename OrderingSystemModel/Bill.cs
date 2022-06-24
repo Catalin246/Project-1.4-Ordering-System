@@ -20,6 +20,7 @@ namespace OrderingSystemModel
         public PaymentType PaymentType { get { return paymentType; } set { paymentType = value; } }
         public string BillFeedback { get; set; }
         public float Tip { get { return tip; } set { tip = value; } }
+        public float TotalWithTIP { get { return Tip + BillTotalWithoutTip; } }
         public int tableId;
         private float tip;
 
