@@ -115,6 +115,35 @@ namespace OrderingSystemDAL
             }
             return dataTable;
         }
+
+        protected DataTable ExecuteSelectQuery(string query)
+        {
+            SqlCommand command = new SqlCommand();
+            DataTable dataTable;
+            DataSet dataSet = new DataSet();
+
+            try
+            {
+                command.Connection = OpenConnection();
+                command.CommandText = query;
+                command.ExecuteNonQuery();
+                adapter.SelectCommand = command;
+                adapter.Fill(dataSet);
+                dataTable = dataSet.Tables[0];
+            }
+            catch (SqlException e)
+            {
+                // Print.ErrorLog(e);
+                Console.WriteLine(e);
+                return null;
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+            return dataTable;
+        }
         public static void ErrorLogging(Exception ex)
         {
             string strPath = @"..\..\..\ExceptionLog.txt";
