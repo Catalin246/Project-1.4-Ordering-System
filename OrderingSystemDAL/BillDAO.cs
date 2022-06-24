@@ -15,16 +15,7 @@ namespace OrderingSystemDAL
     public class BillDAO : BaseDao
     {
         public Order order;
-        private readonly SqlConnection dbConnection;//my sql connection object
-
-        public BillDAO()
-        {
-            string connString = ConfigurationManager
-                .ConnectionStrings["2122chapeau.database.windows.net"]
-                .ConnectionString;
-
-            dbConnection = new SqlConnection(connString);//passing my database to my sql object
-        }
+        private SqlConnection conn;
 
         public List<Bill> GetOpenBills(int tableID)
         {
@@ -52,13 +43,33 @@ namespace OrderingSystemDAL
 
         public void CloseBill(Bill bill, float splitAmong) //stores bill in the database
         {
-            dbConnection.Open();
+            this.OpenConnection();
             try
             {
-                SqlCommand command = new SqlCommand("INSERT INTO dbo.Bill" + " VALUES(@PaymentType, @BillFeedback, @BillTotal, @Tip, 1, @TableID);", dbConnection);
+                SqlCommand command = new SqlCommand("INSERT INTO dbo.Bill" + " VALUES(@PaymentType, @BillFeedback, @BillTotal, @Tip, 1, @TableID);", OpenConnection());
                 command.Parameters.AddWithValue("@PaymentType", bill.PaymentType.ToString());
                 command.Parameters.AddWithValue("@BillFeedback", bill.BillFeedback);
-                command.Parameters.AddWithValue("@BillTotal", Decimal.Round((decimal)(bill.BillTotalWithoutTip / splitAmong), 2));
+                command.Parameters.AddWithValue("@BillTotal", Decimal.Round((decimal)(bill.BillTotalWithoutTip), 2));
+                command.Parameters.AddWithValue("@Tip", Decimal.Round((decimal)(bill.Tip), 2));
+                command.Parameters.AddWithValue("@TableID", bill.tableId);
+                int numOfRowsAdded = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Failed to save bill!" + e.Message);
+            }
+            this.CloseConnection();
+        }
+
+        public void CloseSplitBill(Bill bill, float splitAmong) //stores bill in the database
+        {
+            this.OpenConnection();
+            try
+            {
+                SqlCommand command = new SqlCommand("INSERT INTO dbo.Bill" + " VALUES(@PaymentType, @BillFeedback, @BillTotal, @Tip, 1, @TableID);", OpenConnection());
+                command.Parameters.AddWithValue("@PaymentType", bill.PaymentType.ToString());
+                command.Parameters.AddWithValue("@BillFeedback", bill.BillFeedback);
+                command.Parameters.AddWithValue("@BillTotal", Decimal.Round((decimal)(bill.SplitTotal), 2));
                 command.Parameters.AddWithValue("@Tip", Decimal.Round((decimal)(bill.Tip / splitAmong), 2));
                 command.Parameters.AddWithValue("@TableID", bill.tableId);
                 int numOfRowsAdded = command.ExecuteNonQuery();

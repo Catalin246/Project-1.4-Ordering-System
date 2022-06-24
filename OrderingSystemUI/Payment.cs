@@ -138,6 +138,7 @@ namespace OrderingSystemUI
 
         private void buttFinalizePayment_Click(object sender, EventArgs e)
         {
+            float remainingTotal;
             if (bill != null)
             {
                 setPaymentType();
@@ -146,15 +147,26 @@ namespace OrderingSystemUI
                     MessageBox.Show("Please select a valid number from the dropdown.");
                     return;
                 }
-           
+
                 if (checkBoxSplitBill.Checked)
                 {
+                    if (bill.TotalWithTIP > bill.BillTotalWithoutTip)
+                    {
+                        remainingTotal = bill.TotalWithTIP;
+                    }
+                    else { remainingTotal = bill.BillTotalWithoutTip; }
+
                     float splitAmong = float.Parse(comboBoxSplitBill.GetItemText(comboBoxSplitBill.SelectedItem));
                     for (int i = 0; i < splitAmong; i++) //creates different bill for each of them
                     {
-                        billService.CloseBill(this.bill, splitAmong);
+                        Bill tempBill = bill;
+                        if (i + 1 == splitAmong)
+                            lastCustomer = true;
+                        splitBill = new SplitBill(tempBill, remainingTotal, lastCustomer, i + 1);
+                        splitBill.ShowDialog();
+                        remainingTotal -= bill.SplitTotal;
+                        billService.CloseSplitBill(this.bill, splitAmong);
                     }
-                    
                 }
                 else
                 {
@@ -164,7 +176,7 @@ namespace OrderingSystemUI
 
                 orderService.MarkOrdersPaid(bill.tableId); //updates all orders related to that table to paid in the database
                 foreach (Order order in bill.Orders)
-                { 
+                {
                     orderedItemService.ChangeOrderStatusToPaid(order.OrderId); //updates the ordered Items from those orders to
                                                                                //paid in the database
                 }
@@ -172,7 +184,7 @@ namespace OrderingSystemUI
                 tableService.OpenTable(bill.tableId); //set table to available
                 tableView.ChangeColor(bill.tableId, "");
                 this.cleanPaymentView();
-                
+
                 // need to delete or close orders? 
                 // clear table and display/reset bill page
             }
