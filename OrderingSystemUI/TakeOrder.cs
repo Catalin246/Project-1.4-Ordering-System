@@ -30,14 +30,6 @@ namespace OrderingSystemUI
             lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
             lblEmployeeName.Text = "Employee Name: " + employee.EmployeeName.ToString();
         }
-        public TakeOrder()
-        {
-            //this.employee = employee;
-            //this.tableNumber = tableNumber;
-            InitializeComponent();
-            //lblTableNumber.Text = "Table#" + this.tableNumber.ToString();
-            //lblEmployeeName.Text = "Employee Name: " + employee.EmployeeName.ToString();
-        }
 
         //Display menu items
         public void DisplayItems(List<Item> items)
