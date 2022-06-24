@@ -16,44 +16,37 @@ namespace OrderingSystemDAL
                                       //(which is stored in the Item table) 
         {
             string query = "SELECT * FROM dbo.Item as I join dbo.Drink as D on I.ItemId = D.DrinkItemId";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters), "DrinkType"  );
+            return ReadTables(ExecuteSelectQuery(query), "DrinkType"  );
         }
         public List<Item> GetDinnerStarters()
         {
             string query = "SELECT * FROM dbo.Item as I join dbo.Food as F on I.ItemId = F.FoodItemId where F.FoodType = 'Diner Starter' or F.FoodType = 'Diner Entrement'";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters), "FoodType");
+            return ReadTables(ExecuteSelectQuery(query), "FoodType");
         }
         public List<Item> GetLunchStarters()
         {
             string query = "SELECT * FROM dbo.Item as I join dbo.Food as F on I.ItemId = F.FoodItemId where F.FoodType = 'Lunch Starter'";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters), "FoodType");
+            return ReadTables(ExecuteSelectQuery(query), "FoodType");
         }
         public List<Item> GetDinerMains()
         {
             string query = "SELECT * FROM dbo.Item as I join dbo.Food as F on I.ItemId = F.FoodItemId where F.FoodType = 'Diner Main'";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters), "FoodType");
+            return ReadTables(ExecuteSelectQuery(query), "FoodType");
         }
         public List<Item> GetLunchMains()
         {
             string query = "SELECT * FROM dbo.Item as I join dbo.Food as F on I.ItemId = F.FoodItemId where F.FoodType = 'Lunch Main'";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters), "FoodType");
+            return ReadTables(ExecuteSelectQuery(query), "FoodType");
         }
         public List<Item> GetDinerDeserts()
         {
             string query = "SELECT * FROM dbo.Item as I join dbo.Food as F on I.ItemId = F.FoodItemId where F.FoodType = 'Diner Desert'";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters), "FoodType");
+            return ReadTables(ExecuteSelectQuery(query), "FoodType");
         }
         public List<Item> GetLunchDeserts()
         {
             string query = "SELECT * FROM dbo.Item as I join dbo.Food as F on I.ItemId = F.FoodItemId where F.FoodType = 'Lunch Desert'";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters), "FoodType");
+            return ReadTables(ExecuteSelectQuery(query), "FoodType");
         }
 
         private List<Item> ReadTables(DataTable dataTable,string type) 
