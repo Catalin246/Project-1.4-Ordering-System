@@ -14,8 +14,7 @@ namespace OrderingSystemDAL
         public List<Employee> GetAllEmployee()
         {
             string query = "SELECT [Employee_Name],[Employee_Password],Employee_Role FROM Employee";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            return ReadTables(ExecuteSelectQuery(query));
         }
         private List<Employee> ReadTables(DataTable dataTable)
         {

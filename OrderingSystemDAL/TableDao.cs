@@ -36,15 +36,14 @@ namespace OrderingSystemDAL
         public List<Table> GetAllTable()
         {
             string query = "SELECT t.[Table_Id], O.Order_Time, i.Ordered_Item_Status, O.Order_Id,t.Table_Status,I.Item_Id FROM dbo.[Table] as T join dbo.[Order] as O on T.Table_Id = O.Table_Id join dbo.[OrderedItem] as I on i.Order_Id = o.Order_Id;";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        
+            return ReadTables(ExecuteSelectQuery(query));
         }
 
         public List<Table> GetTablesId()
         {
             string query = "SELECT [table_Id] FROM [Table] ";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return readTablesId(ExecuteSelectQuery(query, sqlParameters));
+            return readTablesId(ExecuteSelectQuery(query));
         }
         private List<Table> readTablesId(DataTable dataTable)
         {
@@ -80,8 +79,7 @@ namespace OrderingSystemDAL
         public List<Table> GetTableStatus()
         {
             string query = "SELECT Table_Id,Table_Status FROM dbo.[Table]";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTablesStatus(ExecuteSelectQuery(query, sqlParameters));
+            return ReadTablesStatus(ExecuteSelectQuery(query));
         }
         private List<Table> ReadTablesStatus(DataTable dataTable)
         {
@@ -127,8 +125,7 @@ namespace OrderingSystemDAL
         public List<Food> GetFood()
         {
             string query = "SELECT I.ItemId FROM Item as I JOIN Food as f ON I.ItemId = f.FoodItemId";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadFood(ExecuteSelectQuery(query, sqlParameters));
+            return ReadFood(ExecuteSelectQuery(query));
         }
         private List<Food> ReadFood(DataTable dataTable)
         {
@@ -146,8 +143,7 @@ namespace OrderingSystemDAL
         public List<Drink> GetDrink()
         {
             string query = " SELECT I.ItemId FROM Item as I JOIN Drink as D ON I.ItemId = d.DrinkItemId;";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDrink(ExecuteSelectQuery(query, sqlParameters));
+            return ReadDrink(ExecuteSelectQuery(query));
         }
         private List<Drink> ReadDrink(DataTable dataTable)
         {
