@@ -439,6 +439,7 @@ namespace OrderingSystemUI
         private void btnemployeeName_Click(object sender, EventArgs e)
         {
             Option optionForm = new Option(EmployeeName, EmployeeRole);
+            this.Close();
             optionForm.Show();
             
         }
