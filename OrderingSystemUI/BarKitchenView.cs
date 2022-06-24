@@ -294,7 +294,7 @@ namespace OrderingSystemUI
             //finished orders dont need any notification. so they recieve normal time.
             DateTime now = DateTime.Now;
             TimeSpan diff = now.Subtract(orderTime);
-            double minuteDiff = Convert.ToInt32(diff.TotalMinutes);
+            int minuteDiff = Convert.ToInt32(diff.TotalMinutes);
 
             return $"{minuteDiff} min ago";
 
