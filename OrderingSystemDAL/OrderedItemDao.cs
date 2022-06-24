@@ -114,28 +114,28 @@ namespace OrderingSystemDAL
         public List<OrderedItem> GetPreparingFoodItemsFromDatabase()
         {
             string query = "select i.ItemId, o.order_id, Table_Id, Order_Time, f.FoodType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join food as f on f.FoodItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'Ordered' order by o.Order_Time desc";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadOrderedFoodItemTable(ExecuteSelectQuery(query, sqlParameters));
+            
+            return ReadOrderedFoodItemTable(ExecuteSelectQuery(query));
         }
         public List<OrderedItem> GetFinishedFoodItemsFromDatabase()
         {
             string query = "select i.ItemId, o.order_id, Table_Id, Order_Time, f.FoodType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join food as f on f.FoodItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id  where (oi.Ordered_Item_Status = 'Ready' OR oi.Ordered_Item_Status = 'Served' OR oi.Ordered_Item_Status = 'Paid') AND Order_Time >= DATEADD(day, -1, GETDATE()) order by o.Order_Time desc";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadOrderedFoodItemTable(ExecuteSelectQuery(query, sqlParameters));
+            
+            return ReadOrderedFoodItemTable(ExecuteSelectQuery(query));
         }       
 
         public List<OrderedItem> GetPreparingDrinkItemsFromDatabase()
         {
             string query = "select i.ItemId, o.order_id, Table_Id, Order_Time, d.DrinkType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join drink as d on d.DrinkItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id where oi.Ordered_Item_Status = 'Ordered' order by o.Order_Time desc";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadOrderedDrinkItemTable(ExecuteSelectQuery(query, sqlParameters));
+            
+            return ReadOrderedDrinkItemTable(ExecuteSelectQuery(query));
         }
 
         public List<OrderedItem> GetFinishedDrinkItemsFromDatabase()
         {
             string query = "select i.ItemId, o.order_id, Table_Id, Order_Time, d.DrinkType, Ordered_Item_Amount, ItemName,oi.Ordered_Item_Note,oi.Ordered_Item_Status from [Order] as o join OrderedItem as oi on o.Order_Id = oi.Order_Id join drink as d on d.DrinkItemId = oi.Item_Id join Item as i on i.ItemId=oi.Item_Id  where (oi.Ordered_Item_Status = 'Ready' or oi.Ordered_Item_Status = 'Served' or oi.Ordered_Item_Status = 'Paid') AND Order_Time >= DATEADD(day, -1, GETDATE()) order by o.Order_Time desc";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadOrderedDrinkItemTable(ExecuteSelectQuery(query, sqlParameters));
+            
+            return ReadOrderedDrinkItemTable(ExecuteSelectQuery(query));
         }
 
         private List<OrderedItem> ReadOrderedFoodItemTable(DataTable dataTable)
